@@ -7,7 +7,36 @@ The only diference here is that instead of the simple demo app we created a more
 
 ### Features:
 
-WIP
+**Components:**
+- index component
+  - home
+  - about [WIP](https://github.com/JonnyBGod/web-seed/issues/7)
+  - contact [WIP](https://github.com/JonnyBGod/web-seed/issues/6)
+  - terms [WIP](https://github.com/JonnyBGod/web-seed/issues/8)
+  - privacy [WIP](https://github.com/JonnyBGod/web-seed/issues/8)
+  - security [WIP](https://github.com/JonnyBGod/web-seed/issues/8)
+- user components
+  - login
+  - signup
+  - recover-account
+  - reset-password
+  - verify-email
+  - passport
+- settings component [WIP](https://github.com/JonnyBGod/web-seed/issues/2)
+  - profile [WIP](https://github.com/JonnyBGod/web-seed/issues/2)
+  - account [WIP](https://github.com/JonnyBGod/web-seed/issues/2)
+  - emails [WIP](https://github.com/JonnyBGod/web-seed/issues/2)
+  - notifications [WIP](https://github.com/JonnyBGod/web-seed/issues/2)
+  - billing [WIP](https://github.com/JonnyBGod/web-seed/issues/2)
+- profile component [WIP](https://github.com/JonnyBGod/web-seed/issues/3)
+
+
+**frameworks**
+- app
+- api
+
+---
+- Tests for everything [WIP](https://github.com/JonnyBGod/web-seed/issues/1)
 
 ### How to use
 
@@ -27,7 +56,12 @@ npm start
 
 ### Configurations
 
-WIP
+Files to take into account:
+
+```
+./config/custom/webpack.common.js
+./src/app/frameworks/app/index.ts
+```
 
 ### Merge Upstream
 
