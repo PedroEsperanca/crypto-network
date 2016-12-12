@@ -33,7 +33,9 @@ The only diference here is that instead of the simple demo app we created a more
 
 **frameworks**
 - app
-- api
+  - guards
+    - user-logged
+- api [Generate SDK](https://github.com/JonnyBGod/api-seed#generate-angular-sdk)
 
 ---
 - Tests for everything [WIP](https://github.com/JonnyBGod/web-seed/issues/1)
