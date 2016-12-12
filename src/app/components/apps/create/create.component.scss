@@ -1,0 +1,37 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+
+  > div {
+    margin: -10% auto 0;
+    padding: 30px 40px;
+    background: #ffffff;
+    width: 100%;
+    max-width: 428px;
+    text-align: center;
+    box-shadow: 0 1px 1px 0 rgba(189, 189, 189, 1);
+  }
+
+  .btn.btn-primary {
+    color: #ffffff;
+    background-color: #5ea7fc;
+    border-color: #5ea7fc;
+    transition: all .25s ease;
+
+    &:hover {
+      color: #5ea7fc;
+      background-color: #fff;
+    }
+  }
+
+  .btn.btn-default {
+    color: #5ea7fc;
+    transition: all .25s ease;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

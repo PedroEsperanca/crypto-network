@@ -1,0 +1,27 @@
+<div class="hero">
+	<div class="userCard">
+		<img class="pull-left"
+			*ngIf="USER?.photo"
+			[ctSrc]="USER.photo" [ctOptions]="{smart: 'face'}">
+		<img class="pull-left"
+			*ngIf="!USER?.photo"
+			[ctSrc]="'https://android.svn.wordpress.org/trunk/res/drawable/placeholder.png'" [ctOptions]="{smart: 'face'}">
+
+		<div>
+			<h1>{{USER?.name}}</h1>
+
+			<a class="btn btn-default add_cc" [routerLink]="['Payments', 'New']">
+				<i class="fa fa-credit-card fa-lg"></i>
+				<h5>{{'Add payment method' | translate}}</h5>
+			</a>
+		</div>
+	</div>
+
+	<a class="btn btn-default" [routerLink]="['Edit']">{{'Update' | translate}}</a>
+
+	<div class="social-connections">
+		<i [class.active]="USER?.identities?.indexOf('facebook') !== -1" class="fa fa-facebook fa-lg"></i>
+		<i [class.active]="USER?.identities?.indexOf('github') !== -1" class="fa fa-github fa-lg"></i>
+		<i [class.active]="USER?.identities?.indexOf('google') !== -1" class="fa fa-google fa-lg"></i>
+	</div>
+</div>

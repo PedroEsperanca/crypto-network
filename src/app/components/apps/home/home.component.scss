@@ -1,0 +1,41 @@
+:host {
+  
+  .row > div {
+    > div {
+      padding: 20px;
+      
+      i {
+        float: right;
+        margin: 10px;
+        cursor: pointer;
+      }
+      
+      a {
+        display: block;
+        background: #ffffff;
+        text-decoration: none;
+        color: #374046;
+        padding: 20px;
+      }
+    }
+  }
+
+  .add-button {
+    position: absolute;
+    bottom: 60px;
+    right: 60px;
+    background: #4caf50;
+    color: #ffffff;
+    border-radius: 50%;
+    padding: 15px 18px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 1px 2px 0 rgba(0, 0, 0, 0.24);
+
+    &:hover {
+      background: #388E3C;
+    }
+
+    &:active {
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    }
+  }
+}

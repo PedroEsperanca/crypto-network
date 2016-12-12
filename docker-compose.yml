@@ -1,0 +1,26 @@
+api:
+  environment:
+    NODE_ENV: production
+  labels:
+    io.rancher.container.pull_image: always
+  tty: true
+  image: connectwtf/api
+  stdin_open: true
+web:
+  labels:
+    io.rancher.container.pull_image: always
+  tty: true
+  image: connectwtf/web
+  links:
+  - 'api:api'
+  stdin_open: true
+lb:
+  ports:
+  - 80:8080
+  labels:
+    io.rancher.loadbalancer.target.web: connect.wtf:80=80
+  tty: true
+  image: rancher/load-balancer-service
+  links:
+  - web:web
+  stdin_open: true

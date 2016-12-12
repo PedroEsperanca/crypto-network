@@ -1,0 +1,71 @@
+<div class="form-block">
+	<form [formGroup]="registerForm" (ngSubmit)="signup()">
+
+		<h4>{{'Create an account' | translate}}</h4>
+		<br>
+
+		<input formControlName="name" name="name" type="text" placeholder="{{'Name' | translate}}" class="form-control" maxlength="40" required autocomplete="off"/>
+		<br>
+
+		<input formControlName="email" name="email_register" class="form-control" type="email" placeholder="{{'E-mail' | translate}}" required autocomplete="off" autofocus/>
+		<br>
+
+		<div class="form_row form_row_password">
+			<input formControlName="password" type="password" name="password_register" class="form-control" placeholder="{{'Password' | translate}}" required autocomplete="off"/>
+
+			<div class="password-composer">
+        <small class="form-text text-muted">Your password must have:</small>
+        <small class="form-text"
+          [class.ng-error]="registerForm.controls.password.dirty && registerForm.controls.password.errors && registerForm.controls.password.errors.length"
+        > - at least 8 characters long</small>
+        <small class="form-text"
+          [class.ng-error]="registerForm.controls.password.dirty && registerForm.controls.password.errors && registerForm.controls.password.errors.numUpper"
+        > - at least 1 uppercase character</small>
+        <small class="form-text"
+          [class.ng-error]="registerForm.controls.password.dirty && registerForm.controls.password.errors && registerForm.controls.password.errors.numLower"
+        > - at least 1 lowercase character</small>
+        <small class="form-text"
+          [class.ng-error]="registerForm.controls.password.dirty && registerForm.controls.password.errors && registerForm.controls.password.errors.numNums"
+        > - at least 1 number</small>
+        <small class="form-text"
+          [class.ng-error]="registerForm.controls.password.dirty && registerForm.controls.password.errors && registerForm.controls.password.errors.numSpecials"
+        > - at least 1 special character</small>
+      </div>
+		</div>
+		<br>
+
+		<button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">{{'Create Account' | translate}}</button>
+		<br>
+		<!-- / submit -->
+		<br>
+		<br *ngIf="!USER?.username" />
+
+		<h5 *ngIf="!USER?.username">{{'...or create an account with:' | translate}}</h5>
+		<br *ngIf="!USER?.username" />
+
+		<div class="social"
+			*ngIf="!USER?.username">
+
+			<a class="fb_connect" (click)="goTo('/auth/facebook')" target="_top">
+				<span class="fa-stack fa-2x">
+					<i class="fa fa-circle fa-stack-2x"></i>
+					<i class="fa fa-facebook fa-stack-1x"></i>
+				</span>
+			</a>
+			<a class="go_connect" (click)="goTo('/auth/google')" target="_top">
+				<span class="fa-stack fa-2x">
+					<i class="fa fa-circle fa-stack-2x"></i>
+					<i class="fa fa-google fa-stack-1x"></i>
+				</span>
+			</a>
+			<!--<a class="gh_connect" (click)="goTo('/auth/github')" target="_top">
+				<span class="fa-stack fa-2x">
+					<i class="fa fa-circle fa-stack-2x"></i>
+					<i class="fa fa-github fa-stack-1x"></i>
+				</span>
+			</a>-->
+		</div>
+	</form>
+</div>
+
+<h5>{{'Already have an account?' | translate}} <a [routerLink]="['../login']">{{'Log in' | translate}}</a></h5>

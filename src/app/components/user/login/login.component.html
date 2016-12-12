@@ -1,0 +1,77 @@
+<div class="form-block">
+	<form (ngSubmit)="login()" #loginForm="ngForm">
+		<h4 *ngIf="!USER?.username">{{'Sign in to continue' | translate}}</h4>
+		<h4 *ngIf="USER?.username">{{'Link to existing account' | translate}}</h4>
+		<br />
+
+		<div *ngIf="message.success" class="alert alert-success" role="alert">{{message.success | translate}}</div>
+		<div *ngIf="message.info" class="alert alert-info" role="alert">{{message.info | translate}}</div>
+		<div *ngIf="message.warning" class="alert alert-warning" role="alert">{{message.warning | translate}}</div>
+		<div *ngIf="message.error" class="alert alert-danger" role="alert">{{message.error | translate}}</div>
+
+		<input class="form-control" type="email" name="email" autocomplete="off"
+			[(ngModel)]="formModel.email"
+			placeholder="{{'E-mail'|translate}}" required autofocus/>
+		<br />
+
+		<input class="form-control" type="password" name="password" autocomplete="off"
+			placeholder="{{'Password' | translate}}"
+			[(ngModel)]="formModel.password" required/>
+		<br />
+
+		<button *ngIf="!USER?.username" type="submit" class="btn btn-primary" [disabled]="!loginForm.form.valid">
+			<span>{{'Log in' | translate}}</span><i class="fa fa-sign-in fa-lg right-i"></i>
+		</button>
+
+		<a class="btn btn-default" 
+			*ngIf="!USER?.username"
+			[routerLink]="['../signup']">
+
+			{{'Create an Account' | translate}}
+		</a>
+
+		<button class="btn btn-primary" type="submit"
+			*ngIf="USER?.username">
+
+			{{'Link Accounts' | translate}}
+		</button>
+
+		<a class="btn btn-default"
+			*ngIf="USER?.username"
+			[routerLink]="['../signup']">
+
+			{{'Create a New Account'  | translate}}
+		</a>
+
+	</form>
+	<br />
+
+	<h5 *ngIf="!USER?.username">{{'Alternatively, you can log in using:' | translate}}</h5>
+	<br *ngIf="!USER?.username" />
+
+	<div class="social"
+		*ngIf="!USER?.username">
+
+		<a class="fb_connect" (click)="goTo('/auth/facebook')" target="_top">
+			<span class="fa-stack fa-2x">
+				<i class="fa fa-circle fa-stack-2x"></i>
+				<i class="fa fa-facebook fa-stack-1x"></i>
+			</span>
+		</a>
+		<a class="go_connect" (click)="goTo('/auth/google')" target="_top">
+			<span class="fa-stack fa-2x">
+				<i class="fa fa-circle fa-stack-2x"></i>
+				<i class="fa fa-google fa-stack-1x"></i>
+			</span>
+		</a>
+		<!--<a class="gh_connect" (click)="goTo('/auth/github')" target="_top">
+			<span class="fa-stack fa-2x">
+				<i class="fa fa-circle fa-stack-2x"></i>
+				<i class="fa fa-github fa-stack-1x"></i>
+			</span>
+		</a>-->
+	</div>
+
+</div>
+
+<p>{{'Forgot your password?' | translate}} <a [routerLink]="['../recover-account']">{{'Recover Account' | translate}}</a></p>

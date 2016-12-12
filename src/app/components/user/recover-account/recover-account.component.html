@@ -1,0 +1,27 @@
+<div class="form-block">
+	<form *ngIf="!submited" (ngSubmit)="recover()" #recoverForm="ngForm">
+		<h4>{{'Reset your password' | translate}}</h4>
+		<br>
+
+		<p>{{'If you have forgotten your password, we will send you an email to reset your password.' | translate}}</p>
+
+		<div *ngIf="message.success" class="alert alert-success" role="alert">{{message.success | translate}}</div>
+		<div *ngIf="message.info" class="alert alert-info" role="alert">{{message.info | translate}}</div>
+		<div *ngIf="message.warning" class="alert alert-warning" role="alert">{{message.warning | translate}}</div>
+		<div *ngIf="message.error" class="alert alert-danger" role="alert">{{message.error | translate}}</div>
+
+		<input [(ngModel)]="formModel.email" name="email-recover" class="form-control" type="email" placeholder="{{'Account email address' | translate}}" required="true"/>
+		<br>
+
+		<button type="submit" class="btn btn-primary btn-block" [disabled]="!recoverForm.form.valid">{{'Continue' | translate}}</button>
+
+	</form>
+
+	<div *ngIf="submited">
+		<h4>{{'Check your inbox' | translate}}</h4>
+
+		<p>{{'We are sending a password reset link...' | translate}}</p>
+
+		<a [routerLink]="['/']" class="btn btn-primary btn-block">{{'Home' | translate}}</a>
+	</div>
+</div>

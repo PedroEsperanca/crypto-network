@@ -1,0 +1,12 @@
+/**
+ * Webpack configuration
+ *
+ * See: http://webpack.github.io/docs/configuration.html#cli
+ */
+module.exports = function(options) {
+  return {
+    output: {
+      publicPath: '//dms.ctcdn.co/'
+    }
+  };
+}

@@ -1,0 +1,32 @@
+<div class="form-block">
+	<form *ngIf="!confirming" (ngSubmit)="confirm()" #confirmForm="ngForm">
+		<h4>{{'Confirm email address' | translate}}</h4>
+		<br>
+
+		<p>{{'You should have received an email containing a confirmation code.' | translate}}</p>
+
+		<div *ngIf="message.success" class="alert alert-success" role="alert">{{message.success | translate}}</div>
+		<div *ngIf="message.info" class="alert alert-info" role="alert">{{message.info | translate}}</div>
+		<div *ngIf="message.warning" class="alert alert-warning" role="alert">{{message.warning | translate}}</div>
+		<div *ngIf="message.error" class="alert alert-danger" role="alert">{{message.error | translate}}</div>
+
+		<input [(ngModel)]="formModel.token" name="email-token" class="form-control" type="string" placeholder="{{'Confirmation Token' | translate}}" required="true"/>
+		<br>
+
+		<button type="submit" class="btn btn-primary btn-block" [disabled]="!confirmForm.form.valid">{{'Continue' | translate}}</button>
+		<br>
+		<a class="btn btn-default" (click)="resend()">{{'Resend confirmation email' | translate}}</a>
+	</form>
+
+	<div *ngIf="confirming">
+		<h4>{{'Confirm email address' | translate}}</h4>
+
+		<div class="spinner">
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+        <div class="rect5"></div>
+    </div>
+	</div>
+</div>

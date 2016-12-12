@@ -1,0 +1,154 @@
+:host /deep/ {
+	a {
+		color: #5ea7fc;
+
+		b {
+			vertical-align: sub;
+		}
+	}
+
+	> a {
+		color: white;
+		text-decoration: none;
+		padding: 4.5% 0;
+		display: block;
+		text-align: center;
+
+		> span > i:last-child {
+			color: #AAA;
+		}
+
+		&.logo img {
+			max-height: 80px;
+		}
+	}
+
+	h4, h5 {
+		font-weight: 400;
+	}
+
+	h1 {
+		text-align: center;
+		color: #FFF;
+		margin: 0 auto;
+	}
+
+	h5, p {
+		text-align: center;
+	}
+
+	button i:last-child {
+		margin-left: 6px;
+		margin-right: -2px;
+	}
+
+	.background {
+		position: absolute;
+		width: 100%;
+		height: 250px;
+		background: #b2bacc;
+    background-image: linear-gradient(163deg, #b2bacc 30%, #3b538c 80%);
+		z-index: -1;
+	}
+
+	.form-block {
+		background: #FFF;
+		width: 100%;
+		max-width: 428px;
+		margin: 0 auto;
+		margin-bottom: 20px;
+		padding: 30px 40px;
+		text-align: center;
+		-webkit-box-shadow: 0px 1px 1px 0px rgba(189,189,189,1);
+		-moz-box-shadow: 0px 1px 1px 0px rgba(189,189,189,1);
+		box-shadow: 0px 1px 1px 0px rgba(189,189,189,1);
+	}
+
+	.btn.btn-primary {
+		color: #fff;
+		background-color: #5ea7fc;
+		border-color: #5ea7fc;
+		transition: all .25s ease;
+
+		&:hover {
+			color: #5ea7fc;
+			background-color: #fff;
+		}
+	}
+
+	.btn.btn-default {
+		color: #5ea7fc;
+		transition: all .25s ease;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+
+	.password-composer {
+		text-align: left;
+
+		.ng-error {
+			color: #d9534f;
+		}
+	}
+
+	.spinner>div {
+    background-color: #3b538c;
+  }
+
+	.social a {
+		text-decoration: none;
+		cursor: pointer;
+
+		i:first-child {
+			transition: all .25s ease;
+		}
+
+		i:last-child {
+			color: #FFF;
+		}
+
+		&:hover {
+			i:first-child {
+				opacity: 0.8;
+			}
+		}
+	}
+
+	.social a.fb_connect > span > i:first-child {
+		color: #3B5998;
+	}
+	.social a.go_connect > span > i:first-child {
+		color: #D34836;
+	}
+	.social a.tw_connect > span > i:first-child {
+		color: #4099FF;
+	}
+	.social a.gh_connect > span > i:first-child {
+		color: #333333;
+	}
+	.social a.bb_connect > span > i:first-child {
+		color: #205081;
+	}
+
+	.social a.inactive > span > i:first-child {
+		color: #758997;
+	}
+
+	.social a.fb_connect:hover > span > i:first-child {
+		color: #3B5998;
+	}
+	.social a.go_connect:hover > span > i:first-child {
+		color: #D34836;
+	}
+	.social a.tw_connect:hover > span > i:first-child {
+		color: #4099FF;
+	}
+	.social a.gh_connect:hover > span > i:first-child {
+		color: #333333;
+	}
+	.social a.bb_connect:hover > span > i:first-child {
+		color: #205081;
+	}
+}
