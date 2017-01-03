@@ -17,8 +17,9 @@ export class UserLoggedGuard implements CanActivate {
 
   canActivate() {
     if (this.auth.getCurrentUserId()) {
-      if (!this.auth.getCurrentUserData() || !this.auth.getCurrentUserData().emailVerified) {
-        this.router.navigate(['/user/verify-email']);
+      if (!this.auth.getCurrentUserData() ||
+        this.auth.getCurrentUserData().emailAddresses.filter(e => { return !e.verified; }).length) {
+        this.router.navigate(['/user/verify']);
         return false;
       }
       return true;

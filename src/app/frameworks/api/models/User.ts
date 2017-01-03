@@ -8,25 +8,23 @@ export interface UserInterface {
   name?: string;
   photo?: string;
   notifications?: any;
-  emailVerified?: boolean;
   realm?: string;
   username?: string;
   password: string;
-  challenges?: any;
-  email: string;
+  email?: string;
+  emailVerified?: boolean;
   verificationToken?: string;
-  status?: string;
-  created?: Date;
-  lastUpdated?: Date;
   id?: number;
   phone?: string;
-  phoneVerificationToken?: string;
-  phoneVerified?: boolean;
+  emailAddresses?: Array<any>;
+  phoneNumbers?: Array<any>;
   createdAt?: Date;
   updatedAt?: Date;
   accessTokens?: Array<any>;
   identities?: Array<any>;
   credentials?: Array<any>;
+  emails?: Array<any>;
+  phones?: Array<any>;
   apps?: Array<App>;
 }
 
@@ -34,25 +32,23 @@ export class User implements UserInterface {
   name: string;
   photo: string;
   notifications: any;
-  emailVerified: boolean;
   realm: string;
   username: string;
   password: string;
-  challenges: any;
   email: string;
+  emailVerified: boolean;
   verificationToken: string;
-  status: string;
-  created: Date;
-  lastUpdated: Date;
   id: number;
   phone: string;
-  phoneVerificationToken: string;
-  phoneVerified: boolean;
+  emailAddresses: Array<any>;
+  phoneNumbers: Array<any>;
   createdAt: Date;
   updatedAt: Date;
   accessTokens: Array<any>;
   identities: Array<any>;
   credentials: Array<any>;
+  emails: Array<any>;
+  phones: Array<any>;
   apps: Array<App>;
   constructor(data?: UserInterface) {
     Object.assign(this, data);
@@ -97,11 +93,6 @@ export class User implements UserInterface {
           name: 'notifications',
           type: 'any'
         },
-        emailVerified: {
-          name: 'emailVerified',
-          type: 'boolean',
-          default: false
-        },
         realm: {
           name: 'realm',
           type: 'string'
@@ -114,33 +105,17 @@ export class User implements UserInterface {
           name: 'password',
           type: 'string'
         },
-        credentials: {
-          name: 'credentials',
-          type: 'any'
-        },
-        challenges: {
-          name: 'challenges',
-          type: 'any'
-        },
         email: {
           name: 'email',
           type: 'string'
         },
+        emailVerified: {
+          name: 'emailVerified',
+          type: 'boolean'
+        },
         verificationToken: {
           name: 'verificationToken',
           type: 'string'
-        },
-        status: {
-          name: 'status',
-          type: 'string'
-        },
-        created: {
-          name: 'created',
-          type: 'Date'
-        },
-        lastUpdated: {
-          name: 'lastUpdated',
-          type: 'Date'
         },
         id: {
           name: 'id',
@@ -150,14 +125,15 @@ export class User implements UserInterface {
           name: 'phone',
           type: 'string'
         },
-        phoneVerificationToken: {
-          name: 'phoneVerificationToken',
-          type: 'string'
+        emailAddresses: {
+          name: 'emailAddresses',
+          type: 'Array&lt;any&gt;',
+          default: <any>[]
         },
-        phoneVerified: {
-          name: 'phoneVerified',
-          type: 'boolean',
-          default: false
+        phoneNumbers: {
+          name: 'phoneNumbers',
+          type: 'Array&lt;any&gt;',
+          default: <any>[]
         },
         createdAt: {
           name: 'createdAt',
@@ -181,6 +157,16 @@ export class User implements UserInterface {
         },
         credentials: {
           name: 'credentials',
+          type: 'Array<any>',
+          model: ''
+        },
+        emails: {
+          name: 'emails',
+          type: 'Array<any>',
+          model: ''
+        },
+        phones: {
+          name: 'phones',
           type: 'Array<any>',
           model: ''
         },

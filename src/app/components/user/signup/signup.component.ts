@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 import { UserApi, LoopBackConfig } from 'frameworks/api';
-import { InternalStorage } from 'frameworks/api/storage/internal.storage';
+import { SDKStorage } from 'frameworks/api/storage/storage.swaps';
 
 @BaseComponent({
   selector: 'user.signup',
@@ -19,7 +19,7 @@ export class SignupComponent {
     private router: Router,
     private user: UserApi,
     private fb: FormBuilder,
-    @Inject(InternalStorage) protected storage: InternalStorage
+    @Inject(SDKStorage) protected storage: SDKStorage
   ) {
     try {
       this.emailVerificationToken = this.storage.get(`$LoopBackSDK$emailVerificationToken`);
@@ -35,7 +35,7 @@ export class SignupComponent {
   }
 
   signup() {
-    this.user.register({
+    this.user.create({
       name: this.registerForm.controls['name'].value,
       email: this.registerForm.controls['email'].value,
       password: this.registerForm.controls['password'].value

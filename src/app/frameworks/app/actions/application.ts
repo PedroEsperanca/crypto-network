@@ -33,5 +33,4 @@ export class ApplicationActions {
       payload: id
     };
   }
-  
 }

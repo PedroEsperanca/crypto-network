@@ -15,7 +15,10 @@ import { ScrollSpyModule } from 'ng2-scrollspy';
 
 // ngrx
 // import { NOTIFY_PROVIDERS, NOTIFY_GLOBAL_OPTIONS } from '@ngrx/notify';
+
+import { ConfigService } from './config.service';
 import { GUARDS_PROVIDERS } from './guards';
+import { RESOLVERS_PROVIDERS } from './resolvers';
 
 import { LoopBackConfig } from 'frameworks/api';
 
@@ -34,8 +37,10 @@ LoopBackConfig.setApiVersion('api');
 LoopBackConfig.setAuthPrefix('Bearer ');
 
 export const MY_APP_PROVIDERS: any[] = [
+  ConfigService,
   // IDLE_PROVIDERS,
   GUARDS_PROVIDERS,
+  RESOLVERS_PROVIDERS,
   CloudtasksService,
 
   // ngrx

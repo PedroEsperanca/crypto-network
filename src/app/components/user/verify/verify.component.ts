@@ -4,17 +4,17 @@ import { ChangeDetectorRef, Inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { LoopBackAuth, UserApi } from 'frameworks/api';
-import { InternalStorage } from 'frameworks/api/storage/internal.storage';
+import { SDKStorage } from 'frameworks/api/storage/storage.swaps';
 
 interface FormI {
   token: string;
 }
 
 @BaseComponent({
-  selector: 'user.verify-email',
-  templateUrl: './verify-email.component.html'
+  selector: 'user.verify',
+  templateUrl: './verify.component.html'
 })
-export class VerifyEmailComponent {
+export class VerifyComponent {
   private formModel: FormI = {
     token: ''
   };
@@ -28,7 +28,7 @@ export class VerifyEmailComponent {
     private route: ActivatedRoute,
     private router: Router,
     private cd: ChangeDetectorRef,
-    @Inject(InternalStorage) protected storage: InternalStorage
+    @Inject(SDKStorage) protected storage: SDKStorage
   ) {
     this.route.params.subscribe((params: any) => {
       if (params.token) {

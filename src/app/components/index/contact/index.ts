@@ -4,10 +4,10 @@ import { CommonModule } from '@angular/common';
 
 // import { CloudtasksDirective } from 'angular2-cloudtasks';
 
-import { IndexHomeComponent } from './home.component';
+import { IndexContactComponent } from './contact.component';
 
 export const routes = [
-  { path: '', component: IndexHomeComponent, pathMatch: 'full' }
+  { path: '', component: IndexContactComponent, pathMatch: 'full' }
 ];
 
 @NgModule({
@@ -16,8 +16,8 @@ export const routes = [
     RouterModule.forChild(routes)
   ],
   declarations: [
-    IndexHomeComponent
+    IndexContactComponent
     // CloudtasksDirective
   ]
 })
-export default class IndexHomeModule { }
+export default class IndexContactModule { }

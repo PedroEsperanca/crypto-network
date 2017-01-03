@@ -4,7 +4,7 @@ import { ChangeDetectorRef, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { UserInterface, UserApi, LoopBackAuth, LoopBackConfig } from 'frameworks/api';
-import { InternalStorage } from 'frameworks/api/storage/internal.storage';
+import { SDKStorage } from 'frameworks/api/storage/storage.swaps';
 
 @BaseComponent({
   selector: 'user.login',
@@ -24,7 +24,7 @@ export class LoginComponent {
     private router: Router,
     private user: UserApi,
     private cd: ChangeDetectorRef,
-    @Inject(InternalStorage) protected storage: InternalStorage
+    @Inject(SDKStorage) protected storage: SDKStorage
   ) {
     try {
       this.emailVerificationToken = this.storage.get(`$LoopBackSDK$emailVerificationToken`);

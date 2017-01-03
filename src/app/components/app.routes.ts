@@ -2,27 +2,30 @@
 import { Routes } from '@angular/router';
 
 import { UserLoggedGuard } from 'frameworks/app/guards';
+import { ProfileResolver } from 'frameworks/app/resolvers';
 
 import { NotFoundComponent } from './not-found/not-found.component';
 
 export const routes: Routes = [
   {
     path: '',
-    loadChildren: () => System.import('./index/index.module').then((comp: any) => comp.default)
+    loadChildren: () => System.import('./index/index.module')
+      .then((comp: any) => comp.default)
   },
   {
     path: 'user',
-    loadChildren: () => System.import('./user/user.module').then((comp: any) => comp.default)
+    loadChildren: () => System.import('./user/user.module')
+      .then((comp: any) => comp.default)
   },
   { path: 'login', redirectTo: 'user/login', pathMatch: 'full' },
   { path: 'signin', redirectTo: 'user/login', pathMatch: 'full' },
   { path: 'signup', redirectTo: 'user/signup', pathMatch: 'full' },
   {
-    path: 'verify-email/:token/:userId',
-    redirectTo: 'user/verify-email/:token/:userId',
+    path: 'verify/:token/:userId',
+    redirectTo: 'user/verify/:token/:userId',
     pathMatch: 'full'
   },
-  { path: 'verify-email', redirectTo: 'user/verify-email', pathMatch: 'full' },
+  { path: 'verify', redirectTo: 'user/verify', pathMatch: 'full' },
   {
     path: 'reset-password/:token/:userId',
     redirectTo: 'user/reset-password/:token/:userId',
@@ -33,7 +36,8 @@ export const routes: Routes = [
   // Private
   {
     path: 'apps',
-    loadChildren: () => System.import('./apps/apps.module').then((comp: any) => comp.default),
+    loadChildren: () => System.import('./apps/apps.module')
+      .then((comp: any) => comp.default),
     canActivate: [ UserLoggedGuard ]
   },
   {
@@ -44,6 +48,14 @@ export const routes: Routes = [
   },
 
   // Public
+  {
+    path: ':id',
+    loadChildren: () => System.import('./profile/profile.module')
+      .then((comp: any) => comp.default),
+    resolve: {
+      profile: ProfileResolver
+    }
+  },
   {
     path: '**',
     component: NotFoundComponent

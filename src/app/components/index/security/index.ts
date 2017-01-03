@@ -8,10 +8,10 @@ import {
 } from 'ng2-scrollspy/dist/plugin/index';
 import { ScrollSpyAffixDirective } from 'ng2-scrollspy/dist/plugin/affix';
 
-import { IndexLegalComponent } from './legal.component';
+import { IndexSecurityComponent } from './security.component';
 
 export const routes = [
-  { path: '', component: IndexLegalComponent, pathMatch: 'full' }
+  { path: '', component: IndexSecurityComponent, pathMatch: 'full' }
 ];
 
 @NgModule({
@@ -20,10 +20,10 @@ export const routes = [
     RouterModule.forChild(routes)
   ],
   declarations: [
-    IndexLegalComponent,
+    IndexSecurityComponent,
     ScrollSpyIndexDirective,
     ScrollSpyIndexRenderComponent,
     ScrollSpyAffixDirective
   ]
 })
-export default class IndexLegalModule { }
+export default class IndexSecurityModule { }

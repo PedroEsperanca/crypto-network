@@ -5,7 +5,7 @@ import { UserComponent } from './user.component';
 
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
-import { VerifyEmailComponent } from './verify-email/verify-email.component';
+import { VerifyComponent } from './verify/verify.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { RecoverAccountComponent } from './recover-account/recover-account.component';
 import { PassportComponent } from './passport/passport.component';
@@ -29,12 +29,12 @@ const routes: Routes = [
         component: SignupComponent
       },
       {
-        path: 'verify-email/:token',
-        component: VerifyEmailComponent
+        path: 'verify/:token',
+        component: VerifyComponent
       },
       {
-        path: 'verify-email',
-        component: VerifyEmailComponent
+        path: 'verify',
+        component: VerifyComponent
       },
       {
         path: 'reset-password/:token/:userId',

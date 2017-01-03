@@ -17,8 +17,20 @@ const routes: Routes = [
         loadChildren: () => System.import('./about').then((comp: any) => comp.default)
       },
       {
-        path: 'legal',
-        loadChildren: () => System.import('./legal').then((comp: any) => comp.default)
+        path: 'contact',
+        loadChildren: () => System.import('./contact').then((comp: any) => comp.default)
+      },
+      {
+        path: 'terms',
+        loadChildren: () => System.import('./terms').then((comp: any) => comp.default)
+      },
+      {
+        path: 'privacy',
+        loadChildren: () => System.import('./privacy').then((comp: any) => comp.default)
+      },
+      {
+        path: 'security',
+        loadChildren: () => System.import('./security').then((comp: any) => comp.default)
       }
     ]
   }

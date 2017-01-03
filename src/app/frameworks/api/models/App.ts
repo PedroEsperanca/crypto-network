@@ -256,13 +256,11 @@ export class App implements AppInterface {
         },
         created: {
           name: 'created',
-          type: 'Date',
-          default: new Date(0)
+          type: 'Date'
         },
         modified: {
           name: 'modified',
-          type: 'Date',
-          default: new Date(0)
+          type: 'Date'
         },
         _options: {
           name: '_options',

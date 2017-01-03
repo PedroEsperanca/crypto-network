@@ -6,7 +6,7 @@ import { MultilingualModule } from 'frameworks/i18n/multilingual.module';
 
 import { ModalModule } from 'ng2-bootstrap/components/modal';
 import { TooltipModule } from 'ng2-bootstrap/components/tooltip';
-//import { TagInputModule } from 'ng2-tag-input';
+// import { TagInputModule } from 'ng2-tag-input';
 
 import { routing } from './apps.routing';
 import { AppsComponent } from './apps.component';
