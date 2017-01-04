@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { MultilingualModule } from 'frameworks/i18n/multilingual.module';
 
-import { TooltipModule } from 'ng2-bootstrap/components/tooltip';
+import { TooltipModule } from 'ng2-bootstrap/tooltip';
 
 import { routing } from './app.routing';
 import { AppComponent } from './app.component';
@@ -26,4 +26,4 @@ import { AppHomeComponent } from './home/home.component';
   ],
   providers: []
 })
-export default class AppModule { }
+export class AppModule { }

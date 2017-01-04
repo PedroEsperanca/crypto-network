@@ -12,8 +12,26 @@ import { LoopBackFilter, AppInterface } from 'frameworks/api/models';
  */
 @Injectable()
 export class AppActions {
-  static SEARCH = '[App] Search';
-  search(filter: LoopBackFilter): Action {
+  public static SEARCH = '[App] Search';
+  public static SEARCH_COMPLETE = '[App] Search Complete';
+
+  public static ADD_TO_COLLECTION = '[App] Add to Collection';
+  public static ADD_TO_COLLECTION_SUCCESS = '[App] Add to Collection Success';
+  public static ADD_TO_COLLECTION_FAIL = '[App] Add to Collection Fail';
+
+  public static UPDATE_IN_COLLECTION = '[App] Update in Collection';
+  public static UPDATE_IN_COLLECTION_SUCCESS = '[App] Update in Collection Success';
+  public static UPDATE_IN_COLLECTION_FAIL = '[App] Update in Collection Fail';
+
+  public static REMOVE_FROM_COLLECTION = '[App] Remove from Collection';
+  public static REMOVE_FROM_COLLECTION_SUCCESS = '[App] Remove From Collection Success';
+  public static REMOVE_FROM_COLLECTION_FAIL = '[App] Remove From Collection Fail';
+
+  public static LOAD_COLLECTION = '[App] Load Collection';
+  public static LOAD_COLLECTION_SUCCESS = '[App] Load Collection Success';
+  public static LOAD_CLUSTER = '[App] Load App';
+
+  public search(filter: LoopBackFilter): Action {
     return {
       type: AppActions.SEARCH,
       payload: filter
@@ -21,79 +39,90 @@ export class AppActions {
   }
 
   // TODO: fix typing
-  static SEARCH_COMPLETE = '[App] Search Complete';
-  searchComplete(results: AppInterface[] | any): Action {
+  public searchComplete(results: AppInterface[] | any): Action {
     return {
       type: AppActions.SEARCH_COMPLETE,
       payload: results
     };
   }
 
-  static ADD_TO_COLLECTION = '[App] Add to Collection';
-  addToCollection(app: AppInterface): Action {
+  public addToCollection(app: AppInterface): Action {
     return {
       type: AppActions.ADD_TO_COLLECTION,
       payload: app
     };
   }
 
-  static ADD_TO_COLLECTION_SUCCESS = '[App] Add to Collection Success';
-  addToCollectionSuccess(app: AppInterface): Action {
+  public addToCollectionSuccess(app: AppInterface): Action {
     return {
       type: AppActions.ADD_TO_COLLECTION_SUCCESS,
       payload: app
     };
   }
 
-  static ADD_TO_COLLECTION_FAIL = '[App] Add to Collection Fail';
-  addToCollectionFail(app: AppInterface): Action {
+  public addToCollectionFail(app: AppInterface): Action {
     return {
       type: AppActions.ADD_TO_COLLECTION_FAIL,
       payload: app
     };
   }
 
-  static REMOVE_FROM_COLLECTION = '[App] Remove from Collection';
-  removeFromCollection(app: AppInterface): Action {
+  public updateInCollection(app: AppInterface): Action {
+    return {
+      type: AppActions.UPDATE_IN_COLLECTION,
+      payload: app
+    };
+  }
+
+  public updateInCollectionSuccess(app: AppInterface): Action {
+    return {
+      type: AppActions.UPDATE_IN_COLLECTION_SUCCESS,
+      payload: app
+    };
+  }
+
+  public updateInCollectionFail(app: AppInterface): Action {
+    return {
+      type: AppActions.UPDATE_IN_COLLECTION_FAIL,
+      payload: app
+    };
+  }
+
+  public removeFromCollection(app: AppInterface): Action {
     return {
       type: AppActions.REMOVE_FROM_COLLECTION,
       payload: app
     };
   }
 
-  static REMOVE_FROM_COLLECTION_SUCCESS = '[App] Remove From Collection Success';
-  removeFromCollectionSuccess(app: AppInterface): Action {
+  public removeFromCollectionSuccess(app: AppInterface): Action {
     return {
       type: AppActions.REMOVE_FROM_COLLECTION_SUCCESS,
       payload: app
     };
   }
 
-  static REMOVE_FROM_COLLECTION_FAIL = '[App] Remove From Collection Fail';
-  removeFromCollectionFail(app: AppInterface): Action {
+  public removeFromCollectionFail(app: AppInterface): Action {
     return {
       type: AppActions.REMOVE_FROM_COLLECTION_FAIL,
       payload: app
     };
   }
 
-  static LOAD_COLLECTION = '[App] Load Collection';
-  loadCollection(): Action {
+  public loadCollection(): Action {
     return {
       type: AppActions.LOAD_COLLECTION
     };
   }
 
-  static LOAD_COLLECTION_SUCCESS = '[App] Load Collection Success';
-  loadCollectionSuccess(apps: AppInterface[]): Action {
+  public loadCollectionSuccess(apps: AppInterface[]): Action {
     return {
       type: AppActions.LOAD_COLLECTION_SUCCESS,
       payload: apps
     };
   }
 
-  static LOAD_CLUSTER = '[App] Load App';
-  loadApp(app: AppInterface): Action {
+  public loadApp(app: AppInterface): Action {
     return {
       type: AppActions.LOAD_CLUSTER,
       payload: app

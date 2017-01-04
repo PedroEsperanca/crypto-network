@@ -28,8 +28,8 @@ module.exports = function (options) {
     isDevServer: helpers.isWebpackDevServer()
   }, require('../custom/webpack.common.js').metadata);
 
-  // replace the instance of HtmlWebpackPlugin with an updated one.
-  ghDeploy.replaceHtmlWebpackPlugin(webpackConfig.plugins, GH_REPO_NAME);
+  // remove the instance of HtmlWebpackPlugin.
+  helpers.removeHtmlWebpackPlugin(webpackConfig.plugins);
 
   return webpackMerge(webpackConfig, {
    output: {
@@ -59,36 +59,38 @@ module.exports = function (options) {
       }),
 
       function() {
-       this.plugin('done', function(stats) {
-         console.log('Starting deployment to GitHub.');
+        this.plugin('done', function(stats) {
+          if (stats.compilation.errors.length > 0) return;
 
-         const logger = function (msg) {
-           console.log(msg);
-         };
+          console.log('Starting deployment to GitHub.');
 
-         const options = {
-           logger: logger,
-           remote: GIT_REMOTE_NAME,
-           message: COMMIT_MESSAGE,
-             dotfiles: true // for .nojekyll
-           };
+          const logger = function (msg) {
+            console.log(msg);
+          };
 
-           // Since GitHub moved to Jekyll 3.3, their server ignores the "node_modules" and "vendors" folder by default.
-           // but, as of now, it also ignores "vendors*" files.
-           // This means vendor.bundle.js or vendor.[chunk].bundle.js will return 404.
-           // this is the fix for now.
-           fs.writeFileSync(path.join(webpackConfig.output.path, '.nojekyll'), '');
+          const options = {
+            logger: logger,
+            remote: GIT_REMOTE_NAME,
+            message: COMMIT_MESSAGE,
+            dotfiles: true // for .nojekyll
+          };
 
-           ghpages.publish(webpackConfig.output.path, options, function(err) {
-             if (err) {
-               console.log('GitHub deployment done. STATUS: ERROR.');
-               throw err;
-             } else {
-               console.log('GitHub deployment done. STATUS: SUCCESS.');
-             }
-           });
-         });
-     }
-   ]
- });
+          // Since GitHub moved to Jekyll 3.3, their server ignores the "node_modules" and "vendors" folder by default.
+          // but, as of now, it also ignores "vendors*" files.
+          // This means vendor.bundle.js or vendor.[chunk].bundle.js will return 404.
+          // this is the fix for now.
+          fs.writeFileSync(path.join(webpackConfig.output.path, '.nojekyll'), '');
+
+          ghpages.publish(webpackConfig.output.path, options, function(err) {
+            if (err) {
+              console.log('GitHub deployment done. STATUS: ERROR.');
+              throw err;
+            } else {
+              console.log('GitHub deployment done. STATUS: SUCCESS.');
+            }
+          });
+        });
+      }
+    ]
+  });
 };

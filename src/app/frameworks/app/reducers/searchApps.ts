@@ -5,7 +5,6 @@ import { Action } from '@ngrx/store';
 import { AppInterface } from 'frameworks/api/models';
 import { AppActions } from '../actions/app';
 
-
 export interface SearchAppsState {
   ids: string[];
   loading: boolean;
@@ -28,12 +27,12 @@ export default function(state = initialState, action: Action): SearchAppsState {
         loading: true
       });
     }
-    
+
     case AppActions.SEARCH_COMPLETE: {
       const apps: AppInterface[] = action.payload;
 
       return {
-        ids: apps.map(app => app.id),
+        ids: apps.map((app) => app.id),
         loading: false,
         filter: state.filter
       };
@@ -43,7 +42,7 @@ export default function(state = initialState, action: Action): SearchAppsState {
       const app: AppInterface = action.payload;
 
       return {
-        ids: state.ids.filter(item => item !== app.id),
+        ids: state.ids.filter((item) => item !== app.id),
         loading: false,
         filter: state.filter
       };
@@ -57,15 +56,15 @@ export default function(state = initialState, action: Action): SearchAppsState {
 
 export function getStatus() {
   return (state$: Observable<SearchAppsState>) => state$
-    .select(s => s.loading);
+    .select((s) => s.loading);
 }
 
 export function getAppIds() {
   return (state$: Observable<SearchAppsState>) => state$
-    .select(s => s.ids);
+    .select((s) => s.ids);
 }
 
 export function getFilter() {
   return (state$: Observable<SearchAppsState>) => state$
-    .select(s => s.filter);
+    .select((s) => s.filter);
 }

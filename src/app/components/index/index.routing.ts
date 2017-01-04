@@ -10,27 +10,27 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: () => System.import('./home').then((comp: any) => comp.default)
+        loadChildren: './home/home.module#IndexHomeModule'
       },
       {
         path: 'about',
-        loadChildren: () => System.import('./about').then((comp: any) => comp.default)
+        loadChildren: './about/about.module#IndexAboutModule'
       },
       {
         path: 'contact',
-        loadChildren: () => System.import('./contact').then((comp: any) => comp.default)
+        loadChildren: './contact/contact.module#IndexContactModule'
       },
       {
         path: 'terms',
-        loadChildren: () => System.import('./terms').then((comp: any) => comp.default)
+        loadChildren: './terms/terms.module#IndexTermsModule'
       },
       {
         path: 'privacy',
-        loadChildren: () => System.import('./privacy').then((comp: any) => comp.default)
+        loadChildren: './privacy/privacy.module#IndexPrivacyModule'
       },
       {
         path: 'security',
-        loadChildren: () => System.import('./security').then((comp: any) => comp.default)
+        loadChildren: './security/security.module#IndexSecurityModule'
       }
     ]
   }

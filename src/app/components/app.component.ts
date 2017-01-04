@@ -1,24 +1,29 @@
 // angular
-import { ChangeDetectionStrategy, ViewContainerRef } from '@angular/core';
+import {
+  ViewEncapsulation,
+  ChangeDetectionStrategy,
+  Component,
+  ViewContainerRef
+} from '@angular/core';
 import { Location } from '@angular/common';
 // any operators needed throughout your application
 import './operators';
 
-// app
-import { AnalyticsService } from 'frameworks/analytics';
-import { BaseComponent, Config, LogService } from 'frameworks/core';
+// libs
+import { ConfigService } from 'ng2-config';
 import { CloudtasksService } from 'angular2-cloudtasks';
-// import { Idle, DEFAULT_INTERRUPTSOURCES } from 'ng2-idle/core';
 
-// ngrx
-// import { Notify } from '@ngrx/notify';
-
+// app
+import { AnalyticsService } from 'frameworks/analytics/index';
+import { MultilingualService } from 'frameworks/i18n/index';
+import { Config } from 'frameworks/core/index';
+import { LogService } from 'frameworks/core/services/index';
 import { LoopBackAuth, UserApi } from 'frameworks/api';
 
 /**
  * This class represents the main application component.
  */
-@BaseComponent({
+@Component({
   selector: 'app',
   changeDetection: ChangeDetectionStrategy.Default, // Everything else uses OnPush
   styleUrls: [ 'app.component.scss' ],
@@ -54,7 +59,7 @@ export class AppComponent {
     // this.initNotifications();
   }
 
-  checkLogginToken() {
+  public checkLogginToken() {
     const token = this.auth.getToken();
     if (token  && token.ttl) {
       let expires = new Date(token.issuedAt ||
@@ -63,12 +68,12 @@ export class AppComponent {
 
       expires.setSeconds(expires.getSeconds() + token.ttl);
       if (expires <= new Date()) {
-        this.user.logout().subscribe(response => this.location.replaceState(''));
+        this.user.logout().subscribe((response) => this.location.replaceState(''));
       }
     }
   }
 
-  initIdleService() {
+  public initIdleService() {
     /*// sets an idle timeout of 5 seconds, for testing purposes.
     this.idle.setIdle(5);
     // sets a timeout period of 5 seconds.
@@ -97,7 +102,7 @@ export class AppComponent {
     this.idle.watch();*/
   }
 
-  initNotifications() {
+  public initNotifications() {
     /*this.notify.requestPermission().subscribe(permission => {
       if (permission) {
         // console.log(permission);

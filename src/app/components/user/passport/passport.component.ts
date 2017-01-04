@@ -1,11 +1,12 @@
-import { BaseComponent } from 'frameworks/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 import { LoopBackAuth } from 'frameworks/api';
 import { Router, ActivatedRoute } from '@angular/router';
 
-@BaseComponent({
+@Component({
   selector: 'user.login',
-  template: ''
+  template: '',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PassportComponent {
 

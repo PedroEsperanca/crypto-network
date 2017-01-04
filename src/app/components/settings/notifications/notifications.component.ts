@@ -1,10 +1,10 @@
-import { BaseComponent } from 'frameworks/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
-@BaseComponent({
+@Component({
   selector: 'settingsNotifications',
   styleUrls: [ './notifications.component.scss' ],
-  templateUrl: './notifications.component.html'
+  templateUrl: './notifications.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SettingsNotificationsComponent {
-  constructor() {}
 }

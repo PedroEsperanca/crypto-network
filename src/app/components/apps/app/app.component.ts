@@ -1,9 +1,10 @@
-import { BaseComponent } from 'frameworks/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
-@BaseComponent({
+@Component({
   selector: 'application',
   styleUrls: [ './app.component.scss' ],
-  templateUrl: './app.component.html'
+  templateUrl: './app.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {
 }

@@ -1,10 +1,11 @@
-// app
-import { BaseComponent } from 'frameworks/core';
+// angular
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
-@BaseComponent({
+@Component({
   selector: 'sd-navbar',
   templateUrl: 'navbar.component.html',
-  styleUrls: ['navbar.component.scss']
+  styleUrls: ['navbar.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavbarComponent {
 }

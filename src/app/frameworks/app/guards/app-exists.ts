@@ -13,10 +13,8 @@ import {
 } from '@angular/router';
 
 import { UserApi, AppApi, LoopBackAuth } from 'frameworks/api';
-import {
-  AppState,
-  hasApp
-} from '../reducers';
+import { IAppState } from 'frameworks/ngrx';
+import { hasApp } from '../reducers';
 import { ApplicationActions, AppActions } from '../actions';
 
 /**
@@ -30,7 +28,7 @@ import { ApplicationActions, AppActions } from '../actions';
 @Injectable()
 export class AppExistsGuard implements CanActivate {
   constructor(
-    private store: Store<AppState>,
+    private store: Store<IAppState>,
     private router: Router,
     private auth: LoopBackAuth,
     private user: UserApi,
@@ -38,42 +36,6 @@ export class AppExistsGuard implements CanActivate {
     private applicationActions: ApplicationActions,
     private appActions: AppActions
   ) { }
-
-  /**
-   * This method checks if a app with the given ID is already registered
-   * in the Store
-   */
-  hasAppInStore(id: string) {
-    return this.store.let(hasApp(id)).take(1);
-  }
-
-  /**
-   * This method loads a app with the given ID from the API and caches
-   * it in the store, returning `true` or `false` if it was found.
-   */
-  hasAppInApi(id: string) {
-    return this.user.findByIdApps(this.auth.getCurrentUserId(), id)
-      .map(app => this.appActions.loadApp(app))
-      .do(action => this.store.dispatch(action))
-      .map(app => !!app)
-      .catch(() => Observable.of(false));
-  }
-
-  /**
-   * `hasApp` composes `hasAppInStore` and `hasAppInApi`. It first checks
-   * if the app is in store, and if not it then checks if it is in the
-   * API.
-   */
-  hasApp(id: string) {
-    return this.hasAppInStore(id)
-      .switchMap(inStore => {
-        if (inStore) {
-          return Observable.of(inStore);
-        }
-
-        return this.hasAppInApi(id);
-      });
-  }
 
   /**
    * This is the actual method the router will call when our guard is run.
@@ -88,13 +50,13 @@ export class AppExistsGuard implements CanActivate {
    * on to the next candidate route. In this case, it will move on
    * to the 404 page.
    */
-  canActivate(
+  public canActivate(
     // Not using but worth knowing about
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ) {
     return this.hasApp(route.params['id'])
-      .switchMap(result => {
+      .switchMap((result) => {
         if (result) {
           this.store.dispatch(this.applicationActions.selectApp(route.params['id']));
           return Observable.of(true);
@@ -102,6 +64,42 @@ export class AppExistsGuard implements CanActivate {
           this.router.navigate(['/apps/not-found']);
           return Observable.of(false);
         }
+      });
+  }
+
+  /**
+   * This method checks if a app with the given ID is already registered
+   * in the Store
+   */
+  private hasAppInStore(id: string) {
+    return this.store.let(hasApp(id)).take(1);
+  }
+
+  /**
+   * This method loads a app with the given ID from the API and caches
+   * it in the store, returning `true` or `false` if it was found.
+   */
+  private hasAppInApi(id: string) {
+    return this.user.findByIdApps(this.auth.getCurrentUserId(), id)
+      .map((app) => this.appActions.loadApp(app))
+      .do((action) => this.store.dispatch(action))
+      .map((app) => !!app)
+      .catch(() => Observable.of(false));
+  }
+
+  /**
+   * `hasApp` composes `hasAppInStore` and `hasAppInApi`. It first checks
+   * if the app is in store, and if not it then checks if it is in the
+   * API.
+   */
+  private hasApp(id: string) {
+    return this.hasAppInStore(id)
+      .switchMap((inStore) => {
+        if (inStore) {
+          return Observable.of(inStore);
+        }
+
+        return this.hasAppInApi(id);
       });
   }
 }

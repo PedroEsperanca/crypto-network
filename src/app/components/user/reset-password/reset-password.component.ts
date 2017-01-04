@@ -1,4 +1,4 @@
-import { BaseComponent } from 'frameworks/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 import { ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -6,17 +6,18 @@ import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 import { LoopBackAuth, UserApi } from 'frameworks/api';
 
-@BaseComponent({
+@Component({
   selector: 'user.reset-password',
-  templateUrl: './reset-password.component.html'
+  templateUrl: './reset-password.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ResetPasswordComponent implements OnDestroy {
-  private resetPasswordForm: FormGroup;
+  public resetPasswordForm: FormGroup;
 
-  private message: any = {};
-  private goto: string;
+  public message: any = {};
+  public goto: string;
 
-  private userId: string;
+  public userId: string;
 
   constructor(
     private auth: LoopBackAuth,
@@ -47,11 +48,11 @@ export class ResetPasswordComponent implements OnDestroy {
     });
   }
 
-  ngOnDestroy() {
+  public ngOnDestroy() {
     this.user.logout();
   }
 
-  resetPassword() {
+  public resetPassword() {
     this.user.updateAttributes(this.userId, {
       password: this.resetPasswordForm.controls['password'].value
     }).subscribe(
@@ -66,7 +67,7 @@ export class ResetPasswordComponent implements OnDestroy {
         this.goto = 'login';
         this.cd.markForCheck();
       },
-      error => {
+      (error) => {
         if (error.message === 'Unexpected token U in JSON at position 0') {
           this.message = {
             error: 'Unauthorized'
@@ -87,7 +88,7 @@ export class ResetPasswordComponent implements OnDestroy {
     );
   }
 
-  matchingPasswords(passwordKey: string, confirmPasswordKey: string) {
+  public matchingPasswords(passwordKey: string, confirmPasswordKey: string) {
     return (group: FormGroup): {[key: string]: any} => {
       let password = group.controls[passwordKey];
       let confirmPassword = group.controls[confirmPasswordKey];
@@ -100,7 +101,7 @@ export class ResetPasswordComponent implements OnDestroy {
     };
   }
 
-  passwordComplexity(control: any) {
+  private passwordComplexity(control: any) {
     const password = control.value;
 
     const anUpperCase = /[A-Z]/;
@@ -115,20 +116,20 @@ export class ResetPasswordComponent implements OnDestroy {
     let numNums = 0;
     let numSpecials = 0;
 
-    for (let i = 0; i < password.length; i++) {
-      if (anUpperCase.test(password[i])) {
+    for (let character of password.length) {
+      if (anUpperCase.test(character)) {
         numUpper++;
       }
 
-      if (aLowerCase.test(password[i])) {
+      if (aLowerCase.test(character)) {
         numLower++;
       }
 
-      if (aNumber.test(password[i])) {
+      if (aNumber.test(character)) {
         numNums++;
       }
 
-      if (aSpecial.test(password[i])) {
+      if (aSpecial.test(character)) {
         numSpecials++;
       }
     }

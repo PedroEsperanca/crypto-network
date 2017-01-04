@@ -5,8 +5,6 @@
  */
 module.exports = function(options) {
   return {
-    output: {
-      publicPath: '//dms.ctcdn.co/'
-    }
-  };
+
+	};
 }

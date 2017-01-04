@@ -6,33 +6,35 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
-import { BaseComponent } from 'frameworks/core';
+import { Component, ChangeDetectionStrategy, ViewChild } from '@angular/core';
 
-// import { MODAL_DIRECTIVES, BS_VIEW_PROVIDERS } from 'ng2-bootstrap/ng2-bootstrap';
+import { ModalDirective } from 'ng2-bootstrap';
 
 import { AppInterface } from 'frameworks/api';
 import { LoopBackFilter } from 'frameworks/api/models';
+import { IAppState } from 'frameworks/ngrx';
 import {
-  AppState,
   getSearchAppsResults,
   getSearchAppsFilter
 } from 'frameworks/app/reducers';
 import { AppActions } from 'frameworks/app/actions';
 
-@BaseComponent({
+@Component({
   selector: 'appsHome',
-  // providers: [ BS_VIEW_PROVIDERS ],
   styleUrls: [ './home.component.scss' ],
-  templateUrl: './home.component.html'
+  templateUrl: './home.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppsHomeComponent {
-  searchFilter$: Observable<LoopBackFilter>;
-  apps$: Observable<AppInterface[]>;
-  selectedApp: any = {};
-  tempSearch: Subscription;
+  @ViewChild('childModal') public childModal: ModalDirective;
+
+  public searchFilter$: Observable<LoopBackFilter>;
+  public apps$: Observable<AppInterface[]>;
+  public selectedApp: any = {};
+  public tempSearch: Subscription;
 
   constructor(
-    private store: Store<AppState>,
+    private store: Store<IAppState>,
     private appActions: AppActions
   ) {
     /**
@@ -50,8 +52,7 @@ export class AppsHomeComponent {
     this.search('');
   }
 
-
-  search(query: string) {
+  public search(query: string) {
     /**
      * All state updates are handled through dispatched actions in 'smart'
      * components. This provides a clear, reproducible history of state
@@ -71,7 +72,15 @@ export class AppsHomeComponent {
     this.store.dispatch(this.appActions.search(filter));
   }
 
-  deleteApp(app: AppInterface) {
+  public deleteApp(app: AppInterface) {
     this.store.dispatch(this.appActions.removeFromCollection(app));
+  }
+
+  public showChildModal(app: any): void {
+    this.childModal.show(app);
+  }
+
+  public hideChildModal(): void {
+    this.childModal.hide();
   }
 }

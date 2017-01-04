@@ -1,12 +1,10 @@
-import { BaseComponent } from 'frameworks/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
-@BaseComponent({
+@Component({
   selector: 'profileHome',
-  providers: [],
-  pipes: [],
   styleUrls: [ './home.component.scss' ],
-  templateUrl: './home.component.html'
+  templateUrl: './home.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProfileHomeComponent {
-  constructor() {}
 }

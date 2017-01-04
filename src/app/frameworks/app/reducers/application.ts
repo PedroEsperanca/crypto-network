@@ -35,7 +35,7 @@ export default function(state = initialState, action: Action): ApplicationState 
 
     case ApplicationActions.SELECT_VAULT: {
       const id: string = action.payload;
-      
+
       return {
         idle: state.idle,
         selectedAppId: id

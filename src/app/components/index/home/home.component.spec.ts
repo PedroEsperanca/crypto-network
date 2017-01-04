@@ -7,22 +7,10 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { StoreModule } from '@ngrx/store';
 
 import { t } from 'frameworks/test';
-<<<<<<< HEAD:src/app/components/index/home/home.component.spec.ts
-import {
-  TEST_CORE_PROVIDERS,
-  TEST_HTTP_PROVIDERS,
-  TEST_ROUTER_PROVIDERS
-} from 'frameworks/core/testing';
-import { TEST_MULTILINGUAL_PROVIDERS } from 'frameworks/i18n/testing';
-import { NameListService, nameListReducer } from 'frameworks/app';
-import { TEST_MULTILINGUAL_PROVIDERS } from 'frameworks/i18n/testing';
->>>>>>> upstream/master:src/app/components/home/home.component.spec.ts
-=======
 import { NameListService, nameListReducer } from 'frameworks/sample';
 import { CoreModule } from 'frameworks/core/core.module';
 import { AnalyticsModule } from 'frameworks/analytics/analytics.module';
 import { MultilingualModule } from 'frameworks/i18n/multilingual.module';
->>>>>>> upstream/master:src/app/components/home/home.component.spec.ts
 import { HomeComponent } from './home.component';
 
 // test module configuration for each test

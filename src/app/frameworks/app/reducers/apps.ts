@@ -7,7 +7,6 @@ import { Action } from '@ngrx/store';
 import { AppInterface } from 'frameworks/api/models';
 import { AppActions } from '../actions';
 
-
 export interface AppsState {
   ids: string[];
   entities: { [id: string]: AppInterface };
@@ -23,9 +22,9 @@ export default function(state = initialState, action: Action): AppsState {
     case AppActions.SEARCH_COMPLETE:
     case AppActions.LOAD_COLLECTION_SUCCESS: {
       const apps: AppInterface[] = action.payload;
-      const newApps = apps.filter(app => !state.entities[app.id]);
+      const newApps = apps.filter((app) => !state.entities[app.id]);
 
-      const newAppIds = newApps.map(app => app.id);
+      const newAppIds = newApps.map((app) => app.id);
       const newAppEntities = newApps.reduce((
         entities: {
           [id: string]: AppInterface
@@ -64,11 +63,11 @@ export default function(state = initialState, action: Action): AppsState {
       delete state.entities[app.id];
 
       return {
-        ids: state.ids.filter(item => item !== app.id),
+        ids: state.ids.filter((item) => item !== app.id),
         entities: Object.assign({}, state.entities)
       };
     }
-    
+
     default: {
       return state;
     }
@@ -85,21 +84,21 @@ export default function(state = initialState, action: Action): AppsState {
  */
 export function getAppEntities() {
   return (state$: Observable<AppsState>) => state$
-    .select(s => s.entities);
+    .select((s) => s.entities);
 };
 
 export function getApp(id: string) {
   return (state$: Observable<AppsState>) => state$
-    .select(s => s.entities[id]);
+    .select((s) => s.entities[id]);
 }
 
 export function getApps(appIds: string[]) {
   return (state$: Observable<AppsState>) => state$
     .let(getAppEntities())
-    .map(entities => appIds.map(id => entities[id]));
+    .map((entities) => appIds.map((id) => entities[id]));
 }
 
 export function hasApp(id: string) {
   return (state$: Observable<AppsState>) => state$
-    .select(s => s.ids.includes(id));
+    .select((s) => s.ids.includes(id));
 }

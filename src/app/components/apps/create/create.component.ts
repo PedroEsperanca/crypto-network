@@ -1,19 +1,20 @@
 import { Store } from '@ngrx/store';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { BaseComponent } from 'frameworks/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 import { AppInterface } from 'frameworks/api';
-import { AppState } from 'frameworks/app/reducers';
+import { IAppState } from 'frameworks/ngrx';
 import { AppActions } from 'frameworks/app/actions';
 
-@BaseComponent({
+@Component({
   selector: 'appsCreate',
   styleUrls: [ './create.component.scss' ],
-  templateUrl: './create.component.html'
+  templateUrl: './create.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppsCreateComponent {
-  private formModel: AppInterface = {
+  public formModel: AppInterface = {
     name: '',
     description: ''
   };
@@ -21,11 +22,11 @@ export class AppsCreateComponent {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private store: Store<AppState>,
+    private store: Store<IAppState>,
     private appActions: AppActions
   ) { }
 
-  createApp() {
+  public createApp() {
     this.store.dispatch(this.appActions.addToCollection(this.formModel));
     this.router.navigate(['../'], { relativeTo: this.route });
   }

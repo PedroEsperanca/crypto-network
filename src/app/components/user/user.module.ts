@@ -7,7 +7,7 @@ import { MultilingualModule } from 'frameworks/i18n/multilingual.module';
 import { SDKStorage } from 'frameworks/api/storage/storage.swaps';
 import { CookieBrowser } from 'frameworks/api/storage/cookie.browser';
 
-import { TooltipModule } from 'ng2-bootstrap/components/tooltip';
+import { TooltipModule } from 'ng2-bootstrap/tooltip';
 
 import { routing } from './user.routing';
 import { UserComponent } from './user.component';
@@ -41,4 +41,4 @@ import { PassportComponent } from './passport/passport.component';
     { provide: SDKStorage, useClass: CookieBrowser },
   ]
 })
-export default class UserModule { }
+export class UserModule { }

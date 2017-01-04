@@ -11,7 +11,7 @@ import {
 } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
-import { AppState } from '../reducers';
+import { IAppState } from 'frameworks/ngrx';
 import { ApplicationActions } from '../actions';
 
 export interface CanComponentDeactivate {
@@ -29,11 +29,11 @@ export interface CanComponentDeactivate {
 @Injectable()
 export class AppCanDeactivateGuard implements CanDeactivate<CanComponentDeactivate> {
   constructor(
-    private store: Store<AppState>,
+    private store: Store<IAppState>,
     private applicationActions: ApplicationActions
   ) { }
 
-  canDeactivate(component: CanComponentDeactivate): Observable<boolean> | boolean {
+  public canDeactivate(component: CanComponentDeactivate): Observable<boolean> | boolean {
     this.store.dispatch(this.applicationActions.selectApp(null));
     return true;
   }

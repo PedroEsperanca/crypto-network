@@ -7,6 +7,7 @@
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
+    "noEmit": true,
     "noEmitHelpers": true,
     "strictNullChecks": false,
     "baseUrl": "./src",
@@ -30,7 +31,6 @@
       "jasmine",
       "lodash",
       "node",
-      "protractor",
       "selenium-webdriver",
       "source-map",
       "uglify-js",
@@ -41,7 +41,9 @@
     "desktop",
     "nativescript",
     "node_modules",
-    "dist"
+    "dist",
+    "src/**/*.spec.ts",
+    "src/**/*.e2e.ts"
   ],
   "awesomeTypescriptLoaderOptions": {
     "forkChecker": true,

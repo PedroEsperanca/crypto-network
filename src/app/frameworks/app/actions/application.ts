@@ -11,23 +11,24 @@ import { Action } from '@ngrx/store';
  */
 @Injectable()
 export class ApplicationActions {
+  public static SET_IDLE = '[App] Set App as Idle';
+  public static SET_ACTIVE = '[App] Set App as Active';
 
-  static SET_IDLE = '[App] Set App as Idle';
-  setIddle(): Action {
+  public static SELECT_VAULT = '[App] Select App';
+
+  public setIddle(): Action {
     return {
       type: ApplicationActions.SET_IDLE
     };
   }
 
-  static SET_ACTIVE = '[App] Set App as Active';
-  setActive(): Action {
+  public setActive(): Action {
     return {
       type: ApplicationActions.SET_ACTIVE
     };
   }
 
-  static SELECT_VAULT = '[App] Select App';
-  selectApp(id: string): Action {
+  public selectApp(id: string): Action {
     return {
       type: ApplicationActions.SELECT_VAULT,
       payload: id

@@ -12,6 +12,7 @@ const customConfig = require('../custom/webpack.common.js');
  * Webpack Plugins
  */
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const NormalModuleReplacementPlugin = require('webpack/lib/NormalModuleReplacementPlugin');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 
 /**
@@ -59,15 +60,16 @@ module.exports = function(options) {
           loader: 'to-string-loader!css-loader!postcss-loader!sass-loader'
         },
 
-        {
-          test: /\.(woff2?|ttf|eot|svg)$/,
-          loader: 'url-loader?limit=10000'
-        }
+        { test: /\.(woff2?|ttf|eot|svg)$/, loader: 'url-loader?limit=10000' }
       ]
 
     },
 
     plugins: [
+      new NormalModuleReplacementPlugin(
+        /routerModule/,
+        helpers.root('src/app/app.routerModule.ts')
+      ),
       /**
        * Plugin: DefinePlugin
        * Description: Define free variables.

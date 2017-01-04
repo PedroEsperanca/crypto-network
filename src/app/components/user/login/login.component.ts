@@ -1,4 +1,4 @@
-import { BaseComponent } from 'frameworks/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 import { ChangeDetectorRef, Inject } from '@angular/core';
 import { Router } from '@angular/router';
@@ -6,18 +6,19 @@ import { Router } from '@angular/router';
 import { UserInterface, UserApi, LoopBackAuth, LoopBackConfig } from 'frameworks/api';
 import { SDKStorage } from 'frameworks/api/storage/storage.swaps';
 
-@BaseComponent({
+@Component({
   selector: 'user.login',
-  templateUrl: './login.component.html'
+  templateUrl: './login.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginComponent {
-  private formModel: UserInterface = {
+  public formModel: UserInterface = {
     email: '',
     password: ''
   };
 
-  private message: any = {};
-  private emailVerificationToken: string;
+  public message: any = {};
+  public emailVerificationToken: string;
 
   constructor(
     private auth: LoopBackAuth,
@@ -33,7 +34,7 @@ export class LoginComponent {
     }
   }
 
-  login() {
+  public login() {
     this.message = {};
     this.cd.markForCheck();
 
@@ -58,7 +59,7 @@ export class LoginComponent {
           }
         }
       },
-      error => {
+      (error) => {
         if (error.message === 'Unexpected token U in JSON at position 0') {
           this.message = {
             error: 'Unauthorized'
@@ -77,7 +78,7 @@ export class LoginComponent {
     );
   }
 
-  goTo(provider: string) {
+  public goTo(provider: string) {
     window.location.href = LoopBackConfig.getPath() + provider;
   }
 }

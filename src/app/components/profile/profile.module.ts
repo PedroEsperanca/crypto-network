@@ -19,4 +19,4 @@ import { ProfileHomeComponent } from './home/home.component';
     // CloudtasksDirective
   ]
 })
-export default class ProfileModule { }
+export class ProfileModule { }

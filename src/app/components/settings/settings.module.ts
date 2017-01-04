@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { MultilingualModule } from 'frameworks/i18n/multilingual.module';
 
-import { TooltipModule } from 'ng2-bootstrap/components/tooltip';
+import { TooltipModule } from 'ng2-bootstrap/tooltip';
 
 import { routing } from './settings.routing';
 import { SettingsComponent } from './settings.component';
@@ -30,4 +30,4 @@ import { SettingsBillingComponent } from './billing/billing.component';
     SettingsBillingComponent
   ]
 })
-export default class SettingsModule { }
+export class SettingsModule { }

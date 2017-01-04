@@ -1,4 +1,4 @@
-import { BaseComponent } from 'frameworks/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 import { ChangeDetectorRef } from '@angular/core';
 
@@ -8,31 +8,32 @@ interface FormI {
   email: string;
 }
 
-@BaseComponent({
+@Component({
   selector: 'user.recover-account',
-  templateUrl: './recover-account.component.html'
+  templateUrl: './recover-account.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RecoverAccountComponent {
-  private formModel: FormI = {
+  public formModel: FormI = {
     email: ''
   };
 
-  private submited: boolean = false;
-  private message: any = {};
+  public submited: boolean = false;
+  public message: any = {};
 
   constructor(
     private user: UserApi,
     private cd: ChangeDetectorRef
   ) {}
 
-  recover() {
+  public recover() {
     this.user.resetPassword(this.formModel).subscribe(
-      response => {
+      (response) => {
         this.message = {};
         this.submited = true;
         this.cd.markForCheck();
       },
-      error => {
+      (error) => {
         this.message = {
           error: error.message
         };

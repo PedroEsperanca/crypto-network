@@ -1,12 +1,10 @@
-import { BaseComponent } from 'frameworks/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
-@BaseComponent({
+@Component({
   selector: 'indexContact',
-  providers: [],
-  pipes: [],
   styleUrls: [ './contact.component.scss' ],
-  templateUrl: './contact.component.html'
+  templateUrl: './contact.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class IndexContactComponent {
-  constructor() {}
 }

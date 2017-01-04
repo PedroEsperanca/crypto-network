@@ -1,49 +1,49 @@
 import 'rxjs/add/operator/let';
 import { Store } from '@ngrx/store';
-import { OnInit, OnDestroy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { BaseComponent } from 'frameworks/core';
-
 import { AppInterface } from 'frameworks/api';
-import { AppState, getCurrentApp } from 'frameworks/app/reducers';
+import { IAppState } from 'frameworks/ngrx';
+import { getCurrentApp } from 'frameworks/app/reducers';
 import { AppActions } from 'frameworks/app/actions';
 
-@BaseComponent({
+@Component({
   selector: 'appsEdit',
   styleUrls: [ './edit.component.scss' ],
-  templateUrl: './edit.component.html'
+  templateUrl: './edit.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppsEditComponent implements OnInit, OnDestroy {
-  private formModel: AppInterface;
+export class EditComponent implements OnInit, OnDestroy {
+  public formModel: AppInterface;
 
-  private subscriptions: Array<Subscription> = [];
+  private subscriptions: Subscription[] = [];
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private store: Store<AppState>,
+    private store: Store<IAppState>,
     private appActions: AppActions
   ) {}
 
-  ngOnInit() {
-    this.subscriptions.push(this.store.let(getCurrentApp()).subscribe(app => {
-      if (!app) return;
+  public ngOnInit() {
+    this.subscriptions.push(this.store.let(getCurrentApp()).subscribe((app) => {
+      if (!app) { return; }
 
-      this.formModel = (<any>Object).assign({}, app);
+      this.formModel = (<any> Object).assign({}, app);
     }));
   }
 
-  ngOnDestroy() {
-    this.subscriptions.forEach(subscription => {
+  public ngOnDestroy() {
+    this.subscriptions.forEach((subscription) => {
       subscription.unsubscribe();
     });
   }
 
-  editApp() {
+  public editApp() {
     this.store.dispatch(
-      this.appActions.updateInCollection((<any>Object).assign({}, this.formModel))
+      this.appActions.updateInCollection((<any> Object).assign({}, this.formModel))
     );
     // this.router.navigate(['../../'], { relativeTo: this.route });
   }

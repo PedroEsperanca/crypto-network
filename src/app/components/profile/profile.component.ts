@@ -1,15 +1,16 @@
-import { BaseComponent } from 'frameworks/core';
+import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 
 import { User, UserApi, LoopBackAuth } from 'frameworks/api';
 
-@BaseComponent({
+@Component({
   selector: 'profile',
   styleUrls: [ './profile.component.scss' ],
-  templateUrl: './profile.component.html'
+  templateUrl: './profile.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private location: Location,
@@ -17,14 +18,14 @@ export class ProfileComponent {
     private user: UserApi
   ) {}
 
-  ngOnInit() {
+  public ngOnInit() {
     this.route.data
       .subscribe((data: { user: User }) => {
         console.log(data.user);
       });
   }
 
-  logout() {
-    this.user.logout().subscribe(response => this.location.replaceState(''));
+  public logout() {
+    this.user.logout().subscribe((response) => this.location.replaceState(''));
   }
 }

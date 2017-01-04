@@ -1,11 +1,12 @@
 // libs
-import { StoreModule } from '@ngrx/store';
 import { DBModule } from '@ngrx/db';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { StoreLogMonitorModule, useLogMonitor } from '@ngrx/store-log-monitor';
+// import { StoreLogMonitorModule, useLogMonitor } from '@ngrx/store-log-monitor';
 
-import { Ng2BootstrapModule } from 'ng2-bootstrap/ng2-bootstrap';
+import { ModalModule } from 'ng2-bootstrap/modal';
+import { TooltipModule } from 'ng2-bootstrap/tooltip';
+import { DropdownModule } from 'ng2-bootstrap/dropdown';
 // import { IDLE_PROVIDERS } from 'ng2-idle/core';
 
 import { SDKBrowserModule } from '../api';
@@ -23,7 +24,6 @@ import { RESOLVERS_PROVIDERS } from './resolvers';
 import { LoopBackConfig } from 'frameworks/api';
 
 import schema from './db-schema';
-import reducer from './reducers';
 import { AppEffects } from './effects/app';
 import actions from './actions';
 
@@ -51,22 +51,25 @@ export const MY_APP_PROVIDERS: any[] = [
 ];
 
 export const MY_APP_IMPORTS: any[] = [
-  Ng2BootstrapModule,
+  ModalModule.forRoot(),
+  TooltipModule.forRoot(),
+  DropdownModule.forRoot(),
+
   ScrollSpyModule.forRoot(),
 
   SDKBrowserModule.forRoot(),
 
-  StoreModule.provideStore(reducer),
+  // StoreModule.provideStore(reducer),
 
   EffectsModule.run(AppEffects),
 
   DBModule.provideDB(schema),
 
-  StoreDevtoolsModule.instrumentStore({
+  /*StoreDevtoolsModule.instrumentStore({
     monitor: useLogMonitor({
       visible: true,
       position: 'right'
     })
-  }),
-  StoreLogMonitorModule
+  }),*/
+  // StoreLogMonitorModule
 ];

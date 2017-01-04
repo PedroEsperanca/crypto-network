@@ -1,12 +1,13 @@
-import { BaseComponent } from 'frameworks/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Location } from '@angular/common';
 
 import { UserApi, LoopBackAuth } from 'frameworks/api';
 
-@BaseComponent({
+@Component({
   selector: 'index',
   styleUrls: [ './index.component.scss' ],
-  templateUrl: './index.component.html'
+  templateUrl: './index.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class IndexComponent {
   constructor(
@@ -15,7 +16,7 @@ export class IndexComponent {
     private user: UserApi
   ) {}
 
-  logout() {
-    this.user.logout().subscribe(response => this.location.replaceState(''));
+  public logout() {
+    this.user.logout().subscribe((response) => this.location.replaceState(''));
   }
 }

@@ -1,6 +1,4 @@
-import { BaseComponent } from 'frameworks/core';
-
-import { ChangeDetectorRef, Inject } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef, Inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { LoopBackAuth, UserApi } from 'frameworks/api';
@@ -10,17 +8,18 @@ interface FormI {
   token: string;
 }
 
-@BaseComponent({
+@Component({
   selector: 'user.verify',
-  templateUrl: './verify.component.html'
+  templateUrl: './verify.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VerifyComponent {
-  private formModel: FormI = {
+  public formModel: FormI = {
     token: ''
   };
 
-  private confirming: boolean = false;
-  private message: any = {};
+  public confirming: boolean = false;
+  public message: any = {};
 
   constructor(
     private auth: LoopBackAuth,
@@ -51,7 +50,7 @@ export class VerifyComponent {
     });
   }
 
-  confirm() {
+  public confirm() {
     this.confirming = true;
     this.message = {};
     this.cd.markForCheck();
@@ -82,7 +81,7 @@ export class VerifyComponent {
           });
         }
       },
-      error => {
+      (error) => {
         if (error.message === 'Unexpected token U in JSON at position 0') {
           this.message = {
             error: 'Unauthorized'
@@ -103,7 +102,7 @@ export class VerifyComponent {
     );
   }
 
-  resend() {
+  public resend() {
     this.user.sendVerificationEmail(this.auth.getCurrentUserId()).subscribe(
       (response: any) => {
         if (response.error) {
@@ -117,7 +116,7 @@ export class VerifyComponent {
         }
         this.cd.markForCheck();
       },
-      error => {
+      (error) => {
         if (error.message === 'Unexpected token U in JSON at position 0') {
           this.message = {
             error: 'Unauthorized'

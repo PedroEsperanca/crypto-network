@@ -1,8 +1,9 @@
-import { BaseComponent } from 'frameworks/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
-@BaseComponent({
+@Component({
   selector: 'indexTerms',
   styleUrls: [ './terms.component.scss' ],
-  templateUrl: './terms.component.html'
+  templateUrl: './terms.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class IndexTermsComponent { }

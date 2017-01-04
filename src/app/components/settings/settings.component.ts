@@ -1,10 +1,15 @@
-import { BaseComponent } from 'frameworks/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
-@BaseComponent({
+@Component({
   selector: 'settings.settings',
   styleUrls: [ './settings.component.scss' ],
-  templateUrl: './settings.component.html'
+  templateUrl: './settings.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SettingsComponent {
-  constructor() {}
+  public USER: any = {};
+
+  public logout() {
+    console.log();
+  }
 }

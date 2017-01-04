@@ -4,8 +4,8 @@ import { FormsModule } from '@angular/forms';
 
 import { MultilingualModule } from 'frameworks/i18n/multilingual.module';
 
-import { ModalModule } from 'ng2-bootstrap/components/modal';
-import { TooltipModule } from 'ng2-bootstrap/components/tooltip';
+import { ModalModule } from 'ng2-bootstrap/modal';
+import { TooltipModule } from 'ng2-bootstrap/tooltip';
 // import { TagInputModule } from 'ng2-tag-input';
 
 import { routing } from './apps.routing';
@@ -32,4 +32,4 @@ import { AppsNotFoundComponent } from './not-found/not-found.component';
     AppsNotFoundComponent
   ]
 })
-export default class AppsModule { }
+export class AppsModule { }

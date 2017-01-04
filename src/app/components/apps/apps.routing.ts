@@ -31,7 +31,7 @@ const routes: Routes = [
       },
       {
         path: ':id',
-        loadChildren: () => System.import('./app/app.module').then((comp: any) => comp.default),
+        loadChildren: './app/app.module#AppModule',
         canActivate: [ AppExistsGuard ],
         canDeactivate: [ AppCanDeactivateGuard ]
       }

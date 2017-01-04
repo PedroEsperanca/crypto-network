@@ -7,7 +7,7 @@ let providers: any[] = [
   BaseRequestOptions,
   MockBackend,
   { provide: Http,
-    useFactory: function (backend: ConnectionBackend, defaultOptions: BaseRequestOptions) {
+    useFactory: (backend: ConnectionBackend, defaultOptions: BaseRequestOptions) => {
       return new Http(backend, defaultOptions);
     },
     deps: [MockBackend, BaseRequestOptions]
@@ -29,7 +29,7 @@ export function GET_HTTP_PROVIDERS_INJECTOR(additionalProviders?: any[]): Reflec
 
 /*
 * For testing http services
-* @returns `any[]`
+* @returns `Array<any>`
 */
 export function TEST_HTTP_PROVIDERS(): any[] {
   return providers;

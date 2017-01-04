@@ -4,16 +4,16 @@ import { CommonModule }       from '@angular/common';
 import { IndexComponent } from './index.component';
 import { routing } from './index.routing';
 
-//import { CloudtasksDirective } from 'angular2-cloudtasks';
+// import { CloudtasksDirective } from 'angular2-cloudtasks';
 
 @NgModule({
   imports: [
-  	CommonModule,
+    CommonModule,
     routing
   ],
   declarations: [
     IndexComponent
-    //CloudtasksDirective
+    // CloudtasksDirective
   ]
 })
-export default class IndexModule { }
+export class IndexModule { }

@@ -1,13 +1,10 @@
-import { BaseComponent } from 'frameworks/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
-@BaseComponent({
-  selector: 'appsNotFound',
-  directives: [],
-  pipes: [],
+@Component({
+  selector: 'notFound',
   styleUrls: [ './not-found.component.scss' ],
-  templateUrl: './not-found.component.html'
+  templateUrl: './not-found.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppsNotFoundComponent {
-  constructor() {
-  }
 }

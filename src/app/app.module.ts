@@ -1,24 +1,32 @@
-import { NgModule, ApplicationRef } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { removeNgStyles, createNewHosts, createInputTransfer, bootloader } from '@angularclass/hmr';
-import { Store } from '@ngrx/store';
+import {
+  NgModule,
+  ApplicationRef
+} from '@angular/core';
+import {
+  removeNgStyles,
+  createNewHosts,
+  createInputTransfer
+} from '@angularclass/hmr';
+import {
+  RouterModule,
+  PreloadAllModules
+} from '@angular/router';
 
 /*
  * Platform and Environment providers/directives/pipes
  */
 import { ENV_PROVIDERS } from './environment';
+import { ROUTES } from './app.routes';
 // App is our top level component
-import { AppComponent } from 'components/app.component';
+import { AppComponent } from './components/app.component';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
 
-// import { IndexModule } from 'components/index/index.module';
-
 // Advance
 import { ADVANCE_MODULES } from './app.advance';
-
 // App
 import { MY_APP_PROVIDERS, MY_APP_IMPORTS } from 'frameworks/app';
 import { NotFoundComponent } from 'components/not-found/not-found.component';
@@ -29,6 +37,12 @@ const APP_PROVIDERS = [
   AppState,
   ...MY_APP_PROVIDERS
 ];
+
+type StoreType = {
+  state: InternalStateType,
+  restoreInputValues: () => void,
+  disposeOldHosts: () => void
+};
 
 /**
  * `AppModule` is the main entry point into Angular2's bootstraping process
@@ -41,6 +55,8 @@ const APP_PROVIDERS = [
   ],
   imports: [ // import Angular's modules
     BrowserModule,
+    FormsModule,
+    HttpModule,
     ...ADVANCE_MODULES,
     ...MY_APP_IMPORTS
   ],
@@ -50,31 +66,47 @@ const APP_PROVIDERS = [
   ]
 })
 export class AppModule {
-  constructor(public appRef: ApplicationRef, private _store: Store<any>) {}
-  hmrOnInit(store) {
-    if (!store || !store.rootState) return;
 
-    // restore state by dispatch a SET_ROOT_STATE action
-    if (store.rootState) {
-      this._store.dispatch({
-        type: 'SET_ROOT_STATE',
-        payload: store.rootState
-      });
+  constructor(
+    public appRef: ApplicationRef,
+    public appState: AppState
+  ) {}
+
+  public hmrOnInit(store: StoreType) {
+    if (!store || !store.state) {
+      return;
+    }
+    console.log('HMR store', JSON.stringify(store, null, 2));
+    // set state
+    this.appState._state = store.state;
+    // set input values
+    if ('restoreInputValues' in store) {
+      let restoreInputValues = store.restoreInputValues;
+      setTimeout(restoreInputValues);
     }
 
-    if ('restoreInputValues' in store) { store.restoreInputValues(); }
     this.appRef.tick();
-    Object.keys(store).forEach(prop => delete store[prop]);
+    delete store.state;
+    delete store.restoreInputValues;
   }
-  hmrOnDestroy(store) {
-    const cmpLocation = this.appRef.components.map(cmp => cmp.location.nativeElement);
-    this._store.take(1).subscribe(s => store.rootState = s);
+
+  public hmrOnDestroy(store: StoreType) {
+    const cmpLocation = this.appRef.components.map((cmp) => cmp.location.nativeElement);
+    // save state
+    const state = this.appState._state;
+    store.state = state;
+    // recreate root elements
     store.disposeOldHosts = createNewHosts(cmpLocation);
+    // save input values
     store.restoreInputValues  = createInputTransfer();
+    // remove styles
     removeNgStyles();
   }
-  hmrAfterDestroy(store) {
+
+  public hmrAfterDestroy(store: StoreType) {
+    // display new elements
     store.disposeOldHosts();
     delete store.disposeOldHosts;
   }
+
 }

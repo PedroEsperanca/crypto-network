@@ -15,10 +15,11 @@ export class UserLoggedGuard implements CanActivate {
     private auth: LoopBackAuth
   ) {}
 
-  canActivate() {
+  public canActivate() {
     if (this.auth.getCurrentUserId()) {
       if (!this.auth.getCurrentUserData() ||
-        this.auth.getCurrentUserData().emailAddresses.filter(e => { return !e.verified; }).length) {
+        this.auth.getCurrentUserData()
+          .emailAddresses.filter((e) => { return !e.verified; }).length) {
         this.router.navigate(['/user/verify']);
         return false;
       }

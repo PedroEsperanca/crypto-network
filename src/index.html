@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>
-    <%= htmlWebpackPlugin.options.title %>
-  </title>
+  <title><%= htmlWebpackPlugin.options.title %></title>
 
   <meta name="description" content="<%= htmlWebpackPlugin.options.title %>">
 
@@ -24,7 +21,6 @@
     body {
       margin: 0;
     }
-
     .splash {
       height: 100vh;
       display: flex;
@@ -32,8 +28,7 @@
       justify-content: center;
       background: #106cc8;
     }
-
-    .splash>div {
+    .splash > div {
       color: white;
       text-align: center;
     }
@@ -59,12 +54,12 @@
       text-align: center;
       font-size: 10px;
     }
-
-    .spinner>div {
+    .spinner > div {
       background-color: white;
       height: 100%;
       width: 6px;
       display: inline-block;
+
       -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
       animation: sk-stretchdelay 1.2s infinite ease-in-out;
     }
@@ -90,24 +85,15 @@
     }
 
     @-webkit-keyframes sk-stretchdelay {
-      0%,
-      40%,
-      100% {
-        -webkit-transform: scaleY(0.4)
-      }
-      20% {
-        -webkit-transform: scaleY(1.0)
-      }
+      0%, 40%, 100% { -webkit-transform: scaleY(0.4) }  
+      20% { -webkit-transform: scaleY(1.0) }
     }
 
     @keyframes sk-stretchdelay {
-      0%,
-      40%,
-      100% {
+      0%, 40%, 100% { 
         transform: scaleY(0.4);
         -webkit-transform: scaleY(0.4);
-      }
-      20% {
+      }  20% { 
         transform: scaleY(1.0);
         -webkit-transform: scaleY(1.0);
       }
@@ -121,32 +107,23 @@
 
   <% if (!htmlWebpackPlugin.options.metadata.isDevServer) { %>
   <script>
-    (function(A, n, g, u, l, a, r) {
-      A.GoogleAnalyticsObject = r;
-      A[l] = A[l] || function() {
-        (A[l].q = A[l].q || []).push(arguments)
-      }, A[l].l = 1 * new Date();
-      a = n.createElement(g),
-      r = n.getElementsByTagName(g)[0];
-      a.async = 1;
-      a.src = u;
-      r.parentNode.insertBefore(a, r)
-    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+    (function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=r;A[l]=A[l]||function(){
+    (A[l].q=A[l].q||[]).push(arguments)},A[l].l=1*new Date();a=n.createElement(g),
+    r=n.getElementsByTagName(g)[0];a.async=1;a.src=u;r.parentNode.insertBefore(a,r)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
     ga('create', '<%= htmlWebpackPlugin.options.metadata.GOOGLE_ANALYTICS %>', 'auto');
+    // ga('send', 'pageview');
   </script>
   <% } %>
-
+  
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQcEfxOuvru9hEYISgnK-d_vxsx6MfllI&libraries=places"></script>
 </head>
-
 <body>
 
   <app>
     <div class="splash">
       <div>
-        <h1>
-          <%= htmlWebpackPlugin.options.title %>
-        </h1>
+        <h1><%= htmlWebpackPlugin.options.title %></h1>
         <div class="spinner">
           <div class="rect1"></div>
           <div class="rect2"></div>
@@ -164,5 +141,4 @@
   <% } %>
 
 </body>
-
 </html>

@@ -1,19 +1,18 @@
-import { BaseComponent } from 'frameworks/core';
-
-import { Inject } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 import { UserApi, LoopBackConfig } from 'frameworks/api';
 import { SDKStorage } from 'frameworks/api/storage/storage.swaps';
 
-@BaseComponent({
+@Component({
   selector: 'user.signup',
-  templateUrl: './signup.component.html'
+  templateUrl: './signup.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SignupComponent {
-  private registerForm: FormGroup;
-  private emailVerificationToken: string;
+  public registerForm: FormGroup;
+  public emailVerificationToken: string;
 
   constructor(
     private router: Router,
@@ -34,24 +33,24 @@ export class SignupComponent {
     });
   }
 
-  signup() {
+  public signup() {
     this.user.create({
       name: this.registerForm.controls['name'].value,
       email: this.registerForm.controls['email'].value,
       password: this.registerForm.controls['password'].value
     }).subscribe(
-      response => {
+      (response) => {
         this.login();
       }
     );
   }
 
-  login() {
+  public login() {
     this.user.login({
       email: this.registerForm.controls['email'].value,
       password: this.registerForm.controls['password'].value
     }).subscribe(
-      response => {
+      (response) => {
         if (this.emailVerificationToken) {
           this.router.navigate(['/user/verify-email/' + this.emailVerificationToken]);
         } else {
@@ -61,11 +60,11 @@ export class SignupComponent {
     );
   }
 
-  goTo(provider: string) {
+  public goTo(provider: string) {
     window.location.href = LoopBackConfig.getPath() + provider;
   }
 
-  passwordComplexity(control: any) {
+  private passwordComplexity(control: any) {
     const password = control.value;
 
     const anUpperCase = /[A-Z]/;
@@ -80,20 +79,20 @@ export class SignupComponent {
     let numNums = 0;
     let numSpecials = 0;
 
-    for (let i = 0; i < password.length; i++) {
-      if (anUpperCase.test(password[i])) {
+    for (let character of password) {
+      if (anUpperCase.test(character)) {
         numUpper++;
       }
 
-      if (aLowerCase.test(password[i])) {
+      if (aLowerCase.test(character)) {
         numLower++;
       }
 
-      if (aNumber.test(password[i])) {
+      if (aNumber.test(character)) {
         numNums++;
       }
 
-      if (aSpecial.test(password[i])) {
+      if (aSpecial.test(character)) {
         numSpecials++;
       }
     }

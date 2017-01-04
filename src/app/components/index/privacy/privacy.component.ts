@@ -1,8 +1,9 @@
-import { BaseComponent } from 'frameworks/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
-@BaseComponent({
+@Component({
   selector: 'indexPrivacy',
   styleUrls: [ './privacy.component.scss' ],
-  templateUrl: './privacy.component.html'
+  templateUrl: './privacy.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class IndexPrivacyComponent { }

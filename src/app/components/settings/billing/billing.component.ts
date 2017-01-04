@@ -1,10 +1,11 @@
-import { BaseComponent } from 'frameworks/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
-@BaseComponent({
+@Component({
   selector: 'settingsBilling',
   styleUrls: [ './billing.component.scss' ],
-  templateUrl: './billing.component.html'
+  templateUrl: './billing.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SettingsBillingComponent {
-  constructor() {}
+  public USER: any = {};
 }
