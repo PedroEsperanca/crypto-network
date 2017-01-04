@@ -30,6 +30,7 @@ import { ADVANCE_MODULES } from './app.advance';
 // App
 import { MY_APP_PROVIDERS, MY_APP_IMPORTS } from 'frameworks/app';
 import { NotFoundComponent } from 'components/not-found/not-found.component';
+import { TestComponent } from './components/not-found/test/test.component';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -51,7 +52,8 @@ type StoreType = {
   bootstrap: [ AppComponent ],
   declarations: [
     AppComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    TestComponent
   ],
   imports: [ // import Angular's modules
     BrowserModule,
