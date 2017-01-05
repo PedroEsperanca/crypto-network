@@ -77,7 +77,8 @@ export class AppsHomeComponent {
   }
 
   public showChildModal(app: any): void {
-    this.childModal.show(app);
+    // this.childModal.show(app);
+    this.childModal.show();
   }
 
   public hideChildModal(): void {

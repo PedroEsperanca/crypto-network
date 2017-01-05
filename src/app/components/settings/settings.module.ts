@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { MultilingualModule } from 'frameworks/i18n/multilingual.module';
 
 import { TooltipModule } from 'ng2-bootstrap/tooltip';
+import { CloudtasksModule } from 'angular2-cloudtasks';
 
 import { routing } from './settings.routing';
 import { SettingsComponent } from './settings.component';
@@ -20,7 +21,8 @@ import { SettingsBillingComponent } from './billing/billing.component';
     FormsModule,
     MultilingualModule,
     routing,
-    TooltipModule
+    TooltipModule,
+    CloudtasksModule
   ],
   declarations: [
     SettingsComponent,

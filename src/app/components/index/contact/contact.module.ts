@@ -20,4 +20,4 @@ export const routes = [
     // CloudtasksDirective
   ]
 })
-export default class IndexContactModule { }
+export class IndexContactModule { }

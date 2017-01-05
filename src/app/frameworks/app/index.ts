@@ -11,7 +11,7 @@ import { DropdownModule } from 'ng2-bootstrap/dropdown';
 
 import { SDKBrowserModule } from '../api';
 
-import { CloudtasksService } from 'angular2-cloudtasks';
+import { CloudtasksModule } from 'angular2-cloudtasks';
 import { ScrollSpyModule } from 'ng2-scrollspy';
 
 // ngrx
@@ -23,9 +23,9 @@ import { RESOLVERS_PROVIDERS } from './resolvers';
 
 import { LoopBackConfig } from 'frameworks/api';
 
-import schema from './db-schema';
+import { schema } from './db-schema';
 import { AppEffects } from './effects/app';
-import actions from './actions';
+import { ACTIONS } from './actions';
 
 if (ENV === 'production') {
   LoopBackConfig.setBaseURL('https://ori-api.reality-connect.pt');
@@ -41,16 +41,16 @@ export const MY_APP_PROVIDERS: any[] = [
   // IDLE_PROVIDERS,
   GUARDS_PROVIDERS,
   RESOLVERS_PROVIDERS,
-  CloudtasksService,
 
   // ngrx
   // NOTIFY_PROVIDERS,
   // { provide: NOTIFY_GLOBAL_OPTIONS, multi: true, useValue: { /* global options here */ } },
 
-  actions
+  ...ACTIONS
 ];
 
 export const MY_APP_IMPORTS: any[] = [
+  CloudtasksModule.forRoot(),
   ModalModule.forRoot(),
   TooltipModule.forRoot(),
   DropdownModule.forRoot(),

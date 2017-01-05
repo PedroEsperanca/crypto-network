@@ -16,7 +16,7 @@ const initialState: ApplicationState = {
   selectedAppId: null
 };
 
-export default function(state = initialState, action: Action): ApplicationState {
+export function reducer(state = initialState, action: Action): ApplicationState {
   switch (action.type) {
 
     case ApplicationActions.SET_IDLE: {

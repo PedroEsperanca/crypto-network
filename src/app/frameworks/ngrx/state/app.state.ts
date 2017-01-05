@@ -39,9 +39,9 @@ import { combineReducers } from '@ngrx/store';
  */
 import * as fromMultilingual from '../../i18n/index';
 
-import applicationReducer, * as fromApplication from 'frameworks/app/reducers/application';
-import searchAppsReducer, * as fromSearchApps from 'frameworks/app/reducers/searchApps';
-import appsReducer, * as fromApps from 'frameworks/app/reducers/apps';
+import * as fromApplication from 'frameworks/app/reducers/application';
+import * as fromSearchApps from 'frameworks/app/reducers/searchApps';
+import * as fromApps from 'frameworks/app/reducers/apps';
 
 import * as fromSample from '../../sample/index';
 
@@ -69,9 +69,9 @@ export interface IAppState {
 const reducers = {
   i18n: fromMultilingual.reducer,
 
-  app: applicationReducer,
-  searchApps: searchAppsReducer,
-  apps: appsReducer,
+  app: fromApplication.reducer,
+  searchApps: fromSearchApps.reducer,
+  apps: fromApps.reducer,
 
   sample: fromSample.reducer
 };

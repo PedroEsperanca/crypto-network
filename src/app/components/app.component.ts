@@ -14,10 +14,10 @@ import { ConfigService } from 'ng2-config';
 import { CloudtasksService } from 'angular2-cloudtasks';
 
 // app
-import { AnalyticsService } from 'frameworks/analytics/index';
-import { MultilingualService } from 'frameworks/i18n/index';
-import { Config } from 'frameworks/core/index';
-import { LogService } from 'frameworks/core/services/index';
+import { AnalyticsService } from 'frameworks/analytics';
+import { MultilingualService } from 'frameworks/i18n';
+import { Config } from 'frameworks/core';
+import { LogService } from 'frameworks/core/services';
 import { LoopBackAuth, UserApi } from 'frameworks/api';
 
 /**

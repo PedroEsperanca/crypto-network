@@ -6,7 +6,7 @@ export {
   AppActions
 };
 
-export default [
+export const ACTIONS: any[] = [
   ApplicationActions,
   AppActions
 ];

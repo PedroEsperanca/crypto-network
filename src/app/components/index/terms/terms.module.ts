@@ -2,11 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule }       from '@angular/common';
 
-import {
-  ScrollSpyIndexDirective,
-  ScrollSpyIndexRenderComponent
-} from 'ng2-scrollspy/dist/plugin/index';
-import { ScrollSpyAffixDirective } from 'ng2-scrollspy/dist/plugin/affix';
+import { ScrollSpySharedModule } from 'frameworks/shared/scrollSpy.shared.module';
 
 import { IndexTermsComponent } from './terms.component';
 
@@ -17,13 +13,11 @@ export const routes = [
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    ScrollSpySharedModule
   ],
   declarations: [
-    IndexTermsComponent,
-    ScrollSpyIndexDirective,
-    ScrollSpyIndexRenderComponent,
-    ScrollSpyAffixDirective
+    IndexTermsComponent
   ]
 })
-export default class IndexTermsModule { }
+export class IndexTermsModule { }

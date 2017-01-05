@@ -1,7 +1,6 @@
 <div class="form-block">
 	<form (ngSubmit)="login()" #loginForm="ngForm">
-		<h4 *ngIf="!USER?.username">{{'Sign in to continue' | translate}}</h4>
-		<h4 *ngIf="USER?.username">{{'Link to existing account' | translate}}</h4>
+		<h4>{{'Sign in to continue' | translate}}</h4>
 		<br />
 
 		<div *ngIf="message.success" class="alert alert-success" role="alert">{{message.success | translate}}</div>
@@ -19,38 +18,21 @@
 			[(ngModel)]="formModel.password" required/>
 		<br />
 
-		<button *ngIf="!USER?.username" type="submit" class="btn btn-primary" [disabled]="!loginForm.form.valid">
+		<button type="submit" class="btn btn-primary" [disabled]="!loginForm.form.valid">
 			<span>{{'Log in' | translate}}</span><i class="fa fa-sign-in fa-lg right-i"></i>
 		</button>
 
-		<a class="btn btn-default" 
-			*ngIf="!USER?.username"
-			[routerLink]="['../signup']">
-
+		<a class="btn btn-default" [routerLink]="['../signup']">
 			{{'Create an Account' | translate}}
-		</a>
-
-		<button class="btn btn-primary" type="submit"
-			*ngIf="USER?.username">
-
-			{{'Link Accounts' | translate}}
-		</button>
-
-		<a class="btn btn-default"
-			*ngIf="USER?.username"
-			[routerLink]="['../signup']">
-
-			{{'Create a New Account'  | translate}}
 		</a>
 
 	</form>
 	<br />
 
-	<h5 *ngIf="!USER?.username">{{'Alternatively, you can log in using:' | translate}}</h5>
-	<br *ngIf="!USER?.username" />
+	<h5>{{'Alternatively, you can log in using:' | translate}}</h5>
+	<br />
 
-	<div class="social"
-		*ngIf="!USER?.username">
+	<div class="social">
 
 		<a class="fb_connect" (click)="goTo('/auth/facebook')" target="_top">
 			<span class="fa-stack fa-2x">

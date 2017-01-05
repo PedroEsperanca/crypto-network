@@ -12,9 +12,9 @@ import { User, UserApi, LoopBackAuth } from 'frameworks/api';
 })
 export class ProfileComponent implements OnInit {
   constructor(
+    public auth: LoopBackAuth,
     private route: ActivatedRoute,
     private location: Location,
-    private auth: LoopBackAuth,
     private user: UserApi
   ) {}
 

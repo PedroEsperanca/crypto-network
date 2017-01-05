@@ -18,7 +18,7 @@ import { AppInterface, UserApi, LoopBackAuth } from 'frameworks/api';
 @Injectable()
 export class AppEffects {
 
-  @Effect() public openDB$ = this.db.open('ORI_app').filter(() => false);
+  @Effect() public openDB$ = this.db.open('seed').filter(() => false);
 
   @Effect() public loadCollectionOnInit$ = Observable.of(this.appActions.loadCollection());
 

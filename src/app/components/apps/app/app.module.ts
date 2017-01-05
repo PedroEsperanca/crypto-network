@@ -10,6 +10,7 @@ import { routing } from './app.routing';
 import { AppComponent } from './app.component';
 
 import { AppHomeComponent } from './home/home.component';
+import { AppNotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { AppHomeComponent } from './home/home.component';
   declarations: [
     AppComponent,
 
-    AppHomeComponent
+    AppHomeComponent,
+    AppNotFoundComponent
   ],
   providers: []
 })

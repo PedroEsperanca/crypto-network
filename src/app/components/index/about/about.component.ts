@@ -8,11 +8,9 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
     }
   `],
   template: `
-  <md-card>
-    <h1>
-      patrick@AngularClass.com
-    </h1>
-  </md-card>
+  <h1>
+    patrick@AngularClass.com
+  </h1>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })

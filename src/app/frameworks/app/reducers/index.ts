@@ -47,9 +47,9 @@ import { IAppState } from 'frameworks/ngrx';
  * the state of the reducer plus any selector functions. The `* as`
  * notation packages up all of the exports into a single object.
  */
-import applicationReducer, * as fromApplication from './application';
-import searchAppsReducer, * as fromSearchApps from './searchApps';
-import appsReducer, * as fromApps from './apps';
+import * as fromApplication from 'frameworks/app/reducers/application';
+import * as fromSearchApps from 'frameworks/app/reducers/searchApps';
+import * as fromApps from 'frameworks/app/reducers/apps';
 
 // Generate a reducer to set the root state
 function stateSetter(reducer: ActionReducer<any>): ActionReducer<any> {
@@ -79,7 +79,7 @@ function stateSetter(reducer: ActionReducer<any>): ActionReducer<any> {
  * wrapping that in storeLogger. Remember that compose applies
  * the result from right to left.
  */
-/*export default compose(storeLogger(), stateSetter, combineReducers)({
+/*export compose(storeLogger(), stateSetter, combineReducers)({
   i18n: multilingualReducer,
   // router: routerReducer,
   app: applicationReducer,

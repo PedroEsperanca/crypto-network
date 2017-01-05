@@ -17,7 +17,7 @@ const initialState: AppsState = {
   entities: {}
 };
 
-export default function(state = initialState, action: Action): AppsState {
+export function reducer(state = initialState, action: Action): AppsState {
   switch (action.type) {
     case AppActions.SEARCH_COMPLETE:
     case AppActions.LOAD_COLLECTION_SUCCESS: {

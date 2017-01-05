@@ -11,8 +11,8 @@ import { UserApi, LoopBackAuth } from 'frameworks/api';
 })
 export class IndexComponent {
   constructor(
+    public auth: LoopBackAuth,
     private location: Location,
-    private auth: LoopBackAuth,
     private user: UserApi
   ) {}
 

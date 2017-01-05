@@ -16,23 +16,23 @@
 
 		<div class="form_row form_row_password">
 			<input formControlName="password" type="password" name="password_register" class="form-control" placeholder="{{'Password' | translate}}" required autocomplete="off"/>
-
+			
 			<div class="password-composer">
         <small class="form-text text-muted">{{'Your password must have:' | translate}}</small>
         <small class="form-text"
-          [class.ng-error]="registerForm.controls.password.dirty && registerForm.controls.password.errors && registerForm.controls.password.errors.length"
+          [class.ng-error]="registerForm.get('password').dirty && registerForm.get('password').errors && registerForm.get('password').errors['length']"
         > - {{'at least 8 characters long' | translate}}</small>
         <small class="form-text"
-          [class.ng-error]="registerForm.controls.password.dirty && registerForm.controls.password.errors && registerForm.controls.password.errors.numUpper"
+          [class.ng-error]="registerForm.get('password').dirty && registerForm.get('password').errors && registerForm.get('password').errors['numUpper']"
         > - {{'at least 1 uppercase character' | translate}}</small>
         <small class="form-text"
-          [class.ng-error]="registerForm.controls.password.dirty && registerForm.controls.password.errors && registerForm.controls.password.errors.numLower"
+          [class.ng-error]="registerForm.get('password').dirty && registerForm.get('password').errors && registerForm.get('password').errors['numLower']"
         > - {{'at least 1 lowercase character' | translate}}</small>
         <small class="form-text"
-          [class.ng-error]="registerForm.controls.password.dirty && registerForm.controls.password.errors && registerForm.controls.password.errors.numNums"
+          [class.ng-error]="registerForm.get('password').dirty && registerForm.get('password').errors && registerForm.get('password').errors['numNums']"
         > - {{'at least 1 number' | translate}}</small>
         <small class="form-text"
-          [class.ng-error]="registerForm.controls.password.dirty && registerForm.controls.password.errors && registerForm.controls.password.errors.numSpecials"
+          [class.ng-error]="registerForm.get('password').dirty && registerForm.get('password').errors && registerForm.get('password').errors['numSpecials']"
         > - {{'at least 1 special character' | translate}}</small>
       </div>
 		</div>
@@ -41,13 +41,12 @@
 		<button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">{{'Create Account' | translate}}</button>
 		<br>
 		
-		<br *ngIf="!USER?.username" />
+		<br>
 
-		<h5 *ngIf="!USER?.username">{{'...or create an account with:' | translate}}</h5>
-		<br *ngIf="!USER?.username" />
+		<h5>{{'...or create an account with:' | translate}}</h5>
+		<br>
 
-		<div class="social"
-			*ngIf="!USER?.username">
+		<div class="social">
 
 			<a class="fb_connect" (click)="goTo('/auth/facebook')" target="_top">
 				<span class="fa-stack fa-2x">

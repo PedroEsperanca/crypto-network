@@ -15,7 +15,7 @@ import { AppActions } from 'frameworks/app/actions';
   templateUrl: './edit.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EditComponent implements OnInit, OnDestroy {
+export class AppsEditComponent implements OnInit, OnDestroy {
   public formModel: AppInterface;
 
   private subscriptions: Subscription[] = [];

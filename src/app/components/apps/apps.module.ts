@@ -13,6 +13,7 @@ import { AppsComponent } from './apps.component';
 
 import { AppsHomeComponent } from './home/home.component';
 import { AppsCreateComponent } from './create/create.component';
+import { AppsEditComponent } from './edit/edit.component';
 import { AppsNotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
@@ -29,6 +30,7 @@ import { AppsNotFoundComponent } from './not-found/not-found.component';
     AppsComponent,
     AppsHomeComponent,
     AppsCreateComponent,
+    AppsEditComponent,
     AppsNotFoundComponent
   ]
 })

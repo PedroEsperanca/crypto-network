@@ -17,7 +17,7 @@ const initialState: SearchAppsState = {
   filter: ''
 };
 
-export default function(state = initialState, action: Action): SearchAppsState {
+export function reducer(state = initialState, action: Action): SearchAppsState {
   switch (action.type) {
     case AppActions.SEARCH: {
       const filter = action.payload;
