@@ -35,7 +35,8 @@ module.exports = function(options) {
       alias: {
         components: helpers.root('src/app/components'),
         frameworks: helpers.root('src/app/frameworks'),
-        assets: helpers.root('src/assets')
+        assets: helpers.root('src/assets'),
+        bootstrap: helpers.root('node_modules/bootstrap/scss')
       }
     },
 

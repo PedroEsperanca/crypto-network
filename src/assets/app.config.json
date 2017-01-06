@@ -35,5 +35,11 @@
       "LEVEL_3": false,
       "LEVEL_4": true
     }
+  },
+  "name": "SEED",
+  "logo": "/assets/img/angular-logo.png",
+  "links": {
+    "blog": "",
+    "status": ""
   }
 }

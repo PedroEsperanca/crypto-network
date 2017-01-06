@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { CommonModule }       from '@angular/common';
+import { CommonModule } from '@angular/common';
 
 import { IndexAboutComponent } from './about.component';
 

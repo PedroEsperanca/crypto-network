@@ -3,13 +3,14 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { ConfigService } from 'ng2-config';
 
 @Component({
-  selector: 'indexPrivacy',
-  styleUrls: [ './privacy.component.scss' ],
-  templateUrl: './privacy.component.html',
+  selector: 'app-footer',
+  styleUrls: [ './footer.component.scss' ],
+  templateUrl: './footer.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class IndexPrivacyComponent {
+export class FooterComponent {
   public config: any;
+  public today: number = Date.now();
 
   constructor(public configService: ConfigService) {
     this.config = this.configService.getSettings();

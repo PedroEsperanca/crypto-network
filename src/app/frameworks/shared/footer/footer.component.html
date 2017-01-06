@@ -1,0 +1,22 @@
+<div class="container">
+  <footer>
+    <div class="pull-left">
+      <span>@ {{today | date:'y'}} · {{config.name}}</span>
+
+      <a [routerLink]="['/terms']">{{'Terms' | translate}}</a>
+      <a [routerLink]="['/privacy']">{{'Privacy' | translate}}</a>
+      <a [routerLink]="['/security']">{{'Security' | translate}}</a>
+      <a *ngIf="config.links?.status" href="{{config.links.status}}">{{'Status' | translate}}</a>
+    </div>
+    
+    <div class="logo">
+      <img src="{{config.logo}}">
+    </div>
+
+    <div class="pull-right">
+      <a [routerLink]="['/contact']">{{'Contact us' | translate}}</a>
+      <a *ngIf="config.links?.blog" href="{{config.links.blog}}">{{'Blog' | translate}}</a>
+      <a [routerLink]="['/about']">{{'About' | translate}}</a>
+    </div>
+  </footer>
+</div>
