@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
-import { ScrollSpySharedModule } from 'frameworks/shared/scrollSpy.shared.module';
+import { ScrollSpyIndexModule } from 'ng2-scrollspy/dist/plugin/index';
+import { ScrollSpyAffixModule } from 'ng2-scrollspy/dist/plugin/affix';
 
 import { IndexSecurityComponent } from './security.component';
 
@@ -14,7 +15,8 @@ export const routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    ScrollSpySharedModule
+    ScrollSpyIndexModule,
+    ScrollSpyAffixModule
   ],
   declarations: [
     IndexSecurityComponent
