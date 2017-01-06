@@ -1,7 +1,7 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
-
-import { ChangeDetectorRef, Inject } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef, Inject } from '@angular/core';
 import { Router } from '@angular/router';
+
+import { ConfigService } from 'ng2-config';
 
 import { UserInterface, UserApi, LoopBackAuth, LoopBackConfig } from 'frameworks/api';
 import { SDKStorage } from 'frameworks/api/storage/storage.swaps';
@@ -12,6 +12,7 @@ import { SDKStorage } from 'frameworks/api/storage/storage.swaps';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginComponent {
+  public config: any;
   public formModel: UserInterface = {
     email: '',
     password: ''
@@ -21,12 +22,15 @@ export class LoginComponent {
   public emailVerificationToken: string;
 
   constructor(
+    private configService: ConfigService,
     private auth: LoopBackAuth,
     private router: Router,
     private user: UserApi,
     private cd: ChangeDetectorRef,
     @Inject(SDKStorage) protected storage: SDKStorage
   ) {
+    this.config = this.configService.getSettings();
+
     try {
       this.emailVerificationToken = this.storage.get(`$LoopBackSDK$emailVerificationToken`);
     } catch (err) {

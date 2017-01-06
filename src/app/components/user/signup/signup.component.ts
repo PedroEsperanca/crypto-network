@@ -2,6 +2,8 @@ import { Component, ChangeDetectionStrategy, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
+import { ConfigService } from 'ng2-config';
+
 import { UserApi, LoopBackConfig } from 'frameworks/api';
 import { SDKStorage } from 'frameworks/api/storage/storage.swaps';
 
@@ -11,15 +13,19 @@ import { SDKStorage } from 'frameworks/api/storage/storage.swaps';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SignupComponent {
+  public config: any;
   public registerForm: FormGroup;
   public emailVerificationToken: string;
 
   constructor(
+    private configService: ConfigService,
     private router: Router,
     private user: UserApi,
     private fb: FormBuilder,
     @Inject(SDKStorage) protected storage: SDKStorage
   ) {
+    this.config = this.configService.getSettings();
+
     try {
       this.emailVerificationToken = this.storage.get(`$LoopBackSDK$emailVerificationToken`);
     } catch (err) {

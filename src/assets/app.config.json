@@ -1,5 +1,24 @@
 
 {
+  "name": "SEED",
+  "logo": "/assets/img/angular-logo.png",
+  "links": {
+    "blog": "",
+    "status": ""
+  },
+  "login": {
+    "validateEmails": false,
+    "validatePhones": false,
+    "strategies": {
+      "form": true,
+      "facebook": true,
+      "google": true,
+      "twitter": true,
+      "linkedin": false,
+      "github": false,
+      "bitbucket": false
+    }
+  },
   "i18n": {
     "defaultLanguage": {
       "code": "en",
@@ -35,11 +54,5 @@
       "LEVEL_3": false,
       "LEVEL_4": true
     }
-  },
-  "name": "SEED",
-  "logo": "/assets/img/angular-logo.png",
-  "links": {
-    "blog": "",
-    "status": ""
   }
 }

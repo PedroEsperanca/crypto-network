@@ -47,25 +47,42 @@
 		<br>
 
 		<div class="social">
-
-			<a class="fb_connect" (click)="goTo('/auth/facebook')" target="_top">
+			<a *ngIf="config.login?.strategies?.facebook" class="fb_connect" (click)="goTo('/auth/facebook')" target="_top">
 				<span class="fa-stack fa-2x">
 					<i class="fa fa-circle fa-stack-2x"></i>
 					<i class="fa fa-facebook fa-stack-1x"></i>
 				</span>
 			</a>
-			<a class="go_connect" (click)="goTo('/auth/google')" target="_top">
+			<a *ngIf="config.login?.strategies?.google" class="go_connect" (click)="goTo('/auth/google')" target="_top">
 				<span class="fa-stack fa-2x">
 					<i class="fa fa-circle fa-stack-2x"></i>
 					<i class="fa fa-google fa-stack-1x"></i>
 				</span>
 			</a>
-			<!--<a class="gh_connect" (click)="goTo('/auth/github')" target="_top">
+			<a *ngIf="config.login?.strategies?.twitter" class="tw_connect" (click)="goTo('/auth/twitter')" target="_top">
+				<span class="fa-stack fa-2x">
+					<i class="fa fa-circle fa-stack-2x"></i>
+					<i class="fa fa-twitter fa-stack-1x"></i>
+				</span>
+			</a>
+			<a *ngIf="config.login?.strategies?.linkedin" class="ln_connect" (click)="goTo('/auth/linkedin')" target="_top">
+				<span class="fa-stack fa-2x">
+					<i class="fa fa-circle fa-stack-2x"></i>
+					<i class="fa fa-linkedin fa-stack-1x"></i>
+				</span>
+			</a>
+			<a *ngIf="config.login?.strategies?.github" class="gh_connect" (click)="goTo('/auth/github')" target="_top">
 				<span class="fa-stack fa-2x">
 					<i class="fa fa-circle fa-stack-2x"></i>
 					<i class="fa fa-github fa-stack-1x"></i>
 				</span>
-			</a>-->
+			</a>
+			<a *ngIf="config.login?.strategies?.bitbucket" class="bb_connect" (click)="goTo('/auth/bitbucket')" target="_top">
+				<span class="fa-stack fa-2x">
+					<i class="fa fa-circle fa-stack-2x"></i>
+					<i class="fa fa-bitbucket fa-stack-1x"></i>
+				</span>
+			</a>
 		</div>
 	</form>
 </div>
