@@ -9,9 +9,7 @@
       <a *ngIf="config.links?.status" href="{{config.links.status}}">{{'Status' | translate}}</a>
     </div>
     
-    <div class="logo">
-      <img src="{{config.logo}}">
-    </div>
+    <a [routerLink]="['/']"><img src="{{config.logo}}"></a>
 
     <div class="pull-right">
       <a [routerLink]="['/contact']">{{'Contact us' | translate}}</a>
