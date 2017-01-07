@@ -10,16 +10,7 @@
     background: #b2bacc;
     background-image: linear-gradient(163deg, #b2bacc 30%, #3b538c 80%);
     text-align: center;
-
-    .background {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-
-      .backgroundContainer {
-        position: absolute;
-      }
-    }
+    margin-top: -20px;
 
     .hero {
       position: relative;
