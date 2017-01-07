@@ -61,6 +61,8 @@ npm start
 Files to take into account:
 
 ```
+./src/assets/app.config.json
+
 ./config/custom/webpack.common.js
 ./src/app/frameworks/app/index.ts
 ```

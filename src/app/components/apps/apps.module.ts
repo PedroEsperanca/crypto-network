@@ -2,11 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule }       from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { MultilingualModule } from 'frameworks/i18n/multilingual.module';
-
 import { ModalModule } from 'ng2-bootstrap/modal';
 import { TooltipModule } from 'ng2-bootstrap/tooltip';
 // import { TagInputModule } from 'ng2-tag-input';
+
+import { MultilingualModule } from 'frameworks/i18n/multilingual.module';
+import { UserMenuModule } from 'frameworks/shared/user-menu';
 
 import { routing } from './apps.routing';
 import { AppsComponent } from './apps.component';
@@ -21,6 +22,7 @@ import { AppsNotFoundComponent } from './not-found/not-found.component';
     CommonModule,
     FormsModule,
     MultilingualModule,
+    UserMenuModule,
     routing,
     ModalModule,
     TooltipModule,

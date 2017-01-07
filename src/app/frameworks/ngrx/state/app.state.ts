@@ -43,8 +43,6 @@ import * as fromApplication from 'frameworks/app/reducers/application';
 import * as fromSearchApps from 'frameworks/app/reducers/searchApps';
 import * as fromApps from 'frameworks/app/reducers/apps';
 
-import * as fromSample from '../../sample/index';
-
 /**
  * As mentioned, we treat each reducer like a table in a database. This means
  * our top level state interface is just a map of keys to inner state types.
@@ -55,8 +53,6 @@ export interface IAppState {
   app: fromApplication.ApplicationState;
   searchApps: fromSearchApps.SearchAppsState;
   apps: fromApps.AppsState;
-
-  sample: fromSample.ISampleState;
 };
 
 /**
@@ -72,8 +68,6 @@ const reducers = {
   app: fromApplication.reducer,
   searchApps: fromSearchApps.reducer,
   apps: fromApps.reducer,
-
-  sample: fromSample.reducer
 };
 
 const developmentReducer: ActionReducer<IAppState> =
@@ -91,9 +85,5 @@ export function AppReducer(state: any, action: any) {
 export function getMultilingualState(state$: Observable<IAppState>) {
   return state$.select((s) => s.i18n);
 }
-export function getNameListState(state$: Observable<IAppState>) {
-  return state$.select((s) => s.sample);
-}
 
 export const getLang: any = compose(fromMultilingual.getLang, getMultilingualState);
-export const getNames: any = compose(fromSample.getNames, getNameListState);

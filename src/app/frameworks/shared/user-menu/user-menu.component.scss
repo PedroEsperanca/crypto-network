@@ -1,0 +1,48 @@
+:host {
+  > li {
+    > a {
+      display: block;
+      padding: 4px 8px;
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 20px;
+      color: #333;
+      cursor: pointer;
+
+      &:hover {
+        color: #4078c0;
+        text-decoration: none;
+      }
+
+      img {
+        float: left;
+        margin-right: 5px;
+        display: inline-block;
+        overflow: hidden;
+        line-height: 1;
+        vertical-align: middle;
+        border-radius: 3px;
+        margin-top: -3px;
+      }
+    }
+
+    > ul {
+      li {
+
+        .dropdown-header {
+          color: #373a3c;
+        }
+
+        a {
+          cursor: pointer;
+
+          i {
+            width: 20px;
+            text-align: center;
+            margin-right: 3px;
+          }
+        }
+      }
+    }
+  }
+}

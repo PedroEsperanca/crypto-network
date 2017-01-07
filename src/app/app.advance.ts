@@ -15,8 +15,6 @@ import { AppReducer } from 'frameworks/ngrx/index';
 import { AnalyticsModule } from 'frameworks/analytics/analytics.module';
 import { MultilingualModule, translateFactory } from 'frameworks/i18n/multilingual.module';
 import { MultilingualEffects } from 'frameworks/i18n/index';
-import { SampleModule } from 'frameworks/sample/sample.module';
-import { NameListEffects } from 'frameworks/sample/index';
 
 // config
 import { Config } from 'frameworks/core/index';
@@ -54,9 +52,7 @@ export const ADVANCE_MODULES = [
     deps: [Http],
     useFactory: (translateFactory)
   }]),
-  SampleModule,
   StoreModule.provideStore(AppReducer),
   StoreDevtoolsModule.instrumentOnlyWithExtension(),
-  EffectsModule.run(MultilingualEffects),
-  EffectsModule.run(NameListEffects)
+  EffectsModule.run(MultilingualEffects)
 ];
