@@ -9,6 +9,7 @@
   "login": {
     "validateEmails": false,
     "validatePhones": false,
+    "multipleEmailsAndPhones": true,
     "strategies": {
       "form": true,
       "facebook": true,

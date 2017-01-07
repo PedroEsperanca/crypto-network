@@ -34,13 +34,13 @@ export class UserApi extends BaseLoopBackApi {
   }
 
   /**
-   * Send verification email
+   * Send verification code
    *
    * @param any id OAuthUser id
    *
    * @param object data Request data.
    *
-   * This method does not accept any data. Supply an empty object.
+   * This method expects a subset of model properties as request parameters.
    *
    * @returns object An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -48,14 +48,16 @@ export class UserApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  public sendVerificationEmail(id: any): Observable<any> {
+  public sendVerificationCode(id: any, data: any = {}): Observable<any> {
     let _method: string = "POST";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/users/:id/sendVerificationEmail";
+    "/users/:id/sendVerificationCode";
     let _routeParams: any = {
       id: id
     };
-    let _postBody: any = {};
+    let _postBody: any = {
+      data: data
+    };
     let _urlParams: any = {};
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
     return result;

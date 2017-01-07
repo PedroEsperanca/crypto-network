@@ -1,6 +1,8 @@
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef, Inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
+import { ConfigService } from 'ng2-config';
+
 import { LoopBackAuth, UserApi } from 'frameworks/api';
 import { SDKStorage } from 'frameworks/api/storage/storage.swaps';
 
@@ -14,6 +16,7 @@ interface FormI {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VerifyComponent {
+  public config: any;
   public formModel: FormI = {
     token: ''
   };
@@ -22,6 +25,7 @@ export class VerifyComponent {
   public message: any = {};
 
   constructor(
+    private configService: ConfigService,
     private auth: LoopBackAuth,
     private user: UserApi,
     private route: ActivatedRoute,
@@ -29,6 +33,8 @@ export class VerifyComponent {
     private cd: ChangeDetectorRef,
     @Inject(SDKStorage) protected storage: SDKStorage
   ) {
+    this.config = this.configService.getSettings();
+
     this.route.params.subscribe((params: any) => {
       if (params.token) {
         try {
@@ -103,7 +109,24 @@ export class VerifyComponent {
   }
 
   public resend() {
-    this.user.sendVerificationEmail(this.auth.getCurrentUserId()).subscribe(
+    let data: any = {};
+    if (this.config.login.multipleEmailsAndPhones) {
+      const emailToVerify = this.auth.getCurrentUserData()
+            .emailAddresses.filter((e) => { return !e.verified; })[0];
+
+      const phoneToVerify = this.auth.getCurrentUserData()
+            .phoneNumbers.filter((e) => { return !e.verified; })[0];
+
+      if (emailToVerify) {
+        data.type = 'email';
+        data.id = emailToVerify.id;
+      } else if (phoneToVerify) {
+        data.type = 'phone';
+        data.id = phoneToVerify.id;
+      }
+    }
+
+    this.user.sendVerificationCode(this.auth.getCurrentUserId(), data).subscribe(
       (response: any) => {
         if (response.error) {
           this.message = {
