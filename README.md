@@ -8,14 +8,14 @@ The only diference here is that instead of the simple demo app we created a more
 ### Features:
 
 **Components:**
-- index component
+- index module
   - home
   - about [WIP](https://github.com/JonnyBGod/web-seed/issues/7)
   - contact [WIP](https://github.com/JonnyBGod/web-seed/issues/6)
   - terms [WIP](https://github.com/JonnyBGod/web-seed/issues/8)
   - privacy [WIP](https://github.com/JonnyBGod/web-seed/issues/8)
   - security [WIP](https://github.com/JonnyBGod/web-seed/issues/8)
-- user components
+- user module
   - login
   - signup
   - recover-account
@@ -28,13 +28,27 @@ The only diference here is that instead of the simple demo app we created a more
   - emails [WIP](https://github.com/JonnyBGod/web-seed/issues/2)
   - notifications [WIP](https://github.com/JonnyBGod/web-seed/issues/2)
   - billing [WIP](https://github.com/JonnyBGod/web-seed/issues/2)
-- profile component [WIP](https://github.com/JonnyBGod/web-seed/issues/3)
+- profile module [WIP](https://github.com/JonnyBGod/web-seed/issues/3)
+- docs module [WIP](https://github.com/JonnyBGod/web-seed/issues/13)
+- apps module [WIP](https://github.com/JonnyBGod/web-seed/issues/14)
+  - home [WIP](https://github.com/JonnyBGod/web-seed/issues/14)
+  - create [WIP](https://github.com/JonnyBGod/web-seed/issues/14)
+  - edit [WIP](https://github.com/JonnyBGod/web-seed/issues/14)
+  - not-found [WIP](https://github.com/JonnyBGod/web-seed/issues/14)
+  - app [WIP](https://github.com/JonnyBGod/web-seed/issues/14)
+    - home [WIP](https://github.com/JonnyBGod/web-seed/issues/14)
+    - not-found [WIP](https://github.com/JonnyBGod/web-seed/issues/14)
+- not-found component
 
 
 **frameworks**
 - app
   - guards
     - user-logged
+- shared
+  - footer
+  - header
+  - user-menu
 - api [Generate SDK](https://github.com/JonnyBGod/api-seed#generate-angular-sdk)
 
 ---
