@@ -46,7 +46,7 @@ import { CookieBrowser } from './storage/cookie.browser';
 import { StorageBrowser } from './storage/storage.browser';
 import { SocketBrowser } from './sockets/socket.browser';
 import { SocketDriver } from './sockets/socket.driver';
-import { SocketConnections } from './sockets/socket.connections';
+import { SocketConnection } from './sockets/socket.connections';
 import { RealTime } from './services/core/real.time';
 import { UserApi } from './services/custom/User';
 import { AppApi } from './services/custom/App';
@@ -65,7 +65,7 @@ import { AppApi } from './services/custom/App';
   exports:      [ ],
   providers:    [
     ErrorHandler,
-    SocketConnections
+    SocketConnection
   ]
 })
 export class SDKBrowserModule {

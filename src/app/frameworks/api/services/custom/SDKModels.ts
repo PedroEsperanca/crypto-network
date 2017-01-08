@@ -3,10 +3,12 @@ import { Injectable } from '@angular/core';
 import { User } from '../../models/User';
 import { App } from '../../models/App';
 
+interface Models { [name: string]: any }
+
 @Injectable()
 export class SDKModels {
 
-  private models: { [name: string]: any } = {
+  private models: Models = {
     User: User,
     App: App,
     
@@ -14,5 +16,13 @@ export class SDKModels {
 
   public get(modelName: string): any {
     return this.models[modelName];
+  }
+
+  public getAll(): Models {
+    return this.models;
+  }
+
+  public getModelNames(): string[] {
+    return Object.keys(this.models);
   }
 }

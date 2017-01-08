@@ -1,7 +1,7 @@
 // angular
 import { Routes } from '@angular/router';
 
-import { UserLoggedGuard } from 'frameworks/app/guards';
+import { UserLoggedGuard, UserExistsGuard } from 'frameworks/app/guards';
 import { ProfileResolver } from 'frameworks/app/resolvers';
 
 import { NotFoundComponent } from './components/not-found/not-found.component';
@@ -47,6 +47,7 @@ export const ROUTES: Routes = [
   {
     path: ':id',
     loadChildren: './components/profile/profile.module#ProfileModule',
+    canActivate: [ UserExistsGuard ],
     resolve: {
       profile: ProfileResolver
     }

@@ -34,7 +34,7 @@ export const routes = [
     Angulartics2Module.forChild()
   ],
   declarations: [
-    IndexContactComponent
+    IndexContactComponent,
     ContactHomeComponent,
     ContactReportAbuseComponent,
     ContactPrivacyComponent

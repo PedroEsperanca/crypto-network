@@ -9,10 +9,9 @@ import { LoopBackFilter,  } from '../../models/BaseModels';
 import { JSONSearchParams } from '../core/search.params';
 import { ErrorHandler } from '../core/error.service';
 import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs/Rx';
 import { App } from '../../models/App';
-import { SocketConnections } from '../../sockets/socket.connections';
+import { SocketConnection } from '../../sockets/socket.connections';
 import { User } from '../../models/User';
 
 
@@ -24,13 +23,13 @@ export class AppApi extends BaseLoopBackApi {
 
   constructor(
     @Inject(Http) protected http: Http,
-    @Inject(SocketConnections) protected connections: SocketConnections,
+    @Inject(SocketConnection) protected connection: SocketConnection,
     @Inject(SDKModels) protected models: SDKModels,
     @Inject(LoopBackAuth) protected auth: LoopBackAuth,
     @Inject(JSONSearchParams) protected searchParams: JSONSearchParams,
     @Optional() @Inject(ErrorHandler) protected errorHandler: ErrorHandler
   ) {
-    super(http,  connections,  models, auth, searchParams, errorHandler);
+    super(http,  connection,  models, auth, searchParams, errorHandler);
   }
 
   /**
@@ -809,7 +808,7 @@ export class AppApi extends BaseLoopBackApi {
    * This usually means the response is a `App` object.)
    * </em>
    */
-  public createManyOptions(id: any, data: Array<any> = []): Observable<any> {
+  public createManyOptions(id: any, data: any[] = []): Observable<any> {
     let _method: string = "POST";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Apps/:id/options";
@@ -842,7 +841,7 @@ export class AppApi extends BaseLoopBackApi {
    * This usually means the response is a `App` object.)
    * </em>
    */
-  public createManyUsers(id: any, data: Array<any> = []): Observable<any> {
+  public createManyUsers(id: any, data: any[] = []): Observable<any> {
     let _method: string = "POST";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Apps/:id/users";
@@ -875,7 +874,7 @@ export class AppApi extends BaseLoopBackApi {
    * This usually means the response is a `App` object.)
    * </em>
    */
-  public createManyRoles(id: any, data: Array<any> = []): Observable<any> {
+  public createManyRoles(id: any, data: any[] = []): Observable<any> {
     let _method: string = "POST";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Apps/:id/roles";
