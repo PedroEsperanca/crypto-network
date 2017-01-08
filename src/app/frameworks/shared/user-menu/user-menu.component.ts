@@ -24,10 +24,6 @@ export class UserMenuComponent {
     console.log();
   }
 
-  public gotoProfile() {
-    this.location.replaceState('/' + this.auth.getCurrentUserId());
-  }
-
   public logout() {
     this.user.logout().subscribe((response) => this.location.replaceState(''));
   }
