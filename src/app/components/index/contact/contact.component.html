@@ -1,18 +1,18 @@
-<div class="landing">
-    <!--<div class="background" trianglify-effect="{effect: ['scaleIn', 'hoverOpacity']}">-->
-    <div class="background">
-        <div class="container hero">
-            <!--<h1>DATACENTER MANAGEMENT PLATFORM</h1>-->
-            <h1>
-                <img src="/assets/img/angular-logo.png">
-            </h1>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-3">
+      <nav class="menu">
+        <span class="menu-heading">{{'Contact' | translate}} {{config.name}}</span>
 
-            <br>
-            <br>
-            <br>
-
-            <!--<a class="btn btn-lg btn-default btn-blue clip" href="http://eepurl.com/bFhnv5">{{'Sign up for early access' | translate}}</a>-->
-        </div>
+        <a [routerLink]="['/contact']" class="menu-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
+true}">{{'Get help with' | translate}} {{config.name}}</a>
+        <a [routerLink]="['/contact/report-abuse']" class="menu-item" routerLinkActive="active">{{'Report abuse' | translate}}</a>
+        <a [routerLink]="['/contact/privacy']" class="menu-item" routerLinkActive="active">{{'Privacy concerns' | translate}}</a>
+      </nav>
     </div>
 
+    <div class="col-sm-9">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
 </div>

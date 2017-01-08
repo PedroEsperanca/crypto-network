@@ -1,0 +1,89 @@
+<div *ngIf="!submited" class="contact">
+  <div class="Subhead">
+    <h2 class="Subhead-heading">
+      {{'Get help with' | translate}} {{config.name}}
+    </h2>
+  </div>
+
+
+  <h4>{{'Need help with a project hosted on' | translate}} {{config.name}}?</h4>
+  <p>{{'Check the project’s README file or get in touch with project maintainers.' | translate}}</p>
+
+  <h4>{{'Need help with' | translate}} {{config.name}}?</h4>
+  <p>{{'You’ve come to the right place! Send a message to our Support staff using the form below.' | translate}}</p>
+
+  <h4>{{'What’s in a great support request?' | translate}}</h4>
+  <ul class="contact-checklist">
+    <li>{{'Provide us with as much essential information as possible.' | translate}}</li>
+    <li>{{'Include any links that are related to your problem.' | translate}}</li>
+  </ul>
+
+
+  <div id="mail-form" class="">
+
+    <div *ngIf="alert.success" class="alert alert-success" role="alert">{{alert.success | translate}}</div>
+    <div *ngIf="alert.info" class="alert alert-info" role="alert">{{alert.info | translate}}</div>
+    <div *ngIf="alert.warning" class="alert alert-warning" role="alert">{{alert.warning | translate}}</div>
+    <div *ngIf="alert.error" class="alert alert-danger" role="alert">{{alert.error | translate}}</div>
+
+    <form (ngSubmit)="send()" #contactForm="ngForm">
+
+      <dl class="form-group">
+        <dt class="input-label">
+          <label for="name">{{'Name' | translate}}</label>
+        </dt>
+        <dd>
+          <input class="form-control" id="name" name="name" [(ngModel)]="formModel.name" size="30" type="text">
+        </dd>
+      </dl>
+
+      <dl class="form-group">
+        <dt class="input-label">
+          <label for="email">{{'Email' | translate}}</label>
+        </dt>
+        <dd>
+          <input class="form-control" id="email" name="email" [(ngModel)]="formModel.email" size="30" type="email" required>
+        </dd>
+      </dl>
+
+      <dl class="form-group">
+        <dt class="input-label">
+          <label for="subject" maxlength="72">{{'Subject' | translate}}</label>
+        </dt>
+        <dd>
+          <input class="form-control" id="subject" name="subject" maxlength="72" [(ngModel)]="formModel.subject" size="72" type="text">
+        </dd>
+      </dl>
+
+      <dl class="form-group js-write-bucket">
+        <dt>
+          <label for="message">{{'How can we help?' | translate}}</label>
+        </dt>
+        <dd>
+          <textarea class="form-control input-block" id="message" name="message" [(ngModel)]="formModel.message" placeholder="{{'Please describe exactly what you’re trying to accomplish.' | translate}}" required></textarea>
+        </dd>
+      </dl>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-success" data-ga-click="Support, send request, link:send-button" [disabled]="!contactForm.form.valid">{{'Send request' | translate}}</button>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<div *ngIf="submited" class="feedback">
+  <a [routerLink]="['/contact']">&lt; {{'Back to Contact GitHub' | translate}}</a>
+
+  <div class="col-8 mx-auto text-center">
+    <div>
+      <svg aria-hidden="true" class="octicon octicon-mail-read text-gray-light mr-2" height="32" version="1.1" viewBox="0 0 14 16" width="28"><path fill-rule="evenodd" d="M6 5H4V4h2v1zm3 1H4v1h5V6zm5-.48V14c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V5.52c0-.33.16-.63.42-.81L2 3.58V3c0-.55.45-1 1-1h1.2L7 0l2.8 2H11c.55 0 1 .45 1 1v.58l1.58 1.13c.27.19.42.48.42.81zM3 7.5L7 10l4-2.5V3H3v4.5zm-2 6l4.5-3-4.5-3v6zm11 .5l-5-3-5 3h10zm1-6.5l-4.5 3 4.5 3v-6z"></path></svg>
+      <svg aria-hidden="true" class="octicon octicon-verified text-green" height="32" version="1.1" viewBox="0 0 16 16" width="32"><path fill-rule="evenodd" d="M15.67 7.06l-1.08-1.34c-.17-.22-.28-.48-.31-.77l-.19-1.7a1.51 1.51 0 0 0-1.33-1.33l-1.7-.19c-.3-.03-.56-.16-.78-.33L8.94.32c-.55-.44-1.33-.44-1.88 0L5.72 1.4c-.22.17-.48.28-.77.31l-1.7.19c-.7.08-1.25.63-1.33 1.33l-.19 1.7c-.03.3-.16.56-.33.78L.32 7.05c-.44.55-.44 1.33 0 1.88l1.08 1.34c.17.22.28.48.31.77l.19 1.7c.08.7.63 1.25 1.33 1.33l1.7.19c.3.03.56.16.78.33l1.34 1.08c.55.44 1.33.44 1.88 0l1.34-1.08c.22-.17.48-.28.77-.31l1.7-.19c.7-.08 1.25-.63 1.33-1.33l.19-1.7c.03-.3.16-.56.33-.78l1.08-1.34c.44-.55.44-1.33 0-1.88zM6.5 12L3 8.5 4.5 7l2 2 5-5L13 5.55 6.5 12z"></path></svg>
+    </div>
+
+    <h1>
+      {{'Thanks for getting in touch with us!' | translate}}
+      <br>{{'We’ll get back to you shortly.' | translate}}
+    </h1>
+  </div>
+</div>
