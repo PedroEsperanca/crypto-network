@@ -3,6 +3,8 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { Angulartics2Module } from 'angulartics2';
+
 import { MultilingualModule } from 'frameworks/i18n/multilingual.module';
 
 import { IndexContactComponent } from './contact.component';
@@ -28,7 +30,8 @@ export const routes = [
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
-    MultilingualModule
+    MultilingualModule,
+    Angulartics2Module.forChild()
   ],
   declarations: [
     IndexContactComponent

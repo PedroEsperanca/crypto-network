@@ -65,7 +65,12 @@
       </dl>
 
       <div class="form-actions">
-        <button type="submit" class="btn btn-success" data-ga-click="Support, send request, link:send-button" [disabled]="!contactForm.form.valid">{{'Send request' | translate}}</button>
+        <button type="submit" class="btn btn-success"
+          angulartics2On="click"
+          angularticsEvent="send request"
+          angularticsCategory="Support"
+          [angularticsProperties]="{label: 'link:send-button'}"
+          [disabled]="!contactForm.form.valid">{{'Send request' | translate}}</button>
       </div>
 
     </form>
