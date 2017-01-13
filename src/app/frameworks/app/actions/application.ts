@@ -28,7 +28,7 @@ export class ApplicationActions {
     };
   }
 
-  public selectApp(id: string): Action {
+  public selectOrganization(id: string): Action {
     return {
       type: ApplicationActions.SELECT_VAULT,
       payload: id

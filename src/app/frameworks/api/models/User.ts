@@ -1,6 +1,6 @@
 /* tslint:disable */
 import {
-  App
+  Organization
 } from '../index';
 
 declare var Object: any;
@@ -15,17 +15,17 @@ export interface UserInterface {
   emailVerified?: boolean;
   verificationToken?: string;
   id?: number;
-  phone?: string;
   emailAddresses?: Array<any>;
   phoneNumbers?: Array<any>;
+  phone?: string;
   createdAt?: Date;
   updatedAt?: Date;
   accessTokens?: Array<any>;
   identities?: Array<any>;
   credentials?: Array<any>;
+  organizations?: Array<Organization>;
   emails?: Array<any>;
   phones?: Array<any>;
-  apps?: Array<App>;
 }
 
 export class User implements UserInterface {
@@ -39,17 +39,17 @@ export class User implements UserInterface {
   emailVerified: boolean;
   verificationToken: string;
   id: number;
-  phone: string;
   emailAddresses: Array<any>;
   phoneNumbers: Array<any>;
+  phone: string;
   createdAt: Date;
   updatedAt: Date;
   accessTokens: Array<any>;
   identities: Array<any>;
   credentials: Array<any>;
+  organizations: Array<Organization>;
   emails: Array<any>;
   phones: Array<any>;
-  apps: Array<App>;
   constructor(data?: UserInterface) {
     Object.assign(this, data);
   }
@@ -121,10 +121,6 @@ export class User implements UserInterface {
           name: 'id',
           type: 'number'
         },
-        phone: {
-          name: 'phone',
-          type: 'string'
-        },
         emailAddresses: {
           name: 'emailAddresses',
           type: 'Array&lt;any&gt;',
@@ -134,6 +130,10 @@ export class User implements UserInterface {
           name: 'phoneNumbers',
           type: 'Array&lt;any&gt;',
           default: <any>[]
+        },
+        phone: {
+          name: 'phone',
+          type: 'string'
         },
         createdAt: {
           name: 'createdAt',
@@ -160,6 +160,11 @@ export class User implements UserInterface {
           type: 'Array<any>',
           model: ''
         },
+        organizations: {
+          name: 'organizations',
+          type: 'Array<Organization>',
+          model: 'Organization'
+        },
         emails: {
           name: 'emails',
           type: 'Array<any>',
@@ -169,11 +174,6 @@ export class User implements UserInterface {
           name: 'phones',
           type: 'Array<any>',
           model: ''
-        },
-        apps: {
-          name: 'apps',
-          type: 'Array<App>',
-          model: 'App'
         },
       }
     }

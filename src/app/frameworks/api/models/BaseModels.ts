@@ -16,7 +16,7 @@ export interface AccessTokenInterface {
     ttl?: number;
     issuedAt?: any;
     created: any;
-    userId?: string;
+    userId?: number;
     rememberMe?: boolean;
 }
 
@@ -25,7 +25,7 @@ export class AccessToken implements AccessTokenInterface {
   ttl: number = 1209600;
   created: Date = new Date(0);
   userId: number = 0;
-  user: User = null;
+  user: any = null;
   constructor(data?: AccessTokenInterface) {
     Object.assign(this, data);
   }

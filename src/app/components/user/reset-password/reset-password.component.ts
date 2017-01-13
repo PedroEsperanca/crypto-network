@@ -33,6 +33,7 @@ export class ResetPasswordComponent implements OnDestroy {
       this.auth.setUser({
         id: params.token,
         ttl: 1000,
+        issuedAt: new Date(),
         created: new Date(),
         userId: params.userId,
         user: {},

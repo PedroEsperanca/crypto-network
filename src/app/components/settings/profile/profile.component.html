@@ -1,27 +1,39 @@
-<div class="hero">
-	<div class="userCard">
-		<img class="pull-left"
-			*ngIf="USER?.photo"
-			[ctSrc]="USER.photo" [ctOptions]="{smart: 'face'}">
-		<img class="pull-left"
-			*ngIf="!USER?.photo"
-			[ctSrc]="'https://android.svn.wordpress.org/trunk/res/drawable/placeholder.png'" [ctOptions]="{smart: 'face'}">
-
-		<div>
-			<h1>{{USER?.name}}</h1>
-
-			<a class="btn btn-default add_cc" [routerLink]="['Payments', 'New']">
-				<i class="fa fa-credit-card fa-lg"></i>
-				<h5>{{'Add payment method' | translate}}</h5>
-			</a>
-		</div>
-	</div>
-
-	<a class="btn btn-default" [routerLink]="['Edit']">{{'Update' | translate}}</a>
-
-	<div class="social-connections">
-		<i [class.active]="USER?.identities?.indexOf('facebook') !== -1" class="fa fa-facebook fa-lg"></i>
-		<i [class.active]="USER?.identities?.indexOf('github') !== -1" class="fa fa-github fa-lg"></i>
-		<i [class.active]="USER?.identities?.indexOf('google') !== -1" class="fa fa-google fa-lg"></i>
-	</div>
+<div class="Subhead">
+  <h2 class="Subhead-heading">Public profile</h2>
 </div>
+
+<form (ngSubmit)="submitUpdate()" #profileForm="ngForm">
+  <div *ngIf="message.success" class="alert alert-success" role="alert">{{message.success | translate}}</div>
+  <div *ngIf="message.info" class="alert alert-info" role="alert">{{message.info | translate}}</div>
+  <div *ngIf="message.warning" class="alert alert-warning" role="alert">{{message.warning | translate}}</div>
+  <div *ngIf="message.error" class="alert alert-danger" role="alert">{{message.error | translate}}</div>
+
+  <dl class="profile-avatar pull-right">
+    <img alt="@{{formModel.username || formModel.name}}" class="avatar" [src]="formModel.photo">
+  </dl>
+
+  <div>
+    <dl class="form-group">
+      <dt><label for="name">Name</label></dt>
+      <dd>
+        <input class="form-control" type="text" id="name" name="name" [(ngModel)]="formModel.name" required>
+      </dd>
+    </dl>
+
+    <dl class="form-group">
+      <dt><label for="photo">Photo</label></dt>
+      <dd>
+        <input class="form-control" type="text" id="photo" name="photo" [(ngModel)]="formModel.photo">
+      </dd>
+    </dl>
+
+    <dl *ngIf="config.login?.username" class="form-group">
+      <dt><label for="username">Username</label></dt>
+      <dd>
+        <input class="form-control" type="text" id="username" name="username" [(ngModel)]="formModel.username">
+      </dd>
+    </dl>
+
+    <p><button type="submit" class="btn" [disabled]="!profileForm.form.valid">Update profile</button></p>
+  </div>
+</form>

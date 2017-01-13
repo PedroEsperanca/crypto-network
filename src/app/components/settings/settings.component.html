@@ -1,98 +1,24 @@
-<header>
-	<div class="title">{{'Account' | translate}}</div>
+<app-header></app-header>
 
-	<div class="header clearfix">
-		<!--<a ng-href="/" class="pull-left logo-ori"><img src="/images/logo-ori.png"></a>-->
-		<a class="pull-left logo-ori" style="color: white; text-decoration: none;"
-			ng-href="/apps/" >
-			<span class="fa-stack fa-lg">
-				<i class="fa fa-cloud fa-stack-2x"></i>
-				<i class="fa fa-cogs fa-stack-1x"></i>
-			</span>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-3">
+      <nav class="menu">
+        <span class="menu-heading">{{'Personal settings' | translate}}</span>
 
-			<i class="fa fa-th-large fa-lg"></i>
-		</a>
+        <a routerLink="/settings/profile" class="menu-item" routerLinkActive="active">{{'Profile' | translate}}</a>
+        <a routerLink="/settings/account" class="menu-item" routerLinkActive="active">{{'Account' | translate}}</a>
+        <a routerLink="/settings/emails" class="menu-item" routerLinkActive="active">{{'Emails' | translate}}</a>
+        <a routerLink="/settings/linkedAccounts" class="menu-item" routerLinkActive="active">{{'Linked Accounts' | translate}}</a>
+        <a routerLink="/settings/notifications" class="menu-item" routerLinkActive="active">{{'Notifications' | translate}}</a>
+        <a routerLink="/settings/billing" class="menu-item" routerLinkActive="active">{{'Billing' | translate}}</a>
+      </nav>
+    </div>
 
-		<ul class="nav nav-pills navbar-left applist">
-			<li *ngIf="USER?.name" dropdown>
-				<a class="dropdown-toggle" dropdown-toggle href="#">
-					<h4 class="pull-left">{{'Select an App' | translate}}</h4> <span class="caret"></span>
-				</a>
-				<ul class="dropdown-menu" role="menu">
-					<li *ngFor="let app of apps$ | async">
-						<a ui-sref="apps.app.prerender.cache({app: app.id})">{{app.name}}</a>
-					</li>
-					<li class="divider"></li>
-					<li><a ui-sref="newApplication"><i class="fa fa-plus"></i> <span>{{'Create app' | translate}}</span></a></li>
-				</ul>
-			</li>
-		</ul>
-
-		<ul class="nav navbar-nav pull-xs-right">
-			<li class="nav-item" dropdown dropdown-hover
-				*ngIf="USER?.name">
-
-				<a class="nav-link" dropdown-toggle>
-					<img style="margin-top: -8px; margin-bottom: -7px;"
-						*ngIf="USER?.photo"
-						[ctSrc]="USER.photo" [ctOptions]="{smart: 'face'}" [ctSize]="'36x36'">
-					<i *ngIf="!USER?.photo" class="fa fa-user fa-lg"></i>
-
-					{{USER.name}}
-				</a>
-
-				<ul class="dropdown-menu" role="menu">
-					<li>
-						<a [routerLink]="['Account']"><i class="fa fa-user"></i> <span>{{'Account' | translate}}</span></a>
-					</li>
-					<li>
-						<a [routerLink]="['Account']"><i class="fa fa-th-large"></i> <span>{{'Dashboard' | translate}}</span></a>
-					</li>
-
-					<li *ngIf="(apps$ | async).length" class="divider"></li>
-
-					<li *ngFor="let app of apps$ | async">
-						<a ui-sref="apps.app.tasks.home({app: app.id})">{{app.name}}</a>
-					</li>
-					
-					<li class="divider"></li>
-
-					<li>
-						<a (click)="logout()"><i class="fa fa-times-circle"></i> <span>{{'Log out' | translate}}</span></a>
-					</li>
-				</ul>
-			</li>
-		</ul>
-	</div>
-</header>
-
-<div class="mainContainer">
-	<div class="header clearfix">
-		<div class="btn-group" role="group" aria-label="...">
-			<a class="btn btn-default"
-				[routerLink]="['Home']">{{'Overview' | translate}}</a>
-
-			<a class="btn btn-default"
-				[routerLink]="['Edit']">{{'Edit' | translate}}</a>
-
-			<a class="btn btn-default"
-				[routerLink]="['Billing']">{{'Billing' | translate}}</a>
-
-			<a class="btn btn-default"
-				[routerLink]="['Notifications']">{{'Notifications' | translate}}</a>
-		</div>
-	</div>
-
-	<router-outlet></router-outlet>
+    <div class="col-sm-9 main">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
 </div>
 
-<footer>
-	<ul class="nav nav-pills">
-		<li><a ui-sref="docs.home">{{'Docs' | translate}}</a></li>
-		<li><a [routerLink]="['/Account', 'Billing']">{{'Billing' | translate}}</a></li>
-		<li><a href="mailto:support@cloudstem.io">{{'Help' | translate}}</a></li>
-		<li><a href="https://cloudstem.statuscast.com">{{'Status' | translate}}</a></li>
-		<li><a [routerLink]="['/Index', 'Legal']">{{'Terms & policies' | translate}}</a></li>
-		<li class="pull-right"><span>© 2015 · <a ng-href="/">Reality Connect Lda.</a></span></li>
-	</ul>
-</footer>
+<app-footer></app-footer>

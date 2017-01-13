@@ -48,6 +48,7 @@ import { SocketBrowser } from './sockets/socket.browser';
 import { SocketDriver } from './sockets/socket.driver';
 import { SocketConnection } from './sockets/socket.connections';
 import { RealTime } from './services/core/real.time';
+import { OrganizationApi } from './services/custom/Organization';
 import { UserApi } from './services/custom/User';
 import { AppApi } from './services/custom/App';
 /**
@@ -78,6 +79,7 @@ export class SDKBrowserModule {
         JSONSearchParams,
         SDKModels,
         RealTime,
+        OrganizationApi,
         UserApi,
         AppApi,
         { provide: InternalStorage, useClass: CookieBrowser },

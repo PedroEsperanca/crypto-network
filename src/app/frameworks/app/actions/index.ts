@@ -1,12 +1,12 @@
 import { ApplicationActions } from './application';
-import { AppActions } from './app';
+import { OrganizationActions } from './organization';
 
 export {
   ApplicationActions,
-  AppActions
+  OrganizationActions
 };
 
 export const ACTIONS: any[] = [
   ApplicationActions,
-  AppActions
+  OrganizationActions
 ];

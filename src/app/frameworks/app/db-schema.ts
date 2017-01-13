@@ -11,7 +11,7 @@ export const schema: DBSchema = {
       autoIncrement: true,
       primaryKey: 'id'
     },
-    apps: {
+    organizations: {
       autoIncrement: true,
       primaryKey: 'id'
     }

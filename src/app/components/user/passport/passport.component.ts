@@ -20,6 +20,7 @@ export class PassportComponent {
         this.auth.setUser({
           id: token.id,
           ttl: parseInt(token.ttl, 10),
+          issuedAt: new Date().setTime(token.issuedAt),
           created: new Date().setTime(token.issuedAt),
           userId: token.userId,
           user: {},

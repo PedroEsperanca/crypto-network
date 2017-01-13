@@ -23,7 +23,7 @@ import { RESOLVERS_PROVIDERS } from './resolvers';
 import { LoopBackConfig } from 'frameworks/api';
 
 import { schema } from './db-schema';
-import { AppEffects } from './effects/app';
+import { OrganizationEffects } from './effects/organization';
 import { ACTIONS } from './actions';
 
 if (ENV === 'production') {
@@ -33,7 +33,7 @@ if (ENV === 'production') {
 }
 
 LoopBackConfig.setApiVersion('api');
-LoopBackConfig.setAuthPrefix('Bearer ');
+LoopBackConfig.setAuthPrefix('');
 
 export const MY_APP_PROVIDERS: any[] = [
   // IDLE_PROVIDERS,
@@ -59,7 +59,7 @@ export const MY_APP_IMPORTS: any[] = [
 
   // StoreModule.provideStore(reducer),
 
-  EffectsModule.run(AppEffects),
+  EffectsModule.run(OrganizationEffects),
 
   DBModule.provideDB(schema),
 

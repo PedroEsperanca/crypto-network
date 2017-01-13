@@ -8,12 +8,12 @@ import { ApplicationActions } from '../actions/application';
 
 export interface ApplicationState {
   idle: boolean;
-  selectedAppId: string;
+  selectedOrganizationId: string;
 };
 
 const initialState: ApplicationState = {
   idle: false,
-  selectedAppId: null
+  selectedOrganizationId: null
 };
 
 export function reducer(state = initialState, action: Action): ApplicationState {
@@ -22,14 +22,14 @@ export function reducer(state = initialState, action: Action): ApplicationState 
     case ApplicationActions.SET_IDLE: {
       return {
         idle: true,
-        selectedAppId: state.selectedAppId
+        selectedOrganizationId: state.selectedOrganizationId
       };
     }
 
     case ApplicationActions.SET_ACTIVE: {
       return {
         idle: false,
-        selectedAppId: state.selectedAppId
+        selectedOrganizationId: state.selectedOrganizationId
       };
     }
 
@@ -38,7 +38,7 @@ export function reducer(state = initialState, action: Action): ApplicationState 
 
       return {
         idle: state.idle,
-        selectedAppId: id
+        selectedOrganizationId: id
       };
     }
 

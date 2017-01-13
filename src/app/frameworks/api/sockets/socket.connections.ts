@@ -18,10 +18,10 @@ import { LoopBackConfig } from '../lb.config';
 export class SocketConnection {
   private socket: any;
   private subjects: {
-    onConnect: Subject<{}>,
-    onDisconnect: Subject<{}>,
-    onAuthenticated: Subject<{}>,
-    onUnAuthorized: Subject<{}>
+    onConnect: Subject<any>,
+    onDisconnect: Subject<any>,
+    onAuthenticated: Subject<any>,
+    onUnAuthorized: Subject<any>
   } = {
     onConnect: new Subject(),
     onDisconnect: new Subject(),
@@ -29,10 +29,10 @@ export class SocketConnection {
     onUnAuthorized: new Subject()
   };
   public sharedObservables: {
-    sharedOnConnect?: Observable<{}>,
-    sharedOnDisconnect?: Observable<{}>,
-    sharedOnAuthenticated?: Observable<{}>,
-    sharedOnUnAuthorized?: Observable<{}>
+    sharedOnConnect?: Observable<any>,
+    sharedOnDisconnect?: Observable<any>,
+    sharedOnAuthenticated?: Observable<any>,
+    sharedOnUnAuthorized?: Observable<any>
   } = {};
   private unauthenticated: boolean = true;
   /**
@@ -126,9 +126,11 @@ export class SocketConnection {
    * @method removeListener
    * @description
    * This method will wrap the original "on" method and run it within the Angular Zone
+   * Note: off is being used since the nativescript socket io client does not provide
+   * removeListener method, but only provides with off.
    **/
   public removeListener(event: string, handler: Function): void {
-    this.socket.removeListener(event, handler);
+    this.socket.off(event, handler);
   }
   /**
    * @method disconnect

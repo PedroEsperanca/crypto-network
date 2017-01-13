@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 import { ConfigService } from 'ng2-config';
 
@@ -17,14 +17,16 @@ export class UserMenuComponent {
   constructor(
     public auth: LoopBackAuth,
     private configService: ConfigService,
-    private location: Location,
+    private router: Router,
     private user: UserApi
   ) {
     this.config = this.configService.getSettings();
-    console.log();
   }
 
   public logout() {
-    this.user.logout().subscribe((response) => this.location.replaceState(''));
+    this.user.logout().subscribe(
+      (response) => this.router.navigate(['/']),
+      () => this.router.navigate(['/'])
+    );
   }
 }

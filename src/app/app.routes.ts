@@ -33,8 +33,8 @@ export const ROUTES: Routes = [
 
   // Private
   {
-    path: 'apps',
-    loadChildren: './components/apps/apps.module#AppsModule',
+    path: 'organizations',
+    loadChildren: './components/organizations/organizations.module#OrganizationsModule',
     canActivate: [ UserLoggedGuard ]
   },
   {

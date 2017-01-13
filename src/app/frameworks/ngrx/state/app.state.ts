@@ -40,8 +40,8 @@ import { combineReducers } from '@ngrx/store';
 import * as fromMultilingual from '../../i18n/index';
 
 import * as fromApplication from 'frameworks/app/reducers/application';
-import * as fromSearchApps from 'frameworks/app/reducers/searchApps';
-import * as fromApps from 'frameworks/app/reducers/apps';
+import * as fromSearchOrganizations from 'frameworks/app/reducers/searchOrganizations';
+import * as fromOrganizations from 'frameworks/app/reducers/organizations';
 
 /**
  * As mentioned, we treat each reducer like a table in a database. This means
@@ -50,9 +50,9 @@ import * as fromApps from 'frameworks/app/reducers/apps';
 export interface IAppState {
   i18n: fromMultilingual.IMultilingualState;
 
-  app: fromApplication.ApplicationState;
-  searchApps: fromSearchApps.SearchAppsState;
-  apps: fromApps.AppsState;
+  application: fromApplication.ApplicationState;
+  searchOrganizations: fromSearchOrganizations.SearchOrganizationsState;
+  organizations: fromOrganizations.OrganizationsState;
 };
 
 /**
@@ -65,9 +65,9 @@ export interface IAppState {
 const reducers = {
   i18n: fromMultilingual.reducer,
 
-  app: fromApplication.reducer,
-  searchApps: fromSearchApps.reducer,
-  apps: fromApps.reducer,
+  application: fromApplication.reducer,
+  searchOrganizations: fromSearchOrganizations.reducer,
+  organizations: fromOrganizations.reducer,
 };
 
 const developmentReducer: ActionReducer<IAppState> =

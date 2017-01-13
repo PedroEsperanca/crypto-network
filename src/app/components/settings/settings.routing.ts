@@ -5,6 +5,8 @@ import { SettingsComponent } from './settings.component';
 
 import { SettingsProfileComponent } from './profile/profile.component';
 import { SettingsAccountComponent } from './account/account.component';
+import { SettingsEmailsComponent } from './emails/emails.component';
+import { SettingsLinkedAccountsComponent } from './linked-accounts/linked-accounts.component';
 import { SettingsNotificationsComponent } from './notifications/notifications.component';
 import { SettingsBillingComponent } from './billing/billing.component';
 
@@ -21,6 +23,14 @@ const routes: Routes = [
       {
         path: 'account',
         component: SettingsAccountComponent,
+      },
+      {
+        path: 'emails',
+        component: SettingsEmailsComponent,
+      },
+      {
+        path: 'linkedAccounts',
+        component: SettingsLinkedAccountsComponent,
       },
       {
         path: 'notifications',

@@ -1,6 +1,7 @@
 /* tslint:disable */
 import {
-  User
+  User,
+  Organization
 } from '../index';
 
 declare var Object: any;
@@ -40,12 +41,12 @@ export interface AppInterface {
   status?: string;
   created?: Date;
   modified?: Date;
-  _options?: any;
+  userId?: number;
+  organizationId?: number;
   createdAt?: Date;
   updatedAt?: Date;
-  users?: Array<User>;
-  options?: Array<any>;
-  roles?: Array<any>;
+  user?: User;
+  organization?: Organization;
 }
 
 export class App implements AppInterface {
@@ -84,12 +85,12 @@ export class App implements AppInterface {
   status: string;
   created: Date;
   modified: Date;
-  _options: any;
+  userId: number;
+  organizationId: number;
   createdAt: Date;
   updatedAt: Date;
-  users: Array<User>;
-  options: Array<any>;
-  roles: Array<any>;
+  user: User;
+  organization: Organization;
   constructor(data?: AppInterface) {
     Object.assign(this, data);
   }
@@ -262,9 +263,13 @@ export class App implements AppInterface {
           name: 'modified',
           type: 'Date'
         },
-        _options: {
-          name: '_options',
-          type: 'any'
+        userId: {
+          name: 'userId',
+          type: 'number'
+        },
+        organizationId: {
+          name: 'organizationId',
+          type: 'number'
         },
         createdAt: {
           name: 'createdAt',
@@ -276,20 +281,15 @@ export class App implements AppInterface {
         },
       },
       relations: {
-        users: {
-          name: 'users',
-          type: 'Array<User>',
+        user: {
+          name: 'user',
+          type: 'User',
           model: 'User'
         },
-        options: {
-          name: 'options',
-          type: 'Array<any>',
-          model: ''
-        },
-        roles: {
-          name: 'roles',
-          type: 'Array<any>',
-          model: ''
+        organization: {
+          name: 'organization',
+          type: 'Organization',
+          model: 'Organization'
         },
       }
     }
