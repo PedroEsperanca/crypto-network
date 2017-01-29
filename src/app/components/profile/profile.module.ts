@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule }       from '@angular/common';
 
 import { MultilingualModule } from 'shared/i18n/multilingual.module';
-import { HeaderModule } from 'shared/app/shared/header';
-import { FooterModule } from 'shared/app/shared/footer';
+import { HeaderModule } from 'shared/app/modules/header';
+import { FooterModule } from 'shared/app/modules/footer';
 
 import { ProfileComponent } from './profile.component';
 import { routing } from './profile.routing';

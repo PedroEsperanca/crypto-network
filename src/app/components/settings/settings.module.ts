@@ -7,9 +7,9 @@ import { ModalModule } from 'ng2-bootstrap/modal';
 import { CloudtasksModule } from 'angular2-cloudtasks';
 
 import { MultilingualModule } from 'shared/i18n/multilingual.module';
-import { HeaderModule } from 'shared/app/shared/header';
-import { FooterModule } from 'shared/app/shared/footer';
-import { FileUploaderModule } from 'shared/app/shared/file-uploader';
+import { HeaderModule } from 'shared/app/modules/header';
+import { FooterModule } from 'shared/app/modules/footer';
+import { FileUploaderModule } from 'shared/app/modules/file-uploader';
 
 import { routing } from './settings.routing';
 import { SettingsComponent } from './settings.component';
