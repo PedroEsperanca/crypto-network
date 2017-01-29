@@ -1,3 +1,160 @@
-<div class="edit">
-    <p>edit</p>
+<div class="Subhead">
+  <h2 class="Subhead-heading">{{'Change password' | translate}}</h2>
 </div>
+
+<form [formGroup]="resetPasswordForm" (ngSubmit)="resetPasswordForm.valid && resetPassword()">
+  <div *ngIf="message.success" class="alert alert-success" role="alert">{{message.success | translate}}</div>
+  <div *ngIf="message.info" class="alert alert-info" role="alert">{{message.info | translate}}</div>
+  <div *ngIf="message.warning" class="alert alert-warning" role="alert">{{message.warning | translate}}</div>
+  <div *ngIf="message.error" class="alert alert-danger" role="alert">{{message.error | translate}}</div>
+
+  <div>
+    <!--<dl class="form-group">
+      <dt><label for="oldPassword">{{'Old password' | translate}}</label></dt>
+      <dd>
+        <input class="form-control" type="password" id="oldPassword" name="oldPassword" [(ngModel)]="formModel.oldPassword" required>
+      </dd>
+    </dl>-->
+
+    <dl class="form-group"
+    	[class.has-success]="resetPasswordForm.get('password').dirty && resetPasswordForm.get('password').valid"
+      [class.has-danger]="resetPasswordForm.get('password').dirty && !resetPasswordForm.get('password').valid">
+      <dt><label for="password">{{'New password' | translate}}</label></dt>
+      <dd>
+        <input type="password" formControlName="password" name="password" class="form-control" required autocomplete="off">
+
+        <div class="password-composer">
+	        <small class="form-text text-muted">{{'Your password must have:' | translate}}</small>
+          <small class="form-text"
+            [class.ng-error]="resetPasswordForm.get('password').dirty && resetPasswordForm.get('password').errors && resetPasswordForm.get('password').errors['length']"
+          > - {{'at least 8 characters long' | translate}}</small>
+          <small class="form-text"
+            [class.ng-error]="resetPasswordForm.get('password').dirty && resetPasswordForm.get('password').errors && resetPasswordForm.get('password').errors['numUpper']"
+          > - {{'at least 1 uppercase character' | translate}}</small>
+          <small class="form-text"
+            [class.ng-error]="resetPasswordForm.get('password').dirty && resetPasswordForm.get('password').errors && resetPasswordForm.get('password').errors['numLower']"
+          > - {{'at least 1 lowercase character' | translate}}</small>
+          <small class="form-text"
+            [class.ng-error]="resetPasswordForm.get('password').dirty && resetPasswordForm.get('password').errors && resetPasswordForm.get('password').errors['numNums']"
+          > - {{'at least 1 number' | translate}}</small>
+          <small class="form-text"
+            [class.ng-error]="resetPasswordForm.get('password').dirty && resetPasswordForm.get('password').errors && resetPasswordForm.get('password').errors['numSpecials']"
+          > - {{'at least 1 special character' | translate}}</small>
+        </div>
+      </dd>
+    </dl>
+
+    <dl class="form-group"
+    	[class.has-success]="resetPasswordForm.get('confirmPassword').dirty && resetPasswordForm.get('confirmPassword').valid"
+      [class.has-danger]="resetPasswordForm.get('confirmPassword').touched && !resetPasswordForm.get('confirmPassword').valid || resetPasswordForm.hasError('mismatchedPasswords')">
+      <dt><label for="confirmPassword">{{'Confirm password' | translate}}</label></dt>
+      <dd>
+        <input type="password" formControlName="confirmPassword" name="confirmPassword" class="form-control" required autocomplete="off">
+      	<div class="form-control-feedback"
+        	*ngIf="resetPasswordForm.get('confirmPassword').touched && resetPasswordForm.hasError('mismatchedPasswords')">{{'Password mismatch' | translate}}</div>
+      </dd>
+    </dl>
+
+    <p><button type="submit" class="btn btn-primary" [disabled]="!resetPasswordForm.valid">{{'Update password' | translate}}</button></p>
+  </div>
+</form>
+
+<br>
+<br>
+
+<div class="Subhead">
+  <h2 class="Subhead-heading">{{'Linked Accounts' | translate}}</h2>
+</div>
+
+<ul id="social" class="Box list-style-none">
+  <li *ngIf="config.settings?.login?.strategies?.facebook" class="Box-row clearfix css-truncate fb_connect">
+    <span class="fa-stack">
+			<i class="fa fa-circle fa-stack-2x"></i>
+			<i class="fa fa-facebook fa-stack-1x"></i>
+		</span> Facebook
+
+    <span class="email-actions pull-right">
+    	<!--<a *ngIf="!isLinked('facebook')" class="btn btn-primary btn-sm" (click)="goTo('/link/facebook')" target="_top">{{'Link' | translate}}</a>-->
+
+      <button *ngIf="isLinked('facebook')" class="btn btn-secondary btn-sm" (click)="unlink('facebook')">{{'Unlink' | translate}}</button>
+    </span>
+
+    <p class="note">{{'We will use your Facebook account exclusively for login purposes.' | translate}}</p>
+  </li>
+
+  <li *ngIf="config.settings?.login?.strategies?.google" class="Box-row clearfix css-truncate go_connect">
+    <span class="fa-stack">
+			<i class="fa fa-circle fa-stack-2x"></i>
+			<i class="fa fa-google fa-stack-1x"></i>
+		</span> Google
+
+    <span class="email-actions pull-right">
+    	<!--<a *ngIf="!isLinked('google')" class="btn btn-primary btn-sm" (click)="goTo('/link/google')" target="_top">{{'Link' | translate}}</a>-->
+
+      <button *ngIf="isLinked('google')" class="btn btn-secondary btn-sm" (click)="unlink('google')">{{'Unlink' | translate}}</button>
+    </span>
+
+    <p class="note">{{'We will use your Google account exclusively for login purposes.' | translate}}</p>
+  </li>
+
+  <li *ngIf="config.settings?.login?.strategies?.twitter" class="Box-row clearfix css-truncate tw_connect">
+    <span class="fa-stack">
+			<i class="fa fa-circle fa-stack-2x"></i>
+			<i class="fa fa-twitter fa-stack-1x"></i>
+		</span> Twitter
+
+    <span class="email-actions pull-right">
+    	<!--<a *ngIf="!isLinked('twitter')" class="btn btn-primary btn-sm" (click)="goTo('/link/twitter')" target="_top">{{'Link' | translate}}</a>-->
+
+      <button *ngIf="isLinked('twitter')" class="btn btn-secondary btn-sm" (click)="unlink('twitter')">{{'Unlink' | translate}}</button>
+    </span>
+
+    <p class="note">{{'We will use your Twitter account exclusively for login purposes.' | translate}}</p>
+  </li>
+
+  <li *ngIf="config.settings?.login?.strategies?.linkedin" class="Box-row clearfix css-truncate ln_connect">
+    <span class="fa-stack">
+			<i class="fa fa-circle fa-stack-2x"></i>
+			<i class="fa fa-linkedin fa-stack-1x"></i>
+		</span> LinkedIn
+
+    <span class="email-actions pull-right">
+    	<!--<a *ngIf="!isLinked('linkedin')" class="btn btn-primary btn-sm" (click)="goTo('/link/linkedin')" target="_top">{{'Link' | translate}}</a>-->
+
+      <button *ngIf="isLinked('linkedin')" class="btn btn-secondary btn-sm" (click)="unlink('linkedin')">{{'Unlink' | translate}}</button>
+    </span>
+
+    <p class="note">{{'We will use your LinkedIn account exclusively for login purposes.' | translate}}</p>
+  </li>
+
+  <li *ngIf="config.settings?.login?.strategies?.github" class="Box-row clearfix css-truncate gh_connect">
+    <span class="fa-stack">
+			<i class="fa fa-circle fa-stack-2x"></i>
+			<i class="fa fa-github fa-stack-1x"></i>
+		</span> Github
+
+    <span class="email-actions pull-right">
+    	<!--<a *ngIf="!isLinked('github')" class="btn btn-primary btn-sm" (click)="goTo('/link/github')" target="_top">{{'Link' | translate}}</a>-->
+
+      <button *ngIf="isLinked('github')" class="btn btn-secondary btn-sm" (click)="unlink('github')">{{'Unlink' | translate}}</button>
+    </span>
+
+    <p class="note">{{'We will use your Github account exclusively for login purposes.' | translate}}</p>
+  </li>
+
+  <li *ngIf="config.settings?.login?.strategies?.bitbucket" class="Box-row clearfix css-truncate bb_connect">
+    <span class="fa-stack">
+			<i class="fa fa-circle fa-stack-2x"></i>
+			<i class="fa fa-bitbucket fa-stack-1x"></i>
+		</span> BitBucket
+
+    <span class="email-actions pull-right">
+    	<!--<a *ngIf="!isLinked('bitbucket')" class="btn btn-primary btn-sm" (click)="goTo('/link/bitbucket')" target="_top">{{'Link' | translate}}</a>-->
+
+      <button *ngIf="isLinked('bitbucket')" class="btn btn-secondary btn-sm" (click)="unlink('bitbucket')">{{'Unlink' | translate}}</button>
+    </span>
+
+    <p class="note">{{'We will use your BitBucket account exclusively for login purposes.' | translate}}</p>
+  </li>
+</ul>
+

@@ -1,12 +1,14 @@
 /* tslint:disable */
 import {
-  Organization
+  Organization,
+  App
 } from '../index';
 
 declare var Object: any;
 export interface UserInterface {
   name?: string;
-  photo?: string;
+  photoUrl?: string;
+  emailPreferences?: string;
   notifications?: any;
   realm?: string;
   username?: string;
@@ -14,23 +16,28 @@ export interface UserInterface {
   email?: string;
   emailVerified?: boolean;
   verificationToken?: string;
-  id?: number;
+  id?: any;
   emailAddresses?: Array<any>;
   phoneNumbers?: Array<any>;
   phone?: string;
   createdAt?: Date;
   updatedAt?: Date;
+  photo?: any;
   accessTokens?: Array<any>;
   identities?: Array<any>;
   credentials?: Array<any>;
   organizations?: Array<Organization>;
+  apps?: Array<App>;
   emails?: Array<any>;
   phones?: Array<any>;
+  s3Photo?: Array<any>;
+  oAuthClientApplications?: Array<any>;
 }
 
 export class User implements UserInterface {
   name: string;
-  photo: string;
+  photoUrl: string;
+  emailPreferences: string;
   notifications: any;
   realm: string;
   username: string;
@@ -38,18 +45,22 @@ export class User implements UserInterface {
   email: string;
   emailVerified: boolean;
   verificationToken: string;
-  id: number;
+  id: any;
   emailAddresses: Array<any>;
   phoneNumbers: Array<any>;
   phone: string;
   createdAt: Date;
   updatedAt: Date;
+  photo: any;
   accessTokens: Array<any>;
   identities: Array<any>;
   credentials: Array<any>;
   organizations: Array<Organization>;
+  apps: Array<App>;
   emails: Array<any>;
   phones: Array<any>;
+  s3Photo: Array<any>;
+  oAuthClientApplications: Array<any>;
   constructor(data?: UserInterface) {
     Object.assign(this, data);
   }
@@ -85,9 +96,14 @@ export class User implements UserInterface {
           name: 'name',
           type: 'string'
         },
-        photo: {
-          name: 'photo',
+        photoUrl: {
+          name: 'photoUrl',
           type: 'string'
+        },
+        emailPreferences: {
+          name: 'emailPreferences',
+          type: 'string',
+          default: 'marketing'
         },
         notifications: {
           name: 'notifications',
@@ -119,7 +135,7 @@ export class User implements UserInterface {
         },
         id: {
           name: 'id',
-          type: 'number'
+          type: 'any'
         },
         emailAddresses: {
           name: 'emailAddresses',
@@ -143,6 +159,10 @@ export class User implements UserInterface {
           name: 'updatedAt',
           type: 'Date'
         },
+        photo: {
+          name: 'photo',
+          type: 'any'
+        },
       },
       relations: {
         accessTokens: {
@@ -165,6 +185,11 @@ export class User implements UserInterface {
           type: 'Array<Organization>',
           model: 'Organization'
         },
+        apps: {
+          name: 'apps',
+          type: 'Array<App>',
+          model: 'App'
+        },
         emails: {
           name: 'emails',
           type: 'Array<any>',
@@ -172,6 +197,16 @@ export class User implements UserInterface {
         },
         phones: {
           name: 'phones',
+          type: 'Array<any>',
+          model: ''
+        },
+        s3Photo: {
+          name: 's3Photo',
+          type: 'Array<any>',
+          model: ''
+        },
+        oAuthClientApplications: {
+          name: 'oAuthClientApplications',
           type: 'Array<any>',
           model: ''
         },

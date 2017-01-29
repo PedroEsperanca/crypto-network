@@ -1,6 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
-
-import { ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
@@ -117,7 +115,7 @@ export class ResetPasswordComponent implements OnDestroy {
     let numNums = 0;
     let numSpecials = 0;
 
-    for (let character of password.length) {
+    for (let character of password) {
       if (anUpperCase.test(character)) {
         numUpper++;
       }

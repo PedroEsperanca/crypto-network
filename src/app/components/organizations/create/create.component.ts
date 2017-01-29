@@ -5,7 +5,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 import { OrganizationInterface } from 'frameworks/api';
 import { IAppState } from 'frameworks/ngrx';
-import { OrganizationActions } from 'frameworks/app/actions';
+import { OrganizationActions } from 'frameworks/ngrx/actions';
 
 @Component({
   selector: 'organizationsCreate',

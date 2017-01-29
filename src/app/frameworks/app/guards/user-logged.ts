@@ -20,7 +20,7 @@ export class UserLoggedGuard implements CanActivate {
 
   public canActivate() {
     if (this.auth.getCurrentUserId()) {
-      if (this.configService.getSettings().login.validateEmails) {
+      if (this.configService.getSettings('settings').login.validateEmails) {
         if (!this.auth.getCurrentUserData() ||
           this.auth.getCurrentUserData()
             .emailAddresses.filter((e) => { return !e.verified; }).length) {
@@ -29,7 +29,7 @@ export class UserLoggedGuard implements CanActivate {
         }
       }
 
-      if (this.configService.getSettings().login.validatePhones) {
+      if (this.configService.getSettings('settings').login.validatePhones) {
         if (!this.auth.getCurrentUserData() ||
           this.auth.getCurrentUserData()
             .phoneNumbers.filter((e) => { return !e.verified; }).length) {

@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 import { ConfigService } from 'ng2-config';
 
-import { UserApi, LoopBackConfig } from 'frameworks/api';
+import { UserApi, LoopBackAuth, LoopBackConfig } from 'frameworks/api';
 import { SDKStorage } from 'frameworks/api/storage/storage.swaps';
 
 @Component({
@@ -19,6 +19,7 @@ export class SignupComponent {
 
   constructor(
     private configService: ConfigService,
+    private auth: LoopBackAuth,
     private router: Router,
     private user: UserApi,
     private fb: FormBuilder,
@@ -55,12 +56,23 @@ export class SignupComponent {
     this.user.login({
       email: this.registerForm.controls['email'].value,
       password: this.registerForm.controls['password'].value
-    }).subscribe(
+    }, [
+      'user',
+      'user.oAuthClientApplications',
+      'user.identities',
+      'user.organizations'
+    ]).subscribe(
       (response) => {
+        let currentUser = this.auth.getCurrentUserData();
+
+        /*if (currentUser && currentUser.twoSetAuthentication) {
+          this.router.navigate(['/user/two-step-authentication']);
+        }*/
+
         if (this.emailVerificationToken) {
           this.router.navigate(['/user/verify-email/' + this.emailVerificationToken]);
         } else {
-          this.router.navigate(['/apps']);
+          this.router.navigate(['/' + currentUser.id]);
         }
       }
     );

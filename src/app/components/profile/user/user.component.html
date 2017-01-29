@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-3">
+      <a *ngIf="isMe" [routerLink]="['/settings/profile']" class="vcard-avatar d-block">
+        <img *ngIf="profile.photo" alt="" class="avatar" [src]="profile.photo">
+        <img *ngIf="!profile.photo" alt="" class="avatar" [src]="config.logo">
+      </a>
+
+      <a *ngIf="!isMe" class="vcard-avatar d-block">
+        <img *ngIf="profile.photo" alt="" class="avatar" [src]="profile.photo">
+        <img *ngIf="!profile.photo" alt="" class="avatar" [src]="config.logo">
+      </a>
+
+      <div class="vcard-names-container">
+        <h1 class="vcard-names">
+          <span class="vcard-fullname d-block" itemprop="name">{{profile.name}}</span>
+          <span *ngIf="config.settings?.login.username" class="vcard-username d-block" itemprop="additionalName">{{profile.username}}</span>
+        </h1>
+      </div>
+
+      <div *ngIf="profile.organizations.length" class="border-top clearfix">
+        <h2>{{'Organizations' | translate}}</h2>
+
+        <a *ngFor="let org of profile.organizations" routerLink="/{{org.id}}" class="avatar-group-item">
+          <img alt="@{{org.name}}" class="avatar" height="35" [src]="org.photo" width="35">
+        </a>
+      </div>
+
+      <a *ngIf="isMe" [routerLink]="['/settings/profile']">{{'Edit profile' | translate}}</a>
+    </div>
+
+    <div class="col-sm-9">
+      
+    </div>
+  </div>
+</div>

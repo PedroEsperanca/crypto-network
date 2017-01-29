@@ -1,6 +1,5 @@
 // libs
 import { DBModule } from '@ngrx/db';
-import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 // import { StoreLogMonitorModule, useLogMonitor } from '@ngrx/store-log-monitor';
 
@@ -9,7 +8,7 @@ import { TooltipModule } from 'ng2-bootstrap/tooltip';
 import { DropdownModule } from 'ng2-bootstrap/dropdown';
 // import { IDLE_PROVIDERS } from 'ng2-idle/core';
 
-import { SDKBrowserModule } from '../api';
+import { SDKBrowserModule, InternalStorage, StorageBrowser } from '../api';
 
 import { CloudtasksModule } from 'angular2-cloudtasks';
 import { ScrollSpyModule } from 'ng2-scrollspy';
@@ -20,20 +19,19 @@ import { ScrollSpyModule } from 'ng2-scrollspy';
 import { GUARDS_PROVIDERS } from './guards';
 import { RESOLVERS_PROVIDERS } from './resolvers';
 
-import { LoopBackConfig } from 'frameworks/api';
+import { LoopBackConfig, LOOPBACK_ACTIONS } from 'frameworks/api';
 
-import { schema } from './db-schema';
-import { OrganizationEffects } from './effects/organization';
-import { ACTIONS } from './actions';
+import { schema } from 'frameworks/ngrx/db-schema';
+import { ACTIONS } from 'frameworks/ngrx/actions';
 
 if (ENV === 'production') {
-  LoopBackConfig.setBaseURL('https://ori-api.reality-connect.pt');
+  LoopBackConfig.setBaseURL('https://api-seed.herokuapp.com');
 } else {
   LoopBackConfig.setBaseURL('http://localhost:54447');
 }
 
 LoopBackConfig.setApiVersion('api');
-LoopBackConfig.setAuthPrefix('');
+LoopBackConfig.setAuthPrefix('Bearer ');
 
 export const MY_APP_PROVIDERS: any[] = [
   // IDLE_PROVIDERS,
@@ -44,7 +42,8 @@ export const MY_APP_PROVIDERS: any[] = [
   // NOTIFY_PROVIDERS,
   // { provide: NOTIFY_GLOBAL_OPTIONS, multi: true, useValue: { /* global options here */ } },
 
-  ...ACTIONS
+  ...ACTIONS,
+  ...LOOPBACK_ACTIONS
 ];
 
 export const MY_APP_IMPORTS: any[] = [
@@ -55,11 +54,10 @@ export const MY_APP_IMPORTS: any[] = [
 
   ScrollSpyModule.forRoot(),
 
-  SDKBrowserModule.forRoot(),
-
-  // StoreModule.provideStore(reducer),
-
-  EffectsModule.run(OrganizationEffects),
+  SDKBrowserModule.forRoot({
+    provide: InternalStorage,
+    useClass: StorageBrowser
+  }),
 
   DBModule.provideDB(schema),
 

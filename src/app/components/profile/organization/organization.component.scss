@@ -1,0 +1,35 @@
+@import '~assets/styles/_colors.scss';
+
+:host {
+    .container {
+        background: white;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        padding: 20px;
+    }
+}
+
+:host /deep/ {
+    @import '~assets/styles/conf/conf.scss';
+    @import '~assets/styles/bootstrap-overrides/overrides.scss';
+
+    .btn {
+        padding: 7px 10px;
+    }
+    [class*="col-"] {
+        padding: 0;
+    }
+    @media print {
+        .map-side-container {
+            border-left: 1px solid black;
+        }
+        .map-side-toggler {
+            display: none;
+        }
+    }
+}
+
+body,
+html {
+    min-height: 100%;
+}

@@ -12,12 +12,12 @@ import { ModalDirective } from 'ng2-bootstrap';
 
 import { OrganizationInterface } from 'frameworks/api';
 import { LoopBackFilter } from 'frameworks/api/models';
-import { IAppState } from 'frameworks/ngrx';
 import {
+  IAppState,
   getSearchOrganizationsResults,
   getSearchOrganizationsFilter
-} from 'frameworks/app/reducers';
-import { OrganizationActions } from 'frameworks/app/actions';
+} from 'frameworks/ngrx';
+import { OrganizationActions } from 'frameworks/ngrx/actions';
 
 @Component({
   selector: 'organizationsHome',

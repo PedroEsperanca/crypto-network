@@ -1,0 +1,21 @@
+<div class="boxed-group">
+  <a routerLink="/organizations/new" class="btn btn-sm boxed-group-action">{{'New organization' | translate}}</a>
+
+  <h3>{{'Organizations' | translate}}</h3>
+
+  <div class="boxed-group-inner">
+    <p *ngIf="!currentUser.organizations.length">{{'You are not a member of any organizations.' | translate}}</p>
+
+    <ul *ngIf="currentUser.organizations.length" class="boxed-group-list boxed-group-standalone">
+        <li *ngFor="let org of currentUser.organizations" class="clearfix">
+          <a class="btn btn-sm float-right">{{'Leave' | translate}}</a>
+
+          <img alt="@{{org.name}}" height="20" [src]="org.photo" style="vertical-align: middle;" width="20">
+
+          <strong><a routerLink="/{{org.id}}">{{org.name}}</a></strong>
+
+          <span class="text-small text-normal text-gray ml-1">member</span>
+        </li>
+    </ul>
+  </div>
+</div>

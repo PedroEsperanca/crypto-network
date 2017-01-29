@@ -1,33 +1,38 @@
 /* tslint:disable */
 import {
+  App,
   User
 } from '../index';
 
 declare var Object: any;
 export interface OrganizationInterface {
+  id?: string;
   name?: string;
   description?: string;
-  photo?: string;
-  id?: string;
+  photoUrl?: string;
   createdAt?: Date;
   updatedAt?: Date;
-  _options?: any;
-  options?: Array<any>;
+  photo?: any;
   roles?: Array<any>;
+  s3Photo?: Array<any>;
+  apps?: Array<App>;
   users?: Array<User>;
+  oauthApps?: Array<any>;
 }
 
 export class Organization implements OrganizationInterface {
+  id: string;
   name: string;
   description: string;
-  photo: string;
-  id: string;
+  photoUrl: string;
   createdAt: Date;
   updatedAt: Date;
-  _options: any;
-  options: Array<any>;
+  photo: any;
   roles: Array<any>;
+  s3Photo: Array<any>;
+  apps: Array<App>;
   users: Array<User>;
+  oauthApps: Array<any>;
   constructor(data?: OrganizationInterface) {
     Object.assign(this, data);
   }
@@ -59,6 +64,10 @@ export class Organization implements OrganizationInterface {
       name: 'Organization',
       plural: 'Organizations',
       properties: {
+        id: {
+          name: 'id',
+          type: 'string'
+        },
         name: {
           name: 'name',
           type: 'string'
@@ -67,12 +76,8 @@ export class Organization implements OrganizationInterface {
           name: 'description',
           type: 'string'
         },
-        photo: {
-          name: 'photo',
-          type: 'string'
-        },
-        id: {
-          name: 'id',
+        photoUrl: {
+          name: 'photoUrl',
           type: 'string'
         },
         createdAt: {
@@ -83,26 +88,36 @@ export class Organization implements OrganizationInterface {
           name: 'updatedAt',
           type: 'Date'
         },
-        _options: {
-          name: '_options',
+        photo: {
+          name: 'photo',
           type: 'any'
         },
       },
       relations: {
-        options: {
-          name: 'options',
-          type: 'Array<any>',
-          model: ''
-        },
         roles: {
           name: 'roles',
           type: 'Array<any>',
           model: ''
         },
+        s3Photo: {
+          name: 's3Photo',
+          type: 'Array<any>',
+          model: ''
+        },
+        apps: {
+          name: 'apps',
+          type: 'Array<App>',
+          model: 'App'
+        },
         users: {
           name: 'users',
           type: 'Array<User>',
           model: 'User'
+        },
+        oauthApps: {
+          name: 'oauthApps',
+          type: 'Array<any>',
+          model: ''
         },
       }
     }

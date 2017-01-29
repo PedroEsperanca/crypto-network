@@ -49,8 +49,8 @@ import { SocketDriver } from './sockets/socket.driver';
 import { SocketConnection } from './sockets/socket.connections';
 import { RealTime } from './services/core/real.time';
 import { OrganizationApi } from './services/custom/Organization';
-import { UserApi } from './services/custom/User';
 import { AppApi } from './services/custom/App';
+import { UserApi } from './services/custom/User';
 /**
 * @module SDKBrowserModule
 * @description
@@ -70,7 +70,10 @@ import { AppApi } from './services/custom/App';
   ]
 })
 export class SDKBrowserModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(internalStorageProvider: any = {
+    provide: InternalStorage,
+    useClass: CookieBrowser
+  }): ModuleWithProviders {
     return {
       ngModule  : SDKBrowserModule,
       providers : [
@@ -80,9 +83,9 @@ export class SDKBrowserModule {
         SDKModels,
         RealTime,
         OrganizationApi,
-        UserApi,
         AppApi,
-        { provide: InternalStorage, useClass: CookieBrowser },
+        UserApi,
+        internalStorageProvider,
         { provide: SDKStorage, useClass: StorageBrowser },
         { provide: SocketDriver, useClass: SocketBrowser }
       ]
@@ -96,4 +99,11 @@ export class SDKBrowserModule {
 export * from './models/index';
 export * from './services/index';
 export * from './lb.config';
+export * from './storage/storage.swaps';
+export { CookieBrowser } from './storage/cookie.browser';
+export { StorageBrowser } from './storage/storage.browser';
 
+export * from './actions/index';
+export * from './effects/index';
+export * from './reducers/index';
+export * from './state';

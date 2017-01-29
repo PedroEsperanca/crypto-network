@@ -1,0 +1,4 @@
+<div *ngIf="(alert$ | async).success" class="alert alert-success" role="alert">{{(alert$ | async).success}}</div>
+<div *ngIf="(alert$ | async).info" class="alert alert-info" role="alert">{{(alert$ | async).info}}</div>
+<div *ngIf="(alert$ | async).warning" class="alert alert-warning" role="alert">{{(alert$ | async).warning}}</div>
+<div *ngIf="(alert$ | async).error" class="alert alert-danger" role="alert">{{(alert$ | async).error}}</div>

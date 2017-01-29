@@ -1,96 +1,34 @@
 /* tslint:disable */
 import {
-  User,
-  Organization
+  Organization,
+  User
 } from '../index';
 
 declare var Object: any;
 export interface AppInterface {
   id?: string;
-  clientType?: string;
-  redirectURIs?: Array<string>;
-  tokenEndpointAuthMethod?: string;
-  grantTypes?: Array<string>;
-  responseTypes?: Array<string>;
-  tokenType?: string;
-  clientSecret?: string;
-  clientName?: string;
-  clientURI?: string;
-  logoURI?: string;
-  scopes?: Array<string>;
-  contacts?: Array<string>;
-  tosURI?: string;
-  policyURI?: string;
-  jwksURI?: string;
-  jwks?: string;
-  softwareId?: string;
-  softwareVersion?: string;
-  realm?: string;
-  name: string;
-  description?: string;
-  owner?: string;
-  collaborators?: Array<string>;
-  email?: string;
-  emailVerified?: boolean;
-  clientKey?: string;
-  javaScriptKey?: string;
-  restApiKey?: string;
-  windowsKey?: string;
-  masterKey?: string;
-  pushSettings?: any;
-  status?: string;
-  created?: Date;
-  modified?: Date;
-  userId?: number;
-  organizationId?: number;
+  name?: string;
+  organizationId?: string;
   createdAt?: Date;
   updatedAt?: Date;
-  user?: User;
+  _options?: any;
+  userId?: any;
   organization?: Organization;
+  options?: Array<any>;
+  user?: User;
 }
 
 export class App implements AppInterface {
   id: string;
-  clientType: string;
-  redirectURIs: Array<string>;
-  tokenEndpointAuthMethod: string;
-  grantTypes: Array<string>;
-  responseTypes: Array<string>;
-  tokenType: string;
-  clientSecret: string;
-  clientName: string;
-  clientURI: string;
-  logoURI: string;
-  scopes: Array<string>;
-  contacts: Array<string>;
-  tosURI: string;
-  policyURI: string;
-  jwksURI: string;
-  jwks: string;
-  softwareId: string;
-  softwareVersion: string;
-  realm: string;
   name: string;
-  description: string;
-  owner: string;
-  collaborators: Array<string>;
-  email: string;
-  emailVerified: boolean;
-  clientKey: string;
-  javaScriptKey: string;
-  restApiKey: string;
-  windowsKey: string;
-  masterKey: string;
-  pushSettings: any;
-  status: string;
-  created: Date;
-  modified: Date;
-  userId: number;
-  organizationId: number;
+  organizationId: string;
   createdAt: Date;
   updatedAt: Date;
-  user: User;
+  _options: any;
+  userId: any;
   organization: Organization;
+  options: Array<any>;
+  user: User;
   constructor(data?: AppInterface) {
     Object.assign(this, data);
   }
@@ -126,150 +64,13 @@ export class App implements AppInterface {
           name: 'id',
           type: 'string'
         },
-        clientType: {
-          name: 'clientType',
-          type: 'string'
-        },
-        redirectURIs: {
-          name: 'redirectURIs',
-          type: 'Array&lt;string&gt;'
-        },
-        tokenEndpointAuthMethod: {
-          name: 'tokenEndpointAuthMethod',
-          type: 'string'
-        },
-        grantTypes: {
-          name: 'grantTypes',
-          type: 'Array&lt;string&gt;'
-        },
-        responseTypes: {
-          name: 'responseTypes',
-          type: 'Array&lt;string&gt;'
-        },
-        tokenType: {
-          name: 'tokenType',
-          type: 'string'
-        },
-        clientSecret: {
-          name: 'clientSecret',
-          type: 'string'
-        },
-        clientName: {
-          name: 'clientName',
-          type: 'string'
-        },
-        clientURI: {
-          name: 'clientURI',
-          type: 'string'
-        },
-        logoURI: {
-          name: 'logoURI',
-          type: 'string'
-        },
-        scopes: {
-          name: 'scopes',
-          type: 'Array&lt;string&gt;'
-        },
-        contacts: {
-          name: 'contacts',
-          type: 'Array&lt;string&gt;'
-        },
-        tosURI: {
-          name: 'tosURI',
-          type: 'string'
-        },
-        policyURI: {
-          name: 'policyURI',
-          type: 'string'
-        },
-        jwksURI: {
-          name: 'jwksURI',
-          type: 'string'
-        },
-        jwks: {
-          name: 'jwks',
-          type: 'string'
-        },
-        softwareId: {
-          name: 'softwareId',
-          type: 'string'
-        },
-        softwareVersion: {
-          name: 'softwareVersion',
-          type: 'string'
-        },
-        realm: {
-          name: 'realm',
-          type: 'string'
-        },
         name: {
           name: 'name',
           type: 'string'
         },
-        description: {
-          name: 'description',
-          type: 'string'
-        },
-        owner: {
-          name: 'owner',
-          type: 'string'
-        },
-        collaborators: {
-          name: 'collaborators',
-          type: 'Array&lt;string&gt;'
-        },
-        email: {
-          name: 'email',
-          type: 'string'
-        },
-        emailVerified: {
-          name: 'emailVerified',
-          type: 'boolean'
-        },
-        clientKey: {
-          name: 'clientKey',
-          type: 'string'
-        },
-        javaScriptKey: {
-          name: 'javaScriptKey',
-          type: 'string'
-        },
-        restApiKey: {
-          name: 'restApiKey',
-          type: 'string'
-        },
-        windowsKey: {
-          name: 'windowsKey',
-          type: 'string'
-        },
-        masterKey: {
-          name: 'masterKey',
-          type: 'string'
-        },
-        pushSettings: {
-          name: 'pushSettings',
-          type: 'any'
-        },
-        status: {
-          name: 'status',
-          type: 'string',
-          default: 'sandbox'
-        },
-        created: {
-          name: 'created',
-          type: 'Date'
-        },
-        modified: {
-          name: 'modified',
-          type: 'Date'
-        },
-        userId: {
-          name: 'userId',
-          type: 'number'
-        },
         organizationId: {
           name: 'organizationId',
-          type: 'number'
+          type: 'string'
         },
         createdAt: {
           name: 'createdAt',
@@ -279,17 +80,30 @@ export class App implements AppInterface {
           name: 'updatedAt',
           type: 'Date'
         },
+        _options: {
+          name: '_options',
+          type: 'any'
+        },
+        userId: {
+          name: 'userId',
+          type: 'any'
+        },
       },
       relations: {
-        user: {
-          name: 'user',
-          type: 'User',
-          model: 'User'
-        },
         organization: {
           name: 'organization',
           type: 'Organization',
           model: 'Organization'
+        },
+        options: {
+          name: 'options',
+          type: 'Array<any>',
+          model: ''
+        },
+        user: {
+          name: 'user',
+          type: 'User',
+          model: 'User'
         },
       }
     }

@@ -29,9 +29,8 @@ import { LoopBackAuth, UserApi } from 'frameworks/api';
   styleUrls: [ 'app.component.scss' ],
   template: `
 <div platform scrollSpy>
+  <app-alert></app-alert>
   <router-outlet></router-outlet>
-  <!--<ngrx-store-log-monitor toggleCommand="ctrl-h" positionCommand="ctrl-m">
-  </ngrx-store-log-monitor>-->
 </div>
   `
 })

@@ -2,13 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule }       from '@angular/common';
 
 import { MultilingualModule } from 'frameworks/i18n/multilingual.module';
-import { HeaderModule } from 'frameworks/shared/header';
-import { FooterModule } from 'frameworks/shared/footer';
+import { HeaderModule } from 'frameworks/app/shared/header';
+import { FooterModule } from 'frameworks/app/shared/footer';
 
 import { ProfileComponent } from './profile.component';
 import { routing } from './profile.routing';
 
-import { ProfileHomeComponent } from './home/home.component';
+import { ProfileUserComponent } from './user/user.component';
+import { ProfileOrganizationComponent } from './organization/organization.component';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { ProfileHomeComponent } from './home/home.component';
   ],
   declarations: [
     ProfileComponent,
-    ProfileHomeComponent
+    ProfileUserComponent,
+    ProfileOrganizationComponent
   ]
 })
 export class ProfileModule {}

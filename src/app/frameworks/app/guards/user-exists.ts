@@ -33,7 +33,7 @@ export class UserExistsGuard implements CanActivate {
       })
       .catch(() => {
         this.router.navigate(['/not-found']);
-        return Observable.of(false)
+        return Observable.of(false);
       });
   }
 }

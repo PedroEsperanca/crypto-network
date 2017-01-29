@@ -1,5 +1,5 @@
 <div class="Subhead">
-  <h2 class="Subhead-heading">Public profile</h2>
+  <h2 class="Subhead-heading">{{'Public profile' | translate}}</h2>
 </div>
 
 <form (ngSubmit)="submitUpdate()" #profileForm="ngForm">
@@ -8,32 +8,45 @@
   <div *ngIf="message.warning" class="alert alert-warning" role="alert">{{message.warning | translate}}</div>
   <div *ngIf="message.error" class="alert alert-danger" role="alert">{{message.error | translate}}</div>
 
-  <dl class="profile-avatar pull-right">
-    <img alt="@{{formModel.username || formModel.name}}" class="avatar" [src]="formModel.photo">
+  <dl *ngIf="!config.settings.usePhotoUpload" class="profile-avatar pull-right">
+    <img *ngIf="formModel.photoUrl" alt="@{{formModel.username || formModel.name}}" class="avatar" [src]="formModel.photoUrl">
+    <img *ngIf="!formModel.photoUrl" alt="" class="avatar" [src]="config.logo">
   </dl>
+
+  <file-uploader *ngIf="config.settings.usePhotoUpload"
+    type="profile"
+    title="Profile picture"
+    uploadButton="Upload new picture"
+    uploadingButton="Uploading"
+    [autoUpload]="true"
+    [currentFile]="formModel.photo"
+    [fileNameRewrite]="fileNameRewrite"
+    [getUploadUrl]="getUploadUrl"
+    [onCompleteItem]="onUploadComplete"
+    class="profile-avatar pull-right"></file-uploader>
 
   <div>
     <dl class="form-group">
-      <dt><label for="name">Name</label></dt>
+      <dt><label for="name">{{'Name' | translate}}</label></dt>
       <dd>
         <input class="form-control" type="text" id="name" name="name" [(ngModel)]="formModel.name" required>
       </dd>
     </dl>
 
-    <dl class="form-group">
-      <dt><label for="photo">Photo</label></dt>
+    <dl *ngIf="!config.settings.usePhotoUpload" class="form-group">
+      <dt><label for="photoUrl">{{'Photo Url' | translate}}</label></dt>
       <dd>
-        <input class="form-control" type="text" id="photo" name="photo" [(ngModel)]="formModel.photo">
+        <input class="form-control" type="text" id="photoUrl" name="photoUrl" [(ngModel)]="formModel.photoUrl">
       </dd>
     </dl>
 
-    <dl *ngIf="config.login?.username" class="form-group">
-      <dt><label for="username">Username</label></dt>
+    <dl *ngIf="config.settings?.login?.username" class="form-group">
+      <dt><label for="username">{{'Username' | translate}}</label></dt>
       <dd>
         <input class="form-control" type="text" id="username" name="username" [(ngModel)]="formModel.username">
       </dd>
     </dl>
 
-    <p><button type="submit" class="btn" [disabled]="!profileForm.form.valid">Update profile</button></p>
+    <p><button type="submit" class="btn btn-primary" [disabled]="!profileForm.form.valid">{{'Update profile' | translate}}</button></p>
   </div>
 </form>

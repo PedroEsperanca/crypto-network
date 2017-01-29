@@ -101,21 +101,25 @@
     background-color: #3b538c;
   }
 
-	.social a {
-		text-decoration: none;
-		cursor: pointer;
+	.social {
+		padding: 0 20px;
 
-		i:first-child {
-			transition: all .25s ease;
-		}
+		a {
+			text-decoration: none;
+			cursor: pointer;
 
-		i:last-child {
-			color: #FFF;
-		}
-
-		&:hover {
 			i:first-child {
-				opacity: 0.8;
+				transition: all .25s ease;
+			}
+
+			i:last-child {
+				color: #FFF;
+			}
+
+			&:hover {
+				i:first-child {
+					opacity: 0.8;
+				}
 			}
 		}
 	}
@@ -160,5 +164,10 @@
 	}
 	.social a.bb_connect:hover > span > i:first-child {
 		color: #205081;
+	}
+
+	.splash {
+	  height: auto;
+	  background: transparent;
 	}
 }

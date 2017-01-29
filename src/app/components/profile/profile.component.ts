@@ -1,4 +1,5 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'profile',
@@ -6,4 +7,19 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   templateUrl: './profile.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProfileComponent {}
+export class ProfileComponent implements OnInit {
+  public type: string;
+
+  constructor(private route: ActivatedRoute) {}
+
+  public ngOnInit() {
+    this.route.data
+      .subscribe((data: any) => {
+        if (typeof data.profile.emailAddresses !== 'undefined') {
+          this.type = 'user';
+        } else {
+          this.type = 'organization';
+        }
+      });
+  }
+}

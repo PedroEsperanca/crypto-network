@@ -1,0 +1,261 @@
+<div class="Subhead">
+  <h2 class="Subhead-heading">{{formModel.name}}</h2>
+</div>
+
+<div class="clearfix app-owner">
+  <img *ngIf="owner.photo" alt="@{{owner.name}}" height="30" [src]="owner.photo">
+  <img *ngIf="!owner.photo" alt="@{{owner.name}}" height="30" [src]="config.logo">
+  <p>
+    <strong><a routerLink="/{{owner.id}}">{{owner.name}}</a></strong> {{'owns this application' | translate}}.
+  </p>
+
+    <button type="button" class="btn btn-primary pull-right" (click)="transferModal.show()">
+      {{'Transfer ownership' | translate}}
+    </button>
+</div>
+
+<hr class="form-hr">
+
+<div class="clearfix">
+  <div class="oauth-app-info-container">
+    <div class="float-left-container">
+      <!--<p class="user-count">
+        <span class="text-emphasized">4</span>
+        users
+      </p>-->
+
+      <dl class="keys">
+        <dt>{{'Client ID' | translate}}</dt>
+        <dd>{{formModel.id}}</dd>
+
+        <dt>{{'Client Key' | translate}}</dt>
+        <dd>{{formModel.clientKey}}</dd>
+
+        <dt>{{'JavaScript Key' | translate}}</dt>
+        <dd>{{formModel.javaScriptKey}}</dd>
+
+        <dt>{{'Rest Api Key' | translate}}</dt>
+        <dd>{{formModel.restApiKey}}</dd>
+
+        <dt>{{'Windows Key' | translate}}</dt>
+        <dd>{{formModel.windowsKey}}</dd>
+
+        <dt>{{'Master Key' | translate}}</dt>
+        <dd>{{formModel.masterKey}}</dd>
+
+        <dt>
+          <a class="btn btn-danger mr-1" (click)="removeModal.show()">{{'Revoke all user tokens' | translate}}</a>
+          <a class="btn btn-danger" (click)="resetModal.show()">{{'Reset Keys' | translate}}</a>
+        </dt>
+      </dl>
+    </div>
+  </div>
+</div>
+
+<hr class="form-hr">
+
+<form (ngSubmit)="updateApp()" #newOAuthAppForm="ngForm">
+  <div *ngIf="message.success" class="alert alert-success" role="alert">{{message.success | translate}}</div>
+  <div *ngIf="message.info" class="alert alert-info" role="alert">{{message.info | translate}}</div>
+  <div *ngIf="message.warning" class="alert alert-warning" role="alert">{{message.warning | translate}}</div>
+  <div *ngIf="message.error" class="alert alert-danger" role="alert">{{message.error | translate}}</div>
+  
+  <dl class="profile-avatar pull-right">
+    <img *ngIf="formModel.photo" alt="@{{formModel.username || formModel.name}}" class="avatar" [src]="formModel.photo">
+    <img *ngIf="!formModel.photo" alt="" class="avatar" [src]="config.logo">
+  </dl>
+
+  <div>
+    <dl class="form-group">
+      <dt><label for="name">{{'Application name' | translate}}</label></dt>
+      <dd>
+        <input class="form-control" type="text" id="name" name="name" [(ngModel)]="formModel.name" required>
+        <p class="note">{{'Something users will recognize and trust' | translate}}</p>
+      </dd>
+    </dl>
+
+    <dl class="form-group">
+      <dt><label for="clientURI">{{'Homepage URL' | translate}}</label></dt>
+      <dd>
+        <input class="form-control" type="text" id="clientURI" name="clientURI" [(ngModel)]="formModel.clientURI" required>
+        <p class="note">{{'The full URL to your application homepage' | translate}}</p>
+      </dd>
+    </dl>
+
+    <dl class="form-group">
+      <dt><label for="logoURI">{{'Application Logo URL' | translate}}</label></dt>
+      <dd>
+        <input class="form-control" type="text" id="logoURI" name="logoURI" [(ngModel)]="formModel.logoURI">
+      </dd>
+    </dl>
+
+    <dl class="form-group">
+      <dt><label for="description">{{'Application description' | translate}}</label></dt>
+      <dd>
+        <textarea class="form-control short" cols="40" id="description" name="description" [(ngModel)]="formModel.description" placeholder="{{'Application description is optional' | translate}}" rows="20" tabindex="4"></textarea>
+        <p class="note">{{'This is displayed to all potential users of your application' | translate}}</p>
+      </dd>
+    </dl>
+
+    <dl class="form-group">
+      <dt><label for="redirectURIs">{{'Authorization callback URLs' | translate}}</label></dt>
+      <dd>
+        <input class="form-control" type="text" id="redirectURIs" name="redirectURIs" [(ngModel)]="formModel.redirectURIs" required>
+        <p class="note">{{'Your application’s callback URL. Read our' | translate}} <a routerLink="/docs/oauth" target="_blank">{{'OAuth documentation' | translate}}</a> {{'for more information' | translate}}.</p>
+      </dd>
+    </dl>
+    
+    <hr class="form-hr">
+
+    <p>
+      <button type="submit" class="btn btn-primary mr-1" tabindex="5" [disabled]="!newOAuthAppForm.form.valid">{{'Update application' | translate}}</button>
+      <a (click)="deleteModal.show()" class="btn btn-danger">{{'Delete application' | translate}}</a>
+    </p>
+  </div>
+</form>
+
+<!-- Tranfer Modal-->
+<div bsModal #transferModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">{{'Where should we transfer' | translate}} {{formModel.name}}?</h4>
+
+        <button type="button" class="close pull-right" (click)="transferModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <p>{{'Transferring may be delayed until the new owner approves the transfer.' | translate}}</p>
+
+        <form (ngSubmit)="transferApp()" #transferForm="ngForm">
+          <div *ngIf="modalMessage.success" class="alert alert-success" role="alert">{{modalMessage.success | translate}}</div>
+          <div *ngIf="modalMessage.info" class="alert alert-info" role="alert">{{modalMessage.info | translate}}</div>
+          <div *ngIf="modalMessage.warning" class="alert alert-warning" role="alert">{{modalMessage.warning | translate}}</div>
+          <div *ngIf="modalMessage.error" class="alert alert-danger" role="alert">{{modalMessage.error | translate}}</div>
+
+          <dl class="form-group">
+            <dt><label for="name">{{'Type the name of the application to confirm' | translate}}</label></dt>
+            <dd>
+              <input class="form-control" type="text" id="name" name="name" [(ngModel)]="transferModel.name" autofocus required>
+            </dd>
+          </dl>
+          <dl class="form-group">
+            <dt><label for="target">{{'New owner’s username or organization name' | translate}}</label></dt>
+            <dd>
+              <input class="form-control" type="text" id="target" name="target" [(ngModel)]="transferModel.target" required>
+            </dd>
+          </dl>
+
+          <button type="submit" class="btn btn-block btn-danger" [disabled]="!transferForm.form.valid">{{'Transfer this application' | translate}}</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Revoke Modal-->
+<div bsModal #removeModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">{{'Revoke all user tokens?' | translate}}</h4>
+
+        <button type="button" class="close pull-right" (click)="removeModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+      <div class="modal-alert">
+        {{'Are you sure you want to revoke ALL user tokens for this application?' | translate}}
+      </div>
+
+      <div class="modal-body">
+        <p>
+          {{'All users of this application will be forced back through the' | translate}}
+          <a routerLink="/docs/basics-of-authentication/">{{'authorization flow' | translate}}</a>
+          {{'before they can use your application again.' | translate}}
+        </p>
+
+        <p>{{'This action is not reversible.' | translate}}</p>
+
+        <button class="btn btn-block btn-danger" (click)="revokeApp()">
+          {{'I understand, revoke all user tokens' | translate}}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Reset Modal-->
+<div bsModal #resetModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">{{'Revoke all user tokens?' | translate}}</h4>
+
+        <button type="button" class="close pull-right" (click)="resetModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+      <div class="modal-alert">
+        {{'Your current Client Secret will no longer work after reset.' | translate}}
+      </div>
+
+      <div class="modal-body">
+        <p>{{'Please note that resetting your Client Secret will not invalidate any user tokens, however you will need to update any application configuration using the old secret because it will no longer work.' | translate}}</p>
+
+        <button class="btn btn-block btn-danger" (click)="resetApp()">
+          {{'Reset OAuth Application Client Secret' | translate}}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Modal-->
+<div bsModal #deleteModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">{{'Delete application?' | translate}}</h4>
+
+        <button type="button" class="close pull-right" (click)="deleteModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+      <div class="modal-alert">
+        {{'Please note that deleting the OAuth Application will invalidate any access tokens authorized by users.' | translate}}
+      </div>
+
+      <div class="modal-body">
+        <!--p>4 {{'users will not be able to use this application after deletion.' | translate}}</p>-->
+        
+        <form (ngSubmit)="deleteApp()" #deleteForm="ngForm">
+          <div *ngIf="modalMessage.success" class="alert alert-success" role="alert">{{modalMessage.success | translate}}</div>
+          <div *ngIf="modalMessage.info" class="alert alert-info" role="alert">{{modalMessage.info | translate}}</div>
+          <div *ngIf="modalMessage.warning" class="alert alert-warning" role="alert">{{modalMessage.warning | translate}}</div>
+          <div *ngIf="modalMessage.error" class="alert alert-danger" role="alert">{{modalMessage.error | translate}}</div>
+
+          <dl class="form-group">
+            <dt><label for="name">{{'Type the name of the application to confirm' | translate}}</label></dt>
+            <dd>
+              <input class="form-control" type="text" id="name" name="name" [(ngModel)]="deleteModel.name" autofocus required>
+            </dd>
+          </dl>
+
+          <button type="submit" class="btn btn-block btn-danger" [disabled]="!deleteForm.form.valid">
+            {{'Delete this OAuth Application' | translate}}
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -45,7 +45,7 @@ const routes: Routes = [
         component: RecoverAccountComponent
       },
       {
-        path: 'passport/:id/:userId/:ttl/:issuedAt',
+        path: 'passport/:id/:userId/:ttl/:created',
         component: PassportComponent
       }
     ]

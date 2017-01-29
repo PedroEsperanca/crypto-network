@@ -1,0 +1,85 @@
+:host {
+	.upload-title {
+		margin-bottom: .5rem;
+	}
+
+	.logo-box {
+    display: inline-block;
+    float: left;
+
+    img {
+    	width: 100%;
+    	border-radius: 6px;
+    }
+
+    .logo-placeholder {
+    	display: flex;
+    	align-items: center;
+    	width: 200px;
+	    height: 200px;
+	    background-color: #eee;
+	    border: 1px solid #ccc;
+	    border-radius: 6px;
+	    color: #767676;
+	    text-align: center;
+	    text-shadow: 0 1px 0 #fff;
+
+	    > div {
+	    	width: 100%;
+	    }
+		}
+
+		&.drag-over .logo-placeholder {
+    	box-shadow: #c9ff00 0 0 3px;
+    }
+	}
+
+	.upload {
+		label {
+			position: relative;
+			width: 100%;
+		}
+
+		input {
+			position: absolute;
+	    top: 0;
+	    left: 0;
+	    height: 34px;
+	    padding: 0;
+	    cursor: pointer;
+	    opacity: 0.0001;
+	    z-index: -1;
+	    width: 10px;
+		}
+
+		button {
+			width: 100%;
+			position: relative;
+			overflow: hidden;
+
+			.loading-bar {
+				background-color: #0275d8;
+		    height: 3px;
+		    bottom: 0;
+		    left: 0;
+		    width: 0;
+		    position: absolute;
+		    z-index: 1;
+		    border-radius: 0 0 2px 2px;
+		    -webkit-transition: width 0.5s, height 0.5s;
+		    -moz-transition: width 0.5s, height 0.5s;
+		    transition: width 0.5s, height 0.5s;
+			}
+		}
+
+		.text-red {
+	    color: #bd2c00;
+		}
+	}
+
+	.octicon {
+	  display: inline-block;
+	  vertical-align: text-top;
+	  fill: currentColor;
+	}
+}

@@ -6,9 +6,15 @@ import { SettingsComponent } from './settings.component';
 import { SettingsProfileComponent } from './profile/profile.component';
 import { SettingsAccountComponent } from './account/account.component';
 import { SettingsEmailsComponent } from './emails/emails.component';
-import { SettingsLinkedAccountsComponent } from './linked-accounts/linked-accounts.component';
 import { SettingsNotificationsComponent } from './notifications/notifications.component';
 import { SettingsBillingComponent } from './billing/billing.component';
+import { SettingsOrganizationsComponent } from './organizations/organizations.component';
+
+import { SettingsApplicationsComponent } from './applications/applications.component';
+import { SettingsApplicationsNewComponent } from './applications/new/new.component';
+import {
+  SettingsApplicationsApplicationComponent
+} from './applications/application/application.component';
 
 const routes: Routes = [
   {
@@ -29,16 +35,34 @@ const routes: Routes = [
         component: SettingsEmailsComponent,
       },
       {
-        path: 'linkedAccounts',
-        component: SettingsLinkedAccountsComponent,
-      },
-      {
         path: 'notifications',
         component: SettingsNotificationsComponent,
       },
       {
         path: 'billing',
         component: SettingsBillingComponent,
+      },
+      {
+        path: 'organizations',
+        component: SettingsOrganizationsComponent,
+      },
+
+      {
+        path: 'applications',
+        children: [
+          {
+            path: 'new',
+            component: SettingsApplicationsNewComponent,
+          },
+          {
+            path: ':id',
+            component: SettingsApplicationsApplicationComponent,
+          },
+          {
+            path: '',
+            component: SettingsApplicationsComponent,
+          }
+        ]
       }
     ]
   }

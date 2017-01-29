@@ -1,24 +1,33 @@
 
 {
   "name": "SEED",
-  "logo": "/assets/img/angular-logo.png",
+  "logo": "assets/img/angular-logo.png",
   "links": {
     "blog": "",
     "status": ""
   },
-  "login": {
-    "username": false,
-    "validateEmails": false,
-    "validatePhones": false,
+  "settings": {
+    "organizations": true,
+    "oauth": true,
     "multipleEmailsAndPhones": true,
-    "strategies": {
-      "form": true,
-      "facebook": true,
-      "google": true,
-      "twitter": true,
-      "linkedin": false,
-      "github": false,
-      "bitbucket": false
+    "usePhotoUpload": true,
+    "login": {
+      "username": false,
+      "validateEmails": false,
+      "validatePhones": false,
+      "strategies": {
+        "form": true,
+        "facebook": true,
+        "google": true,
+        "twitter": false,
+        "linkedin": false,
+        "github": true,
+        "bitbucket": true
+      }
+    },
+    "public": {
+      "profiles": true,
+      "organizations": true
     }
   },
   "i18n": {

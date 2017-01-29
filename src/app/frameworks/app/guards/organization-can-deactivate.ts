@@ -12,7 +12,7 @@ import {
 import { Observable } from 'rxjs/Observable';
 
 import { IAppState } from 'frameworks/ngrx';
-import { ApplicationActions } from '../actions';
+import { ApplicationActions } from 'frameworks/ngrx/actions';
 
 export interface CanComponentDeactivate {
   canDeactivate: () => boolean | Observable<boolean>;

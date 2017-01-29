@@ -7,7 +7,7 @@ import { TooltipModule } from 'ng2-bootstrap/tooltip';
 // import { TagInputModule } from 'ng2-tag-input';
 
 import { MultilingualModule } from 'frameworks/i18n/multilingual.module';
-import { UserMenuModule } from 'frameworks/shared/user-menu';
+import { UserMenuModule } from 'frameworks/app/shared/user-menu';
 
 import { routing } from './organizations.routing';
 import { OrganizationsComponent } from './organizations.component';

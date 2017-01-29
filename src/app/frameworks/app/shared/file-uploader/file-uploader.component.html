@@ -1,0 +1,147 @@
+<dl *ngIf="type === 'profile'" class="form-group">
+  <dt *ngIf="title" class="upload-title">{{title | translate}}</dt>
+
+  <dd class="upload-container clearfix">
+    <div ng2FileDrop
+      [ngClass]="{'drag-over': hasDropZoneOver}"
+      (fileOver)="fileOverBase($event)"
+      [uploader]="uploader"
+      class="logo-box">
+      <img *ngIf="currentFile" alt="" [src]="currentFile.url">
+
+      <div *ngIf="!currentFile" class="logo-placeholder">
+        <div>
+          <svg aria-hidden="true" class="octicon octicon-cloud-upload" height="32" version="1.1" viewBox="0 0 16 16" width="32"><path fill-rule="evenodd" d="M7 9H5l3-3 3 3H9v5H7V9zm5-4c0-.44-.91-3-4.5-3C5.08 2 3 3.92 3 6 1.02 6 0 7.52 0 9c0 1.53 1 3 3 3h3v-1.3H3c-1.62 0-1.7-1.42-1.7-1.7 0-.17.05-1.7 1.7-1.7h1.3V6c0-1.39 1.56-2.7 3.2-2.7 2.55 0 3.13 1.55 3.2 1.8v1.2H12c.81 0 2.7.22 2.7 2.2 0 2.09-2.25 2.2-2.7 2.2h-2V12h2c2.08 0 4-1.16 4-3.5C16 6.06 14.08 5 12 5z"></path></svg>
+          <p>{{'Drag &amp; drop' | translate}}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="upload">
+      <label *ngIf="!uploading" class="btn btn-secondary mt-2 text-center">
+        {{uploadButton || 'Upload new picture' | translate}}
+        <input type="file" class="width-full height-full ml-0" ng2FileSelect [uploader]="uploader">
+      </label>
+
+      <div *ngIf="uploading" class="upload-state loading">
+        <button type="button" class="btn btn-secondary my-2 width-full text-center" disabled="">
+          <img alt="" class="v-align-text-bottom" height="16" src="https://assets-cdn.github.com/images/spinners/octocat-spinner-32.gif" width="16">  {{uploadingButton || 'Uploading' | translate}}...
+
+          <span class="loading-bar" [ngStyle]="{ 'width': progress + '%' }"></span>
+        </button>
+      </div>
+
+      <!--<div class="upload-state text-red">
+        {{'This file is empty.' | translate}}
+      </div>-->
+
+      <div *ngIf="errorName === 'fileSize'" class="upload-state text-redg">
+        {{'Please upload a picture smaller than' | translate}} {{uploader.maxFileSize / 1048576}} MB.
+      </div>
+
+      <div *ngIf="errorName === 'mimeType'" class="upload-state text-red">
+       {{'We only support PNG or JPG pictures.' | translate}}
+      </div>
+
+      <div *ngIf="errorName === '404'" class="upload-state text-red">
+        {{'Something went really wrong and we can’t process that picture.' | translate}}
+      </div>
+
+      <!--<div class="upload-state text-red">
+        {{'File contents don't match the file extension.' | translate}}
+      </div>-->
+    </div>
+  </dd>
+</dl>
+
+<div *ngIf="type === 'gallery'" class="row">
+  <div class="col-md-3">
+
+    <h3>Select files</h3>
+
+    <div ng2FileDrop
+      [ngClass]="{'nv-file-over': hasDropZoneOver}"
+      (fileOver)="fileOverBase($event)"
+      [uploader]="uploader"
+      class="well my-drop-zone">Base drop zone</div>
+
+    Multiple
+    <input type="file" ng2FileSelect [uploader]="uploader" multiple /><br/>
+  </div>
+
+  <div class="col-md-9" style="margin-bottom: 40px">
+
+    <h3>Upload queue</h3>
+    <p>Queue length: {{ uploader?.queue?.length }}</p>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th width="50%">Name</th>
+          <th>Size</th>
+          <th>Progress</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of uploader.queue">
+          <td><strong>{{ item?.file?.name }}</strong></td>
+
+          <td *ngIf="uploader.isHTML5" nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
+
+          <td *ngIf="uploader.isHTML5">
+            <div class="progress" style="margin-bottom: 0;">
+              <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }"></div>
+            </div>
+          </td>
+
+          <td class="text-center">
+            <span *ngIf="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+            <span *ngIf="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+            <span *ngIf="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+          </td>
+
+          <td nowrap>
+            <button type="button" class="btn btn-success btn-xs"
+              (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
+              <span class="glyphicon glyphicon-upload"></span> Upload
+            </button>
+
+            <button type="button" class="btn btn-warning btn-xs"
+              (click)="item.cancel()" [disabled]="!item.isUploading">
+              <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+            </button>
+
+            <button type="button" class="btn btn-danger btn-xs"
+              (click)="item.remove()">
+              <span class="glyphicon glyphicon-trash"></span> Remove
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div>
+      <div>
+        Queue progress:
+        <div class="progress" style="">
+          <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+        </div>
+      </div>
+      <button type="button" class="btn btn-success btn-s"
+        (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+        <span class="glyphicon glyphicon-upload"></span> Upload all
+      </button>
+      <button type="button" class="btn btn-warning btn-s"
+        (click)="uploader.cancelAll()" [disabled]="!uploader.isUploading">
+        <span class="glyphicon glyphicon-ban-circle"></span> Cancel all
+      </button>
+      <button type="button" class="btn btn-danger btn-s"
+        (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
+        <span class="glyphicon glyphicon-trash"></span> Remove all
+      </button>
+    </div>
+
+  </div>
+</div>

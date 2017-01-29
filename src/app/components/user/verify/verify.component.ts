@@ -110,7 +110,7 @@ export class VerifyComponent {
 
   public resend() {
     let data: any = {};
-    if (this.config.login.multipleEmailsAndPhones) {
+    if (this.config.settings.login.multipleEmailsAndPhones) {
       const emailToVerify = this.auth.getCurrentUserData()
             .emailAddresses.filter((e) => { return !e.verified; })[0];
 

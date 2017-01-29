@@ -5,16 +5,18 @@ import { Http } from '@angular/http';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { RouterStoreModule } from '@ngrx/router-store';
 import { ConfigLoader, ConfigService } from 'ng2-config';
 import { TranslateLoader } from 'ng2-translate';
 import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
 
 // feature modules
 import { CoreModule, configFactory } from 'frameworks/core/core.module';
-import { AppReducer } from 'frameworks/ngrx/index';
+import { Reducer, Effects } from 'frameworks/ngrx/index';
 import { AnalyticsModule } from 'frameworks/analytics/analytics.module';
 import { MultilingualModule, translateFactory } from 'frameworks/i18n/multilingual.module';
 import { MultilingualEffects } from 'frameworks/i18n/index';
+import { LoopbackEffects } from 'frameworks/api/index';
 
 // config
 import { Config } from 'frameworks/core/index';
@@ -52,7 +54,10 @@ export const ADVANCE_MODULES = [
     deps: [Http],
     useFactory: (translateFactory)
   }]),
-  StoreModule.provideStore(AppReducer),
+  StoreModule.provideStore(Reducer),
   StoreDevtoolsModule.instrumentOnlyWithExtension(),
-  EffectsModule.run(MultilingualEffects)
+  RouterStoreModule.connectRouter(),
+  EffectsModule.run(MultilingualEffects),
+  ...Effects,
+  ...LoopbackEffects
 ];

@@ -13,9 +13,8 @@ import {
 } from '@angular/router';
 
 import { UserApi, OrganizationApi, LoopBackAuth } from 'frameworks/api';
-import { IAppState } from 'frameworks/ngrx';
-import { hasOrganization } from '../reducers';
-import { ApplicationActions, OrganizationActions } from '../actions';
+import { IAppState, hasOrganization } from 'frameworks/ngrx';
+import { ApplicationActions, OrganizationActions } from 'frameworks/ngrx/actions';
 
 /**
  * Guards are hooks into the route resolution process, providing an opportunity
@@ -55,13 +54,14 @@ export class OrganizationExistsGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ) {
+    console.log('OrganizationExistsGuard', 'asDSGSADGSDGSAFGDAFHDGHSD');
     return this.hasOrganization(route.params['id'])
       .switchMap((result) => {
         if (result) {
           this.store.dispatch(this.applicationActions.selectOrganization(route.params['id']));
           return Observable.of(true);
         } else {
-          this.router.navigate(['/apps/not-found']);
+          this.router.navigate(['/not-found']);
           return Observable.of(false);
         }
       });

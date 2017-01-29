@@ -19,7 +19,7 @@ const ENV = process.env.ENV = process.env.NODE_ENV = 'test';
 
 let webpackConfig = simpleWebTestConfig({env: ENV});
 // remove the instance of HtmlWebpackPlugin.
-helpers.removeHtmlWebpackPlugin(webpackConfig.plugins);
+helpers.removePlugins(webpackConfig.plugins, [HtmlWebpackPlugin]);
 
 /**
  * Webpack configuration

@@ -5,8 +5,7 @@ import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
-import { IAppState } from 'frameworks/ngrx';
-import { getCurrentOrganization } from 'frameworks/app/reducers';
+import { IAppState, getCurrentOrganization } from 'frameworks/ngrx';
 import { OrganizationInterface } from 'frameworks/api';
 import { LoopBackFilter } from 'frameworks/api/models';
 

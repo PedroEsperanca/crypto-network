@@ -1,5 +1,6 @@
 <app-header></app-header>
 
-<router-outlet></router-outlet>
+<profile-user *ngIf="type === 'user'"></profile-user>
+<profile-organization *ngIf="type === 'organization'"></profile-organization>
 
 <app-footer></app-footer>

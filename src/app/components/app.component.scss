@@ -1,4 +1,18 @@
 :host /deep/ {
-    margin: 0;
-    font-size: 15px;
+  margin: 0;
+  font-size: 15px;
+
+  a, button, .btn {
+  	cursor: pointer;
+
+  	&:disabled,
+  	&.disabled {
+  		cursor: not-allowed;
+  	}
+  }
+
+  .text-gray {
+  	color: #767676;
+  	
+  }
 }

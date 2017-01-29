@@ -5,9 +5,8 @@ import { Subscription } from 'rxjs/Subscription';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { OrganizationInterface } from 'frameworks/api';
-import { IAppState } from 'frameworks/ngrx';
-import { getCurrentOrganization } from 'frameworks/app/reducers';
-import { OrganizationActions } from 'frameworks/app/actions';
+import { IAppState, getCurrentOrganization } from 'frameworks/ngrx';
+import { OrganizationActions } from 'frameworks/ngrx/actions';
 
 @Component({
   selector: 'organizationsEdit',
