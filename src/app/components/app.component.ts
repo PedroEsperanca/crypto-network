@@ -14,11 +14,11 @@ import { ConfigService } from 'ng2-config';
 import { CloudtasksService } from 'angular2-cloudtasks';
 
 // app
-import { AnalyticsService } from 'frameworks/analytics';
-import { MultilingualService } from 'frameworks/i18n';
-import { Config } from 'frameworks/core';
-import { LogService } from 'frameworks/core/services';
-import { LoopBackAuth, UserApi } from 'frameworks/api';
+import { AnalyticsService } from 'shared/analytics';
+import { MultilingualService } from 'shared/i18n';
+import { Config } from 'shared/core';
+import { LogService } from 'shared/core/services';
+import { LoopBackAuth, UserApi } from 'shared/api';
 
 /**
  * This class represents the main application component.

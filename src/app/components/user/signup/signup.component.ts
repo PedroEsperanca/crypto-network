@@ -4,8 +4,8 @@ import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 import { ConfigService } from 'ng2-config';
 
-import { UserApi, LoopBackAuth, LoopBackConfig } from 'frameworks/api';
-import { SDKStorage } from 'frameworks/api/storage/storage.swaps';
+import { UserApi, LoopBackAuth, LoopBackConfig } from 'shared/api';
+import { SDKStorage } from 'shared/api/storage/storage.swaps';
 
 @Component({
   selector: 'user.signup',

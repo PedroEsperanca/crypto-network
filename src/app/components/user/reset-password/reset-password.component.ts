@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
-import { LoopBackAuth, UserApi } from 'frameworks/api';
+import { LoopBackAuth, UserApi } from 'shared/api';
 
 @Component({
   selector: 'user.reset-password',

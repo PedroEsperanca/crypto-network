@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/
 
 import { ConfigService } from 'ng2-config';
 
-import { User, UserApi, LoopBackAuth } from 'frameworks/api';
+import { User, UserApi, LoopBackAuth } from 'shared/api';
 
 @Component({
   selector: 'settingsEmails',

@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 import { ConfigService } from 'ng2-config';
 
-import { LoopBackAuth, User, UserApi, LoopBackConfig } from 'frameworks/api';
+import { LoopBackAuth, User, UserApi, LoopBackConfig } from 'shared/api';
 
 @Component({
   selector: 'settingsAccount',

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule }       from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { MultilingualModule } from 'frameworks/i18n/multilingual.module';
+import { MultilingualModule } from 'shared/i18n/multilingual.module';
 
 import { TooltipModule } from 'ng2-bootstrap/tooltip';
 

@@ -34,7 +34,7 @@ module.exports = function(options) {
     resolve: {
       alias: {
         components: helpers.root('src/app/components'),
-        frameworks: helpers.root('src/app/frameworks'),
+        shared: helpers.root('src/app/shared'),
         assets: helpers.root('src/assets'),
         bootstrap: helpers.root('node_modules/bootstrap/scss')
       }

@@ -3,8 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { ConfigService } from 'ng2-config';
 
-import { LoopBackAuth, UserApi } from 'frameworks/api';
-import { SDKStorage } from 'frameworks/api/storage/storage.swaps';
+import { LoopBackAuth, UserApi } from 'shared/api';
+import { SDKStorage } from 'shared/api/storage/storage.swaps';
 
 interface FormI {
   token: string;

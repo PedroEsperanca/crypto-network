@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ConfigService } from 'ng2-config';
 import { ModalDirective } from 'ng2-bootstrap';
 
-import { UserApi, LoopBackAuth } from 'frameworks/api';
+import { UserApi, LoopBackAuth } from 'shared/api';
 
 @Component({
   selector: 'settingsApplicationsApplication',

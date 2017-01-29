@@ -13,11 +13,11 @@ import { MockBackend } from '@angular/http/testing';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
-import { t } from 'frameworks/test';
-import { NameListService, nameListReducer, NameListEffects } from 'frameworks/sample';
-import { CoreModule } from 'frameworks/core/core.module';
-import { AnalyticsModule } from 'frameworks/analytics/analytics.module';
-import { MultilingualModule } from 'frameworks/i18n/multilingual.module';
+import { t } from 'shared/test';
+import { NameListService, nameListReducer, NameListEffects } from 'shared/sample';
+import { CoreModule } from 'shared/core/core.module';
+import { AnalyticsModule } from 'shared/analytics/analytics.module';
+import { MultilingualModule } from 'shared/i18n/multilingual.module';
 import { HomeComponent } from './home.component';
 
 // test module configuration for each test

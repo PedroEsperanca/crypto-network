@@ -2,9 +2,9 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 
-import { IAppState } from 'frameworks/ngrx';
-import { LoopbackAuthActions } from 'frameworks/api/actions';
-import { LoopBackAuth, User, UserApi } from 'frameworks/api';
+import { IAppState } from 'shared/ngrx';
+import { LoopbackAuthActions } from 'shared/api/actions';
+import { LoopBackAuth, User, UserApi } from 'shared/api';
 
 @Component({
   selector: 'user.login',

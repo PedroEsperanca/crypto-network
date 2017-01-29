@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { Angulartics2Module } from 'angulartics2';
 
-import { MultilingualModule } from 'frameworks/i18n/multilingual.module';
+import { MultilingualModule } from 'shared/i18n/multilingual.module';
 
 import { IndexContactComponent } from './contact.component';
 

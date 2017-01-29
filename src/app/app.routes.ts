@@ -1,8 +1,8 @@
 // angular
 import { Routes } from '@angular/router';
 
-import { UserLoggedGuard, ProfileExistsGuard } from 'frameworks/app/guards';
-import { ProfileResolver } from 'frameworks/app/resolvers';
+import { UserLoggedGuard, ProfileExistsGuard } from 'shared/app/guards';
+import { ProfileResolver } from 'shared/app/resolvers';
 
 import { NotFoundComponent } from './components/not-found/not-found.component';
 

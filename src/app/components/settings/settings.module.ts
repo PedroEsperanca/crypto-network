@@ -6,10 +6,10 @@ import { TooltipModule } from 'ng2-bootstrap/tooltip';
 import { ModalModule } from 'ng2-bootstrap/modal';
 import { CloudtasksModule } from 'angular2-cloudtasks';
 
-import { MultilingualModule } from 'frameworks/i18n/multilingual.module';
-import { HeaderModule } from 'frameworks/app/shared/header';
-import { FooterModule } from 'frameworks/app/shared/footer';
-import { FileUploaderModule } from 'frameworks/app/shared/file-uploader';
+import { MultilingualModule } from 'shared/i18n/multilingual.module';
+import { HeaderModule } from 'shared/app/shared/header';
+import { FooterModule } from 'shared/app/shared/footer';
+import { FileUploaderModule } from 'shared/app/shared/file-uploader';
 
 import { routing } from './settings.routing';
 import { SettingsComponent } from './settings.component';

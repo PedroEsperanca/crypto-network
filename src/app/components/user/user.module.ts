@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule }       from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { MultilingualModule } from 'frameworks/i18n/multilingual.module';
+import { MultilingualModule } from 'shared/i18n/multilingual.module';
 
-import { SDKStorage } from 'frameworks/api/storage/storage.swaps';
-import { CookieBrowser } from 'frameworks/api/storage/cookie.browser';
+import { SDKStorage } from 'shared/api/storage/storage.swaps';
+import { CookieBrowser } from 'shared/api/storage/cookie.browser';
 
 import { TooltipModule } from 'ng2-bootstrap/tooltip';
 

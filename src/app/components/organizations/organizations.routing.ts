@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {
   OrganizationExistsGuard,
   OrganizationCanDeactivateGuard
-} from 'frameworks/app/guards';
+} from 'shared/app/guards';
 
 import { OrganizationsComponent } from './organizations.component';
 

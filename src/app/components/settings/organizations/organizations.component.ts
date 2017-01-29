@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 import { ConfigService } from 'ng2-config';
 
-import { User, UserApi, LoopBackAuth } from 'frameworks/api';
+import { User, UserApi, LoopBackAuth } from 'shared/api';
 
 @Component({
   selector: 'settingsOrganizations',

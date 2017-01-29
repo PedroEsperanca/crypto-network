@@ -3,9 +3,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 
-import { OrganizationInterface } from 'frameworks/api';
-import { IAppState } from 'frameworks/ngrx';
-import { OrganizationActions } from 'frameworks/ngrx/actions';
+import { OrganizationInterface } from 'shared/api';
+import { IAppState } from 'shared/ngrx';
+import { OrganizationActions } from 'shared/ngrx/actions';
 
 @Component({
   selector: 'organizationsCreate',

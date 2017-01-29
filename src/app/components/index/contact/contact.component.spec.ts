@@ -6,11 +6,11 @@ import { RouterTestingModule } from '@angular/router/testing';
 // libs
 import { StoreModule } from '@ngrx/store';
 
-import { t } from 'frameworks/test';
-import { NameListService, nameListReducer } from 'frameworks/sample';
-import { CoreModule } from 'frameworks/core/core.module';
-import { AnalyticsModule } from 'frameworks/analytics/analytics.module';
-import { MultilingualModule } from 'frameworks/i18n/multilingual.module';
+import { t } from 'shared/test';
+import { NameListService, nameListReducer } from 'shared/sample';
+import { CoreModule } from 'shared/core/core.module';
+import { AnalyticsModule } from 'shared/analytics/analytics.module';
+import { MultilingualModule } from 'shared/i18n/multilingual.module';
 import { HomeComponent } from './home.component';
 
 // test module configuration for each test

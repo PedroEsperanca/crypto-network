@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 import { ChangeDetectorRef } from '@angular/core';
 
-import { UserApi } from 'frameworks/api';
+import { UserApi } from 'shared/api';
 
 interface FormI {
   email: string;

@@ -4,9 +4,9 @@ import { Component, ChangeDetectionStrategy, OnInit, OnDestroy } from '@angular/
 import { Subscription } from 'rxjs/Subscription';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { OrganizationInterface } from 'frameworks/api';
-import { IAppState, getCurrentOrganization } from 'frameworks/ngrx';
-import { OrganizationActions } from 'frameworks/ngrx/actions';
+import { OrganizationInterface } from 'shared/api';
+import { IAppState, getCurrentOrganization } from 'shared/ngrx';
+import { OrganizationActions } from 'shared/ngrx/actions';
 
 @Component({
   selector: 'organizationsEdit',

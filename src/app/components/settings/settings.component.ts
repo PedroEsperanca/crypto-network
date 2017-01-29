@@ -5,13 +5,13 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ConfigService } from 'ng2-config';
 
-import { LoopBackAuth, OrganizationInterface } from 'frameworks/api';
-import { LoopBackFilter } from 'frameworks/api/models';
+import { LoopBackAuth, OrganizationInterface } from 'shared/api';
+import { LoopBackFilter } from 'shared/api/models';
 import {
   IAppState,
   getOrganizationsState,
   getOrganizations
-} from 'frameworks/ngrx';
+} from 'shared/ngrx';
 
 @Component({
   selector: 'settings.settings',

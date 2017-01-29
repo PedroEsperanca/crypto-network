@@ -11,16 +11,16 @@ import { TranslateLoader } from 'ng2-translate';
 import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
 
 // feature modules
-import { CoreModule, configFactory } from 'frameworks/core/core.module';
-import { Reducer, Effects } from 'frameworks/ngrx/index';
-import { AnalyticsModule } from 'frameworks/analytics/analytics.module';
-import { MultilingualModule, translateFactory } from 'frameworks/i18n/multilingual.module';
-import { MultilingualEffects } from 'frameworks/i18n/index';
-import { LoopbackEffects } from 'frameworks/api/index';
+import { CoreModule, configFactory } from 'shared/core/core.module';
+import { Reducer, Effects } from 'shared/ngrx/index';
+import { AnalyticsModule } from 'shared/analytics/analytics.module';
+import { MultilingualModule, translateFactory } from 'shared/i18n/multilingual.module';
+import { MultilingualEffects } from 'shared/i18n/index';
+import { LoopbackEffects } from 'shared/api/index';
 
 // config
-import { Config } from 'frameworks/core/index';
-import { WindowService, ConsoleService } from 'frameworks/core/services/index';
+import { Config } from 'shared/core/index';
+import { WindowService, ConsoleService } from 'shared/core/services/index';
 Config.PLATFORM_TARGET = Config.PLATFORMS.WEB;
 
 import { routerModule } from 'routerModule';

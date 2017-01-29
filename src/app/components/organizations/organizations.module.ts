@@ -6,8 +6,8 @@ import { ModalModule } from 'ng2-bootstrap/modal';
 import { TooltipModule } from 'ng2-bootstrap/tooltip';
 // import { TagInputModule } from 'ng2-tag-input';
 
-import { MultilingualModule } from 'frameworks/i18n/multilingual.module';
-import { UserMenuModule } from 'frameworks/app/shared/user-menu';
+import { MultilingualModule } from 'shared/i18n/multilingual.module';
+import { UserMenuModule } from 'shared/app/shared/user-menu';
 
 import { routing } from './organizations.routing';
 import { OrganizationsComponent } from './organizations.component';

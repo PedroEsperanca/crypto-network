@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { ConfigService } from 'ng2-config';
 
-import { UserApi, LoopBackAuth } from 'frameworks/api';
+import { UserApi, LoopBackAuth } from 'shared/api';
 
 interface FormI {
   name: string;

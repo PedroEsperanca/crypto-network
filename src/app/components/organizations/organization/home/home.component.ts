@@ -5,9 +5,9 @@ import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
-import { IAppState, getCurrentOrganization } from 'frameworks/ngrx';
-import { OrganizationInterface } from 'frameworks/api';
-import { LoopBackFilter } from 'frameworks/api/models';
+import { IAppState, getCurrentOrganization } from 'shared/ngrx';
+import { OrganizationInterface } from 'shared/api';
+import { LoopBackFilter } from 'shared/api/models';
 
 const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 

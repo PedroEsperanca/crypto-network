@@ -28,9 +28,9 @@ import { AppState, InternalStateType } from './app.service';
 // Advance
 import { ADVANCE_MODULES } from './app.advance';
 // App
-import { MY_APP_PROVIDERS, MY_APP_IMPORTS } from 'frameworks/app';
+import { MY_APP_PROVIDERS, MY_APP_IMPORTS } from 'shared/app';
 import { NotFoundComponent } from 'components/not-found/not-found.component';
-import { AlertModule } from 'frameworks/app/shared/alert';
+import { AlertModule } from 'shared/app/shared/alert';
 
 // Application wide providers
 const APP_PROVIDERS = [

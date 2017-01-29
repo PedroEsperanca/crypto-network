@@ -10,14 +10,14 @@ import { Component, ChangeDetectionStrategy, ViewChild } from '@angular/core';
 
 import { ModalDirective } from 'ng2-bootstrap';
 
-import { OrganizationInterface } from 'frameworks/api';
-import { LoopBackFilter } from 'frameworks/api/models';
+import { OrganizationInterface } from 'shared/api';
+import { LoopBackFilter } from 'shared/api/models';
 import {
   IAppState,
   getSearchOrganizationsResults,
   getSearchOrganizationsFilter
-} from 'frameworks/ngrx';
-import { OrganizationActions } from 'frameworks/ngrx/actions';
+} from 'shared/ngrx';
+import { OrganizationActions } from 'shared/ngrx/actions';
 
 @Component({
   selector: 'organizationsHome',
