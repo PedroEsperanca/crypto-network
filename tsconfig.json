@@ -26,12 +26,14 @@
       "dom",
       "es7"
     ],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
     "types": [
       "hammerjs",
       "jasmine",
       "lodash",
       "node",
-      "selenium-webdriver",
       "source-map",
       "uglify-js",
       "webpack"
@@ -51,5 +53,7 @@
   },
   "compileOnSave": false,
   "buildOnSave": false,
-  "atom": { "rewriteTsconfig": false }
+  "atom": {
+    "rewriteTsconfig": false
+  }
 }

@@ -17,7 +17,7 @@ import { CloudtasksService } from 'angular2-cloudtasks';
 import { AnalyticsService } from 'shared/analytics';
 import { MultilingualService } from 'shared/i18n';
 import { Config } from 'shared/core';
-import { LogService } from 'shared/core/services';
+import { LogService, AppService } from 'shared/core/services';
 import { LoopBackAuth, UserApi } from 'shared/api';
 
 /**
@@ -45,7 +45,8 @@ export class AppComponent {
     // private notify: Notify,
     private location: Location,
     private auth: LoopBackAuth,
-    private user: UserApi
+    private user: UserApi,
+    private appService: AppService
   ) {
     this.analytics.devMode(`${Config.ENVIRONMENT().ENV}` === 'development' ? true : false);
     logger.debug(`Config env: ${Config.ENVIRONMENT().ENV}`);

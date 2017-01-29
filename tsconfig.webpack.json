@@ -29,6 +29,9 @@
       "es7",
       "dom"
     ],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
     "types": [
       "hammerjs",
       "jasmine",
@@ -49,10 +52,12 @@
     "useWebpackText": true
   },
   "angularCompilerOptions": {
-   "genDir": "./compiled",
-   "skipMetadataEmit": true
+    "genDir": "./compiled",
+    "skipMetadataEmit": true
   },
   "compileOnSave": false,
   "buildOnSave": false,
-  "atom": { "rewriteTsconfig": false }
+  "atom": {
+    "rewriteTsconfig": false
+  }
 }

@@ -1,12 +1,19 @@
 // angular
-import { NgModule, ModuleWithProviders, Optional, SkipSelf } from '@angular/core';
+import {
+  NgModule,
+  ModuleWithProviders,
+  Optional,
+  SkipSelf,
+  CUSTOM_ELEMENTS_SCHEMA,
+  NO_ERRORS_SCHEMA
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpModule, Http } from '@angular/http';
 
 // libs
-import { TranslateModule, TranslateStaticLoader } from 'ng2-translate';
+import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate';
 
 // app
 import { Config } from '../core/index';
@@ -16,7 +23,7 @@ import { LangSwitcherComponent } from './components/index';
 import { MultilingualService } from './services/index';
 
 // for AoT compilation
-export function translateFactory(http: Http) {
+export function translateLoaderFactory(http: Http) {
   return new TranslateStaticLoader(http, `${Config.IS_MOBILE_NATIVE() ?
      '/' : ''}assets/i18n`, '.json');
 };
@@ -31,7 +38,11 @@ export function translateFactory(http: Http) {
     RouterModule,
     FormsModule,
     HttpModule,
-    TranslateModule.forRoot()
+    TranslateModule.forRoot([{
+      provide: TranslateLoader,
+      deps: [Http],
+      useFactory: (translateLoaderFactory)
+    }]),
   ],
   declarations: [
     LangSwitcherComponent
@@ -42,6 +53,10 @@ export function translateFactory(http: Http) {
   ],
   providers: [
     MultilingualService
+  ],
+  schemas: [
+    NO_ERRORS_SCHEMA,
+    CUSTOM_ELEMENTS_SCHEMA
   ]
 })
 export class MultilingualModule {

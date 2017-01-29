@@ -51,16 +51,6 @@ module.exports = function(options) {
        * See: http://webpack.github.io/docs/configuration.html#module-loaders
        */
       rules: [
-        {
-          test: /\.css$/,
-          loader: 'to-string-loader!css-loader!postcss-loader'
-        },
-
-        {
-          test: /\.scss$/,
-          loader: 'to-string-loader!css-loader!postcss-loader!sass-loader'
-        },
-
         { test: /\.(woff2?|ttf|eot|svg)$/, loader: 'url-loader?limit=10000' }
       ]
 
@@ -94,17 +84,14 @@ module.exports = function(options) {
         inject: 'head'
       }),
 
-      new webpack.LoaderOptionsPlugin({
+      /*new webpack.LoaderOptionsPlugin({
         options: {
           context: helpers.root(),
           output: {
               path: helpers.root('dist')
-          },
-          postcss: [
-            require('autoprefixer')({ /* ...options */ })
-          ]
+          }
         }
-      })
+      })*/
     ],
 
     /*externals: [

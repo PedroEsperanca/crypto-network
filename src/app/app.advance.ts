@@ -14,7 +14,7 @@ import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
 import { CoreModule, configFactory } from 'shared/core/core.module';
 import { Reducer, Effects } from 'shared/ngrx/index';
 import { AnalyticsModule } from 'shared/analytics/analytics.module';
-import { MultilingualModule, translateFactory } from 'shared/i18n/multilingual.module';
+import { MultilingualModule, translateLoaderFactory } from 'shared/i18n/multilingual.module';
 import { MultilingualEffects } from 'shared/i18n/index';
 import { LoopbackEffects } from 'shared/api/index';
 
@@ -52,7 +52,7 @@ export const ADVANCE_MODULES = [
   MultilingualModule.forRoot([{
     provide: TranslateLoader,
     deps: [Http],
-    useFactory: (translateFactory)
+    useFactory: (translateLoaderFactory)
   }]),
   StoreModule.provideStore(Reducer),
   StoreDevtoolsModule.instrumentOnlyWithExtension(),
