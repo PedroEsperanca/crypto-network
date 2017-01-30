@@ -1,8 +1,16 @@
-import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
+import { Store } from '@ngrx/store';
+import { Component, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 
 import { ConfigService } from 'ng2-config';
 
-import { User, UserApi, LoopBackAuth } from 'shared/api';
+import {
+  User,
+  UserApi,
+  LoopbackAuthActions,
+  getLoopbackAuthUser
+} from 'shared/api';
+import { IAppState, AlertActions } from 'shared/ngrx';
 
 @Component({
   selector: 'settingsEmails',
@@ -10,7 +18,7 @@ import { User, UserApi, LoopBackAuth } from 'shared/api';
   templateUrl: './emails.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SettingsEmailsComponent {
+export class SettingsEmailsComponent implements OnDestroy  {
   public config: any;
   public currenUser: User;
 
@@ -22,21 +30,32 @@ export class SettingsEmailsComponent {
   };
   public updatePreferencesModel: any = 'marketing';
 
-  public message: any = {};
+  private subscriptions: Subscription[] = [];
 
   constructor(
-    public auth: LoopBackAuth,
+    private store: Store<IAppState>,
+    private alertActions: AlertActions,
+    private loopbackAuthActions: LoopbackAuthActions,
     private user: UserApi,
-    private configService: ConfigService,
-    private cd: ChangeDetectorRef,
+    private configService: ConfigService
   ) {
     this.config = this.configService.getSettings();
-    this.currenUser = this.auth.getCurrentUserData();
-    this.updatePreferencesModel = this.currenUser.emailPreferences;
+
+    this.subscriptions.push(this.store.let(getLoopbackAuthUser()).subscribe((currentUser: User) => {
+      if (!currentUser) { return; }
+
+      this.updatePreferencesModel = (<any> Object).assign({}, currentUser.emailPreferences);
+      this.currenUser = (<any> Object).assign({}, currentUser);
+    }));
+  }
+
+  public ngOnDestroy() {
+    this.subscriptions.forEach((subscription) => {
+      subscription.unsubscribe();
+    });
   }
 
   public verifyEmail(emailId: string) {
-    this.message = {};
     let data: any = {};
 
     if (this.config.settings.multipleEmailsAndPhones) {
@@ -46,48 +65,25 @@ export class SettingsEmailsComponent {
       };
     }
 
-    this.user.sendVerificationCode(this.auth.getCurrentUserId(), data).subscribe(
+    this.user.sendVerificationCode(this.currenUser.id, data).subscribe(
       (response: any) => {
         if (response.error) {
-          this.message = {
-            error: response.error_description
-          };
+          this.store.dispatch(this.alertActions.setAlert(response.error_description, 'error'));
         } else {
-          this.message = {
-            info: 'Verification Code sent to ' + this.auth.getCurrentUserData()
-              .emailAddresses.filter((e) => { return e.id === emailId; })[0].masked
-          };
+          this.store.dispatch(this.alertActions.setAlert('Verification Code sent to ' +
+            this.currenUser
+              .emailAddresses.filter((e) => { return e.id === emailId; })[0].masked, 'info'));
         }
-        this.cd.markForCheck();
       },
-      (error) => {
-        if (error.message === 'Unexpected token U in JSON at position 0') {
-          this.message = {
-            error: 'Unauthorized'
-          };
-        } else if (error === 'invalid_grant') {
-          this.message = {
-            error: 'Access token is expired'
-          };
-        } else {
-          this.message = {
-            error: error.message || error.error_description
-          };
-        }
-        this.cd.markForCheck();
-      }
+      (error) => this.store.dispatch(this.alertActions.setAlert(error.message, 'error'))
     );
   }
 
   public setPrimary(emailId: string) {
-    this.message = {};
-
-    this.user.setPrimaryEmail(this.auth.getCurrentUserId(), emailId).subscribe(
+    this.user.setPrimaryEmail(this.currenUser.id, emailId).subscribe(
       (response: any) => {
         if (response.error) {
-          this.message = {
-            error: response.error_description
-          };
+          this.store.dispatch(this.alertActions.setAlert(response.error_description, 'error'));
         } else {
           for (let email of this.currenUser.emailAddresses) {
             if (email.id === emailId) {
@@ -97,87 +93,41 @@ export class SettingsEmailsComponent {
             }
           }
 
-          let token = this.auth.getToken();
-          token.user = this.currenUser;
-          this.auth.setUser(token);
-          this.auth.save();
+          this.store.dispatch(this.loopbackAuthActions.updateUserProperties({
+            emailAddresses: this.currenUser.emailAddresses
+          }));
         }
-        this.cd.markForCheck();
       },
-      (error) => {
-        if (error.message === 'Unexpected token U in JSON at position 0') {
-          this.message = {
-            error: 'Unauthorized'
-          };
-        } else if (error === 'invalid_grant') {
-          this.message = {
-            error: 'Access token is expired'
-          };
-        } else {
-          this.message = {
-            error: error.message || error.error_description
-          };
-        }
-        this.cd.markForCheck();
-      }
+      (error) => this.store.dispatch(this.alertActions.setAlert(error.message, 'error'))
     );
   }
 
   public editEmail() {
-    this.message = {};
-
-    this.user.patchAttributes(this.auth.getCurrentUserId(), {
+    this.user.patchAttributes(this.currenUser.id, {
       email: this.editEmailModel.email,
       emailVerified: false
     }).subscribe(
       (response: any) => {
         if (response.error) {
-          this.message = {
-            error: response.error_description
-          };
+          this.store.dispatch(this.alertActions.setAlert(response.error_description, 'error'));
         } else {
-          this.message = {
-            info: 'Email updated successfully'
-          };
+          this.store.dispatch(this.alertActions.setAlert('Email updated successfully', 'info'));
 
-          this.currenUser.email = this.editEmailModel.email;
-          this.currenUser.emailVerified = false;
-
-          let token = this.auth.getToken();
-          token.user = this.currenUser;
-          this.auth.setUser(token);
-          this.auth.save();
+          this.store.dispatch(this.loopbackAuthActions.updateUserProperties({
+            email: this.editEmailModel.email,
+            emailVerified: false
+          }));
         }
-        this.cd.markForCheck();
       },
-      (error) => {
-        if (error.message === 'Unexpected token U in JSON at position 0') {
-          this.message = {
-            error: 'Unauthorized'
-          };
-        } else if (error === 'invalid_grant') {
-          this.message = {
-            error: 'Access token is expired'
-          };
-        } else {
-          this.message = {
-            error: error.message || error.error_description
-          };
-        }
-        this.cd.markForCheck();
-      }
+      (error) => this.store.dispatch(this.alertActions.setAlert(error.message, 'error'))
     );
   }
 
   public removeEmail(emailId: string) {
-    this.message = {};
-
-    this.user.destroyByIdEmails(this.auth.getCurrentUserId(), emailId).subscribe(
+    this.user.destroyByIdEmails(this.currenUser.id, emailId).subscribe(
       (response: any) => {
         if (response.error) {
-          this.message = {
-            error: response.error_description
-          };
+          this.store.dispatch(this.alertActions.setAlert(response.error_description, 'error'));
         } else {
           for (let i = 0; i < this.currenUser.emailAddresses.length; ++i) {
             if (this.currenUser.emailAddresses[i].id === emailId) {
@@ -186,111 +136,48 @@ export class SettingsEmailsComponent {
             }
           }
 
-          let token = this.auth.getToken();
-          token.user = this.currenUser;
-          this.auth.setUser(token);
-          this.auth.save();
+          this.store.dispatch(this.loopbackAuthActions.updateUserProperties({
+            emailAddresses: this.currenUser.emailAddresses
+          }));
         }
-        this.cd.markForCheck();
       },
-      (error) => {
-        if (error.message === 'Unexpected token U in JSON at position 0') {
-          this.message = {
-            error: 'Unauthorized'
-          };
-        } else if (error === 'invalid_grant') {
-          this.message = {
-            error: 'Access token is expired'
-          };
-        } else {
-          this.message = {
-            error: error.message || error.error_description
-          };
-        }
-        this.cd.markForCheck();
-      }
+      (error) => this.store.dispatch(this.alertActions.setAlert(error.message, 'error'))
     );
   }
 
   public addEmail() {
-    this.message = {};
-
-    this.user.createEmails(this.auth.getCurrentUserId(), this.addEmailModel).subscribe(
+    this.user.createEmails(this.currenUser.id, this.addEmailModel).subscribe(
       (response: any) => {
         if (response.error) {
-          this.message = {
-            error: response.error_description
-          };
+          this.store.dispatch(this.alertActions.setAlert(response.error_description, 'error'));
         } else {
-          this.currenUser.emailAddresses.push(response);
-
-          let token = this.auth.getToken();
-          token.user = this.currenUser;
-          this.auth.setUser(token);
-          this.auth.save();
+          this.store.dispatch(this.loopbackAuthActions.updateUserProperties({
+            emailAddresses: this.currenUser.emailAddresses.push(response)
+          }));
         }
-        this.cd.markForCheck();
       },
-      (error) => {
-        if (error.message === 'Unexpected token U in JSON at position 0') {
-          this.message = {
-            error: 'Unauthorized'
-          };
-        } else if (error === 'invalid_grant') {
-          this.message = {
-            error: 'Access token is expired'
-          };
-        } else {
-          this.message = {
-            error: error.message || error.error_description
-          };
-        }
-        this.cd.markForCheck();
-      }
+      (error) => this.store.dispatch(this.alertActions.setAlert(error.message, 'error'))
     );
   }
 
   public updatePreferences() {
-    this.message = {};
-
-    this.user.patchAttributes(this.auth.getCurrentUserId(), {
+    this.user.patchAttributes(this.currenUser.id, {
       emailPreferences: this.updatePreferencesModel
     }).subscribe(
       (response: any) => {
         if (response.error) {
-          this.message = {
-            error: response.error_description
-          };
+          this.store.dispatch(this.alertActions.setAlert(response.error_description, 'error'));
         } else {
-          this.message = {
-            info: 'Email preferences updated successfully'
-          };
+          this.store.dispatch(
+            this.alertActions.setAlert('Email preferences updated successfully', 'info')
+          );
 
-          this.currenUser.emailPreferences = this.updatePreferencesModel;
-
-          let token = this.auth.getToken();
-          token.user = this.currenUser;
-          this.auth.setUser(token);
-          this.auth.save();
+          this.store.dispatch(this.loopbackAuthActions.updateUserProperties({
+            emailPreferences: this.updatePreferencesModel
+          }));
         }
-        this.cd.markForCheck();
       },
-      (error) => {
-        if (error.message === 'Unexpected token U in JSON at position 0') {
-          this.message = {
-            error: 'Unauthorized'
-          };
-        } else if (error === 'invalid_grant') {
-          this.message = {
-            error: 'Access token is expired'
-          };
-        } else {
-          this.message = {
-            error: error.message || error.error_description
-          };
-        }
-        this.cd.markForCheck();
-      }
+      (error) => this.store.dispatch(this.alertActions.setAlert(error.message, 'error'))
     );
   }
 }

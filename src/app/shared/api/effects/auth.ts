@@ -51,6 +51,20 @@ export class LoopbackAuthEffects {
     })
     .ignoreElements();
 
+  @Effect()
+  public updateUserProperties: Observable<Action> = this.actions$
+    .ofType(LoopbackAuthActions.UPDATE_USER_PROPERTIES)
+    .map((action) => action.payload)
+    .do((payload) => {
+      let token = this.auth.getToken();
+      token.user = Object.assign(token.user, payload);
+      this.auth.setUser(token);
+      this.auth.save();
+
+      return this.loopbackAuthActions.updateUserPropertiesSuccess(payload);
+    })
+    .ignoreElements();
+
   constructor(
     private actions$: Actions,
     private loopbackAuthActions: LoopbackAuthActions,

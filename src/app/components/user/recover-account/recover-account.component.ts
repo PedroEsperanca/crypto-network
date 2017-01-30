@@ -1,8 +1,8 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
-
-import { ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Store } from '@ngrx/store';
 
 import { UserApi } from 'shared/api';
+import { IAppState, AlertActions } from 'shared/ngrx';
 
 interface FormI {
   email: string;
@@ -19,9 +19,10 @@ export class RecoverAccountComponent {
   };
 
   public submited: boolean = false;
-  public message: any = {};
 
   constructor(
+    private store: Store<IAppState>,
+    private alertActions: AlertActions,
     private user: UserApi,
     private cd: ChangeDetectorRef
   ) {}
@@ -29,16 +30,10 @@ export class RecoverAccountComponent {
   public recover() {
     this.user.resetPassword(this.formModel).subscribe(
       (response) => {
-        this.message = {};
         this.submited = true;
         this.cd.markForCheck();
       },
-      (error) => {
-        this.message = {
-          error: error.message
-        };
-        this.cd.markForCheck();
-      }
+      (error) => this.store.dispatch(this.alertActions.setAlert(error.message, 'error'))
     );
   }
 }

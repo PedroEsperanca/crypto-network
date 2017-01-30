@@ -1,10 +1,24 @@
-import { Component, ChangeDetectionStrategy, ChangeDetectorRef, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
+import { Store } from '@ngrx/store';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  OnInit,
+  OnDestroy
+} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { ConfigService } from 'ng2-config';
 import { ModalDirective } from 'ng2-bootstrap';
 
-import { UserApi, LoopBackAuth } from 'shared/api';
+import {
+  User,
+  UserApi,
+  LoopbackAuthActions,
+  getLoopbackAuthUser
+} from 'shared/api';
+import { IAppState, AlertActions } from 'shared/ngrx';
 
 @Component({
   selector: 'settingsApplicationsApplication',
@@ -12,15 +26,16 @@ import { UserApi, LoopBackAuth } from 'shared/api';
   templateUrl: './application.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SettingsApplicationsApplicationComponent implements OnInit {
+export class SettingsApplicationsApplicationComponent implements OnInit, OnDestroy  {
   public config: any;
   public formModel: any = {};
   public owner: any = {};
 
+  public currentUser: User;
+
   public transferModel: any = {};
   public deleteModel: any = {};
 
-  public message: any = {};
   public modalMessage: any = {};
 
   public transferModal: ModalDirective;
@@ -28,8 +43,12 @@ export class SettingsApplicationsApplicationComponent implements OnInit {
   public resetModal: ModalDirective;
   public deleteModal: ModalDirective;
 
+  private subscriptions: Subscription[] = [];
+
   constructor(
-    public auth: LoopBackAuth,
+    private store: Store<IAppState>,
+    private alertActions: AlertActions,
+    private loopbackAuthActions: LoopbackAuthActions,
     private router: Router,
     private route: ActivatedRoute,
     private user: UserApi,
@@ -40,22 +59,34 @@ export class SettingsApplicationsApplicationComponent implements OnInit {
   }
 
   public ngOnInit() {
-    this.formModel = this.auth.getCurrentUserData().oAuthClientApplications.filter((app) => {
-      return app.id === this.route.snapshot.params['id'];
-    })[0];
+    this.subscriptions.push(this.store.let(getLoopbackAuthUser()).subscribe((currentUser: User) => {
+      if (!currentUser) { return; }
 
-    if (this.formModel.userId) {
-      this.owner = this.auth.getCurrentUserData();
-    } else if (this.formModel.organizationId) {
-      this.owner = this.auth.getCurrentUserData().organizations.filter((org) => {
-        return org.id === this.formModel.organizationId;
-      })[0];
-    }
-    this.cd.markForCheck();
+      this.currentUser = (<any> Object).assign({}, currentUser);
+
+      this.formModel =
+        (<any> Object).assign({}, currentUser.oAuthClientApplications.filter((app) => {
+          return app.id === this.route.snapshot.params['id'];
+        })[0]);
+
+      if (this.formModel.userId) {
+        this.owner = currentUser;
+      } else if (this.formModel.organizationId) {
+        this.owner = currentUser.organizations.filter((org) => {
+          return org.id === this.formModel.organizationId;
+        })[0];
+      }
+    }));
+  }
+
+  public ngOnDestroy() {
+    this.subscriptions.forEach((subscription) => {
+      subscription.unsubscribe();
+    });
   }
 
   public updateApp() {
-    this.user.createOAuthClientApplications(this.auth.getCurrentUserId(), {
+    this.user.createOAuthClientApplications(this.currentUser.id, {
       name: this.formModel.name,
       clientURI: this.formModel.clientURI,
       logoURI: this.formModel.logoURI,
@@ -64,37 +95,16 @@ export class SettingsApplicationsApplicationComponent implements OnInit {
     }).subscribe(
       (response: any) => {
         if (response.error) {
-          this.message = {
-            error: response.error_description
-          };
-
-          this.cd.markForCheck();
+          this.store.dispatch(this.alertActions.setAlert(response.error_description, 'error'));
         } else {
-
-          let token = this.auth.getToken();
-          token.user.oAuthClientApplications.push(response);
-          this.auth.setUser(token);
-          this.auth.save();
+          this.store.dispatch(this.loopbackAuthActions.updateUserProperties({
+            oAuthClientApplications: this.currentUser.oAuthClientApplications.push(response)
+          }));
 
           this.router.navigate(['/settings/applications/' + response.id]);
         }
       },
-      (error) => {
-        if (error.message === 'Unexpected token U in JSON at position 0') {
-          this.message = {
-            error: 'Unauthorized'
-          };
-        } else if (error === 'invalid_grant') {
-          this.message = {
-            error: 'Access token is expired'
-          };
-        } else {
-          this.message = {
-            error: error.message || error.error_description
-          };
-        }
-        this.cd.markForCheck();
-      }
+      (error) => this.store.dispatch(this.alertActions.setAlert(error.message, 'error'))
     );
   }
 

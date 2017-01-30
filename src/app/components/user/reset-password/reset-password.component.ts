@@ -1,8 +1,11 @@
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { Store } from '@ngrx/store';
 
-import { LoopBackAuth, UserApi } from 'shared/api';
+import { IAppState, AlertActions } from 'shared/ngrx';
+import { LoopbackAuthActions } from 'shared/api/actions';
+import { User, UserApi } from 'shared/api';
 
 @Component({
   selector: 'user.reset-password',
@@ -12,23 +15,23 @@ import { LoopBackAuth, UserApi } from 'shared/api';
 export class ResetPasswordComponent implements OnDestroy {
   public resetPasswordForm: FormGroup;
 
-  public message: any = {};
   public goto: string;
 
   public userId: string;
 
   constructor(
-    private auth: LoopBackAuth,
+    private store: Store<IAppState>,
+    private loopbackAuthActions: LoopbackAuthActions,
+    private alertActions: AlertActions,
     private user: UserApi,
     private fb: FormBuilder,
     private cd: ChangeDetectorRef,
-    private route: ActivatedRoute,
-    private router: Router
+    private route: ActivatedRoute
   ) {
     this.route.params.subscribe((params: any) => {
       this.userId = params.userId;
 
-      this.auth.setUser({
+      this.store.dispatch(this.loopbackAuthActions.setToken({
         id: params.token,
         ttl: 1000,
         issuedAt: new Date(),
@@ -36,7 +39,7 @@ export class ResetPasswordComponent implements OnDestroy {
         userId: params.userId,
         user: {},
         rememberMe: false
-      });
+      }));
     });
 
     this.resetPasswordForm = fb.group({
@@ -48,7 +51,7 @@ export class ResetPasswordComponent implements OnDestroy {
   }
 
   public ngOnDestroy() {
-    this.user.logout();
+    this.store.dispatch(this.loopbackAuthActions.clearToken());
   }
 
   public resetPassword() {
@@ -57,33 +60,13 @@ export class ResetPasswordComponent implements OnDestroy {
     }).subscribe(
       (response: any) => {
         if (response.error) {
-          this.message = {
-            error: response.error_description
-          };
-        } else {
-          this.message = {};
+          this.store.dispatch(this.alertActions.setAlert(response.error_description, 'error'));
         }
+
         this.goto = 'login';
         this.cd.markForCheck();
       },
-      (error) => {
-        if (error.message === 'Unexpected token U in JSON at position 0') {
-          this.message = {
-            error: 'Unauthorized'
-          };
-        } else if (error === 'invalid_grant') {
-          this.message = {
-            error: 'Access token is expired'
-          };
-
-          this.goto = 'recover';
-        } else {
-          this.message = {
-            error: error.message || error.error_description
-          };
-        }
-        this.cd.markForCheck();
-      }
+      (error) => this.store.dispatch(this.alertActions.setAlert(error.message, 'error'))
     );
   }
 

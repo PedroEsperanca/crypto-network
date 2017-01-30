@@ -3,10 +3,6 @@
 </div>
 
 <form (ngSubmit)="submitUpdate()" #profileForm="ngForm">
-  <div *ngIf="message.success" class="alert alert-success" role="alert">{{message.success | translate}}</div>
-  <div *ngIf="message.info" class="alert alert-info" role="alert">{{message.info | translate}}</div>
-  <div *ngIf="message.warning" class="alert alert-warning" role="alert">{{message.warning | translate}}</div>
-  <div *ngIf="message.error" class="alert alert-danger" role="alert">{{message.error | translate}}</div>
 
   <dl *ngIf="!config.settings.usePhotoUpload" class="profile-avatar pull-right">
     <img *ngIf="formModel.photoUrl" alt="@{{formModel.username || formModel.name}}" class="avatar" [src]="formModel.photoUrl">

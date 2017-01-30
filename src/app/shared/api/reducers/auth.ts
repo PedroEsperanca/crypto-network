@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs/Observable';
 import { createSelector } from 'reselect';
 import { Action } from '@ngrx/store';
 import { SDKToken } from '../models/BaseModels';
@@ -39,16 +40,37 @@ export function reducer(state = initialState, action: Action): SDKToken {
       return Object.assign({}, initialState);
     }
 
+    case LoopbackAuthActions.UPDATE_USER_PROPERTIES_SUCCESS: {
+      const userProperties: any = action.payload;
+      let updateState = Object.assign({}, state);
+
+      updateState.user = Object.assign(updateState.user, userProperties);
+
+      return updateState;
+    }
+
     default: {
       return state;
     }
   }
 }
 
-export const getLoopbackAuthState = (state: any) => state.loopbackAuth;
+export function getLoopbackAuthState() {
+  return (state$: Observable<any>) => state$
+    .select((s) => s.loopbackAuth);
+}
 
-export const getLoopbackAuthToken = (state: any) => state.loopbackAuth;
+export function getLoopbackAuthToken() {
+  return (state$: Observable<any>) => state$
+    .select((s) => s.loopbackAuth);
+}
 
-export const getLoopbackAuthUser = (state: any) => state.loopbackAuth.user;
+export function getLoopbackAuthUser() {
+  return (state$: Observable<any>) => state$
+    .select((s) => s.loopbackAuth.user);
+}
 
-export const getLoopbackAuthUserId = (state: any) => state.loopbackAuth.userId;
+export function getLoopbackAuthUserId() {
+  return (state$: Observable<any>) => state$
+    .select((s) => s.loopbackAuth.userId);
+}

@@ -1,9 +1,22 @@
+import 'rxjs/add/operator/let';
+import 'rxjs/add/operator/take';
+import 'rxjs/add/operator/last';
+import '@ngrx/core/add/operator/select';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef, Inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { ConfigService } from 'ng2-config';
 
-import { LoopBackAuth, UserApi } from 'shared/api';
+import {
+  SDKToken,
+  LoopBackAuth,
+  UserApi,
+  LoopbackAuthActions,
+  getLoopbackAuthToken
+} from 'shared/api';
+import { IAppState, AlertActions } from 'shared/ngrx';
 import { SDKStorage } from 'shared/api/storage/storage.swaps';
 
 interface FormI {
@@ -22,9 +35,11 @@ export class VerifyComponent {
   };
 
   public confirming: boolean = false;
-  public message: any = {};
 
   constructor(
+    private store: Store<IAppState>,
+    private alertActions: AlertActions,
+    private loopbackAuthActions: LoopbackAuthActions,
     private configService: ConfigService,
     private auth: LoopBackAuth,
     private user: UserApi,
@@ -58,15 +73,12 @@ export class VerifyComponent {
 
   public confirm() {
     this.confirming = true;
-    this.message = {};
     this.cd.markForCheck();
 
     this.user.confirm(this.auth.getCurrentUserId(), this.formModel.token).subscribe(
       (response: any) => {
         if (response.error) {
-          this.message = {
-            error: response.error_description
-          };
+          this.store.dispatch(this.alertActions.setAlert(response.error_description, 'error'));
           this.confirming = false;
           this.cd.markForCheck();
         } else {
@@ -76,35 +88,15 @@ export class VerifyComponent {
             console.error('Cannot access local/session storage:', err);
           }
 
-          let currentToken = this.auth.getToken();
-          currentToken.user.emailVerified = true;
-          this.auth.setUser(currentToken);
-          this.auth.setRememberMe(true);
-          this.auth.save();
+          // TODO: make sure this is working for multiple Emails/Phones
+          this.store.dispatch(this.loopbackAuthActions.updateUserProperties({
+            emailVerified: true
+          }));
 
-          setTimeout(() => {
-            this.router.navigate(['/apps']);
-          });
+          this.router.navigate(['/apps']);
         }
       },
-      (error) => {
-        if (error.message === 'Unexpected token U in JSON at position 0') {
-          this.message = {
-            error: 'Unauthorized'
-          };
-        } else if (error === 'invalid_grant') {
-          this.message = {
-            error: 'Access token is expired'
-          };
-        } else {
-          this.message = {
-            error: error.message || error.error_description
-          };
-        }
-
-        this.confirming = false;
-        this.cd.markForCheck();
-      }
+      (error) => this.store.dispatch(this.alertActions.setAlert(error.message, 'error'))
     );
   }
 
@@ -129,32 +121,12 @@ export class VerifyComponent {
     this.user.sendVerificationCode(this.auth.getCurrentUserId(), data).subscribe(
       (response: any) => {
         if (response.error) {
-          this.message = {
-            error: response.error_description
-          };
+          this.store.dispatch(this.alertActions.setAlert(response.error_description, 'error'));
         } else {
-          this.message = {
-            info: 'New email sent!'
-          };
+          this.store.dispatch(this.alertActions.setAlert('New email sent!', 'info'));
         }
-        this.cd.markForCheck();
       },
-      (error) => {
-        if (error.message === 'Unexpected token U in JSON at position 0') {
-          this.message = {
-            error: 'Unauthorized'
-          };
-        } else if (error === 'invalid_grant') {
-          this.message = {
-            error: 'Access token is expired'
-          };
-        } else {
-          this.message = {
-            error: error.message || error.error_description
-          };
-        }
-        this.cd.markForCheck();
-      }
+      (error) => this.store.dispatch(this.alertActions.setAlert(error.message, 'error'))
     );
   }
 }

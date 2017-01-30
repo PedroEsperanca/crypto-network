@@ -1,9 +1,17 @@
-import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
+import { Store } from '@ngrx/store';
+import { Component, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ConfigService } from 'ng2-config';
 
-import { UserApi, LoopBackAuth } from 'shared/api';
+import {
+  User,
+  UserApi,
+  LoopbackAuthActions,
+  getLoopbackAuthUser
+} from 'shared/api';
+import { IAppState, AlertActions } from 'shared/ngrx';
 
 interface FormI {
   name: string;
@@ -20,7 +28,7 @@ interface FormI {
   templateUrl: './new.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SettingsApplicationsNewComponent {
+export class SettingsApplicationsNewComponent implements OnDestroy {
   public config: any;
   public formModel: FormI = {
     name: '',
@@ -31,20 +39,34 @@ export class SettingsApplicationsNewComponent {
     redirectURIs: ''
   };
 
-  public message: any = {};
+  public currenUser: User;
+
+  private subscriptions: Subscription[] = [];
 
   constructor(
-    public auth: LoopBackAuth,
+    private store: Store<IAppState>,
+    private alertActions: AlertActions,
+    private loopbackAuthActions: LoopbackAuthActions,
     private router: Router,
     private user: UserApi,
-    private configService: ConfigService,
-    private cd: ChangeDetectorRef,
+    private configService: ConfigService
   ) {
     this.config = this.configService.getSettings();
+
+    this.subscriptions.push(this.store.let(getLoopbackAuthUser()).subscribe((currentUser: User) => {
+      if (!currentUser) { return; }
+      this.currenUser = (<any> Object).assign({}, currentUser);
+    }));
+  }
+
+  public ngOnDestroy() {
+    this.subscriptions.forEach((subscription) => {
+      subscription.unsubscribe();
+    });
   }
 
   public newApp() {
-    this.user.createOAuthClientApplications(this.auth.getCurrentUserId(), {
+    this.user.createOAuthClientApplications(this.currenUser.id, {
       name: this.formModel.name,
       clientURI: this.formModel.clientURI,
       logoURI: this.formModel.logoURI,
@@ -53,37 +75,16 @@ export class SettingsApplicationsNewComponent {
     }).subscribe(
       (response: any) => {
         if (response.error) {
-          this.message = {
-            error: response.error_description
-          };
-
-          this.cd.markForCheck();
+          this.store.dispatch(this.alertActions.setAlert(response.error_description, 'error'));
         } else {
-
-          let token = this.auth.getToken();
-          token.user.oAuthClientApplications.push(response);
-          this.auth.setUser(token);
-          this.auth.save();
+          this.store.dispatch(this.loopbackAuthActions.updateUserProperties({
+            oAuthClientApplications: this.currenUser.oAuthClientApplications.push(response)
+          }));
 
           this.router.navigate(['/settings/applications/' + response.id]);
         }
       },
-      (error) => {
-        if (error.message === 'Unexpected token U in JSON at position 0') {
-          this.message = {
-            error: 'Unauthorized'
-          };
-        } else if (error === 'invalid_grant') {
-          this.message = {
-            error: 'Access token is expired'
-          };
-        } else {
-          this.message = {
-            error: error.message || error.error_description
-          };
-        }
-        this.cd.markForCheck();
-      }
+      (error) => this.store.dispatch(this.alertActions.setAlert(error.message, 'error'))
     );
   }
 }

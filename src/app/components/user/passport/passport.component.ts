@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 
 import { IAppState } from 'shared/ngrx';
 import { LoopbackAuthActions } from 'shared/api/actions';
-import { LoopBackAuth, User, UserApi } from 'shared/api';
+import { User, UserApi } from 'shared/api';
 
 @Component({
   selector: 'user.login',
@@ -16,7 +16,6 @@ export class PassportComponent {
   constructor(
     private store: Store<IAppState>,
     private loopbackAuthActions: LoopbackAuthActions,
-    private auth: LoopBackAuth,
     private user: UserApi,
     private route: ActivatedRoute,
     private router: Router

@@ -37,6 +37,16 @@ export class AppEffects {
       }
     });
 
+  @Effect()
+  public logoutSuccess$ = this.actions$
+    .ofType(UserActions.LOGOUT_SUCCESS)
+    .map(() => go(['/']));
+
+  @Effect()
+  public logoutFail$ = this.actions$
+    .ofType(UserActions.LOGOUT_FAIL)
+    .map(() => go(['/']));
+
   constructor(
     private actions$: Actions,
     private appActions: AppActions,

@@ -1,9 +1,13 @@
+import 'rxjs/add/operator/let';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { ConfigService } from 'ng2-config';
 
-import { LoopBackAuth, User, UserApi } from 'shared/api';
+import { SDKToken, User, getLoopbackAuthToken, getLoopbackAuthUser } from 'shared/api';
+import { IAppState } from 'shared/ngrx';
+import { UserActions } from 'shared/api/actions';
 
 @Component({
   selector: 'user-menu',
@@ -13,28 +17,20 @@ import { LoopBackAuth, User, UserApi } from 'shared/api';
 })
 export class UserMenuComponent {
   public config: any;
-  public currentUser: User;
+  public currentToken$: Observable<SDKToken>;
+  public currentUser$: Observable<User>;
 
   constructor(
-    public auth: LoopBackAuth,
+    private store: Store<IAppState>,
     private configService: ConfigService,
-    private router: Router,
-    private user: UserApi
+    private userActions: UserActions
   ) {
     this.config = this.configService.getSettings();
-    this.currentUser = this.auth.getCurrentUserData();
+    this.currentToken$ = store.let(getLoopbackAuthToken());
+    this.currentUser$ = store.let(getLoopbackAuthUser());
   }
 
   public logout() {
-    this.user.logout().subscribe(
-      (response) => {
-        this.auth.clear();
-        this.router.navigate(['/']);
-      },
-      () => {
-        this.auth.clear();
-        this.router.navigate(['/']);
-      }
-    );
+    this.store.dispatch(this.userActions.logout());
   }
 }

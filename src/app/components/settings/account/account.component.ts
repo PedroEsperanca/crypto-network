@@ -1,9 +1,20 @@
-import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
+import { Store } from '@ngrx/store';
+import { Component, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 import { ConfigService } from 'ng2-config';
 
-import { LoopBackAuth, User, UserApi, LoopBackConfig } from 'shared/api';
+import {
+  SDKToken,
+  User,
+  LoopBackAuth,
+  UserApi,
+  LoopBackConfig,
+  LoopbackAuthActions,
+  getLoopbackAuthToken
+} from 'shared/api';
+import { IAppState, AlertActions } from 'shared/ngrx';
 
 @Component({
   selector: 'settingsAccount',
@@ -11,24 +22,32 @@ import { LoopBackAuth, User, UserApi, LoopBackConfig } from 'shared/api';
   templateUrl: './account.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SettingsAccountComponent {
+export class SettingsAccountComponent implements OnDestroy {
   public config: any;
   public resetPasswordForm: FormGroup;
+
+  public currentToken: SDKToken;
   public currenUser: User;
 
-  public message: any = {};
-
-  public userId: string;
+  private subscriptions: Subscription[] = [];
 
   constructor(
+    private store: Store<IAppState>,
+    private alertActions: AlertActions,
+    private loopbackAuthActions: LoopbackAuthActions,
     private configService: ConfigService,
     private auth: LoopBackAuth,
     private user: UserApi,
-    private fb: FormBuilder,
-    private cd: ChangeDetectorRef
+    private fb: FormBuilder
   ) {
     this.config = this.configService.getSettings();
-    this.currenUser = this.auth.getCurrentUserData();
+
+    this.subscriptions.push(this.store.let(getLoopbackAuthToken()).subscribe((token: SDKToken) => {
+      if (!token) { return; }
+
+      this.currentToken = (<any> Object).assign({}, token);
+      this.currenUser = (<any> Object).assign({}, token.user);
+    }));
 
     this.resetPasswordForm = fb.group({
       password: ['', this.passwordComplexity],
@@ -38,44 +57,28 @@ export class SettingsAccountComponent {
     });
   }
 
-  public resetPassword() {
-    this.message = {};
+  public ngOnDestroy() {
+    this.subscriptions.forEach((subscription) => {
+      subscription.unsubscribe();
+    });
+  }
 
-    this.user.updateAttributes(this.userId, {
+  public resetPassword() {
+    this.user.updateAttributes(this.currenUser.id, {
       password: this.resetPasswordForm.controls['password'].value
     }).subscribe(
       (response: any) => {
         if (response.error) {
-          this.message = {
-            error: response.error_description
-          };
-        } else {
-          this.message = {};
+          this.store.dispatch(this.alertActions.setAlert(response.error_description, 'error'));
         }
-        this.cd.markForCheck();
       },
-      (error) => {
-        if (error.message === 'Unexpected token U in JSON at position 0') {
-          this.message = {
-            error: 'Unauthorized'
-          };
-        } else if (error === 'invalid_grant') {
-          this.message = {
-            error: 'Access token is expired'
-          };
-        } else {
-          this.message = {
-            error: error.message || error.error_description
-          };
-        }
-        this.cd.markForCheck();
-      }
+      (error) => this.store.dispatch(this.alertActions.setAlert(error.message, 'error'))
     );
   }
 
   public goTo(provider: string) {
     window.location.href = LoopBackConfig.getPath() + provider +
-      '?access_token=' + this.auth.getToken().id;
+      '?access_token=' + this.currentToken.id;
   }
 
   public isLinked(provider: string): boolean {
@@ -85,8 +88,6 @@ export class SettingsAccountComponent {
   }
 
   public unlink(provider: string) {
-    this.message = {};
-
     const identityId: string = this.currenUser.identities.filter((entity: any) => {
       return entity.provider === provider;
     })[0].id;
@@ -100,29 +101,11 @@ export class SettingsAccountComponent {
           }
         }
 
-        let token = this.auth.getToken();
-        token.user = this.currenUser;
-        this.auth.setUser(token);
-        this.auth.save();
-
-        this.cd.markForCheck();
+        this.store.dispatch(this.loopbackAuthActions.updateUserProperties({
+          identities: this.currenUser.identities
+        }));
       },
-      (error) => {
-        if (error.message === 'Unexpected token U in JSON at position 0') {
-          this.message = {
-            error: 'Unauthorized'
-          };
-        } else if (error === 'invalid_grant') {
-          this.message = {
-            error: 'Access token is expired'
-          };
-        } else {
-          this.message = {
-            error: error.message || error.error_description
-          };
-        }
-        this.cd.markForCheck();
-      }
+      (error) => this.store.dispatch(this.alertActions.setAlert(error.message, 'error'))
     );
   }
 

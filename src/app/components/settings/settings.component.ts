@@ -1,12 +1,19 @@
 import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 import { ConfigService } from 'ng2-config';
 
-import { LoopBackAuth, OrganizationInterface } from 'shared/api';
-import { LoopBackFilter } from 'shared/api/models';
+import {
+  SDKToken,
+  User,
+  OrganizationInterface,
+  LoopBackFilter,
+  LoopBackAuth,
+  getLoopbackAuthUser
+} from 'shared/api';
 import {
   IAppState,
   getOrganizationsState,
@@ -19,9 +26,13 @@ import {
   templateUrl: './settings.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SettingsComponent {
+export class SettingsComponent implements OnDestroy {
   public config: any;
   public organizations$: Observable<OrganizationInterface[]>;
+
+  private subscriptions: Subscription[] = [];
+
+  private needToVerifyEmail: boolean = false;
 
   constructor(
     public auth: LoopBackAuth,
@@ -32,11 +43,23 @@ export class SettingsComponent {
 
     this.organizations$ = store.let(getOrganizationsState())
       .switchMap((organizations) => store.let(getOrganizations(organizations.ids)));
+
+    this.subscriptions.push(this.store.let(getLoopbackAuthUser()).subscribe((user: User) => {
+      if (!user) { return; }
+
+      if (typeof user.emailAddresses !== 'undefined') {
+        this.needToVerifyEmail = user.emailAddresses.filter((email: any) => {
+          return !email.verified;
+        }).length > 0;
+      } else {
+        this.needToVerifyEmail = !user.emailVerified;
+      }
+    }));
   }
 
-  public needToVerifyEmail(): boolean {
-    return this.auth.getCurrentUserData().emailAddresses.filter((email: any) => {
-      return !email.verified;
-    }).length > 0;
+  public ngOnDestroy() {
+    this.subscriptions.forEach((subscription) => {
+      subscription.unsubscribe();
+    });
   }
 }

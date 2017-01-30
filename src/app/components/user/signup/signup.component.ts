@@ -1,11 +1,12 @@
-import { Component, ChangeDetectionStrategy, Inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 import { ConfigService } from 'ng2-config';
 
-import { UserApi, LoopBackAuth, LoopBackConfig } from 'shared/api';
-import { SDKStorage } from 'shared/api/storage/storage.swaps';
+import { UserApi, LoopBackConfig } from 'shared/api';
+import { IAppState, AlertActions } from 'shared/ngrx';
+import { UserActions } from 'shared/api/actions';
 
 @Component({
   selector: 'user.signup',
@@ -15,23 +16,16 @@ import { SDKStorage } from 'shared/api/storage/storage.swaps';
 export class SignupComponent {
   public config: any;
   public registerForm: FormGroup;
-  public emailVerificationToken: string;
 
   constructor(
+    private store: Store<IAppState>,
     private configService: ConfigService,
-    private auth: LoopBackAuth,
-    private router: Router,
+    private userActions: UserActions,
+    private alertActions: AlertActions,
     private user: UserApi,
-    private fb: FormBuilder,
-    @Inject(SDKStorage) protected storage: SDKStorage
+    private fb: FormBuilder
   ) {
     this.config = this.configService.getSettings();
-
-    try {
-      this.emailVerificationToken = this.storage.get(`$LoopBackSDK$emailVerificationToken`);
-    } catch (err) {
-      console.error('Cannot access local/session storage:', err);
-    }
 
     this.registerForm = fb.group({
       name: '',
@@ -48,12 +42,13 @@ export class SignupComponent {
     }).subscribe(
       (response) => {
         this.login();
-      }
+      },
+      (error) => this.store.dispatch(this.alertActions.setAlert(error.message, 'error'))
     );
   }
 
   public login() {
-    this.user.login({
+    this.store.dispatch(this.userActions.login({
       email: this.registerForm.controls['email'].value,
       password: this.registerForm.controls['password'].value
     }, [
@@ -61,21 +56,7 @@ export class SignupComponent {
       'user.oAuthClientApplications',
       'user.identities',
       'user.organizations'
-    ]).subscribe(
-      (response) => {
-        let currentUser = this.auth.getCurrentUserData();
-
-        /*if (currentUser && currentUser.twoSetAuthentication) {
-          this.router.navigate(['/user/two-step-authentication']);
-        }*/
-
-        if (this.emailVerificationToken) {
-          this.router.navigate(['/user/verify-email/' + this.emailVerificationToken]);
-        } else {
-          this.router.navigate(['/' + currentUser.id]);
-        }
-      }
-    );
+    ]));
   }
 
   public goTo(provider: string) {

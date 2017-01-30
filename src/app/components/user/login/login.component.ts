@@ -6,7 +6,6 @@ import { ConfigService } from 'ng2-config';
 import { UserInterface, LoopBackConfig } from 'shared/api';
 import { IAppState } from 'shared/ngrx';
 import { UserActions } from 'shared/api/actions';
-import { SDKStorage } from 'shared/api/storage/storage.swaps';
 
 @Component({
   selector: 'user.login',

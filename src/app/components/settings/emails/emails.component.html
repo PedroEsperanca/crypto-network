@@ -2,11 +2,6 @@
   <h2 class="Subhead-heading">{{'Email' | translate}}</h2>
 </div>
 
-<div *ngIf="message.success" class="alert alert-success" role="alert">{{message.success | translate}}</div>
-<div *ngIf="message.info" class="alert alert-info" role="alert">{{message.info | translate}}</div>
-<div *ngIf="message.warning" class="alert alert-warning" role="alert">{{message.warning | translate}}</div>
-<div *ngIf="message.error" class="alert alert-danger" role="alert">{{message.error | translate}}</div>
-
 <p *ngIf="config.settings.multipleEmailsAndPhones">{{'Your' | translate}} <strong>{{'primary email address' | translate}}</strong> {{'will be used for account-related notifications (e.g. account changes and billing receipts) as well as any web-based operations.' | translate}}</p>
 
 <ul *ngIf="config.settings.multipleEmailsAndPhones" id="settings-emails" class="Box list-style-none">

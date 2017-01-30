@@ -1,8 +1,16 @@
-import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
+import { Store } from '@ngrx/store';
+import { Component, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 
 import { ConfigService } from 'ng2-config';
 
-import { User, UserApi, LoopBackAuth } from 'shared/api';
+import {
+  User,
+  UserApi,
+  LoopbackAuthActions,
+  getLoopbackAuthUser
+} from 'shared/api';
+import { IAppState, AlertActions } from 'shared/ngrx';
 
 @Component({
   selector: 'settingsProfile',
@@ -10,114 +18,87 @@ import { User, UserApi, LoopBackAuth } from 'shared/api';
   templateUrl: './profile.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SettingsProfileComponent {
+export class SettingsProfileComponent implements OnDestroy {
   public config: any;
   public formModel: User;
+  public getCurrentUserId: string;
 
-  public message: any = {};
+  private subscriptions: Subscription[] = [];
 
   constructor(
-    public auth: LoopBackAuth,
+    private store: Store<IAppState>,
+    private alertActions: AlertActions,
+    private loopbackAuthActions: LoopbackAuthActions,
     private user: UserApi,
-    private configService: ConfigService,
-    private cd: ChangeDetectorRef
+    private configService: ConfigService
   ) {
     this.config = this.configService.getSettings();
-    this.formModel = this.auth.getCurrentUserData();
-    console.log(this.auth.getCurrentUserData());
+
+    this.subscriptions.push(this.store.let(getLoopbackAuthUser()).subscribe((currentUser: User) => {
+      if (!currentUser) { return; }
+
+      this.formModel = (<any> Object).assign({}, currentUser);
+      this.getCurrentUserId = currentUser.id;
+    }));
+
     this.fileNameRewrite = this.fileNameRewrite.bind(this);
     this.getUploadUrl = this.getUploadUrl.bind(this);
     this.onUploadComplete = this.onUploadComplete.bind(this);
   }
 
+  public ngOnDestroy() {
+    this.subscriptions.forEach((subscription) => {
+      subscription.unsubscribe();
+    });
+  }
+
   public submitUpdate() {
-    this.user.patchAttributes(this.auth.getCurrentUserId(), {
+    this.user.patchAttributes(this.getCurrentUserId, {
       name: this.formModel.name,
       photoUrl: this.formModel.photoUrl,
       username: this.formModel.username || null
     }).subscribe(
       (response: any) => {
         if (response.error) {
-          this.message = {
-            error: response.error_description
-          };
+          this.store.dispatch(this.alertActions.setAlert(response.error_description, 'error'));
         } else {
-          this.message = {
-            info: 'Profile updated successfully'
-          };
+          this.store.dispatch(this.alertActions.setAlert('Profile updated successfully', 'info'));
 
-          let token = this.auth.getToken();
-          token.user = Object.assign(token.user, response);
-          this.formModel = token.user;
-          this.auth.setUser(token);
-          this.auth.save();
+          this.store.dispatch(this.loopbackAuthActions.updateUserProperties({
+            name: response.name,
+            photoUrl: response.photoUrl,
+            username: response.username || null
+          }));
         }
-        this.cd.markForCheck();
       },
-      (error) => {
-        if (error.message === 'Unexpected token U in JSON at position 0') {
-          this.message = {
-            error: 'Unauthorized'
-          };
-        } else if (error === 'invalid_grant') {
-          this.message = {
-            error: 'Access token is expired'
-          };
-        } else {
-          this.message = {
-            error: error.message || error.error_description
-          };
-        }
-        this.cd.markForCheck();
-      }
+      (error) => this.store.dispatch(this.alertActions.setAlert(error.message, 'error'))
     );
   }
 
   public fileNameRewrite(fileName: string): string {
-    return 'user/' + this.auth.getCurrentUserId() + '/avatar';
+    return 'user/' + this.getCurrentUserId + '/avatar';
   }
 
   public getUploadUrl(fileName: string, fileType: string, options: any = {}) {
     options.fileType = fileType;
-    return this.user.s3PUTSignedUrl(this.auth.getCurrentUserId(), fileName, options);
+    return this.user.s3PUTSignedUrl(this.getCurrentUserId, fileName, options);
   }
 
   public onUploadComplete(item: any) {
-    this.user.updateS3Photo(this.auth.getCurrentUserId(), {
+    this.user.updateS3Photo(this.getCurrentUserId, {
       url: item.url.split('?')[0],
       key: item.file.name
     }).subscribe(
       (response: any) => {
         if (response.error) {
-          this.message = {
-            error: response.error_description
-          };
+          this.store.dispatch(this.alertActions.setAlert(response.error_description, 'error'));
         } else {
-
-          let token = this.auth.getToken();
-          token.user.photo = response;
-          this.formModel = token.user;
-          this.auth.setUser(token);
-          this.auth.save();
+          this.store.dispatch(this.loopbackAuthActions.updateUserProperties({
+            photo: response
+          }));
         }
-        this.cd.markForCheck();
       },
-      (error) => {
-        if (error.message === 'Unexpected token U in JSON at position 0') {
-          this.message = {
-            error: 'Unauthorized'
-          };
-        } else if (error === 'invalid_grant') {
-          this.message = {
-            error: 'Access token is expired'
-          };
-        } else {
-          this.message = {
-            error: error.message || error.error_description
-          };
-        }
-        this.cd.markForCheck();
-      }
+      (error) => this.store.dispatch(this.alertActions.setAlert(error.message, 'error'))
     );
   }
 }

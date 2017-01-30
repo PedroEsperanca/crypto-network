@@ -9,8 +9,11 @@ export class LoopbackAuthActions {
   public static LOAD_TOKEN_FAIL = '[Auth] Load token from storage into store fail';
   public static SET_TOKEN = '[Auth] Set token in store';
   public static SET_TOKEN_SUCCESS = '[Auth] Set token in store success';
+  public static CLEAR_TOKEN = '[Auth] Clear token in store';
   public static SET_USER = '[Auth] Set user in store';
   public static SET_USER_SUCCESS = '[Auth] Set user in store success';
+  public static UPDATE_USER_PROPERTIES = '[Auth] Update user properties in store';
+  public static UPDATE_USER_PROPERTIES_SUCCESS = '[Auth] Update user properties in store success';
 
   public loadToken(): Action {
     return {
@@ -46,6 +49,12 @@ export class LoopbackAuthActions {
     };
   }
 
+  public clearToken(): Action {
+    return {
+      type: LoopbackAuthActions.CLEAR_TOKEN
+    };
+  }
+
   public setUser(user: any): Action {
     return {
       type: LoopbackAuthActions.SET_USER,
@@ -57,6 +66,20 @@ export class LoopbackAuthActions {
     return {
       type: LoopbackAuthActions.SET_USER_SUCCESS,
       payload: user
+    };
+  }
+
+  public updateUserProperties(userProperties: any): Action {
+    return {
+      type: LoopbackAuthActions.UPDATE_USER_PROPERTIES,
+      payload: userProperties
+    };
+  }
+
+  public updateUserPropertiesSuccess(userProperties: any): Action {
+    return {
+      type: LoopbackAuthActions.UPDATE_USER_PROPERTIES_SUCCESS,
+      payload: userProperties
     };
   }
 }

@@ -5,11 +5,6 @@
 
 		<p>{{'If you have forgotten your password, we will send you an email to reset your password.' | translate}}</p>
 
-		<div *ngIf="message.success" class="alert alert-success" role="alert">{{message.success | translate}}</div>
-		<div *ngIf="message.info" class="alert alert-info" role="alert">{{message.info | translate}}</div>
-		<div *ngIf="message.warning" class="alert alert-warning" role="alert">{{message.warning | translate}}</div>
-		<div *ngIf="message.error" class="alert alert-danger" role="alert">{{message.error | translate}}</div>
-
 		<input [(ngModel)]="formModel.email" name="email-recover" class="form-control" type="email" placeholder="{{'Account email address' | translate}}" required="true"/>
 		<br>
 
