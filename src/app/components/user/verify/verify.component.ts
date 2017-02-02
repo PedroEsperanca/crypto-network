@@ -38,8 +38,6 @@ export class VerifyComponent {
 
   constructor(
     private store: Store<IAppState>,
-    private alertActions: AlertActions,
-    private loopbackAuthActions: LoopbackAuthActions,
     private configService: ConfigService,
     private auth: LoopBackAuth,
     private user: UserApi,
@@ -78,7 +76,10 @@ export class VerifyComponent {
     this.user.confirm(this.auth.getCurrentUserId(), this.formModel.token).subscribe(
       (response: any) => {
         if (response.error) {
-          this.store.dispatch(this.alertActions.setAlert(response.error_description, 'error'));
+          this.store.dispatch(new AlertActions.setAlert({
+            message: response.error_description,
+            type: 'error'
+          }));
           this.confirming = false;
           this.cd.markForCheck();
         } else {
@@ -89,14 +90,17 @@ export class VerifyComponent {
           }
 
           // TODO: make sure this is working for multiple Emails/Phones
-          this.store.dispatch(this.loopbackAuthActions.updateUserProperties({
+          this.store.dispatch(new LoopbackAuthActions.updateUserProperties({
             emailVerified: true
           }));
 
           this.router.navigate(['/apps']);
         }
       },
-      (error) => this.store.dispatch(this.alertActions.setAlert(error.message, 'error'))
+      (error) => this.store.dispatch(new AlertActions.setAlert({
+        message: error.message,
+        type: 'error'
+      }))
     );
   }
 
@@ -121,12 +125,21 @@ export class VerifyComponent {
     this.user.sendVerificationCode(this.auth.getCurrentUserId(), data).subscribe(
       (response: any) => {
         if (response.error) {
-          this.store.dispatch(this.alertActions.setAlert(response.error_description, 'error'));
+          this.store.dispatch(new AlertActions.setAlert({
+            message: response.error_description,
+            type: 'error'
+          }));
         } else {
-          this.store.dispatch(this.alertActions.setAlert('New email sent!', 'info'));
+          this.store.dispatch(new AlertActions.setAlert({
+            message: 'New email sent!',
+            type: 'info'
+          }));
         }
       },
-      (error) => this.store.dispatch(this.alertActions.setAlert(error.message, 'error'))
+      (error) => this.store.dispatch(new AlertActions.setAlert({
+        message: error.message,
+        type: 'error'
+      }))
     );
   }
 }

@@ -1,16 +1,16 @@
 /* tslint:disable */
-import { LoopbackAuthActions } from './auth';
-import { ErrorActions } from './error';
-import { UserActions } from './user';
+import { LoopbackAuthActionTypes, LoopbackAuthActions } from './auth';
+import { LoopbackErrorActionTypes, LoopbackErrorActions } from './error';
+import { UserActionTypes, UserActions } from './user';
 
 export {
-  LoopbackAuthActions,
-  ErrorActions,
-  UserActions
+  LoopbackAuthActionTypes, LoopbackAuthActions,
+  LoopbackErrorActionTypes, LoopbackErrorActions,
+  UserActionTypes, UserActions,
 };
 
 export const LOOPBACK_ACTIONS: any[] = [
   LoopbackAuthActions,
-  ErrorActions,
-  UserActions
+  LoopbackErrorActions,
+  UserActions,
 ];

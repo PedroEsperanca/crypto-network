@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { ConfigService } from 'ng2-config';
 
 import { UserApi, LoopBackConfig } from 'shared/api';
-import { IAppState, AlertActions } from 'shared/ngrx';
+import { IAppState } from 'shared/ngrx';
 import { UserActions } from 'shared/api/actions';
 
 @Component({
@@ -20,8 +20,6 @@ export class SignupComponent {
   constructor(
     private store: Store<IAppState>,
     private configService: ConfigService,
-    private userActions: UserActions,
-    private alertActions: AlertActions,
     private user: UserApi,
     private fb: FormBuilder
   ) {
@@ -35,28 +33,11 @@ export class SignupComponent {
   }
 
   public signup() {
-    this.user.create({
+    this.store.dispatch(new UserActions.signup({
       name: this.registerForm.controls['name'].value,
       email: this.registerForm.controls['email'].value,
       password: this.registerForm.controls['password'].value
-    }).subscribe(
-      (response) => {
-        this.login();
-      },
-      (error) => this.store.dispatch(this.alertActions.setAlert(error.message, 'error'))
-    );
-  }
-
-  public login() {
-    this.store.dispatch(this.userActions.login({
-      email: this.registerForm.controls['email'].value,
-      password: this.registerForm.controls['password'].value
-    }, [
-      'user',
-      'user.oAuthClientApplications',
-      'user.identities',
-      'user.organizations'
-    ]));
+    }));
   }
 
   public goTo(provider: string) {

@@ -30,9 +30,9 @@ export class SettingsComponent implements OnDestroy {
   public config: any;
   public organizations$: Observable<OrganizationInterface[]>;
 
-  private subscriptions: Subscription[] = [];
+  public needToVerifyEmail: boolean = false;
 
-  private needToVerifyEmail: boolean = false;
+  private subscriptions: Subscription[] = [];
 
   constructor(
     public auth: LoopBackAuth,

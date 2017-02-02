@@ -21,19 +21,21 @@ export class LoginComponent {
 
   constructor(
     private store: Store<IAppState>,
-    private configService: ConfigService,
-    private userActions: UserActions
+    private configService: ConfigService
   ) {
     this.config = this.configService.getSettings();
   }
 
   public login() {
-    this.store.dispatch(this.userActions.login(this.formModel, [
-      'user',
-      'user.oAuthClientApplications',
-      'user.identities',
-      'user.organizations'
-    ]));
+    this.store.dispatch(new UserActions.login({
+      credentials: this.formModel,
+      include: [
+        'user',
+        'user.oAuthClientApplications',
+        'user.identities',
+        'user.organizations'
+      ]
+    }));
   }
 
   public goTo(provider: string) {

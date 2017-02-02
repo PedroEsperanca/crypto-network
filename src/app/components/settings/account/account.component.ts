@@ -10,6 +10,7 @@ import {
   User,
   LoopBackAuth,
   UserApi,
+  UserActions,
   LoopBackConfig,
   LoopbackAuthActions,
   getLoopbackAuthToken
@@ -33,8 +34,6 @@ export class SettingsAccountComponent implements OnDestroy {
 
   constructor(
     private store: Store<IAppState>,
-    private alertActions: AlertActions,
-    private loopbackAuthActions: LoopbackAuthActions,
     private configService: ConfigService,
     private auth: LoopBackAuth,
     private user: UserApi,
@@ -64,16 +63,12 @@ export class SettingsAccountComponent implements OnDestroy {
   }
 
   public resetPassword() {
-    this.user.updateAttributes(this.currenUser.id, {
-      password: this.resetPasswordForm.controls['password'].value
-    }).subscribe(
-      (response: any) => {
-        if (response.error) {
-          this.store.dispatch(this.alertActions.setAlert(response.error_description, 'error'));
-        }
-      },
-      (error) => this.store.dispatch(this.alertActions.setAlert(error.message, 'error'))
-    );
+    this.store.dispatch(new UserActions.updateAttributes({
+      id: this.currenUser.id,
+      data: {
+        password: this.resetPasswordForm.controls['password'].value
+      }
+    }));
   }
 
   public goTo(provider: string) {
@@ -101,11 +96,14 @@ export class SettingsAccountComponent implements OnDestroy {
           }
         }
 
-        this.store.dispatch(this.loopbackAuthActions.updateUserProperties({
+        this.store.dispatch(new LoopbackAuthActions.updateUserProperties({
           identities: this.currenUser.identities
         }));
       },
-      (error) => this.store.dispatch(this.alertActions.setAlert(error.message, 'error'))
+      (error) => this.store.dispatch(new AlertActions.setAlert({
+        message: error.message,
+        type: 'error'
+      }))
     );
   }
 

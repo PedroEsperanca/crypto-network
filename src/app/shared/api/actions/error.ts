@@ -1,15 +1,29 @@
-import { Injectable } from '@angular/core';
+/* tslint:disable */
 import { Action } from '@ngrx/store';
-import { SDKToken } from '../models/BaseModels';
+import { type } from '../util';
 
-@Injectable()
-export class ErrorActions {
-  public static ERROR = '[ERROR] Error';
+/**
+ * @module LoopbackErrorActionTypes
+ * @author João Ribeiro <@JonnyBGod> <github:JonnyBGod>
+ * @license MIT
+ * @description
+ * Provides with a LoopBack error action types to centralize error message handling.
+ */
+export const LoopbackErrorActionTypes = {
+  ERROR: type('[LoopbackError] Error'),
+};
 
-  public error(error: any): Action {
-    return {
-      type: ErrorActions.ERROR,
-      payload: error
-    };
+/**
+ * @module LoopbackErrorActions
+ * @author João Ribeiro <@JonnyBGod> <github:JonnyBGod>
+ * @license MIT
+ * @description
+ * Provides with a LoopBack error actions to centralize error message handling.
+ */
+export const LoopbackErrorActions = {
+  error: class implements Action {
+    public type = LoopbackErrorActionTypes.ERROR;
+
+    constructor(public payload: any) { }
   }
-}
+};

@@ -1,9 +1,11 @@
+/* tslint:disable */
 import { Observable } from 'rxjs/Observable';
 import { createSelector } from 'reselect';
 import { Action } from '@ngrx/store';
 import { SDKToken } from '../models/BaseModels';
-import { LoopbackAuthActions } from '../actions/auth';
-import { UserActions } from '../actions/user';
+import { User } from '../models/user';
+import { LoopbackAuthActionTypes } from '../actions/auth';
+import { UserActionTypes } from '../actions/user';
 
 const initialState: SDKToken = {
   id: null,
@@ -15,17 +17,24 @@ const initialState: SDKToken = {
   rememberMe: null
 };
 
-export function reducer(state = initialState, action: Action): SDKToken {
+/**
+ * @module LoopbackAuthReducer
+ * @author João Ribeiro <@JonnyBGod> <github:JonnyBGod>
+ * @license MIT
+ * @description
+ * Provides with a LoopBack compatible authentication reducer.
+ */
+export function LoopbackAuthReducer(state = initialState, action: Action): SDKToken {
   switch (action.type) {
-    case UserActions.LOGIN_SUCCESS:
-    case LoopbackAuthActions.SET_TOKEN:
-    case LoopbackAuthActions.LOAD_TOKEN_SUCCESS: {
+    case UserActionTypes.LOGIN_SUCCESS:
+    case LoopbackAuthActionTypes.SET_TOKEN:
+    case LoopbackAuthActionTypes.LOAD_TOKEN_SUCCESS: {
       const token: SDKToken = action.payload;
 
       return Object.assign({}, token);
     }
 
-    case LoopbackAuthActions.SET_USER: {
+    case LoopbackAuthActionTypes.SET_USER: {
       const user: any = action.payload;
       let updateState = Object.assign({}, state);
 
@@ -35,12 +44,12 @@ export function reducer(state = initialState, action: Action): SDKToken {
       return updateState;
     }
 
-    case UserActions.LOGOUT_SUCCESS:
-    case UserActions.LOGOUT_FAIL: {
+    case UserActionTypes.LOGOUT_SUCCESS:
+    case UserActionTypes.LOGOUT_FAIL: {
       return Object.assign({}, initialState);
     }
 
-    case LoopbackAuthActions.UPDATE_USER_PROPERTIES_SUCCESS: {
+    case LoopbackAuthActionTypes.UPDATE_USER_PROPERTIES_SUCCESS: {
       const userProperties: any = action.payload;
       let updateState = Object.assign({}, state);
 

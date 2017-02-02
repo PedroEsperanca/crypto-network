@@ -10,10 +10,13 @@ import 'rxjs/add/operator/toArray';
 import 'rxjs/add/observable/of';
 import { Injectable, Inject } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
 import { go } from '@ngrx/router-store';
 
+import { IAppState } from '../state/app.state';
+import { AlertActions } from '../actions/alert';
 import { AppActions } from '../actions/app';
-import { UserActions } from 'shared/api';
+import { LoopbackAuthActionTypes, UserActionTypes, UserActions } from 'shared/api';
 import { SDKStorage } from 'shared/api/storage/storage.swaps';
 
 @Injectable()
@@ -21,7 +24,7 @@ export class AppEffects {
 
   @Effect()
   public loginSuccess$ = this.actions$
-    .ofType(UserActions.LOGIN_SUCCESS)
+    .ofType(UserActionTypes.LOGIN_SUCCESS)
     .map((action) => {
       let emailVerificationToken;
       try {
@@ -38,18 +41,43 @@ export class AppEffects {
     });
 
   @Effect()
+  public signupSuccess$ = this.actions$
+    .ofType(UserActionTypes.SIGNUP_SUCCESS)
+    .map((action) =>
+      this.store.dispatch(new UserActions.login({
+        email: action.payload.credentials.email,
+        password: action.payload.credentials.password
+      }, [
+        'user',
+        'user.oAuthClientApplications',
+        'user.identities',
+        'user.organizations'
+      ]))
+    );
+
+  @Effect()
   public logoutSuccess$ = this.actions$
-    .ofType(UserActions.LOGOUT_SUCCESS)
+    .ofType(UserActionTypes.LOGOUT_SUCCESS)
     .map(() => go(['/']));
 
   @Effect()
   public logoutFail$ = this.actions$
-    .ofType(UserActions.LOGOUT_FAIL)
+    .ofType(UserActionTypes.LOGOUT_FAIL)
     .map(() => go(['/']));
 
+  @Effect()
+  public updateUserPropertiesSuccess = this.actions$
+    .ofType(LoopbackAuthActionTypes.UPDATE_USER_PROPERTIES_SUCCESS)
+    .map((action) =>
+      new AlertActions.setAlert({
+        message: 'Profile updated successfully',
+        type: 'info'
+      })
+    );
+
   constructor(
+    private store: Store<IAppState>,
     private actions$: Actions,
-    private appActions: AppActions,
     @Inject(SDKStorage) protected storage: SDKStorage
   ) {}
 }

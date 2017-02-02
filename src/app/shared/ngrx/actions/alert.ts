@@ -1,24 +1,19 @@
-import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
+import { type } from '../util';
 
-@Injectable()
-export class AlertActions {
-  public static SET_ALERT = '[Alert] Set Alert';
-  public static CLEAR_ALERT = '[Alert] Clear Alert';
+export const AlertActionTypes = {
+  SET_ALERT: type('[Alert] Set Alert'),
+  CLEAR_ALERT: type('[Alert] Clear Alert'),
+};
 
-  public setAlert(message: string = '', type: string = 'info'): Action {
-    return {
-      type: AlertActions.SET_ALERT,
-      payload: {
-        message,
-        type
-      }
-    };
-  }
+export const AlertActions = {
+  setAlert: class implements Action {
+    public type = AlertActionTypes.SET_ALERT;
 
-  public clearAlert(): Action {
-    return {
-      type: AlertActions.CLEAR_ALERT
-    };
-  }
-}
+    constructor(public payload: {message: string, type: string}) { }
+  },
+
+  clearAlert: class implements Action {
+    public type = AlertActionTypes.CLEAR_ALERT;
+  },
+};

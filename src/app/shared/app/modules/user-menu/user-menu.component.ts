@@ -22,8 +22,7 @@ export class UserMenuComponent {
 
   constructor(
     private store: Store<IAppState>,
-    private configService: ConfigService,
-    private userActions: UserActions
+    private configService: ConfigService
   ) {
     this.config = this.configService.getSettings();
     this.currentToken$ = store.let(getLoopbackAuthToken());
@@ -31,6 +30,6 @@ export class UserMenuComponent {
   }
 
   public logout() {
-    this.store.dispatch(this.userActions.logout());
+    this.store.dispatch(new UserActions.logout());
   }
 }

@@ -8,7 +8,7 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { SDKToken } from './models/BaseModels';
 
-import * as fromLoopbackAuth from './reducers/auth';
+import * as reducers from './reducers/index';
 
 import * as effects from './effects/index';
 
@@ -17,7 +17,8 @@ export interface LoopbackStateInterface {
 };
 
 export const LoopbackReducer = {
-  loopbackAuth: fromLoopbackAuth.reducer
+  loopbackAuth: reducers.LoopbackAuthReducer,
+  users: reducers.UsersReducer
 };
 
 export const LoopbackEffects = [

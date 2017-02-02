@@ -40,10 +40,7 @@ export const MY_APP_PROVIDERS: any[] = [
 
   // ngrx
   // NOTIFY_PROVIDERS,
-  // { provide: NOTIFY_GLOBAL_OPTIONS, multi: true, useValue: { /* global options here */ } },
-
-  ...ACTIONS,
-  ...LOOPBACK_ACTIONS
+  // { provide: NOTIFY_GLOBAL_OPTIONS, multi: true, useValue: { /* global options here */ } }
 ];
 
 export const MY_APP_IMPORTS: any[] = [

@@ -22,7 +22,6 @@ export class RecoverAccountComponent {
 
   constructor(
     private store: Store<IAppState>,
-    private alertActions: AlertActions,
     private user: UserApi,
     private cd: ChangeDetectorRef
   ) {}
@@ -33,7 +32,10 @@ export class RecoverAccountComponent {
         this.submited = true;
         this.cd.markForCheck();
       },
-      (error) => this.store.dispatch(this.alertActions.setAlert(error.message, 'error'))
+      (error) => this.store.dispatch(new AlertActions.setAlert({
+        message: error.message,
+        type: 'error'
+      }))
     );
   }
 }

@@ -73,7 +73,7 @@ export interface IAppState {
 export const Effects = [
   EffectsModule.run(AlertEffects),
   EffectsModule.run(AppEffects),
-  EffectsModule.run(OrganizationEffects)
+  // EffectsModule.run(OrganizationEffects)
 ];
 
 /**

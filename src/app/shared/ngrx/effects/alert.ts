@@ -4,18 +4,20 @@ import { Injectable, Inject } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
 
 import { AlertActions } from '../actions/alert';
-import { ErrorActions } from 'shared/api';
+import { LoopbackErrorActionTypes, LoopbackErrorActions } from 'shared/api';
 
 @Injectable()
 export class AlertEffects {
 
   @Effect()
   public error$ = this.actions$
-    .ofType(ErrorActions.ERROR)
-    .map((action) => this.alertActions.setAlert(action.payload, 'error'));
+    .ofType(LoopbackErrorActionTypes.ERROR)
+    .map((action) => new AlertActions.setAlert({
+      message: action.payload,
+      type: 'error'
+    }));
 
   constructor(
-    private actions$: Actions,
-    private alertActions: AlertActions
+    private actions$: Actions
   ) {}
 }

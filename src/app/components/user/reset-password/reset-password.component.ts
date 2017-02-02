@@ -3,8 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
-import { IAppState, AlertActions } from 'shared/ngrx';
-import { LoopbackAuthActions } from 'shared/api/actions';
+import { IAppState } from 'shared/ngrx';
+import { LoopbackAuthActions, UserActions } from 'shared/api/actions';
 import { User, UserApi } from 'shared/api';
 
 @Component({
@@ -21,8 +21,6 @@ export class ResetPasswordComponent implements OnDestroy {
 
   constructor(
     private store: Store<IAppState>,
-    private loopbackAuthActions: LoopbackAuthActions,
-    private alertActions: AlertActions,
     private user: UserApi,
     private fb: FormBuilder,
     private cd: ChangeDetectorRef,
@@ -31,7 +29,7 @@ export class ResetPasswordComponent implements OnDestroy {
     this.route.params.subscribe((params: any) => {
       this.userId = params.userId;
 
-      this.store.dispatch(this.loopbackAuthActions.setToken({
+      this.store.dispatch(new LoopbackAuthActions.setToken({
         id: params.token,
         ttl: 1000,
         issuedAt: new Date(),
@@ -51,23 +49,19 @@ export class ResetPasswordComponent implements OnDestroy {
   }
 
   public ngOnDestroy() {
-    this.store.dispatch(this.loopbackAuthActions.clearToken());
+    this.store.dispatch(new LoopbackAuthActions.clearToken());
   }
 
   public resetPassword() {
-    this.user.updateAttributes(this.userId, {
-      password: this.resetPasswordForm.controls['password'].value
-    }).subscribe(
-      (response: any) => {
-        if (response.error) {
-          this.store.dispatch(this.alertActions.setAlert(response.error_description, 'error'));
-        }
+    this.store.dispatch(new UserActions.updateAttributes({
+      id: this.userId,
+      data: {
+        password: this.resetPasswordForm.controls['password'].value
+      }
+    }));
 
-        this.goto = 'login';
-        this.cd.markForCheck();
-      },
-      (error) => this.store.dispatch(this.alertActions.setAlert(error.message, 'error'))
-    );
+    this.goto = 'login';
+    this.cd.markForCheck();
   }
 
   public matchingPasswords(passwordKey: string, confirmPasswordKey: string) {

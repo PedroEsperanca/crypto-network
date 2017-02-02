@@ -47,8 +47,6 @@ export class SettingsApplicationsApplicationComponent implements OnInit, OnDestr
 
   constructor(
     private store: Store<IAppState>,
-    private alertActions: AlertActions,
-    private loopbackAuthActions: LoopbackAuthActions,
     private router: Router,
     private route: ActivatedRoute,
     private user: UserApi,
@@ -95,16 +93,22 @@ export class SettingsApplicationsApplicationComponent implements OnInit, OnDestr
     }).subscribe(
       (response: any) => {
         if (response.error) {
-          this.store.dispatch(this.alertActions.setAlert(response.error_description, 'error'));
+          this.store.dispatch(new AlertActions.setAlert({
+            message: response.error_description,
+            type: 'error'
+          }));
         } else {
-          this.store.dispatch(this.loopbackAuthActions.updateUserProperties({
+          this.store.dispatch(new LoopbackAuthActions.updateUserProperties({
             oAuthClientApplications: this.currentUser.oAuthClientApplications.push(response)
           }));
 
           this.router.navigate(['/settings/applications/' + response.id]);
         }
       },
-      (error) => this.store.dispatch(this.alertActions.setAlert(error.message, 'error'))
+      (error) => this.store.dispatch(new AlertActions.setAlert({
+        message: error.message,
+        type: 'error'
+      }))
     );
   }
 

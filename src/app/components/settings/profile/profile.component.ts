@@ -8,6 +8,7 @@ import {
   User,
   UserApi,
   LoopbackAuthActions,
+  UserActions,
   getLoopbackAuthUser
 } from 'shared/api';
 import { IAppState, AlertActions } from 'shared/ngrx';
@@ -27,8 +28,6 @@ export class SettingsProfileComponent implements OnDestroy {
 
   constructor(
     private store: Store<IAppState>,
-    private alertActions: AlertActions,
-    private loopbackAuthActions: LoopbackAuthActions,
     private user: UserApi,
     private configService: ConfigService
   ) {
@@ -53,26 +52,11 @@ export class SettingsProfileComponent implements OnDestroy {
   }
 
   public submitUpdate() {
-    this.user.patchAttributes(this.getCurrentUserId, {
+    this.store.dispatch(new LoopbackAuthActions.updateUserProperties({
       name: this.formModel.name,
       photoUrl: this.formModel.photoUrl,
       username: this.formModel.username || null
-    }).subscribe(
-      (response: any) => {
-        if (response.error) {
-          this.store.dispatch(this.alertActions.setAlert(response.error_description, 'error'));
-        } else {
-          this.store.dispatch(this.alertActions.setAlert('Profile updated successfully', 'info'));
-
-          this.store.dispatch(this.loopbackAuthActions.updateUserProperties({
-            name: response.name,
-            photoUrl: response.photoUrl,
-            username: response.username || null
-          }));
-        }
-      },
-      (error) => this.store.dispatch(this.alertActions.setAlert(error.message, 'error'))
-    );
+    }));
   }
 
   public fileNameRewrite(fileName: string): string {
@@ -91,14 +75,20 @@ export class SettingsProfileComponent implements OnDestroy {
     }).subscribe(
       (response: any) => {
         if (response.error) {
-          this.store.dispatch(this.alertActions.setAlert(response.error_description, 'error'));
+          this.store.dispatch(new AlertActions.setAlert({
+            message: response.error_description,
+            type: 'error'
+          }));
         } else {
-          this.store.dispatch(this.loopbackAuthActions.updateUserProperties({
+          this.store.dispatch(new LoopbackAuthActions.updateUserProperties({
             photo: response
           }));
         }
       },
-      (error) => this.store.dispatch(this.alertActions.setAlert(error.message, 'error'))
+      (error) => this.store.dispatch(new AlertActions.setAlert({
+        message: error.message,
+        type: 'error'
+      }))
     );
   }
 }

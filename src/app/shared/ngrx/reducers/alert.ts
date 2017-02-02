@@ -4,7 +4,7 @@ import 'rxjs/add/operator/let';
 import { Observable } from 'rxjs/Observable';
 import { Action } from '@ngrx/store';
 
-import { AlertActions } from '../actions/alert';
+import { AlertActionTypes } from '../actions/alert';
 
 export interface IAlertState {
   success: string;
@@ -22,7 +22,7 @@ const initialState: IAlertState = {
 
 export function reducer(state = initialState, action: Action): IAlertState {
   switch (action.type) {
-    case AlertActions.SET_ALERT: {
+    case AlertActionTypes.SET_ALERT: {
       let newState = Object.assign({}, initialState);
 
       if (action.payload.type === 'error' && action.payload.message.constructor === Object) {
@@ -34,7 +34,7 @@ export function reducer(state = initialState, action: Action): IAlertState {
       return newState;
     }
 
-    case AlertActions.CLEAR_ALERT: {
+    case AlertActionTypes.CLEAR_ALERT: {
       return Object.assign({}, initialState);
     }
 

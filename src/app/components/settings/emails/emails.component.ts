@@ -34,8 +34,6 @@ export class SettingsEmailsComponent implements OnDestroy  {
 
   constructor(
     private store: Store<IAppState>,
-    private alertActions: AlertActions,
-    private loopbackAuthActions: LoopbackAuthActions,
     private user: UserApi,
     private configService: ConfigService
   ) {
@@ -68,14 +66,22 @@ export class SettingsEmailsComponent implements OnDestroy  {
     this.user.sendVerificationCode(this.currenUser.id, data).subscribe(
       (response: any) => {
         if (response.error) {
-          this.store.dispatch(this.alertActions.setAlert(response.error_description, 'error'));
+          this.store.dispatch(new AlertActions.setAlert({
+            message: response.error_description,
+            type: 'error'
+          }));
         } else {
-          this.store.dispatch(this.alertActions.setAlert('Verification Code sent to ' +
-            this.currenUser
-              .emailAddresses.filter((e) => { return e.id === emailId; })[0].masked, 'info'));
+          this.store.dispatch(new AlertActions.setAlert({
+            message: 'Verification Code sent to ' +
+              this.currenUser.emailAddresses.filter((e) => { return e.id === emailId; })[0].masked,
+            type: 'info'
+          }));
         }
       },
-      (error) => this.store.dispatch(this.alertActions.setAlert(error.message, 'error'))
+      (error) => this.store.dispatch(new AlertActions.setAlert({
+        message: error.message,
+        type: 'error'
+      }))
     );
   }
 
@@ -83,7 +89,10 @@ export class SettingsEmailsComponent implements OnDestroy  {
     this.user.setPrimaryEmail(this.currenUser.id, emailId).subscribe(
       (response: any) => {
         if (response.error) {
-          this.store.dispatch(this.alertActions.setAlert(response.error_description, 'error'));
+          this.store.dispatch(new AlertActions.setAlert({
+            message: response.error_description,
+            type: 'error'
+          }));
         } else {
           for (let email of this.currenUser.emailAddresses) {
             if (email.id === emailId) {
@@ -93,12 +102,15 @@ export class SettingsEmailsComponent implements OnDestroy  {
             }
           }
 
-          this.store.dispatch(this.loopbackAuthActions.updateUserProperties({
+          this.store.dispatch(new LoopbackAuthActions.updateUserProperties({
             emailAddresses: this.currenUser.emailAddresses
           }));
         }
       },
-      (error) => this.store.dispatch(this.alertActions.setAlert(error.message, 'error'))
+      (error) => this.store.dispatch(new AlertActions.setAlert({
+        message: error.message,
+        type: 'error'
+      }))
     );
   }
 
@@ -109,17 +121,26 @@ export class SettingsEmailsComponent implements OnDestroy  {
     }).subscribe(
       (response: any) => {
         if (response.error) {
-          this.store.dispatch(this.alertActions.setAlert(response.error_description, 'error'));
+          this.store.dispatch(new AlertActions.setAlert({
+            message: response.error_description,
+            type: 'error'
+          }));
         } else {
-          this.store.dispatch(this.alertActions.setAlert('Email updated successfully', 'info'));
+          this.store.dispatch(new AlertActions.setAlert({
+            message: 'Email updated successfully',
+            type: 'info'
+          }));
 
-          this.store.dispatch(this.loopbackAuthActions.updateUserProperties({
+          this.store.dispatch(new LoopbackAuthActions.updateUserProperties({
             email: this.editEmailModel.email,
             emailVerified: false
           }));
         }
       },
-      (error) => this.store.dispatch(this.alertActions.setAlert(error.message, 'error'))
+      (error) => this.store.dispatch(new AlertActions.setAlert({
+        message: error.message,
+        type: 'error'
+      }))
     );
   }
 
@@ -127,7 +148,10 @@ export class SettingsEmailsComponent implements OnDestroy  {
     this.user.destroyByIdEmails(this.currenUser.id, emailId).subscribe(
       (response: any) => {
         if (response.error) {
-          this.store.dispatch(this.alertActions.setAlert(response.error_description, 'error'));
+          this.store.dispatch(new AlertActions.setAlert({
+            message: response.error_description,
+            type: 'error'
+          }));
         } else {
           for (let i = 0; i < this.currenUser.emailAddresses.length; ++i) {
             if (this.currenUser.emailAddresses[i].id === emailId) {
@@ -136,12 +160,15 @@ export class SettingsEmailsComponent implements OnDestroy  {
             }
           }
 
-          this.store.dispatch(this.loopbackAuthActions.updateUserProperties({
+          this.store.dispatch(new LoopbackAuthActions.updateUserProperties({
             emailAddresses: this.currenUser.emailAddresses
           }));
         }
       },
-      (error) => this.store.dispatch(this.alertActions.setAlert(error.message, 'error'))
+      (error) => this.store.dispatch(new AlertActions.setAlert({
+        message: error.message,
+        type: 'error'
+      }))
     );
   }
 
@@ -149,14 +176,20 @@ export class SettingsEmailsComponent implements OnDestroy  {
     this.user.createEmails(this.currenUser.id, this.addEmailModel).subscribe(
       (response: any) => {
         if (response.error) {
-          this.store.dispatch(this.alertActions.setAlert(response.error_description, 'error'));
+          this.store.dispatch(new AlertActions.setAlert({
+            message: response.error_description,
+            type: 'error'
+          }));
         } else {
-          this.store.dispatch(this.loopbackAuthActions.updateUserProperties({
+          this.store.dispatch(new LoopbackAuthActions.updateUserProperties({
             emailAddresses: this.currenUser.emailAddresses.push(response)
           }));
         }
       },
-      (error) => this.store.dispatch(this.alertActions.setAlert(error.message, 'error'))
+      (error) => this.store.dispatch(new AlertActions.setAlert({
+        message: error.message,
+        type: 'error'
+      }))
     );
   }
 
@@ -166,18 +199,27 @@ export class SettingsEmailsComponent implements OnDestroy  {
     }).subscribe(
       (response: any) => {
         if (response.error) {
-          this.store.dispatch(this.alertActions.setAlert(response.error_description, 'error'));
+          this.store.dispatch(new AlertActions.setAlert({
+            message: response.error_description,
+            type: 'error'
+          }));
         } else {
           this.store.dispatch(
-            this.alertActions.setAlert('Email preferences updated successfully', 'info')
+            new AlertActions.setAlert({
+              message: 'Email preferences updated successfully',
+              type: 'info'
+            })
           );
 
-          this.store.dispatch(this.loopbackAuthActions.updateUserProperties({
+          this.store.dispatch(new LoopbackAuthActions.updateUserProperties({
             emailPreferences: this.updatePreferencesModel
           }));
         }
       },
-      (error) => this.store.dispatch(this.alertActions.setAlert(error.message, 'error'))
+      (error) => this.store.dispatch(new AlertActions.setAlert({
+        message: error.message,
+        type: 'error'
+      }))
     );
   }
 }
