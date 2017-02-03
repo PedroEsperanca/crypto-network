@@ -29,7 +29,6 @@ import { LoopBackAuth, UserApi } from 'shared/api';
   styleUrls: [ 'app.component.scss' ],
   template: `
 <div platform scrollSpy>
-  <app-alert></app-alert>
   <router-outlet></router-outlet>
 </div>
   `

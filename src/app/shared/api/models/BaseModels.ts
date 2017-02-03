@@ -1,4 +1,9 @@
 /* tslint:disable */
+import { Action } from '@ngrx/store';
+
+export interface LoopbackAction extends Action {
+  meta?: any;
+}
 
 declare var Object: any;
 export interface LoopBackFilter {

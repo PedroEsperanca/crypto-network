@@ -1,4 +1,4 @@
-/* tslint:disable */
+
 import { Action } from '@ngrx/store';
 import { type } from '../util';
 import { SDKToken } from '../models/BaseModels';
@@ -39,25 +39,25 @@ export const LoopbackAuthActions = {
   loadTokenSuccess: class implements Action {
     public type = LoopbackAuthActionTypes.LOAD_TOKEN_SUCCESS;
 
-    constructor(public payload: SDKToken) { }
+    constructor(public payload: SDKToken, public meta?: any) { }
   },
 
   loadTokenFail: class implements Action {
     public type = LoopbackAuthActionTypes.LOAD_TOKEN_FAIL;
 
-    constructor(public payload: any) { }
+    constructor(public payload: any, public meta?: any) { }
   },
 
   setToken: class implements Action {
     public type = LoopbackAuthActionTypes.SET_TOKEN;
 
-    constructor(public payload: SDKToken) { }
+    constructor(public payload: SDKToken, public meta?: any) { }
   },
 
   setTokenSuccess: class implements Action {
     public type = LoopbackAuthActionTypes.SET_TOKEN_SUCCESS;
 
-    constructor(public payload: SDKToken) { }
+    constructor(public payload: SDKToken, public meta?: any) { }
   },
 
   clearToken: class implements Action {
@@ -67,30 +67,30 @@ export const LoopbackAuthActions = {
   setUser: class implements Action {
     public type = LoopbackAuthActionTypes.SET_USER;
 
-    constructor(public payload: any) { }
+    constructor(public payload: any, public meta?: any) { }
   },
 
   setUserSuccess: class implements Action {
     public type = LoopbackAuthActionTypes.SET_USER_SUCCESS;
 
-    constructor(public payload: any) { }
+    constructor(public payload: any, public meta?: any) { }
   },
 
   updateUserProperties: class implements Action {
     public type = LoopbackAuthActionTypes.UPDATE_USER_PROPERTIES;
 
-    constructor(public payload: any) { }
+    constructor(public payload: any, public meta?: any) { }
   },
 
   updateUserPropertiesSuccess: class implements Action {
     public type = LoopbackAuthActionTypes.UPDATE_USER_PROPERTIES_SUCCESS;
 
-    constructor(public payload: any) { }
+    constructor(public payload: any, public meta?: any) { }
   },
 
   updateUserPropertiesFail: class implements Action {
     public type = LoopbackAuthActionTypes.UPDATE_USER_PROPERTIES_FAIL;
 
-    constructor(public payload: any) { }
+    constructor(public payload: any, public meta?: any) { }
   },
 };

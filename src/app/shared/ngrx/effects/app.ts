@@ -16,7 +16,7 @@ import { go } from '@ngrx/router-store';
 import { IAppState } from '../state/app.state';
 import { AlertActions } from '../actions/alert';
 import { AppActions } from '../actions/app';
-import { LoopbackAuthActionTypes, UserActionTypes, UserActions } from 'shared/api';
+import { LoopbackAction, LoopbackAuthActionTypes, UserActionTypes, UserActions } from 'shared/api';
 import { SDKStorage } from 'shared/api/storage/storage.swaps';
 
 @Injectable()
@@ -68,11 +68,8 @@ export class AppEffects {
   @Effect()
   public updateUserPropertiesSuccess = this.actions$
     .ofType(LoopbackAuthActionTypes.UPDATE_USER_PROPERTIES_SUCCESS)
-    .map((action) =>
-      new AlertActions.setAlert({
-        message: 'Profile updated successfully',
-        type: 'info'
-      })
+    .map((action: LoopbackAction) =>
+      new AlertActions.setAlert(action.meta.alert.success)
     );
 
   constructor(

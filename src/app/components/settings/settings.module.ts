@@ -7,6 +7,7 @@ import { ModalModule } from 'ng2-bootstrap/modal';
 import { CloudtasksModule } from 'angular2-cloudtasks';
 
 import { MultilingualModule } from 'shared/i18n/multilingual.module';
+import { AlertModule } from 'shared/app/modules/alert';
 import { HeaderModule } from 'shared/app/modules/header';
 import { FooterModule } from 'shared/app/modules/footer';
 import { FileUploaderModule } from 'shared/app/modules/file-uploader';
@@ -36,6 +37,7 @@ import {
     TooltipModule,
     ModalModule,
     CloudtasksModule,
+    AlertModule,
     MultilingualModule,
     HeaderModule,
     FooterModule,

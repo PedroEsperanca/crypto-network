@@ -42,7 +42,7 @@ export class SettingsEmailsComponent implements OnDestroy  {
     this.subscriptions.push(this.store.let(getLoopbackAuthUser()).subscribe((currentUser: User) => {
       if (!currentUser) { return; }
 
-      this.updatePreferencesModel = (<any> Object).assign({}, currentUser.emailPreferences);
+      this.updatePreferencesModel = currentUser.emailPreferences;
       this.currenUser = (<any> Object).assign({}, currentUser);
     }));
   }
@@ -194,7 +194,17 @@ export class SettingsEmailsComponent implements OnDestroy  {
   }
 
   public updatePreferences() {
-    this.user.patchAttributes(this.currenUser.id, {
+    this.store.dispatch(new LoopbackAuthActions.updateUserProperties({
+      emailPreferences: this.updatePreferencesModel
+    }, {
+      alert: {
+        success: {
+          message: 'Email preferences updated successfully.',
+          type: 'info'
+        }
+      }
+    }));
+    /*this.user.patchAttributes(this.currenUser.id, {
       emailPreferences: this.updatePreferencesModel
     }).subscribe(
       (response: any) => {
@@ -220,6 +230,6 @@ export class SettingsEmailsComponent implements OnDestroy  {
         message: error.message,
         type: 'error'
       }))
-    );
+    );*/
   }
 }

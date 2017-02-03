@@ -5,7 +5,8 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 import {
   IAppState,
-  getAlertState
+  getAlertState,
+  AlertActions
 } from 'shared/ngrx';
 import { IAlertState } from 'shared/ngrx/reducers/alert';
 import { ConfigService } from 'ng2-config';
@@ -27,5 +28,9 @@ export class AlertComponent {
     this.config = this.configService.getSettings();
 
     this.alert$ = store.let(getAlertState());
+  }
+
+  public close() {
+    this.store.dispatch(new AlertActions.clearAlert());
   }
 }

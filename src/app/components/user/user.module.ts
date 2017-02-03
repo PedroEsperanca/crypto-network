@@ -3,6 +3,7 @@ import { CommonModule }       from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MultilingualModule } from 'shared/i18n/multilingual.module';
+import { AlertModule } from 'shared/app/modules/alert';
 
 import { SDKStorage } from 'shared/api/storage/storage.swaps';
 import { CookieBrowser } from 'shared/api/storage/cookie.browser';
@@ -25,6 +26,7 @@ import { PassportComponent } from './passport/passport.component';
     FormsModule,
     ReactiveFormsModule,
     MultilingualModule,
+    AlertModule,
     routing,
     TooltipModule
   ],

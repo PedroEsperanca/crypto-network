@@ -9,9 +9,9 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { concat } from 'rxjs/observable/concat';
 import { Injectable, Inject } from '@angular/core';
-import { Effect, Actions, toPayload } from '@ngrx/effects';
-import { Action } from '@ngrx/store';
+import { Effect, Actions } from '@ngrx/effects';
 
+import { LoopbackAction } from '../models/BaseModels';
 import { BaseLoopbackEffects } from './base';
 
 import { UserActionTypes, UserActions } from '../actions/user';
@@ -26,80 +26,74 @@ export class UserEffects extends BaseLoopbackEffects {
    * Apps relation effects
    */
   @Effect()
-  protected findByIdApps: Observable<Action> = this.actions$
+  protected findByIdApps: Observable<LoopbackAction> = this.actions$
     .ofType(UserActionTypes.FIND_BY_ID_APPS)
-    .map(toPayload)
-    .mergeMap((payload) =>
-      this.user.findByIdApps(payload.id, payload.fk)
-        .map((response) => new UserActions.findByIdAppsSuccess({id: payload.id, data: response}))
+    .mergeMap((action: LoopbackAction) =>
+      this.user.findByIdApps(action.payload.id, action.payload.fk)
+        .map((response) => new UserActions.findByIdAppsSuccess(action.payload.id, response, action.meta))
         .catch((error) => concat(
-          of(new UserActions.findByIdAppsFail(error)),
-          of(new LoopbackErrorActions.error(error))
+          of(new UserActions.findByIdAppsFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  protected destroyByIdApps: Observable<Action> = this.actions$
+  protected destroyByIdApps: Observable<LoopbackAction> = this.actions$
     .ofType(UserActionTypes.DESTROY_BY_ID_APPS)
-    .map(toPayload)
-    .mergeMap((payload) =>
-      this.user.destroyByIdApps(payload.id, payload.fk)
-        .map(() => new UserActions.destroyByIdAppsSuccess(payload))
+    .mergeMap((action: LoopbackAction) =>
+      this.user.destroyByIdApps(action.payload.id, action.payload.fk)
+        .map(() => new UserActions.destroyByIdAppsSuccess(action.payload, action.meta))
         .catch((error) => concat(
-          of(new UserActions.destroyByIdAppsFail(error)),
-          of(new LoopbackErrorActions.error(error))
+          of(new UserActions.destroyByIdAppsFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  protected updateByIdApps: Observable<Action> = this.actions$
+  protected updateByIdApps: Observable<LoopbackAction> = this.actions$
     .ofType(UserActionTypes.UPDATE_BY_ID_APPS)
-    .map(toPayload)
-    .mergeMap((payload) =>
-      this.user.updateByIdApps(payload.id, payload.fk, payload.data)
-        .map((response) => new UserActions.updateByIdAppsSuccess({id: payload.id, data: response}))
+    .mergeMap((action: LoopbackAction) =>
+      this.user.updateByIdApps(action.payload.id, action.payload.fk, action.payload.data)
+        .map((response) => new UserActions.updateByIdAppsSuccess(action.payload.id, response, action.meta))
         .catch((error) => concat(
-          of(new UserActions.updateByIdAppsFail(error)),
-          of(new LoopbackErrorActions.error(error))
+          of(new UserActions.updateByIdAppsFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  protected createApps: Observable<Action> = this.actions$
+  protected createApps: Observable<LoopbackAction> = this.actions$
     .ofType(UserActionTypes.CREATE_APPS)
-    .map(toPayload)
-    .mergeMap((payload) =>
-      this.user.createApps(payload.id, payload.data)
-        .map((response) => new UserActions.createAppsSuccess({id: payload.id, data: response}))
+    .mergeMap((action: LoopbackAction) =>
+      this.user.createApps(action.payload.id, action.payload.data)
+        .map((response) => new UserActions.createAppsSuccess(action.payload.id,response, action.meta))
         .catch((error) => concat(
-          of(new UserActions.createAppsFail(error)),
-          of(new LoopbackErrorActions.error(error))
+          of(new UserActions.createAppsFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  protected deleteApps: Observable<Action> = this.actions$
+  protected deleteApps: Observable<LoopbackAction> = this.actions$
     .ofType(UserActionTypes.DELETE_APPS)
-    .map(toPayload)
-    .mergeMap((payload) =>
-      this.user.deleteApps(payload.id)
-        .map(() => new UserActions.deleteAppsSuccess(payload.id))
+    .mergeMap((action: LoopbackAction) =>
+      this.user.deleteApps(action.payload.id)
+        .map(() => new UserActions.deleteAppsSuccess(action.payload.id, action.meta))
         .catch((error) => concat(
-          of(new UserActions.deleteAppsFail(error)),
-          of(new LoopbackErrorActions.error(error))
+          of(new UserActions.deleteAppsFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  protected createManyApps: Observable<Action> = this.actions$
+  protected createManyApps: Observable<LoopbackAction> = this.actions$
     .ofType(UserActionTypes.CREATE_MANY_APPS)
-    .map(toPayload)
-    .mergeMap((payload) =>
-      this.user.createManyApps(payload.id, payload.data)
-        .map((response) => new UserActions.createManyAppsSuccess({id: payload.id, data: response}))
+    .mergeMap((action: LoopbackAction) =>
+      this.user.createManyApps(action.payload.id, action.payload.data)
+        .map((response) => new UserActions.createManyAppsSuccess(action.payload.id, response, action.meta))
         .catch((error) => concat(
-          of(new UserActions.createManyAppsFail(error)),
-          of(new LoopbackErrorActions.error(error))
+          of(new UserActions.createManyAppsFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
@@ -109,41 +103,38 @@ export class UserEffects extends BaseLoopbackEffects {
    * User specific actions
    */
   @Effect()
-  protected login: Observable<Action> = this.actions$
+  protected login: Observable<LoopbackAction> = this.actions$
     .ofType(UserActionTypes.LOGIN)
-    .map(toPayload)
-    .mergeMap((payload) =>
-      this.user.login(payload.credentials, payload.include, payload.rememberMe)
-        .map((response) => new UserActions.loginSuccess(response))
+    .mergeMap((action: LoopbackAction) =>
+      this.user.login(action.payload.credentials, action.payload.include, action.payload.rememberMe)
+        .map((response) => new UserActions.loginSuccess(response, action.meta))
         .catch((error) => concat(
-          of(new UserActions.loginFail(error)),
-          of(new LoopbackErrorActions.error(error))
+          of(new UserActions.loginFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  protected signup: Observable<Action> = this.actions$
+  protected signup: Observable<LoopbackAction> = this.actions$
     .ofType(UserActionTypes.SIGNUP)
-    .map(toPayload)
-    .mergeMap((payload) =>
-      this.user.create(payload)
-        .map((response) => new UserActions.signupSuccess({credentials: payload, data: response}))
+    .mergeMap((action: LoopbackAction) =>
+      this.user.create(action.payload)
+        .map((response) => new UserActions.signupSuccess(action.payload, response, action.meta))
         .catch((error) => concat(
-          of(new UserActions.signupFail(error)),
-          of(new LoopbackErrorActions.error(error))
+          of(new UserActions.signupFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  protected logout: Observable<Action> = this.actions$
+  protected logout: Observable<LoopbackAction> = this.actions$
     .ofType(UserActionTypes.LOGOUT)
-    .map(toPayload)
-    .mergeMap((payload) =>
+    .mergeMap((action: LoopbackAction) =>
       this.user.logout()
-        .map(() => new UserActions.logoutSuccess())
+        .map(() => new UserActions.logoutSuccess(action.meta))
         .catch((error) => concat(
           of(new UserActions.logoutFail()),
-          of(new LoopbackErrorActions.error(error))
+          of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 

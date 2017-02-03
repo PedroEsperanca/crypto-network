@@ -27,15 +27,12 @@ export class LoginComponent {
   }
 
   public login() {
-    this.store.dispatch(new UserActions.login({
-      credentials: this.formModel,
-      include: [
-        'user',
-        'user.oAuthClientApplications',
-        'user.identities',
-        'user.organizations'
-      ]
-    }));
+    this.store.dispatch(new UserActions.login(this.formModel, [
+      'user',
+      'user.oAuthClientApplications',
+      'user.identities',
+      'user.organizations'
+    ]));
   }
 
   public goTo(provider: string) {

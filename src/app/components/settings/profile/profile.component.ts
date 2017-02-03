@@ -56,6 +56,13 @@ export class SettingsProfileComponent implements OnDestroy {
       name: this.formModel.name,
       photoUrl: this.formModel.photoUrl,
       username: this.formModel.username || null
+    }, {
+      alert: {
+        success: {
+          message: 'Profile updated successfully.',
+          type: 'info'
+        }
+      }
     }));
   }
 
