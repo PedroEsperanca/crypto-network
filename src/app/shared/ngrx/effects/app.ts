@@ -44,7 +44,7 @@ export class AppEffects {
   public signupSuccess$ = this.actions$
     .ofType(UserActionTypes.SIGNUP_SUCCESS)
     .map((action) =>
-      this.store.dispatch(new UserActions.login({
+      new UserActions.login({
         email: action.payload.credentials.email,
         password: action.payload.credentials.password
       }, [
@@ -52,7 +52,7 @@ export class AppEffects {
         'user.oAuthClientApplications',
         'user.identities',
         'user.organizations'
-      ]))
+      ])
     );
 
   @Effect()

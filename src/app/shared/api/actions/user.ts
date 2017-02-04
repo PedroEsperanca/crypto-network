@@ -205,8 +205,15 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
    */
   login: class implements Action {
     public readonly type = UserActionTypes.LOGIN;
+    public payload: {credentials: any, include: any, rememberMe: boolean};
 
-    constructor(public payload: any, public meta?: any) { }
+    constructor(
+      credentials: any,
+      include: any = 'user',
+      rememberMe: boolean = true,
+      public meta?: any) {
+      this.payload = {credentials, include, rememberMe};
+    }
   },
 
   loginSuccess: class implements Action {
