@@ -15,7 +15,8 @@ export class ProfileComponent implements OnInit {
   public ngOnInit() {
     this.route.data
       .subscribe((data: any) => {
-        if (typeof data.profile.emailAddresses !== 'undefined') {
+        if (typeof data.profile.email !== 'undefined' ||
+          typeof data.profile.emailAddresses !== 'undefined') {
           this.type = 'user';
         } else {
           this.type = 'organization';
