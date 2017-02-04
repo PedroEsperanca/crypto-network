@@ -20,14 +20,9 @@ import { IAppState, AlertActions } from 'shared/ngrx';
 })
 export class SettingsEmailsComponent implements OnDestroy  {
   public config: any;
-  public currenUser: User;
+  public currentUser: User;
 
-  public addEmailModel: any = {
-    email: ''
-  };
-  public editEmailModel: any = {
-    email: ''
-  };
+  public emailModel: string = '';
   public updatePreferencesModel: any = 'marketing';
 
   private subscriptions: Subscription[] = [];
@@ -43,7 +38,7 @@ export class SettingsEmailsComponent implements OnDestroy  {
       if (!currentUser) { return; }
 
       this.updatePreferencesModel = currentUser.emailPreferences;
-      this.currenUser = (<any> Object).assign({}, currentUser);
+      this.currentUser = (<any> Object).assign({}, currentUser);
     }));
   }
 
@@ -63,7 +58,7 @@ export class SettingsEmailsComponent implements OnDestroy  {
       };
     }
 
-    this.user.sendVerificationCode(this.currenUser.id, data).subscribe(
+    this.user.sendVerificationCode(this.currentUser.id, data).subscribe(
       (response: any) => {
         if (response.error) {
           this.store.dispatch(new AlertActions.setAlert({
@@ -73,7 +68,7 @@ export class SettingsEmailsComponent implements OnDestroy  {
         } else {
           this.store.dispatch(new AlertActions.setAlert({
             message: 'Verification Code sent to ' +
-              this.currenUser.emailAddresses.filter((e) => { return e.id === emailId; })[0].masked,
+              this.currentUser.emailAddresses.filter((e) => { return e.id === emailId; })[0].masked,
             type: 'info'
           }));
         }
@@ -86,7 +81,7 @@ export class SettingsEmailsComponent implements OnDestroy  {
   }
 
   public setPrimary(emailId: string) {
-    this.user.setPrimaryEmail(this.currenUser.id, emailId).subscribe(
+    this.user.setPrimaryEmail(this.currentUser.id, emailId).subscribe(
       (response: any) => {
         if (response.error) {
           this.store.dispatch(new AlertActions.setAlert({
@@ -94,7 +89,7 @@ export class SettingsEmailsComponent implements OnDestroy  {
             type: 'error'
           }));
         } else {
-          for (let email of this.currenUser.emailAddresses) {
+          for (let email of this.currentUser.emailAddresses) {
             if (email.id === emailId) {
               email.primary = true;
             } else {
@@ -103,7 +98,7 @@ export class SettingsEmailsComponent implements OnDestroy  {
           }
 
           this.store.dispatch(new LoopbackAuthActions.updateUserProperties({
-            emailAddresses: this.currenUser.emailAddresses
+            emailAddresses: this.currentUser.emailAddresses
           }));
         }
       },
@@ -115,37 +110,21 @@ export class SettingsEmailsComponent implements OnDestroy  {
   }
 
   public editEmail() {
-    this.user.patchAttributes(this.currenUser.id, {
-      email: this.editEmailModel.email,
+    this.store.dispatch(new LoopbackAuthActions.updateUserProperties({
+      email: this.emailModel,
       emailVerified: false
-    }).subscribe(
-      (response: any) => {
-        if (response.error) {
-          this.store.dispatch(new AlertActions.setAlert({
-            message: response.error_description,
-            type: 'error'
-          }));
-        } else {
-          this.store.dispatch(new AlertActions.setAlert({
-            message: 'Email updated successfully',
-            type: 'info'
-          }));
-
-          this.store.dispatch(new LoopbackAuthActions.updateUserProperties({
-            email: this.editEmailModel.email,
-            emailVerified: false
-          }));
+    }, {
+      alert: {
+        success: {
+          message: 'Email updated successfully',
+          type: 'info'
         }
-      },
-      (error) => this.store.dispatch(new AlertActions.setAlert({
-        message: error.message,
-        type: 'error'
-      }))
-    );
+      }
+    }));
   }
 
   public removeEmail(emailId: string) {
-    this.user.destroyByIdEmails(this.currenUser.id, emailId).subscribe(
+    this.user.destroyByIdEmails(this.currentUser.id, emailId).subscribe(
       (response: any) => {
         if (response.error) {
           this.store.dispatch(new AlertActions.setAlert({
@@ -153,15 +132,15 @@ export class SettingsEmailsComponent implements OnDestroy  {
             type: 'error'
           }));
         } else {
-          for (let i = 0; i < this.currenUser.emailAddresses.length; ++i) {
-            if (this.currenUser.emailAddresses[i].id === emailId) {
-              this.currenUser.emailAddresses.splice(i, 1);
+          for (let i = 0; i < this.currentUser.emailAddresses.length; ++i) {
+            if (this.currentUser.emailAddresses[i].id === emailId) {
+              this.currentUser.emailAddresses.splice(i, 1);
               break;
             }
           }
 
           this.store.dispatch(new LoopbackAuthActions.updateUserProperties({
-            emailAddresses: this.currenUser.emailAddresses
+            emailAddresses: this.currentUser.emailAddresses
           }));
         }
       },
@@ -173,7 +152,7 @@ export class SettingsEmailsComponent implements OnDestroy  {
   }
 
   public addEmail() {
-    this.user.createEmails(this.currenUser.id, this.addEmailModel).subscribe(
+    this.user.createEmails(this.currentUser.id, {email: this.emailModel}).subscribe(
       (response: any) => {
         if (response.error) {
           this.store.dispatch(new AlertActions.setAlert({
@@ -182,7 +161,7 @@ export class SettingsEmailsComponent implements OnDestroy  {
           }));
         } else {
           this.store.dispatch(new LoopbackAuthActions.updateUserProperties({
-            emailAddresses: this.currenUser.emailAddresses.push(response)
+            emailAddresses: this.currentUser.emailAddresses.push(response)
           }));
         }
       },
@@ -204,32 +183,5 @@ export class SettingsEmailsComponent implements OnDestroy  {
         }
       }
     }));
-    /*this.user.patchAttributes(this.currenUser.id, {
-      emailPreferences: this.updatePreferencesModel
-    }).subscribe(
-      (response: any) => {
-        if (response.error) {
-          this.store.dispatch(new AlertActions.setAlert({
-            message: response.error_description,
-            type: 'error'
-          }));
-        } else {
-          this.store.dispatch(
-            new AlertActions.setAlert({
-              message: 'Email preferences updated successfully',
-              type: 'info'
-            })
-          );
-
-          this.store.dispatch(new LoopbackAuthActions.updateUserProperties({
-            emailPreferences: this.updatePreferencesModel
-          }));
-        }
-      },
-      (error) => this.store.dispatch(new AlertActions.setAlert({
-        message: error.message,
-        type: 'error'
-      }))
-    );*/
   }
 }

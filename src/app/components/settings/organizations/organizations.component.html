@@ -4,9 +4,9 @@
   <h3>{{'Organizations' | translate}}</h3>
 
   <div class="boxed-group-inner">
-    <p *ngIf="!currentUser.organizations.length">{{'You are not a member of any organizations.' | translate}}</p>
+    <p *ngIf="!currentUser.organizations?.length">{{'You are not a member of any organizations.' | translate}}</p>
 
-    <ul *ngIf="currentUser.organizations.length" class="boxed-group-list boxed-group-standalone">
+    <ul *ngIf="currentUser.organizations?.length" class="boxed-group-list boxed-group-standalone">
         <li *ngFor="let org of currentUser.organizations" class="clearfix">
           <a class="btn btn-sm float-right">{{'Leave' | translate}}</a>
 
