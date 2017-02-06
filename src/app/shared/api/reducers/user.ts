@@ -5,14 +5,14 @@ import { BaseReducerFactory } from './base';
 import { User } from '../models/user';
 import { UserActionTypes } from '../actions/user';
 
-export interface State {
+export interface UserState {
   ids: string[];
   entities: { [id: string]: User };
   selectedIds: string | string[];
   selectedAppsIds: string | string[];
 };
 
-const initialState: State = {
+const initialState: UserState = {
   ids: [],
   entities: {},
   selectedIds: [],
@@ -83,10 +83,132 @@ function ReducerFactory() {
     return Object.assign({}, state, {entities: state.entities});
   };
 
+  /**
+   * @author João Ribeiro <@JonnyBGod> <github:JonnyBGod>
+   * @description
+   * OAuthClientApplications relation reducer methods
+   */
+  cases[UserActionTypes.FIND_BY_ID_OAUTHCLIENTAPPLICATIONS] =
+  (state = initialState, action: Action) => {
+    state.entities[action.payload.id].oAuthClientApplications =
+      Array.from(new Set([ ...state.entities[action.payload.id].oAuthClientApplications, action.payload.data]));
+
+    return Object.assign({}, state, {
+      entities: state.entities,
+      selectedOAuthClientApplicationsIds: action.payload.data.id,
+    });
+  };
+
+  cases[UserActionTypes.DESTROY_BY_ID_OAUTHCLIENTAPPLICATIONS] =
+  (state = initialState, action: Action) => {
+    state.entities[action.payload.id].oAuthClientApplications =
+      state.entities[action.payload.id].oAuthClientApplications.filter((item) => item.id !== action.payload.fk);
+
+    return Object.assign({}, state, {entities: state.entities});
+  };
+
+  cases[UserActionTypes.UPDATE_BY_ID_OAUTHCLIENTAPPLICATIONS] =
+  (state = initialState, action: Action) => {
+    state.entities[action.payload.id].oAuthClientApplications =
+      state.entities[action.payload.id].oAuthClientApplications.map((item) => {
+        if (item.id === action.payload.data.id) {
+          return action.payload.data;
+        } else {
+          return item;
+        }
+      });
+
+    return Object.assign({}, state, {entities: state.entities});
+  };
+
+  cases[UserActionTypes.CREATE_OAUTHCLIENTAPPLICATIONS] =
+  (state = initialState, action: Action) => {
+    state.entities[action.payload.id].oAuthClientApplications =
+      Array.from(new Set([ ...state.entities[action.payload.id].oAuthClientApplications, ...action.payload.data]));
+
+    return Object.assign({}, state, {entities: state.entities});
+  };
+
+  cases[UserActionTypes.DELETE_OAUTHCLIENTAPPLICATIONS] =
+  (state = initialState, action: Action) => {
+    state.entities[action.payload.id].oAuthClientApplications = [];
+
+    return Object.assign({}, state, {entities: state.entities});
+  };
+
+  cases[UserActionTypes.CREATE_MANY_OAUTHCLIENTAPPLICATIONS] =
+  (state = initialState, action: Action) => {
+    state.entities[action.payload.id].oAuthClientApplications =
+      Array.from(new Set([ ...state.entities[action.payload.id].oAuthClientApplications, ...action.payload.data]));
+
+    return Object.assign({}, state, {entities: state.entities});
+  };
+
+  /**
+   * @author João Ribeiro <@JonnyBGod> <github:JonnyBGod>
+   * @description
+   * Organizations relation reducer methods
+   */
+  cases[UserActionTypes.FIND_BY_ID_ORGANIZATIONS] =
+  (state = initialState, action: Action) => {
+    state.entities[action.payload.id].organizations =
+      Array.from(new Set([ ...state.entities[action.payload.id].organizations, action.payload.data]));
+
+    return Object.assign({}, state, {
+      entities: state.entities,
+      selectedOrganizationsIds: action.payload.data.id,
+    });
+  };
+
+  cases[UserActionTypes.DESTROY_BY_ID_ORGANIZATIONS] =
+  (state = initialState, action: Action) => {
+    state.entities[action.payload.id].organizations =
+      state.entities[action.payload.id].organizations.filter((item) => item.id !== action.payload.fk);
+
+    return Object.assign({}, state, {entities: state.entities});
+  };
+
+  cases[UserActionTypes.UPDATE_BY_ID_ORGANIZATIONS] =
+  (state = initialState, action: Action) => {
+    state.entities[action.payload.id].organizations =
+      state.entities[action.payload.id].organizations.map((item) => {
+        if (item.id === action.payload.data.id) {
+          return action.payload.data;
+        } else {
+          return item;
+        }
+      });
+
+    return Object.assign({}, state, {entities: state.entities});
+  };
+
+  cases[UserActionTypes.CREATE_ORGANIZATIONS] =
+  (state = initialState, action: Action) => {
+    state.entities[action.payload.id].organizations =
+      Array.from(new Set([ ...state.entities[action.payload.id].organizations, ...action.payload.data]));
+
+    return Object.assign({}, state, {entities: state.entities});
+  };
+
+  cases[UserActionTypes.DELETE_ORGANIZATIONS] =
+  (state = initialState, action: Action) => {
+    state.entities[action.payload.id].organizations = [];
+
+    return Object.assign({}, state, {entities: state.entities});
+  };
+
+  cases[UserActionTypes.CREATE_MANY_ORGANIZATIONS] =
+  (state = initialState, action: Action) => {
+    state.entities[action.payload.id].organizations =
+      Array.from(new Set([ ...state.entities[action.payload.id].organizations, ...action.payload.data]));
+
+    return Object.assign({}, state, {entities: state.entities});
+  };
+
   return cases;
 };
 
-const cases = Object.assign(BaseReducerFactory<State, User>(UserActionTypes), ReducerFactory());
+const cases = Object.assign(BaseReducerFactory<UserState, User>(UserActionTypes), ReducerFactory());
 
 /**
  * @module UsersReducer
@@ -95,7 +217,7 @@ const cases = Object.assign(BaseReducerFactory<State, User>(UserActionTypes), Re
  * @description
  * Provides with a LoopBack compatible User reducer.
  */
-export function UsersReducer(state = initialState, action: Action): State {
+export function UsersReducer(state = initialState, action: Action): UserState {
   if (cases[action.type]) {
     return cases[action.type](state, action);
   } else {
@@ -168,6 +290,52 @@ export function getUsersSelectedApps(id: string) {
   return (state$: Observable<any>) =>
     createSelector(getUsersApps(id), getUsersSelectedAppsIds(), (apps, selectedAppsIds) =>
       selectedAppsIds.map((appId) => apps[appId]).map((ents) =>
+        ents.length > 1 ? ents : ents[0])
+    );
+}
+
+/**
+ * @author João Ribeiro <@JonnyBGod> <github:JonnyBGod>
+ * @description
+ * OAuthClientApplications relation helper methods
+ */
+export function getUsersSelectedOAuthClientApplicationsIds() {
+  return (state$: Observable<any>) => state$
+    .select((s) => s.users.selectedOAuthClientApplicationsIds);
+}
+
+export function getUsersOAuthClientApplications(id: string) {
+  return (state$: Observable<any>) => state$
+    .select((s) => s.users.entities[id].oAuthClientApplicationss);
+}
+
+export function getUsersSelectedOAuthClientApplications(id: string) {
+  return (state$: Observable<any>) =>
+    createSelector(getUsersOAuthClientApplications(id), getUsersSelectedOAuthClientApplicationsIds(), (oAuthClientApplicationss, selectedOAuthClientApplicationsIds) =>
+      selectedOAuthClientApplicationsIds.map((oAuthClientApplicationsId) => oAuthClientApplicationss[oAuthClientApplicationsId]).map((ents) =>
+        ents.length > 1 ? ents : ents[0])
+    );
+}
+
+/**
+ * @author João Ribeiro <@JonnyBGod> <github:JonnyBGod>
+ * @description
+ * Organizations relation helper methods
+ */
+export function getUsersSelectedOrganizationsIds() {
+  return (state$: Observable<any>) => state$
+    .select((s) => s.users.selectedOrganizationsIds);
+}
+
+export function getUsersOrganizations(id: string) {
+  return (state$: Observable<any>) => state$
+    .select((s) => s.users.entities[id].organizations);
+}
+
+export function getUsersSelectedOrganizations(id: string) {
+  return (state$: Observable<any>) =>
+    createSelector(getUsersOrganizations(id), getUsersSelectedOrganizationsIds(), (organizations, selectedOrganizationsIds) =>
+      selectedOrganizationsIds.map((organizationsId) => organizations[organizationsId]).map((ents) =>
         ents.length > 1 ? ents : ents[0])
     );
 }

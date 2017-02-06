@@ -526,11 +526,11 @@ export class OrganizationApi extends BaseLoopBackApi {
   }
 
   /**
-   * Find a related item by id for oauthApps.
+   * Find a related item by id for oAuthClientApplications.
    *
    * @param any id PersistedModel id
    *
-   * @param any fk Foreign key for oauthApps
+   * @param any fk Foreign key for oAuthClientApplications
    *
    * @returns object An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -541,10 +541,10 @@ export class OrganizationApi extends BaseLoopBackApi {
    * This usually means the response is a `Organization` object.)
    * </em>
    */
-  public findByIdOauthApps(id: any, fk: any): Observable<any> {
+  public findByIdOAuthClientApplications(id: any, fk: any): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Organizations/:id/oauthApps/:fk";
+    "/Organizations/:id/oAuthClientApplications/:fk";
     let _routeParams: any = {
       id: id,
       fk: fk
@@ -556,11 +556,11 @@ export class OrganizationApi extends BaseLoopBackApi {
   }
 
   /**
-   * Delete a related item by id for oauthApps.
+   * Delete a related item by id for oAuthClientApplications.
    *
    * @param any id PersistedModel id
    *
-   * @param any fk Foreign key for oauthApps
+   * @param any fk Foreign key for oAuthClientApplications
    *
    * @returns object An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -568,10 +568,10 @@ export class OrganizationApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  public destroyByIdOauthApps(id: any, fk: any): Observable<any> {
+  public destroyByIdOAuthClientApplications(id: any, fk: any): Observable<any> {
     let _method: string = "DELETE";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Organizations/:id/oauthApps/:fk";
+    "/Organizations/:id/oAuthClientApplications/:fk";
     let _routeParams: any = {
       id: id,
       fk: fk
@@ -583,11 +583,11 @@ export class OrganizationApi extends BaseLoopBackApi {
   }
 
   /**
-   * Update a related item by id for oauthApps.
+   * Update a related item by id for oAuthClientApplications.
    *
    * @param any id PersistedModel id
    *
-   * @param any fk Foreign key for oauthApps
+   * @param any fk Foreign key for oAuthClientApplications
    *
    * @param object data Request data.
    *
@@ -602,10 +602,10 @@ export class OrganizationApi extends BaseLoopBackApi {
    * This usually means the response is a `Organization` object.)
    * </em>
    */
-  public updateByIdOauthApps(id: any, fk: any, data: any = {}): Observable<any> {
+  public updateByIdOAuthClientApplications(id: any, fk: any, data: any = {}): Observable<any> {
     let _method: string = "PUT";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Organizations/:id/oauthApps/:fk";
+    "/Organizations/:id/oAuthClientApplications/:fk";
     let _routeParams: any = {
       id: id,
       fk: fk
@@ -967,7 +967,7 @@ export class OrganizationApi extends BaseLoopBackApi {
   }
 
   /**
-   * Queries oauthApps of Organization.
+   * Queries oAuthClientApplications of Organization.
    *
    * @param any id PersistedModel id
    *
@@ -982,10 +982,10 @@ export class OrganizationApi extends BaseLoopBackApi {
    * This usually means the response is a `Organization` object.)
    * </em>
    */
-  public getOauthApps(id: any, filter: LoopBackFilter = {}): Observable<any> {
+  public getOAuthClientApplications(id: any, filter: LoopBackFilter = {}): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Organizations/:id/oauthApps";
+    "/Organizations/:id/oAuthClientApplications";
     let _routeParams: any = {
       id: id
     };
@@ -997,7 +997,7 @@ export class OrganizationApi extends BaseLoopBackApi {
   }
 
   /**
-   * Creates a new instance in oauthApps of this model.
+   * Creates a new instance in oAuthClientApplications of this model.
    *
    * @param any id PersistedModel id
    *
@@ -1014,10 +1014,10 @@ export class OrganizationApi extends BaseLoopBackApi {
    * This usually means the response is a `Organization` object.)
    * </em>
    */
-  public createOauthApps(id: any, data: any = {}): Observable<any> {
+  public createOAuthClientApplications(id: any, data: any = {}): Observable<any> {
     let _method: string = "POST";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Organizations/:id/oauthApps";
+    "/Organizations/:id/oAuthClientApplications";
     let _routeParams: any = {
       id: id
     };
@@ -1030,7 +1030,7 @@ export class OrganizationApi extends BaseLoopBackApi {
   }
 
   /**
-   * Deletes all oauthApps of this model.
+   * Deletes all oAuthClientApplications of this model.
    *
    * @param any id PersistedModel id
    *
@@ -1040,10 +1040,10 @@ export class OrganizationApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  public deleteOauthApps(id: any): Observable<any> {
+  public deleteOAuthClientApplications(id: any): Observable<any> {
     let _method: string = "DELETE";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Organizations/:id/oauthApps";
+    "/Organizations/:id/oAuthClientApplications";
     let _routeParams: any = {
       id: id
     };
@@ -1054,7 +1054,7 @@ export class OrganizationApi extends BaseLoopBackApi {
   }
 
   /**
-   * Counts oauthApps of Organization.
+   * Counts oAuthClientApplications of Organization.
    *
    * @param any id PersistedModel id
    *
@@ -1068,10 +1068,10 @@ export class OrganizationApi extends BaseLoopBackApi {
    *
    *  - `count` – `{number}` - 
    */
-  public countOauthApps(id: any, where: any = {}): Observable<any> {
+  public countOAuthClientApplications(id: any, where: any = {}): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Organizations/:id/oauthApps/count";
+    "/Organizations/:id/oAuthClientApplications/count";
     let _routeParams: any = {
       id: id
     };
@@ -1378,7 +1378,7 @@ export class OrganizationApi extends BaseLoopBackApi {
   }
 
   /**
-   * Creates a new instance in oauthApps of this model.
+   * Creates a new instance in oAuthClientApplications of this model.
    *
    * @param any id PersistedModel id
    *
@@ -1395,10 +1395,10 @@ export class OrganizationApi extends BaseLoopBackApi {
    * This usually means the response is a `Organization` object.)
    * </em>
    */
-  public createManyOauthApps(id: any, data: any[] = []): Observable<any> {
+  public createManyOAuthClientApplications(id: any, data: any[] = []): Observable<any> {
     let _method: string = "POST";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Organizations/:id/oauthApps";
+    "/Organizations/:id/oAuthClientApplications";
     let _routeParams: any = {
       id: id
     };

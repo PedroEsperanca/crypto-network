@@ -32,7 +32,7 @@
           *ngFor="let org of currentUser.organizations"
           routerLink="/organizations/{{org.id}}/settings">
 
-          <img alt="@{{org.displayName}}" class="avatar org-avatar" height="20" [src]="org.logoURI?.url || org.logoURI || config.logo" width="20" />
+          <img alt="@{{org.displayName}}" class="avatar org-avatar" height="20" [src]="org.logo?.url || org.logo || config.logo" width="20" />
           {{org.displayName}}
         </a>
       </nav>

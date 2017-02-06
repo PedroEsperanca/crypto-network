@@ -4,10 +4,22 @@
   </div>
 
   <form (ngSubmit)="newOrganization()" #newOrganizationForm="ngForm">
-    <dl class="profile-avatar pull-right">
-      <img *ngIf="formModel.photo" alt="@{{formModel.username || formModel.name}}" class="avatar" [src]="formModel.photo">
-      <img *ngIf="!formModel.photo" alt="" class="avatar" [src]="config.logo">
+
+    <dl *ngIf="!config.settings.usePhotoUpload" class="profile-avatar pull-right">
+      <img class="avatar" [src]="formModel.logo?.url || formModel.logo || config.logo">
     </dl>
+
+    <file-uploader *ngIf="config.settings.usePhotoUpload"
+      type="profile"
+      title="Organization logo"
+      uploadButton="Upload new image"
+      uploadingButton="Uploading"
+      [autoUpload]="true"
+      [currentFile]="formModel.logo?.url || config.logo"
+      [fileNameRewrite]="fileNameRewrite"
+      [getUploadUrl]="getUploadUrl"
+      [onCompleteItem]="onUploadComplete"
+      class="profile-avatar pull-right"></file-uploader>
 
     <div>
       <dl class="form-group">
@@ -25,10 +37,10 @@
         </dd>
       </dl>
 
-      <dl class="form-group">
-        <dt><label for="logoURI">{{'Organization Logo URL' | translate}}</label></dt>
+      <dl *ngIf="!config.settings.usePhotoUpload" class="form-group">
+        <dt><label for="logo">{{'Organization Logo Url' | translate}}</label></dt>
         <dd>
-          <input class="form-control" type="text" id="logoURI" name="logoURI" [(ngModel)]="formModel.logoURI">
+          <input class="form-control" type="text" id="logo" name="logo" [(ngModel)]="formModel.logo">
         </dd>
       </dl>
 

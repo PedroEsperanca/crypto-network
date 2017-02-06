@@ -7,6 +7,7 @@ import { TooltipModule } from 'ng2-bootstrap/tooltip';
 // import { TagInputModule } from 'ng2-tag-input';
 
 import { MultilingualModule } from 'shared/i18n/multilingual.module';
+import { FileUploaderModule } from 'shared/app/modules/file-uploader';
 import { AlertModule } from 'shared/app/modules/alert';
 import { HeaderModule } from 'shared/app/modules/header';
 import { FooterModule } from 'shared/app/modules/footer';
@@ -23,6 +24,7 @@ import { OrganizationsNotFoundComponent } from './not-found/not-found.component'
     FormsModule,
     AlertModule,
     MultilingualModule,
+    FileUploaderModule,
     HeaderModule,
     FooterModule,
     routing,

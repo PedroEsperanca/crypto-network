@@ -1,3 +1,78 @@
 :host /deep/ {
-  
+  .no-underline {
+    text-decoration: none !important;
+  }
+
+  .octicon {
+    fill: currentColor;
+    vertical-align: text-bottom;
+  }
+
+  .orghead {
+    margin-top: 68px;
+    padding-top: 20px;
+    padding-bottom: 0;
+    margin-bottom: 20px;
+    color: #666;
+    background-color: #fafafa;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+
+    h1 {
+      margin-top: 0;
+      margin-bottom: 0;
+      font-size: 20px;
+      font-weight: normal;
+      line-height: 28px;
+
+      .avatar {
+        margin-top: -2px;
+        margin-right: 9px;
+        margin-bottom: -2px;
+      }
+    }
+
+    .orgnav {
+      display: flex;
+      position: relative;
+      top: 1px;
+      margin-top: 10px;
+
+      .pagehead-tabs-item {
+        padding: 8px 15px 11px;
+        color: #666;
+        white-space: nowrap;
+        border: solid transparent;
+        border-width: 3px 1px 1px;
+        border-radius: 3px 3px 0 0;
+        
+        .octicon {
+          color: #bbb;
+        }
+
+        .counter {
+          display: inline-block;
+          padding: 2px 5px;
+          font-size: 12px;
+          font-weight: 600;
+          line-height: 1;
+          color: #777;
+          background-color: #eee;
+          border-radius: 20px;
+        }
+
+        &:hover {
+          color: #333;
+          text-decoration: none;
+        }
+
+        &.active {
+          font-weight: 600;
+          color: #333;
+          background-color: #fff;
+          border-color: #d26911 #e5e5e5 transparent;
+        }
+      }
+    }
+  }
 }

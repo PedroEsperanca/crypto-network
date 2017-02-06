@@ -17,7 +17,7 @@ export interface OrganizationInterface {
   s3Photo?: Array<any>;
   apps?: Array<App>;
   users?: Array<User>;
-  oauthApps?: Array<any>;
+  oAuthClientApplications?: Array<any>;
 }
 
 export class Organization implements OrganizationInterface {
@@ -32,7 +32,7 @@ export class Organization implements OrganizationInterface {
   s3Photo: Array<any>;
   apps: Array<App>;
   users: Array<User>;
-  oauthApps: Array<any>;
+  oAuthClientApplications: Array<any>;
   constructor(data?: OrganizationInterface) {
     Object.assign(this, data);
   }
@@ -114,8 +114,8 @@ export class Organization implements OrganizationInterface {
           type: 'Array<User>',
           model: 'User'
         },
-        oauthApps: {
-          name: 'oauthApps',
+        oAuthClientApplications: {
+          name: 'oAuthClientApplications',
           type: 'Array<any>',
           model: ''
         },

@@ -18,10 +18,14 @@ export interface LoopbackStateInterface {
 
 export const LoopbackReducer = {
   loopbackAuth: reducers.LoopbackAuthReducer,
-  users: reducers.UsersReducer
+  users: reducers.UsersReducer,
+  organizations: reducers.OrganizationsReducer,
+  apps: reducers.AppsReducer
 };
 
 export const LoopbackEffects = [
   EffectsModule.run(effects.LoopbackAuthEffects),
-  EffectsModule.run(effects.UserEffects)
+  EffectsModule.run(effects.UserEffects),
+  EffectsModule.run(effects.OrganizationEffects),
+  EffectsModule.run(effects.AppEffects)
 ];

@@ -19,8 +19,8 @@
   <div *ngFor="let application of (currentUser$ | async)?.oAuthClientApplications" class="listgroup-item">
     <div class="list-group-text-block">
       <a routerLink="/settings/applications/{{application.id}}">
-        <img *ngIf="application.logoURI" alt="{{application.name}}" class="avatar" height="40" [src]="application.logoURI">
-        <img *ngIf="!application.logoURI" alt="{{application.name}}" class="avatar" height="40" [src]="config.logo">
+        <img *ngIf="application.logo" alt="{{application.name}}" class="avatar" height="40" [src]="application.logo">
+        <img *ngIf="!application.logo" alt="{{application.name}}" class="avatar" height="40" [src]="config.logo">
       </a>
 
       <div class="oauth-app-meta-container">

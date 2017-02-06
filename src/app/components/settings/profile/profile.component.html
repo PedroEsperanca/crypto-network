@@ -5,8 +5,7 @@
 <form (ngSubmit)="submitUpdate()" #profileForm="ngForm">
 
   <dl *ngIf="!config.settings.usePhotoUpload" class="profile-avatar pull-right">
-    <img *ngIf="formModel.photoUrl" alt="@{{formModel.username || formModel.name}}" class="avatar" [src]="formModel.photoUrl">
-    <img *ngIf="!formModel.photoUrl" alt="" class="avatar" [src]="config.logo">
+    <img alt="@{{formModel.username || formModel.name}}" class="avatar" [src]="profile.photo?.url || profile.photo || config.logo">
   </dl>
 
   <file-uploader *ngIf="config.settings.usePhotoUpload"
@@ -15,7 +14,7 @@
     uploadButton="Upload new picture"
     uploadingButton="Uploading"
     [autoUpload]="true"
-    [currentFile]="formModel.photo"
+    [currentFile]="formModel.photo?.url || config.logo"
     [fileNameRewrite]="fileNameRewrite"
     [getUploadUrl]="getUploadUrl"
     [onCompleteItem]="onUploadComplete"
@@ -30,9 +29,9 @@
     </dl>
 
     <dl *ngIf="!config.settings.usePhotoUpload" class="form-group">
-      <dt><label for="photoUrl">{{'Photo Url' | translate}}</label></dt>
+      <dt><label for="photo">{{'Photo Url' | translate}}</label></dt>
       <dd>
-        <input class="form-control" type="text" id="photoUrl" name="photoUrl" [(ngModel)]="formModel.photoUrl">
+        <input class="form-control" type="text" id="photo" name="photo" [(ngModel)]="formModel.photo">
       </dd>
     </dl>
 

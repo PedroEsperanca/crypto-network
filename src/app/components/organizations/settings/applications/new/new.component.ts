@@ -17,7 +17,7 @@ interface FormI {
   name: string;
   photo: string;
   clientURI: string;
-  logoURI?: string;
+  logo?: string;
   description?: string;
   redirectURIs: string;
 }
@@ -34,7 +34,7 @@ export class SettingsApplicationsNewComponent implements OnDestroy {
     name: '',
     photo: '',
     clientURI: '',
-    logoURI: '',
+    logo: '',
     description: '',
     redirectURIs: ''
   };
@@ -67,7 +67,7 @@ export class SettingsApplicationsNewComponent implements OnDestroy {
     this.user.createOAuthClientApplications(this.currenUser.id, {
       name: this.formModel.name,
       clientURI: this.formModel.clientURI,
-      logoURI: this.formModel.logoURI,
+      logo: this.formModel.logo,
       description: this.formModel.description,
       redirectURIs: this.formModel.redirectURIs.replace(', ', ',').split(',')
     }).subscribe(

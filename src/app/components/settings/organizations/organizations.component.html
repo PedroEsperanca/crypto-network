@@ -10,7 +10,7 @@
         <li *ngFor="let org of currentUser.organizations" class="clearfix">
           <a class="btn btn-sm float-right">{{'Leave' | translate}}</a>
 
-          <img alt="@{{org.displayName}}" [src]="org.logoURI?.url || org.logoURI || config.logo" style="vertical-align: middle;" height="20" width="20">
+          <img alt="@{{org.displayName}}" [src]="org.logo?.url || org.logo || config.logo" style="vertical-align: middle;" height="20" width="20">
 
           <strong><a routerLink="/{{org.id}}">{{org.displayName}}</a></strong>
 

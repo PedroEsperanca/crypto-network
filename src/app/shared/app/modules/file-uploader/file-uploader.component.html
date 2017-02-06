@@ -7,7 +7,7 @@
       (fileOver)="fileOverBase($event)"
       [uploader]="uploader"
       class="logo-box">
-      <img *ngIf="currentFile" alt="" [src]="currentFile.url">
+      <img *ngIf="currentFile" alt="" [src]="currentFile">
 
       <div *ngIf="!currentFile" class="logo-placeholder">
         <div>

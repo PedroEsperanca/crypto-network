@@ -17,7 +17,7 @@ interface FormI {
   name: string;
   photo: string;
   clientURI: string;
-  logoURI?: string;
+  logo?: string;
   description?: string;
   redirectURIs: string;
 }
@@ -34,7 +34,7 @@ export class OrganizationsNewComponent implements OnDestroy {
     name: '',
     photo: '',
     clientURI: '',
-    logoURI: '',
+    logo: '',
     description: '',
     redirectURIs: ''
   };
