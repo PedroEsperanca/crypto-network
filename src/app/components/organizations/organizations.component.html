@@ -1,15 +1,7 @@
-<header>
-	<nav class="navbar navbar-dark">
-	  <a [routerLink]="['/apps']" class="navbar-brand" style="color: white; text-decoration: none;">
-	    <img src="/assets/img/angular-logo.png">
-	  </a>
+<app-header></app-header>
 
-	  <div class="nav navbar-nav float-xs-right">
-	  	<user-menu></user-menu>
-	  </div>
-	</nav>
-</header>
+<app-alert></app-alert>
 
-<div>
-    <router-outlet></router-outlet>
-</div>
+<router-outlet></router-outlet>
+
+<app-footer></app-footer>

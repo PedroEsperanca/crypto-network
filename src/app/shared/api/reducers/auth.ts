@@ -49,7 +49,8 @@ export function LoopbackAuthReducer(state = initialState, action: Action): SDKTo
       return Object.assign({}, initialState);
     }
 
-    case LoopbackAuthActionTypes.UPDATE_USER_PROPERTIES_SUCCESS: {
+    case LoopbackAuthActionTypes.UPDATE_USER_PROPERTIES_SUCCESS:
+    case LoopbackAuthActionTypes.UPDATE_USER_STATE_SUCCESS: {
       const userProperties: any = action.payload;
       let updateState = Object.assign({}, state);
 

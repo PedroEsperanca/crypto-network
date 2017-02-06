@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-3">
+      <nav class="menu">
+        <span class="menu-heading">{{'Organization settings' | translate}}</span>
+
+        <a routerLink="./profile" class="menu-item" routerLinkActive="active">{{'Profile' | translate}}</a>
+        <a routerLink="./billing" class="menu-item" routerLinkActive="active">{{'Billing' | translate}}</a>
+      </nav>
+
+      <nav *ngIf="config.settings?.oauth" class="menu">
+        <span class="menu-heading">{{'Developer settings' | translate}}</span>
+
+        <a routerLink="./applications" class="menu-item" routerLinkActive="active">{{'OAuth Applications' | translate}}</a>
+      </nav>
+    </div>
+
+    <div class="col-sm-9 main">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

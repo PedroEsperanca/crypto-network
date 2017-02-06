@@ -1,7 +1,7 @@
-<li *ngIf="(currentToken$ | async).id" class="nav-item dropdown" dropdown>
+<li *ngIf="(currentToken$ | async)?.id" class="nav-item dropdown" dropdown>
   <a class="dropdown-toggle" dropdownToggle>
-    <img *ngIf="(currentUser$ | async).photo" [ctSrc]="(currentUser$ | async).photo?.url || (currentUser$ | async).photo" [ctOptions]="{smart: 'face'}" ctSize="24x24">
-    <i *ngIf="!(currentUser$ | async).photo" class="fa fa-user fa-lg"></i>
+    <img *ngIf="(currentUser$ | async)?.photo" [ctSrc]="(currentUser$ | async)?.photo?.url || (currentUser$ | async)?.photo" [ctOptions]="{smart: 'face'}" ctSize="24x24">
+    <i *ngIf="!(currentUser$ | async)?.photo" class="fa fa-user fa-lg"></i>
   </a>
 
   <ul dropdownMenu role="menu" aria-labelledby="single-button" class="dropdown-menu-right">
@@ -9,19 +9,19 @@
       <div class="dropdown-header">
         {{'Signed in as' | translate}}
         <br>
-        <strong>{{(currentUser$ | async).name}}</strong>
+        <strong>{{(currentUser$ | async)?.name}}</strong>
       </div>
     </li>
 
     <li class="divider dropdown-divider"></li>
 
     <li role="menuitem">
-      <a class="dropdown-item" routerLink="/{{(currentToken$ | async).id}}">{{'Your profile' | translate}}</a>
+      <a class="dropdown-item" routerLink="/{{(currentToken$ | async)?.id}}">{{'Your profile' | translate}}</a>
     </li>
 
     <!--<li><a ng-href="/apps"><i class="fa fa-th-large"></i> <span translate>Dashboard</span></a></li>
-    <li ng-if="(currentUser$ | async).applications" class="divider"></li>
-    <li ng-repeat="application in (currentUser$ | async).applications">
+    <li ng-if="(currentUser$ | async)?.applications" class="divider"></li>
+    <li ng-repeat="application in (currentUser$ | async)?.applications">
       <a ui-sref="apps.app.tasks.home({app: application.id})" ng-class="{active: application.id == currentApplication.id}">{{application.name}}</a>
     </li>-->
 

@@ -1,0 +1,17 @@
+:host /deep/ {
+	.profile-avatar {
+		width: 200px;
+		
+		img {
+			width: 100%;
+			border-radius: 6px;
+		}
+	}
+
+	.form-group textarea.form-control {
+    width: 440px !important;
+    max-width: 100% !important;
+    height: 70px !important;
+    min-height: 70px !important;
+  }
+}

@@ -8,8 +8,7 @@ import {
 
 import { OrganizationsComponent } from './organizations.component';
 
-import { OrganizationsHomeComponent } from './home/home.component';
-import { OrganizationsCreateComponent } from './create/create.component';
+import { OrganizationsNewComponent } from './new/new.component';
 import { OrganizationsNotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
@@ -18,22 +17,16 @@ const routes: Routes = [
     component: OrganizationsComponent,
     children: [
       {
-        path: '',
-        component: OrganizationsHomeComponent
-      },
-      {
-        path: 'create',
-        component: OrganizationsCreateComponent
+        path: 'new',
+        component: OrganizationsNewComponent
       },
       {
         path: 'not-found',
         component: OrganizationsNotFoundComponent
       },
       {
-        path: ':id',
-        loadChildren: './organization/organization.module#OrganizationModule',
-        canActivate: [ OrganizationExistsGuard ],
-        canDeactivate: [ OrganizationCanDeactivateGuard ]
+        path: ':id/settings',
+        loadChildren: './settings/settings.module#SettingsModule'
       }
     ]
   }

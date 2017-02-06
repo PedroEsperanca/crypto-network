@@ -65,12 +65,14 @@ export class AppEffects {
     .ofType(UserActionTypes.LOGOUT_FAIL)
     .map(() => go(['/']));
 
-  @Effect()
+  @Effect({dispatch: false})
   public updateUserPropertiesSuccess = this.actions$
     .ofType(LoopbackAuthActionTypes.UPDATE_USER_PROPERTIES_SUCCESS)
-    .map((action: LoopbackAction) =>
-      new AlertActions.setAlert(action.meta.alert.success)
-    );
+    .do((action: LoopbackAction) => {
+      if (action.meta && action.meta.alert && action.meta.alert.success) {
+        this.store.dispatch(new AlertActions.setAlert(action.meta.alert.success));
+      }
+    });
 
   constructor(
     private store: Store<IAppState>,

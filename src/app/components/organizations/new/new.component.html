@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="Subhead">
+    <h2 class="Subhead-heading">{{'Register a new Organization' | translate}}</h2>
+  </div>
+
+  <form (ngSubmit)="newOrganization()" #newOrganizationForm="ngForm">
+    <dl class="profile-avatar pull-right">
+      <img *ngIf="formModel.photo" alt="@{{formModel.username || formModel.name}}" class="avatar" [src]="formModel.photo">
+      <img *ngIf="!formModel.photo" alt="" class="avatar" [src]="config.logo">
+    </dl>
+
+    <div>
+      <dl class="form-group">
+        <dt><label for="name">{{'Organization name' | translate}}</label></dt>
+        <dd>
+          <input class="form-control" type="text" id="name" name="name" [(ngModel)]="formModel.name" required>
+          <p class="note">{{'Something users will recognize and trust' | translate}}</p>
+        </dd>
+      </dl>
+
+      <dl class="form-group">
+        <dt><label for="displayName">{{'Organization display name' | translate}}</label></dt>
+        <dd>
+          <input class="form-control" type="text" id="displayName" name="displayName" [(ngModel)]="formModel.displayName" required>
+        </dd>
+      </dl>
+
+      <dl class="form-group">
+        <dt><label for="logoURI">{{'Organization Logo URL' | translate}}</label></dt>
+        <dd>
+          <input class="form-control" type="text" id="logoURI" name="logoURI" [(ngModel)]="formModel.logoURI">
+        </dd>
+      </dl>
+
+      <dl class="form-group">
+        <dt><label for="description">{{'Organization description' | translate}}</label></dt>
+        <dd>
+          <textarea class="form-control short" cols="40" id="description" name="description" [(ngModel)]="formModel.description" placeholder="{{'Organization description is optional' | translate}}" rows="20" tabindex="4"></textarea>
+        </dd>
+      </dl>
+      
+      <hr class="form-hr">
+
+      <p>
+        <button type="submit" class="btn btn-primary mr-1" tabindex="5" [disabled]="!newOrganizationForm.form.valid">{{'Register application' | translate}}</button>
+        <a routerLink="/settings/applications" class="btn btn-invisible">{{'Cancel' | translate}}</a>
+      </p>
+    </div>
+  </form>
+</div>

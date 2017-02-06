@@ -1,0 +1,76 @@
+:host /deep/ {
+	.profile-avatar {
+		width: 200px;
+		
+		img {
+			width: 100%;
+			border-radius: 6px;
+		}
+	}
+
+	.form-group textarea.form-control {
+    width: 440px !important;
+    max-width: 100% !important;
+    height: 70px !important;
+    min-height: 70px !important;
+  }
+
+	.app-owner {
+		margin: 15px 0 0;
+
+		img {
+	    float: left;
+	    margin: 0 10px 0 0;
+	    border-radius: 3px;
+	  }
+
+    p {
+		  float: left;
+		  margin: 0;
+		  line-height: 30px;
+		}
+	}
+
+	.oauth-app-info-container {
+		dl.keys {
+			dt {
+			  margin-top: 10px;
+			  font-weight: bold;
+			  color: #767676;
+			}
+
+	  	dd {
+		    font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+		    color: #333;
+			}
+		}
+	}
+
+	.btn-danger {
+		color: #fff !important;
+	}
+	
+	.modal-dialog {
+		.modal-header {
+			h4 {
+		    font-size: 18px;
+		    font-weight: normal;
+			}
+		}
+
+		.modal-alert {
+			padding: 10px 15px;
+			border-bottom: 1px solid #f2e09a;
+			color: #796620;
+			background-color: #f8eec7;
+		}
+
+		.modal-body {
+			form {
+				.form-group .form-control {
+			    width: 100%;
+				}
+			}
+		}
+	}
+}

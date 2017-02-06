@@ -19,9 +19,11 @@ export const LoopbackAuthActionTypes = {
   CLEAR_TOKEN: type('[LoopbackAuth] Clear token in store'),
   SET_USER: type('[LoopbackAuth] Set user in store'),
   SET_USER_SUCCESS: type('[LoopbackAuth] Set user in store success'),
-  UPDATE_USER_PROPERTIES: type('[LoopbackAuth] Update user properties in store'),
-  UPDATE_USER_PROPERTIES_SUCCESS: type('[LoopbackAuth] Update user properties in store success'),
-  UPDATE_USER_PROPERTIES_FAIL: type('[LoopbackAuth] Update user properties in store fail'),
+  UPDATE_USER_PROPERTIES: type('[LoopbackAuth] Update user properties'),
+  UPDATE_USER_PROPERTIES_SUCCESS: type('[LoopbackAuth] Update user properties success'),
+  UPDATE_USER_PROPERTIES_FAIL: type('[LoopbackAuth] Update user properties fail'),
+  UPDATE_USER_STATE: type('[LoopbackAuth] Update user state'),
+  UPDATE_USER_STATE_SUCCESS: type('[LoopbackAuth] Update user state success'),
 };
 
 /**
@@ -90,6 +92,18 @@ export const LoopbackAuthActions = {
 
   updateUserPropertiesFail: class implements Action {
     public type = LoopbackAuthActionTypes.UPDATE_USER_PROPERTIES_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  updateUserState: class implements Action {
+    public type = LoopbackAuthActionTypes.UPDATE_USER_STATE;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  updateUserStateSuccess: class implements Action {
+    public type = LoopbackAuthActionTypes.UPDATE_USER_STATE_SUCCESS;
 
     constructor(public payload: any, public meta?: any) { }
   },

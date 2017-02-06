@@ -23,12 +23,12 @@ interface FormI {
 }
 
 @Component({
-  selector: 'settingsApplicationsNew',
+  selector: 'organizationNew',
   styleUrls: [ './new.component.scss' ],
   templateUrl: './new.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SettingsApplicationsNewComponent implements OnDestroy {
+export class OrganizationsNewComponent implements OnDestroy {
   public config: any;
   public formModel: FormI = {
     name: '',
@@ -63,14 +63,8 @@ export class SettingsApplicationsNewComponent implements OnDestroy {
     });
   }
 
-  public newApp() {
-    this.user.createOAuthClientApplications(this.currenUser.id, {
-      name: this.formModel.name,
-      clientURI: this.formModel.clientURI,
-      logoURI: this.formModel.logoURI,
-      description: this.formModel.description,
-      redirectURIs: this.formModel.redirectURIs.replace(', ', ',').split(',')
-    }).subscribe(
+  public newOrganization() {
+    this.user.createOrganizations(this.currenUser.id, this.formModel).subscribe(
       (response: any) => {
         if (response.error) {
           this.store.dispatch(new AlertActions.setAlert({
@@ -79,10 +73,10 @@ export class SettingsApplicationsNewComponent implements OnDestroy {
           }));
         } else {
           this.store.dispatch(new LoopbackAuthActions.updateUserState({
-            oAuthClientApplications: [...this.currenUser.oAuthClientApplications, response]
+            organizations: [...this.currenUser.organizations, response]
           }));
 
-          this.router.navigate(['/settings/applications/' + response.id]);
+          this.router.navigate(['organizations/' + response.id + '/settings/']);
         }
       },
       (error) => this.store.dispatch(new AlertActions.setAlert({

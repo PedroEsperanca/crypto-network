@@ -28,7 +28,7 @@ import {
 })
 export class SettingsComponent implements OnDestroy {
   public config: any;
-  public organizations$: Observable<OrganizationInterface[]>;
+  public currentUser: User;
 
   public needToVerifyEmail: boolean = false;
 
@@ -41,11 +41,10 @@ export class SettingsComponent implements OnDestroy {
   ) {
     this.config = this.configService.getSettings();
 
-    this.organizations$ = store.let(getOrganizationsState())
-      .switchMap((organizations) => store.let(getOrganizations(organizations.ids)));
-
     this.subscriptions.push(this.store.let(getLoopbackAuthUser()).subscribe((user: User) => {
       if (!user) { return; }
+
+      this.currentUser = Object.assign({}, user);
 
       if (typeof user.emailAddresses !== 'undefined') {
         this.needToVerifyEmail = user.emailAddresses.filter((email: any) => {

@@ -78,6 +78,19 @@ export class LoopbackAuthEffects {
         ))
     });
 
+  @Effect({dispatch: false})
+  protected updateUserState: Observable<LoopbackAction> = this.actions$
+    .ofType(LoopbackAuthActionTypes.UPDATE_USER_STATE)
+    .do((action: LoopbackAction) => {
+      let token = this.auth.getToken();
+      token.user = Object.assign(token.user, action.payload);
+      this.auth.setUser(token);
+      this.auth.save();
+      this.store.dispatch(
+        new LoopbackAuthActions.updateUserStateSuccess(action.payload, action.meta)
+      );
+    });
+
   constructor(
     private actions$: Actions,
     private store: Store<any>,

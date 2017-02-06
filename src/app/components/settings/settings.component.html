@@ -25,15 +25,15 @@
         <a routerLink="/settings/applications" class="menu-item" routerLinkActive="active">{{'OAuth Applications' | translate}}</a>
       </nav>
 
-      <nav *ngIf="(organizations$ | async).length" class="menu">
+      <nav *ngIf="currentUser.organizations.length" class="menu">
         <span class="menu-heading">{{'Organization settings' | translate}}</span>
 
         <a class="menu-item"
-          *ngFor="let organization of organizations$ | async"
-          routerLink="/organizations/{{organization.id}}/settings">
+          *ngFor="let org of currentUser.organizations"
+          routerLink="/organizations/{{org.id}}/settings">
 
-          <img alt="@{{organization.name}}" class="avatar org-avatar" height="20" [src]="organization.photo" width="20" />
-          {{organization.name}}
+          <img alt="@{{org.displayName}}" class="avatar org-avatar" height="20" [src]="org.logoURI?.url || org.logoURI || config.logo" width="20" />
+          {{org.displayName}}
         </a>
       </nav>
     </div>

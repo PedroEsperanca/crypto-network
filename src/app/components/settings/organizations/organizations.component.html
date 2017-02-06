@@ -10,9 +10,9 @@
         <li *ngFor="let org of currentUser.organizations" class="clearfix">
           <a class="btn btn-sm float-right">{{'Leave' | translate}}</a>
 
-          <img alt="@{{org.name}}" height="20" [src]="org.photo" style="vertical-align: middle;" width="20">
+          <img alt="@{{org.displayName}}" [src]="org.logoURI?.url || org.logoURI || config.logo" style="vertical-align: middle;" height="20" width="20">
 
-          <strong><a routerLink="/{{org.id}}">{{org.name}}</a></strong>
+          <strong><a routerLink="/{{org.id}}">{{org.displayName}}</a></strong>
 
           <span class="text-small text-normal text-gray ml-1">member</span>
         </li>

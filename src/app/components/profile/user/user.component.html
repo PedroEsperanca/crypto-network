@@ -2,8 +2,7 @@
   <div class="row">
     <div class="col-sm-3">
       <a *ngIf="isMe" [routerLink]="['/settings/profile']" class="vcard-avatar d-block">
-        <img *ngIf="profile.photo" alt="" class="avatar" [src]="profile.photo?.url || profile.photo">
-        <img *ngIf="!profile.photo" alt="" class="avatar" [src]="config.logo">
+        <img alt="" class="avatar" [src]="profile.photo?.url || profile.photo || config.logo">
       </a>
 
       <a *ngIf="!isMe" class="vcard-avatar d-block">
@@ -19,12 +18,14 @@
       </div>
 
       <div *ngIf="profile.organizations.length" class="border-top clearfix">
-        <h2>{{'Organizations' | translate}}</h2>
+        <h4>{{'Organizations' | translate}}</h4>
 
         <a *ngFor="let org of profile.organizations" routerLink="/{{org.id}}" class="avatar-group-item">
-          <img alt="@{{org.name}}" class="avatar" height="35" [src]="org.photo" width="35">
+          <img alt="@{{org.displayName}}" [src]="org.logoURI?.url || org.logoURI || config.logo" height="35" width="35">
         </a>
       </div>
+
+      <br *ngIf="profile.organizations.length">
 
       <a *ngIf="isMe" [routerLink]="['/settings/profile']">{{'Edit profile' | translate}}</a>
     </div>
