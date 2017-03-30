@@ -1,10 +1,10 @@
-<li *ngIf="(currentToken$ | async)?.id" class="nav-item dropdown" dropdown>
+<li *ngIf="(currentToken$ | async)?.id" class="nav-item dropdown" dropdown placement="bottom right">
   <a class="dropdown-toggle" dropdownToggle>
     <img *ngIf="(currentUser$ | async)?.photo" [ctSrc]="(currentUser$ | async)?.photo?.url || (currentUser$ | async)?.photo" [ctOptions]="{smart: 'face'}" ctSize="24x24">
     <i *ngIf="!(currentUser$ | async)?.photo" class="fa fa-user fa-lg"></i>
   </a>
 
-  <ul dropdownMenu role="menu" aria-labelledby="single-button" class="dropdown-menu-right">
+  <ul *dropdownMenu role="menu" aria-labelledby="single-button" class="dropdown-menu dropdown-menu-right">
     <li role="menuitem">
       <div class="dropdown-header">
         {{'Signed in as' | translate}}
@@ -16,7 +16,7 @@
     <li class="divider dropdown-divider"></li>
 
     <li role="menuitem">
-      <a class="dropdown-item" routerLink="/{{(currentToken$ | async)?.id}}">{{'Your profile' | translate}}</a>
+      <a class="dropdown-item" routerLink="/{{(currentUser$ | async)?.id}}">{{'Your profile' | translate}}</a>
     </li>
 
     <!--<li><a ng-href="/apps"><i class="fa fa-th-large"></i> <span translate>Dashboard</span></a></li>

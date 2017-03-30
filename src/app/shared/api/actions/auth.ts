@@ -1,4 +1,4 @@
-
+/* tslint:disable */
 import { Action } from '@ngrx/store';
 import { type } from '../util';
 import { SDKToken } from '../models/BaseModels';

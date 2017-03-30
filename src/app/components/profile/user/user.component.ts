@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { ConfigService } from 'ng2-config';
+import { ConfigService } from '@nglibs/config';
 
 import { User, UserApi, LoopBackAuth } from 'shared/api';
 

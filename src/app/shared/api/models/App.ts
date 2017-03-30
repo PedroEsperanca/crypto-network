@@ -1,34 +1,34 @@
 /* tslint:disable */
 import {
-  Organization,
-  User
+  User,
+  Organization
 } from '../index';
 
 declare var Object: any;
 export interface AppInterface {
-  id?: string;
-  name?: string;
-  organizationId?: string;
-  createdAt?: Date;
-  updatedAt?: Date;
-  _options?: any;
-  userId?: any;
-  organization?: Organization;
-  options?: Array<any>;
+  "id"?: any;
+  "name"?: any;
+  "userId"?: any;
+  "organizationId"?: any;
+  "createdAt"?: any;
+  "updatedAt"?: any;
+  "_options"?: any;
   user?: User;
+  organization?: Organization;
+  options?: any[];
 }
 
 export class App implements AppInterface {
-  id: string;
-  name: string;
-  organizationId: string;
-  createdAt: Date;
-  updatedAt: Date;
-  _options: any;
-  userId: any;
-  organization: Organization;
-  options: Array<any>;
+  "id": any;
+  "name": any;
+  "userId": any;
+  "organizationId": any;
+  "createdAt": any;
+  "updatedAt": any;
+  "_options": any;
   user: User;
+  organization: Organization;
+  options: any[];
   constructor(data?: AppInterface) {
     Object.assign(this, data);
   }
@@ -47,7 +47,7 @@ export class App implements AppInterface {
   **/
   public static factory(data: AppInterface): App{
     return new App(data);
-  }  
+  }
   /**
   * @method getModelDefinition
   * @author Julien Ledun
@@ -60,36 +60,41 @@ export class App implements AppInterface {
       name: 'App',
       plural: 'Apps',
       properties: {
-        id: {
+        "id": {
           name: 'id',
-          type: 'string'
-        },
-        name: {
-          name: 'name',
-          type: 'string'
-        },
-        organizationId: {
-          name: 'organizationId',
-          type: 'string'
-        },
-        createdAt: {
-          name: 'createdAt',
-          type: 'Date'
-        },
-        updatedAt: {
-          name: 'updatedAt',
-          type: 'Date'
-        },
-        _options: {
-          name: '_options',
           type: 'any'
         },
-        userId: {
+        "name": {
+          name: 'name',
+          type: 'any'
+        },
+        "userId": {
           name: 'userId',
+          type: 'any'
+        },
+        "organizationId": {
+          name: 'organizationId',
+          type: 'any'
+        },
+        "createdAt": {
+          name: 'createdAt',
+          type: 'any'
+        },
+        "updatedAt": {
+          name: 'updatedAt',
+          type: 'any'
+        },
+        "_options": {
+          name: '_options',
           type: 'any'
         },
       },
       relations: {
+        user: {
+          name: 'user',
+          type: 'User',
+          model: 'User'
+        },
         organization: {
           name: 'organization',
           type: 'Organization',
@@ -97,13 +102,8 @@ export class App implements AppInterface {
         },
         options: {
           name: 'options',
-          type: 'Array<any>',
+          type: 'any[]',
           model: ''
-        },
-        user: {
-          name: 'user',
-          type: 'User',
-          model: 'User'
         },
       }
     }

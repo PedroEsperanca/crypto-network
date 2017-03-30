@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef, Inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { ConfigService } from 'ng2-config';
+import { ConfigService } from '@nglibs/config';
 
 import {
   SDKToken,

@@ -12,8 +12,8 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
 import { App } from '../../models/App';
 import { SocketConnection } from '../../sockets/socket.connections';
-import { Organization } from '../../models/Organization';
 import { User } from '../../models/User';
+import { Organization } from '../../models/Organization';
 
 
 /**
@@ -34,13 +34,43 @@ export class AppApi extends BaseLoopBackApi {
   }
 
   /**
+   * Fetches belongsTo relation user.
+   *
+   * @param {any} id App id
+   *
+   * @param {boolean} refresh 
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `App` object.)
+   * </em>
+   */
+  public getUser(id: any, refresh: any = {}): Observable<any> {
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Apps/:id/user";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (refresh) _urlParams.refresh = refresh;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    return result;
+  }
+
+  /**
    * Fetches belongsTo relation organization.
    *
-   * @param any id PersistedModel id
+   * @param {any} id App id
    *
-   * @param boolean refresh 
+   * @param {boolean} refresh 
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -66,11 +96,11 @@ export class AppApi extends BaseLoopBackApi {
   /**
    * Fetches hasOne relation options.
    *
-   * @param any id PersistedModel id
+   * @param {any} id App id
    *
-   * @param boolean refresh 
+   * @param {boolean} refresh 
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -96,13 +126,13 @@ export class AppApi extends BaseLoopBackApi {
   /**
    * Creates a new instance in options of this model.
    *
-   * @param any id PersistedModel id
+   * @param {any} id App id
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -129,13 +159,13 @@ export class AppApi extends BaseLoopBackApi {
   /**
    * Update options of this model.
    *
-   * @param any id PersistedModel id
+   * @param {any} id App id
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -162,9 +192,9 @@ export class AppApi extends BaseLoopBackApi {
   /**
    * Deletes options of this model.
    *
-   * @param any id PersistedModel id
+   * @param {any} id App id
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -184,43 +214,13 @@ export class AppApi extends BaseLoopBackApi {
   }
 
   /**
-   * Fetches belongsTo relation user.
-   *
-   * @param any id PersistedModel id
-   *
-   * @param boolean refresh 
-   *
-   * @returns object An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `App` object.)
-   * </em>
-   */
-  public getUser(id: any, refresh: any = {}): Observable<any> {
-    let _method: string = "GET";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Apps/:id/user";
-    let _routeParams: any = {
-      id: id
-    };
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    if (refresh) _urlParams.refresh = refresh;
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
-    return result;
-  }
-
-  /**
    * Patch an existing model instance or insert a new one into the data source.
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
-   * This method expects a subset of model properties as request parameters.
+   *  - `data` – `{object}` - Model instance data
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -245,13 +245,13 @@ export class AppApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param any id PersistedModel id
+   * @param {any} id App id
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
-   * This method expects a subset of model properties as request parameters.
+   *  - `data` – `{object}` - An object of model property name/value pairs
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -278,15 +278,15 @@ export class AppApi extends BaseLoopBackApi {
   /**
    * Statistical information for 'App' registers.
    *
-   * @param string range hourly, daily, weekly, monthly, yearly, custom
+   * @param {string} range hourly, daily, weekly, monthly, yearly, custom
    *
-   * @param object custom {"start": date, "end": date }
+   * @param {object} custom {"start": date, "end": date }
    *
-   * @param object where where filter 
+   * @param {object} where where filter 
    *
-   * @param string groupBy group by filter 
+   * @param {string} groupBy group by filter 
    *
-   * @returns object[] An empty reference that will be
+   * @returns {object[]} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -313,13 +313,13 @@ export class AppApi extends BaseLoopBackApi {
   /**
    * Creates a new instance in options of this model.
    *
-   * @param any id PersistedModel id
+   * @param {any} id App id
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object[] An empty reference that will be
+   * @returns {object[]} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *

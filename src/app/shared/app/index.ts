@@ -5,7 +5,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { ModalModule } from 'ng2-bootstrap/modal';
 import { TooltipModule } from 'ng2-bootstrap/tooltip';
-import { DropdownModule } from 'ng2-bootstrap/dropdown';
+import { BsDropdownModule } from 'ng2-bootstrap/dropdown';
 // import { IDLE_PROVIDERS } from 'ng2-idle/core';
 
 import { SDKBrowserModule, InternalStorage, StorageBrowser } from '../api';
@@ -47,7 +47,7 @@ export const MY_APP_IMPORTS: any[] = [
   CloudtasksModule.forRoot(),
   ModalModule.forRoot(),
   TooltipModule.forRoot(),
-  DropdownModule.forRoot(),
+  BsDropdownModule.forRoot(),
 
   ScrollSpyModule.forRoot(),
 

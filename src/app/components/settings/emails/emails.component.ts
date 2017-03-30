@@ -2,7 +2,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { Store } from '@ngrx/store';
 import { Component, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 
-import { ConfigService } from 'ng2-config';
+import { ConfigService } from '@nglibs/config';
 
 import {
   User,

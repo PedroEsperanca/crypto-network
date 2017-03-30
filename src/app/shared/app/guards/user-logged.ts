@@ -6,7 +6,7 @@ import {
   RouterStateSnapshot
 } from '@angular/router';
 
-import { ConfigService } from 'ng2-config';
+import { ConfigService } from '@nglibs/config';
 
 import { LoopBackAuth } from 'shared/api';
 

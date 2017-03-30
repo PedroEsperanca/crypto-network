@@ -1,3 +1,4 @@
+/* tslint:disable */
 /**
 * @module SDKModule
 * @author Jonathan Casarrubias <t:@johncasarrubias> <gh:jonathan-casarrubias>
@@ -48,9 +49,9 @@ import { SocketBrowser } from './sockets/socket.browser';
 import { SocketDriver } from './sockets/socket.driver';
 import { SocketConnection } from './sockets/socket.connections';
 import { RealTime } from './services/core/real.time';
+import { UserApi } from './services/custom/User';
 import { OrganizationApi } from './services/custom/Organization';
 import { AppApi } from './services/custom/App';
-import { UserApi } from './services/custom/User';
 /**
 * @module SDKBrowserModule
 * @description
@@ -82,9 +83,9 @@ export class SDKBrowserModule {
         JSONSearchParams,
         SDKModels,
         RealTime,
+        UserApi,
         OrganizationApi,
         AppApi,
-        UserApi,
         internalStorageProvider,
         { provide: SDKStorage, useClass: StorageBrowser },
         { provide: SocketDriver, useClass: SocketBrowser }
@@ -110,3 +111,4 @@ export * from './state';
 export * from './guards/index';
 export * from './resolvers/index';
 export * from './util';
+

@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { ConfigService } from 'ng2-config';
+import { ConfigService } from '@nglibs/config';
 
 import { UserInterface, LoopBackConfig } from 'shared/api';
 import { IAppState } from 'shared/ngrx';

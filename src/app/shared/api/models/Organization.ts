@@ -1,38 +1,38 @@
 /* tslint:disable */
 import {
-  App,
-  User
+  User,
+  App
 } from '../index';
 
 declare var Object: any;
 export interface OrganizationInterface {
-  id?: string;
-  name?: string;
-  description?: string;
-  photoUrl?: string;
-  createdAt?: Date;
-  updatedAt?: Date;
-  photo?: any;
-  roles?: Array<any>;
-  s3Photo?: Array<any>;
-  apps?: Array<App>;
-  users?: Array<User>;
-  oAuthClientApplications?: Array<any>;
+  "id"?: any;
+  "name"?: any;
+  "displayName"?: any;
+  "description"?: any;
+  "logo"?: any;
+  "createdAt"?: any;
+  "updatedAt"?: any;
+  users?: User[];
+  roles?: any[];
+  s3Photo?: any[];
+  apps?: App[];
+  oAuthClientApplications?: any[];
 }
 
 export class Organization implements OrganizationInterface {
-  id: string;
-  name: string;
-  description: string;
-  photoUrl: string;
-  createdAt: Date;
-  updatedAt: Date;
-  photo: any;
-  roles: Array<any>;
-  s3Photo: Array<any>;
-  apps: Array<App>;
-  users: Array<User>;
-  oAuthClientApplications: Array<any>;
+  "id": any;
+  "name": any;
+  "displayName": any;
+  "description": any;
+  "logo": any;
+  "createdAt": any;
+  "updatedAt": any;
+  users: User[];
+  roles: any[];
+  s3Photo: any[];
+  apps: App[];
+  oAuthClientApplications: any[];
   constructor(data?: OrganizationInterface) {
     Object.assign(this, data);
   }
@@ -51,7 +51,7 @@ export class Organization implements OrganizationInterface {
   **/
   public static factory(data: OrganizationInterface): Organization{
     return new Organization(data);
-  }  
+  }
   /**
   * @method getModelDefinition
   * @author Julien Ledun
@@ -64,59 +64,59 @@ export class Organization implements OrganizationInterface {
       name: 'Organization',
       plural: 'Organizations',
       properties: {
-        id: {
+        "id": {
           name: 'id',
-          type: 'string'
+          type: 'any'
         },
-        name: {
+        "name": {
           name: 'name',
-          type: 'string'
+          type: 'any'
         },
-        description: {
+        "displayName": {
+          name: 'displayName',
+          type: 'any'
+        },
+        "description": {
           name: 'description',
-          type: 'string'
+          type: 'any'
         },
-        photoUrl: {
-          name: 'photoUrl',
-          type: 'string'
+        "logo": {
+          name: 'logo',
+          type: 'any'
         },
-        createdAt: {
+        "createdAt": {
           name: 'createdAt',
-          type: 'Date'
+          type: 'any'
         },
-        updatedAt: {
+        "updatedAt": {
           name: 'updatedAt',
-          type: 'Date'
-        },
-        photo: {
-          name: 'photo',
           type: 'any'
         },
       },
       relations: {
+        users: {
+          name: 'users',
+          type: 'User[]',
+          model: 'User'
+        },
         roles: {
           name: 'roles',
-          type: 'Array<any>',
+          type: 'any[]',
           model: ''
         },
         s3Photo: {
           name: 's3Photo',
-          type: 'Array<any>',
+          type: 'any[]',
           model: ''
         },
         apps: {
           name: 'apps',
-          type: 'Array<App>',
+          type: 'App[]',
           model: 'App'
-        },
-        users: {
-          name: 'users',
-          type: 'Array<User>',
-          model: 'User'
         },
         oAuthClientApplications: {
           name: 'oAuthClientApplications',
-          type: 'Array<any>',
+          type: 'any[]',
           model: ''
         },
       }

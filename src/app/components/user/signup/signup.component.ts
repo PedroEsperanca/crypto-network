@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
-import { ConfigService } from 'ng2-config';
+import { ConfigService } from '@nglibs/config';
 
 import { UserApi, LoopBackConfig } from 'shared/api';
 import { IAppState } from 'shared/ngrx';

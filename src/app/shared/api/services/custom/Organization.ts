@@ -12,8 +12,8 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
 import { Organization } from '../../models/Organization';
 import { SocketConnection } from '../../sockets/socket.connections';
-import { App } from '../../models/App';
 import { User } from '../../models/User';
+import { App } from '../../models/App';
 
 
 /**
@@ -34,319 +34,13 @@ export class OrganizationApi extends BaseLoopBackApi {
   }
 
   /**
-   * Find a related item by id for roles.
-   *
-   * @param any id PersistedModel id
-   *
-   * @param any fk Foreign key for roles
-   *
-   * @returns object An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Organization` object.)
-   * </em>
-   */
-  public findByIdRoles(id: any, fk: any): Observable<any> {
-    let _method: string = "GET";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Organizations/:id/roles/:fk";
-    let _routeParams: any = {
-      id: id,
-      fk: fk
-    };
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
-    return result;
-  }
-
-  /**
-   * Delete a related item by id for roles.
-   *
-   * @param any id PersistedModel id
-   *
-   * @param any fk Foreign key for roles
-   *
-   * @returns object An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * This method returns no data.
-   */
-  public destroyByIdRoles(id: any, fk: any): Observable<any> {
-    let _method: string = "DELETE";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Organizations/:id/roles/:fk";
-    let _routeParams: any = {
-      id: id,
-      fk: fk
-    };
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
-    return result;
-  }
-
-  /**
-   * Update a related item by id for roles.
-   *
-   * @param any id PersistedModel id
-   *
-   * @param any fk Foreign key for roles
-   *
-   * @param object data Request data.
-   *
-   * This method expects a subset of model properties as request parameters.
-   *
-   * @returns object An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Organization` object.)
-   * </em>
-   */
-  public updateByIdRoles(id: any, fk: any, data: any = {}): Observable<any> {
-    let _method: string = "PUT";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Organizations/:id/roles/:fk";
-    let _routeParams: any = {
-      id: id,
-      fk: fk
-    };
-    let _postBody: any = {
-      data: data
-    };
-    let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
-    return result;
-  }
-
-  /**
-   * Fetches hasOne relation s3Photo.
-   *
-   * @param any id PersistedModel id
-   *
-   * @param boolean refresh 
-   *
-   * @returns object An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Organization` object.)
-   * </em>
-   */
-  public getS3Photo(id: any, refresh: any = {}): Observable<any> {
-    let _method: string = "GET";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Organizations/:id/s3Photo";
-    let _routeParams: any = {
-      id: id
-    };
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    if (refresh) _urlParams.refresh = refresh;
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
-    return result;
-  }
-
-  /**
-   * Creates a new instance in s3Photo of this model.
-   *
-   * @param any id PersistedModel id
-   *
-   * @param object data Request data.
-   *
-   * This method expects a subset of model properties as request parameters.
-   *
-   * @returns object An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Organization` object.)
-   * </em>
-   */
-  public createS3Photo(id: any, data: any = {}): Observable<any> {
-    let _method: string = "POST";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Organizations/:id/s3Photo";
-    let _routeParams: any = {
-      id: id
-    };
-    let _postBody: any = {
-      data: data
-    };
-    let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
-    return result;
-  }
-
-  /**
-   * Update s3Photo of this model.
-   *
-   * @param any id PersistedModel id
-   *
-   * @param object data Request data.
-   *
-   * This method expects a subset of model properties as request parameters.
-   *
-   * @returns object An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Organization` object.)
-   * </em>
-   */
-  public updateS3Photo(id: any, data: any = {}): Observable<any> {
-    let _method: string = "PUT";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Organizations/:id/s3Photo";
-    let _routeParams: any = {
-      id: id
-    };
-    let _postBody: any = {
-      data: data
-    };
-    let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
-    return result;
-  }
-
-  /**
-   * Deletes s3Photo of this model.
-   *
-   * @param any id PersistedModel id
-   *
-   * @returns object An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * This method returns no data.
-   */
-  public destroyS3Photo(id: any): Observable<any> {
-    let _method: string = "DELETE";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Organizations/:id/s3Photo";
-    let _routeParams: any = {
-      id: id
-    };
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
-    return result;
-  }
-
-  /**
-   * Find a related item by id for apps.
-   *
-   * @param any id PersistedModel id
-   *
-   * @param any fk Foreign key for apps
-   *
-   * @returns object An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Organization` object.)
-   * </em>
-   */
-  public findByIdApps(id: any, fk: any): Observable<any> {
-    let _method: string = "GET";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Organizations/:id/apps/:fk";
-    let _routeParams: any = {
-      id: id,
-      fk: fk
-    };
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
-    return result;
-  }
-
-  /**
-   * Delete a related item by id for apps.
-   *
-   * @param any id PersistedModel id
-   *
-   * @param any fk Foreign key for apps
-   *
-   * @returns object An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * This method returns no data.
-   */
-  public destroyByIdApps(id: any, fk: any): Observable<any> {
-    let _method: string = "DELETE";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Organizations/:id/apps/:fk";
-    let _routeParams: any = {
-      id: id,
-      fk: fk
-    };
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
-    return result;
-  }
-
-  /**
-   * Update a related item by id for apps.
-   *
-   * @param any id PersistedModel id
-   *
-   * @param any fk Foreign key for apps
-   *
-   * @param object data Request data.
-   *
-   * This method expects a subset of model properties as request parameters.
-   *
-   * @returns object An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Organization` object.)
-   * </em>
-   */
-  public updateByIdApps(id: any, fk: any, data: any = {}): Observable<any> {
-    let _method: string = "PUT";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Organizations/:id/apps/:fk";
-    let _routeParams: any = {
-      id: id,
-      fk: fk
-    };
-    let _postBody: any = {
-      data: data
-    };
-    let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
-    return result;
-  }
-
-  /**
    * Find a related item by id for users.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Organization id
    *
-   * @param any fk Foreign key for users
+   * @param {any} fk Foreign key for users
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -372,11 +66,11 @@ export class OrganizationApi extends BaseLoopBackApi {
   /**
    * Delete a related item by id for users.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Organization id
    *
-   * @param any fk Foreign key for users
+   * @param {any} fk Foreign key for users
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -399,15 +93,15 @@ export class OrganizationApi extends BaseLoopBackApi {
   /**
    * Update a related item by id for users.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Organization id
    *
-   * @param any fk Foreign key for users
+   * @param {any} fk Foreign key for users
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -435,15 +129,15 @@ export class OrganizationApi extends BaseLoopBackApi {
   /**
    * Add a related item by id for users.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Organization id
    *
-   * @param any fk Foreign key for users
+   * @param {any} fk Foreign key for users
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -471,11 +165,11 @@ export class OrganizationApi extends BaseLoopBackApi {
   /**
    * Remove the users relation to an item by id.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Organization id
    *
-   * @param any fk Foreign key for users
+   * @param {any} fk Foreign key for users
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -498,11 +192,11 @@ export class OrganizationApi extends BaseLoopBackApi {
   /**
    * Check the existence of users relation to an item by id.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Organization id
    *
-   * @param any fk Foreign key for users
+   * @param {any} fk Foreign key for users
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -526,13 +220,319 @@ export class OrganizationApi extends BaseLoopBackApi {
   }
 
   /**
+   * Find a related item by id for roles.
+   *
+   * @param {any} id Organization id
+   *
+   * @param {any} fk Foreign key for roles
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Organization` object.)
+   * </em>
+   */
+  public findByIdRoles(id: any, fk: any): Observable<any> {
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Organizations/:id/roles/:fk";
+    let _routeParams: any = {
+      id: id,
+      fk: fk
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    return result;
+  }
+
+  /**
+   * Delete a related item by id for roles.
+   *
+   * @param {any} id Organization id
+   *
+   * @param {any} fk Foreign key for roles
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * This method returns no data.
+   */
+  public destroyByIdRoles(id: any, fk: any): Observable<any> {
+    let _method: string = "DELETE";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Organizations/:id/roles/:fk";
+    let _routeParams: any = {
+      id: id,
+      fk: fk
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    return result;
+  }
+
+  /**
+   * Update a related item by id for roles.
+   *
+   * @param {any} id Organization id
+   *
+   * @param {any} fk Foreign key for roles
+   *
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Organization` object.)
+   * </em>
+   */
+  public updateByIdRoles(id: any, fk: any, data: any = {}): Observable<any> {
+    let _method: string = "PUT";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Organizations/:id/roles/:fk";
+    let _routeParams: any = {
+      id: id,
+      fk: fk
+    };
+    let _postBody: any = {
+      data: data
+    };
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    return result;
+  }
+
+  /**
+   * Fetches hasOne relation s3Photo.
+   *
+   * @param {any} id Organization id
+   *
+   * @param {boolean} refresh 
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Organization` object.)
+   * </em>
+   */
+  public getS3Photo(id: any, refresh: any = {}): Observable<any> {
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Organizations/:id/s3Photo";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (refresh) _urlParams.refresh = refresh;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    return result;
+  }
+
+  /**
+   * Creates a new instance in s3Photo of this model.
+   *
+   * @param {any} id Organization id
+   *
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Organization` object.)
+   * </em>
+   */
+  public createS3Photo(id: any, data: any = {}): Observable<any> {
+    let _method: string = "POST";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Organizations/:id/s3Photo";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {
+      data: data
+    };
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    return result;
+  }
+
+  /**
+   * Update s3Photo of this model.
+   *
+   * @param {any} id Organization id
+   *
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Organization` object.)
+   * </em>
+   */
+  public updateS3Photo(id: any, data: any = {}): Observable<any> {
+    let _method: string = "PUT";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Organizations/:id/s3Photo";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {
+      data: data
+    };
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    return result;
+  }
+
+  /**
+   * Deletes s3Photo of this model.
+   *
+   * @param {any} id Organization id
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * This method returns no data.
+   */
+  public destroyS3Photo(id: any): Observable<any> {
+    let _method: string = "DELETE";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Organizations/:id/s3Photo";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    return result;
+  }
+
+  /**
+   * Find a related item by id for apps.
+   *
+   * @param {any} id Organization id
+   *
+   * @param {any} fk Foreign key for apps
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Organization` object.)
+   * </em>
+   */
+  public findByIdApps(id: any, fk: any): Observable<any> {
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Organizations/:id/apps/:fk";
+    let _routeParams: any = {
+      id: id,
+      fk: fk
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    return result;
+  }
+
+  /**
+   * Delete a related item by id for apps.
+   *
+   * @param {any} id Organization id
+   *
+   * @param {any} fk Foreign key for apps
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * This method returns no data.
+   */
+  public destroyByIdApps(id: any, fk: any): Observable<any> {
+    let _method: string = "DELETE";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Organizations/:id/apps/:fk";
+    let _routeParams: any = {
+      id: id,
+      fk: fk
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    return result;
+  }
+
+  /**
+   * Update a related item by id for apps.
+   *
+   * @param {any} id Organization id
+   *
+   * @param {any} fk Foreign key for apps
+   *
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Organization` object.)
+   * </em>
+   */
+  public updateByIdApps(id: any, fk: any, data: any = {}): Observable<any> {
+    let _method: string = "PUT";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Organizations/:id/apps/:fk";
+    let _routeParams: any = {
+      id: id,
+      fk: fk
+    };
+    let _postBody: any = {
+      data: data
+    };
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    return result;
+  }
+
+  /**
    * Find a related item by id for oAuthClientApplications.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Organization id
    *
-   * @param any fk Foreign key for oAuthClientApplications
+   * @param {any} fk Foreign key for oAuthClientApplications
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -558,11 +558,11 @@ export class OrganizationApi extends BaseLoopBackApi {
   /**
    * Delete a related item by id for oAuthClientApplications.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Organization id
    *
-   * @param any fk Foreign key for oAuthClientApplications
+   * @param {any} fk Foreign key for oAuthClientApplications
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -585,15 +585,15 @@ export class OrganizationApi extends BaseLoopBackApi {
   /**
    * Update a related item by id for oAuthClientApplications.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Organization id
    *
-   * @param any fk Foreign key for oAuthClientApplications
+   * @param {any} fk Foreign key for oAuthClientApplications
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -619,245 +619,13 @@ export class OrganizationApi extends BaseLoopBackApi {
   }
 
   /**
-   * Queries roles of Organization.
-   *
-   * @param any id PersistedModel id
-   *
-   * @param object filter 
-   *
-   * @returns object[] An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Organization` object.)
-   * </em>
-   */
-  public getRoles(id: any, filter: LoopBackFilter = {}): Observable<any> {
-    let _method: string = "GET";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Organizations/:id/roles";
-    let _routeParams: any = {
-      id: id
-    };
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    if (filter) _urlParams.filter = filter;
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
-    return result;
-  }
-
-  /**
-   * Creates a new instance in roles of this model.
-   *
-   * @param any id PersistedModel id
-   *
-   * @param object data Request data.
-   *
-   * This method expects a subset of model properties as request parameters.
-   *
-   * @returns object An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Organization` object.)
-   * </em>
-   */
-  public createRoles(id: any, data: any = {}): Observable<any> {
-    let _method: string = "POST";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Organizations/:id/roles";
-    let _routeParams: any = {
-      id: id
-    };
-    let _postBody: any = {
-      data: data
-    };
-    let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
-    return result;
-  }
-
-  /**
-   * Deletes all roles of this model.
-   *
-   * @param any id PersistedModel id
-   *
-   * @returns object An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * This method returns no data.
-   */
-  public deleteRoles(id: any): Observable<any> {
-    let _method: string = "DELETE";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Organizations/:id/roles";
-    let _routeParams: any = {
-      id: id
-    };
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
-    return result;
-  }
-
-  /**
-   * Counts roles of Organization.
-   *
-   * @param any id PersistedModel id
-   *
-   * @param object where Criteria to match model instances
-   *
-   * @returns object An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * Data properties:
-   *
-   *  - `count` – `{number}` - 
-   */
-  public countRoles(id: any, where: any = {}): Observable<any> {
-    let _method: string = "GET";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Organizations/:id/roles/count";
-    let _routeParams: any = {
-      id: id
-    };
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    if (where) _urlParams.where = where;
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
-    return result;
-  }
-
-  /**
-   * Queries apps of Organization.
-   *
-   * @param any id PersistedModel id
-   *
-   * @param object filter 
-   *
-   * @returns object[] An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Organization` object.)
-   * </em>
-   */
-  public getApps(id: any, filter: LoopBackFilter = {}): Observable<any> {
-    let _method: string = "GET";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Organizations/:id/apps";
-    let _routeParams: any = {
-      id: id
-    };
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    if (filter) _urlParams.filter = filter;
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
-    return result;
-  }
-
-  /**
-   * Creates a new instance in apps of this model.
-   *
-   * @param any id PersistedModel id
-   *
-   * @param object data Request data.
-   *
-   * This method expects a subset of model properties as request parameters.
-   *
-   * @returns object An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Organization` object.)
-   * </em>
-   */
-  public createApps(id: any, data: any = {}): Observable<any> {
-    let _method: string = "POST";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Organizations/:id/apps";
-    let _routeParams: any = {
-      id: id
-    };
-    let _postBody: any = {
-      data: data
-    };
-    let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
-    return result;
-  }
-
-  /**
-   * Deletes all apps of this model.
-   *
-   * @param any id PersistedModel id
-   *
-   * @returns object An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * This method returns no data.
-   */
-  public deleteApps(id: any): Observable<any> {
-    let _method: string = "DELETE";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Organizations/:id/apps";
-    let _routeParams: any = {
-      id: id
-    };
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
-    return result;
-  }
-
-  /**
-   * Counts apps of Organization.
-   *
-   * @param any id PersistedModel id
-   *
-   * @param object where Criteria to match model instances
-   *
-   * @returns object An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * Data properties:
-   *
-   *  - `count` – `{number}` - 
-   */
-  public countApps(id: any, where: any = {}): Observable<any> {
-    let _method: string = "GET";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Organizations/:id/apps/count";
-    let _routeParams: any = {
-      id: id
-    };
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    if (where) _urlParams.where = where;
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
-    return result;
-  }
-
-  /**
    * Queries users of Organization.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Organization id
    *
-   * @param object filter 
+   * @param {object} filter 
    *
-   * @returns object[] An empty reference that will be
+   * @returns {object[]} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -883,13 +651,13 @@ export class OrganizationApi extends BaseLoopBackApi {
   /**
    * Creates a new instance in users of this model.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Organization id
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -916,9 +684,9 @@ export class OrganizationApi extends BaseLoopBackApi {
   /**
    * Deletes all users of this model.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Organization id
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -940,11 +708,11 @@ export class OrganizationApi extends BaseLoopBackApi {
   /**
    * Counts users of Organization.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Organization id
    *
-   * @param object where Criteria to match model instances
+   * @param {object} where Criteria to match model instances
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -967,13 +735,245 @@ export class OrganizationApi extends BaseLoopBackApi {
   }
 
   /**
+   * Queries roles of Organization.
+   *
+   * @param {any} id Organization id
+   *
+   * @param {object} filter 
+   *
+   * @returns {object[]} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Organization` object.)
+   * </em>
+   */
+  public getRoles(id: any, filter: LoopBackFilter = {}): Observable<any> {
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Organizations/:id/roles";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (filter) _urlParams.filter = filter;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    return result;
+  }
+
+  /**
+   * Creates a new instance in roles of this model.
+   *
+   * @param {any} id Organization id
+   *
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Organization` object.)
+   * </em>
+   */
+  public createRoles(id: any, data: any = {}): Observable<any> {
+    let _method: string = "POST";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Organizations/:id/roles";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {
+      data: data
+    };
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    return result;
+  }
+
+  /**
+   * Deletes all roles of this model.
+   *
+   * @param {any} id Organization id
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * This method returns no data.
+   */
+  public deleteRoles(id: any): Observable<any> {
+    let _method: string = "DELETE";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Organizations/:id/roles";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    return result;
+  }
+
+  /**
+   * Counts roles of Organization.
+   *
+   * @param {any} id Organization id
+   *
+   * @param {object} where Criteria to match model instances
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * Data properties:
+   *
+   *  - `count` – `{number}` - 
+   */
+  public countRoles(id: any, where: any = {}): Observable<any> {
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Organizations/:id/roles/count";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (where) _urlParams.where = where;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    return result;
+  }
+
+  /**
+   * Queries apps of Organization.
+   *
+   * @param {any} id Organization id
+   *
+   * @param {object} filter 
+   *
+   * @returns {object[]} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Organization` object.)
+   * </em>
+   */
+  public getApps(id: any, filter: LoopBackFilter = {}): Observable<any> {
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Organizations/:id/apps";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (filter) _urlParams.filter = filter;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    return result;
+  }
+
+  /**
+   * Creates a new instance in apps of this model.
+   *
+   * @param {any} id Organization id
+   *
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Organization` object.)
+   * </em>
+   */
+  public createApps(id: any, data: any = {}): Observable<any> {
+    let _method: string = "POST";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Organizations/:id/apps";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {
+      data: data
+    };
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    return result;
+  }
+
+  /**
+   * Deletes all apps of this model.
+   *
+   * @param {any} id Organization id
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * This method returns no data.
+   */
+  public deleteApps(id: any): Observable<any> {
+    let _method: string = "DELETE";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Organizations/:id/apps";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    return result;
+  }
+
+  /**
+   * Counts apps of Organization.
+   *
+   * @param {any} id Organization id
+   *
+   * @param {object} where Criteria to match model instances
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * Data properties:
+   *
+   *  - `count` – `{number}` - 
+   */
+  public countApps(id: any, where: any = {}): Observable<any> {
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Organizations/:id/apps/count";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (where) _urlParams.where = where;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    return result;
+  }
+
+  /**
    * Queries oAuthClientApplications of Organization.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Organization id
    *
-   * @param object filter 
+   * @param {object} filter 
    *
-   * @returns object[] An empty reference that will be
+   * @returns {object[]} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -999,13 +999,13 @@ export class OrganizationApi extends BaseLoopBackApi {
   /**
    * Creates a new instance in oAuthClientApplications of this model.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Organization id
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -1032,9 +1032,9 @@ export class OrganizationApi extends BaseLoopBackApi {
   /**
    * Deletes all oAuthClientApplications of this model.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Organization id
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -1056,11 +1056,11 @@ export class OrganizationApi extends BaseLoopBackApi {
   /**
    * Counts oAuthClientApplications of Organization.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Organization id
    *
-   * @param object where Criteria to match model instances
+   * @param {object} where Criteria to match model instances
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -1085,11 +1085,11 @@ export class OrganizationApi extends BaseLoopBackApi {
   /**
    * Patch an existing model instance or insert a new one into the data source.
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
-   * This method expects a subset of model properties as request parameters.
+   *  - `data` – `{object}` - Model instance data
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -1114,13 +1114,13 @@ export class OrganizationApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Organization id
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
-   * This method expects a subset of model properties as request parameters.
+   *  - `data` – `{object}` - An object of model property name/value pairs
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -1147,15 +1147,13 @@ export class OrganizationApi extends BaseLoopBackApi {
   /**
    * Get a S3 Signed URL for direct file uploads.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Organization id
    *
-   * @param string key 
+   * @param {string} key 
    *
-   * @param string fileType 
+   * @param {object} options 
    *
-   * @param object options 
-   *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -1164,13 +1162,12 @@ export class OrganizationApi extends BaseLoopBackApi {
    * This usually means the response is a `Organization` object.)
    * </em>
    */
-  public s3PUTSignedUrl(id: any, key: any = {}, fileType: any = {}, options: any = {}): Observable<any> {
+  public s3PUTSignedUrl(id: any, key: any = {}, options: any = {}): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Organizations/:id/s3PUTSignedUrl";
     let _routeParams: any = {
-      id: id,
-      fileType: fileType
+      id: id
     };
     let _postBody: any = {};
     let _urlParams: any = {};
@@ -1183,11 +1180,11 @@ export class OrganizationApi extends BaseLoopBackApi {
   /**
    * Get a S3 Signed URL for direct file access.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Organization id
    *
-   * @param string key 
+   * @param {string} key 
    *
-   * @returns object An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -1213,15 +1210,15 @@ export class OrganizationApi extends BaseLoopBackApi {
   /**
    * Statistical information for 'Organization' registers.
    *
-   * @param string range hourly, daily, weekly, monthly, yearly, custom
+   * @param {string} range hourly, daily, weekly, monthly, yearly, custom
    *
-   * @param object custom {"start": date, "end": date }
+   * @param {object} custom {"start": date, "end": date }
    *
-   * @param object where where filter 
+   * @param {object} where where filter 
    *
-   * @param string groupBy group by filter 
+   * @param {string} groupBy group by filter 
    *
-   * @returns object[] An empty reference that will be
+   * @returns {object[]} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -1248,13 +1245,13 @@ export class OrganizationApi extends BaseLoopBackApi {
   /**
    * Creates a new instance in s3Photo of this model.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Organization id
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object[] An empty reference that will be
+   * @returns {object[]} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -1279,15 +1276,48 @@ export class OrganizationApi extends BaseLoopBackApi {
   }
 
   /**
-   * Creates a new instance in roles of this model.
+   * Creates a new instance in users of this model.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Organization id
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object[] An empty reference that will be
+   * @returns {object[]} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Organization` object.)
+   * </em>
+   */
+  public createManyUsers(id: any, data: any[] = []): Observable<any> {
+    let _method: string = "POST";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Organizations/:id/users";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {
+      data: data
+    };
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    return result;
+  }
+
+  /**
+   * Creates a new instance in roles of this model.
+   *
+   * @param {any} id Organization id
+   *
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   *
+   * @returns {object[]} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -1314,13 +1344,13 @@ export class OrganizationApi extends BaseLoopBackApi {
   /**
    * Creates a new instance in apps of this model.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Organization id
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object[] An empty reference that will be
+   * @returns {object[]} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
@@ -1345,48 +1375,15 @@ export class OrganizationApi extends BaseLoopBackApi {
   }
 
   /**
-   * Creates a new instance in users of this model.
-   *
-   * @param any id PersistedModel id
-   *
-   * @param object data Request data.
-   *
-   * This method expects a subset of model properties as request parameters.
-   *
-   * @returns object[] An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Organization` object.)
-   * </em>
-   */
-  public createManyUsers(id: any, data: any[] = []): Observable<any> {
-    let _method: string = "POST";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Organizations/:id/users";
-    let _routeParams: any = {
-      id: id
-    };
-    let _postBody: any = {
-      data: data
-    };
-    let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
-    return result;
-  }
-
-  /**
    * Creates a new instance in oAuthClientApplications of this model.
    *
-   * @param any id PersistedModel id
+   * @param {any} id Organization id
    *
-   * @param object data Request data.
+   * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    *
-   * @returns object[] An empty reference that will be
+   * @returns {object[]} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *

@@ -9,7 +9,7 @@ import {
   AlertActions
 } from 'shared/ngrx';
 import { IAlertState } from 'shared/ngrx/reducers/alert';
-import { ConfigService } from 'ng2-config';
+import { ConfigService } from '@nglibs/config';
 
 @Component({
   selector: 'app-alert',

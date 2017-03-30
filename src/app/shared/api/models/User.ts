@@ -6,61 +6,59 @@ import {
 
 declare var Object: any;
 export interface UserInterface {
-  name?: string;
-  photoUrl?: string;
-  emailPreferences?: string;
-  notifications?: any;
-  realm?: string;
-  username?: string;
-  password: string;
-  email?: string;
-  emailVerified?: boolean;
-  verificationToken?: string;
-  id?: any;
-  emailAddresses?: Array<any>;
-  phoneNumbers?: Array<any>;
-  phone?: string;
-  createdAt?: Date;
-  updatedAt?: Date;
-  photo?: any;
-  accessTokens?: Array<any>;
-  identities?: Array<any>;
-  credentials?: Array<any>;
-  organizations?: Array<Organization>;
-  apps?: Array<App>;
-  emails?: Array<any>;
-  phones?: Array<any>;
-  s3Photo?: Array<any>;
-  oAuthClientApplications?: Array<any>;
+  "name"?: any;
+  "emailPreferences"?: any;
+  "notifications"?: any;
+  "photo"?: any;
+  "realm"?: any;
+  "username"?: any;
+  "password": any;
+  "email"?: any;
+  "emailVerified"?: any;
+  "verificationToken"?: any;
+  "id"?: any;
+  "emailAddresses"?: any;
+  "phoneNumbers"?: any;
+  "phone"?: any;
+  "createdAt"?: any;
+  "updatedAt"?: any;
+  emails?: any[];
+  phones?: any[];
+  s3Photo?: any[];
+  identities?: any[];
+  credentials?: any[];
+  accessTokens?: any[];
+  organizations?: Organization[];
+  apps?: App[];
+  oAuthClientApplications?: any[];
 }
 
 export class User implements UserInterface {
-  name: string;
-  photoUrl: string;
-  emailPreferences: string;
-  notifications: any;
-  realm: string;
-  username: string;
-  password: string;
-  email: string;
-  emailVerified: boolean;
-  verificationToken: string;
-  id: any;
-  emailAddresses: Array<any>;
-  phoneNumbers: Array<any>;
-  phone: string;
-  createdAt: Date;
-  updatedAt: Date;
-  photo: any;
-  accessTokens: Array<any>;
-  identities: Array<any>;
-  credentials: Array<any>;
-  organizations: Array<Organization>;
-  apps: Array<App>;
-  emails: Array<any>;
-  phones: Array<any>;
-  s3Photo: Array<any>;
-  oAuthClientApplications: Array<any>;
+  "name": any;
+  "emailPreferences": any;
+  "notifications": any;
+  "photo": any;
+  "realm": any;
+  "username": any;
+  "password": any;
+  "email": any;
+  "emailVerified": any;
+  "verificationToken": any;
+  "id": any;
+  "emailAddresses": any;
+  "phoneNumbers": any;
+  "phone": any;
+  "createdAt": any;
+  "updatedAt": any;
+  emails: any[];
+  phones: any[];
+  s3Photo: any[];
+  identities: any[];
+  credentials: any[];
+  accessTokens: any[];
+  organizations: Organization[];
+  apps: App[];
+  oAuthClientApplications: any[];
   constructor(data?: UserInterface) {
     Object.assign(this, data);
   }
@@ -79,7 +77,7 @@ export class User implements UserInterface {
   **/
   public static factory(data: UserInterface): User{
     return new User(data);
-  }  
+  }
   /**
   * @method getModelDefinition
   * @author Julien Ledun
@@ -92,122 +90,118 @@ export class User implements UserInterface {
       name: 'User',
       plural: 'users',
       properties: {
-        name: {
+        "name": {
           name: 'name',
-          type: 'string'
+          type: 'any'
         },
-        photoUrl: {
-          name: 'photoUrl',
-          type: 'string'
-        },
-        emailPreferences: {
+        "emailPreferences": {
           name: 'emailPreferences',
-          type: 'string',
+          type: 'any',
           default: 'marketing'
         },
-        notifications: {
+        "notifications": {
           name: 'notifications',
           type: 'any'
         },
-        realm: {
+        "photo": {
+          name: 'photo',
+          type: 'any'
+        },
+        "realm": {
           name: 'realm',
-          type: 'string'
+          type: 'any'
         },
-        username: {
+        "username": {
           name: 'username',
-          type: 'string'
+          type: 'any'
         },
-        password: {
+        "password": {
           name: 'password',
-          type: 'string'
+          type: 'any'
         },
-        email: {
+        "email": {
           name: 'email',
-          type: 'string'
+          type: 'any'
         },
-        emailVerified: {
+        "emailVerified": {
           name: 'emailVerified',
-          type: 'boolean'
+          type: 'any'
         },
-        verificationToken: {
+        "verificationToken": {
           name: 'verificationToken',
-          type: 'string'
+          type: 'any'
         },
-        id: {
+        "id": {
           name: 'id',
           type: 'any'
         },
-        emailAddresses: {
+        "emailAddresses": {
           name: 'emailAddresses',
-          type: 'Array&lt;any&gt;',
+          type: 'any',
           default: <any>[]
         },
-        phoneNumbers: {
+        "phoneNumbers": {
           name: 'phoneNumbers',
-          type: 'Array&lt;any&gt;',
+          type: 'any',
           default: <any>[]
         },
-        phone: {
+        "phone": {
           name: 'phone',
-          type: 'string'
+          type: 'any'
         },
-        createdAt: {
+        "createdAt": {
           name: 'createdAt',
-          type: 'Date'
+          type: 'any'
         },
-        updatedAt: {
+        "updatedAt": {
           name: 'updatedAt',
-          type: 'Date'
-        },
-        photo: {
-          name: 'photo',
           type: 'any'
         },
       },
       relations: {
-        accessTokens: {
-          name: 'accessTokens',
-          type: 'Array<any>',
-          model: ''
-        },
-        identities: {
-          name: 'identities',
-          type: 'Array<any>',
-          model: ''
-        },
-        credentials: {
-          name: 'credentials',
-          type: 'Array<any>',
-          model: ''
-        },
-        organizations: {
-          name: 'organizations',
-          type: 'Array<Organization>',
-          model: 'Organization'
-        },
-        apps: {
-          name: 'apps',
-          type: 'Array<App>',
-          model: 'App'
-        },
         emails: {
           name: 'emails',
-          type: 'Array<any>',
+          type: 'any[]',
           model: ''
         },
         phones: {
           name: 'phones',
-          type: 'Array<any>',
+          type: 'any[]',
           model: ''
         },
         s3Photo: {
           name: 's3Photo',
-          type: 'Array<any>',
+          type: 'any[]',
           model: ''
+        },
+        identities: {
+          name: 'identities',
+          type: 'any[]',
+          model: ''
+        },
+        credentials: {
+          name: 'credentials',
+          type: 'any[]',
+          model: ''
+        },
+        accessTokens: {
+          name: 'accessTokens',
+          type: 'any[]',
+          model: ''
+        },
+        organizations: {
+          name: 'organizations',
+          type: 'Organization[]',
+          model: 'Organization'
+        },
+        apps: {
+          name: 'apps',
+          type: 'App[]',
+          model: 'App'
         },
         oAuthClientApplications: {
           name: 'oAuthClientApplications',
-          type: 'Array<any>',
+          type: 'any[]',
           model: ''
         },
       }

@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 
-import { ConfigService } from 'ng2-config';
+import { ConfigService } from '@nglibs/config';
 
 import { SDKToken, User, getLoopbackAuthToken, getLoopbackAuthUser } from 'shared/api';
 import { IAppState } from 'shared/ngrx';

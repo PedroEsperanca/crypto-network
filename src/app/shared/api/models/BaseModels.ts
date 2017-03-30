@@ -17,7 +17,7 @@ export interface LoopBackFilter {
 }
 
 export interface AccessTokenInterface {
-    id?: string;
+    id?: any;
     ttl?: number;
     issuedAt?: any;
     created: any;
@@ -26,7 +26,7 @@ export interface AccessTokenInterface {
 }
 
 export class AccessToken implements AccessTokenInterface {
-  id: string = '';
+  id: any = '';
   ttl: number = 1209600;
   created: Date = new Date(0);
   userId: number = 0;
@@ -104,10 +104,14 @@ export class SDKToken implements AccessTokenInterface {
         Object.assign(this, data);
     }
 }
-
+/**
+* This GeoPoint represents both, LoopBack and MongoDB GeoPoint
+**/
 export interface GeoPoint  {
-    lat: number;
-    lng: number;
+    lat?: number;
+    lng?: number;
+    type?: string;
+    coordinates?: number[];
 }
 
 export interface StatFilter {

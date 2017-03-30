@@ -2,7 +2,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { Store } from '@ngrx/store';
 import { Component, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 
-import { ConfigService } from 'ng2-config';
+import { ConfigService } from '@nglibs/config';
 
 import {
   User,
@@ -54,7 +54,7 @@ export class SettingsProfileComponent implements OnDestroy {
   public submitUpdate() {
     this.store.dispatch(new LoopbackAuthActions.updateUserProperties({
       name: this.formModel.name,
-      photoUrl: this.formModel.photoUrl,
+      photo: this.formModel.photo,
       username: this.formModel.username || null
     }, {
       alert: {
