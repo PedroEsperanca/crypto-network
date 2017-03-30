@@ -1,7 +1,6 @@
 // angular
 import {
   ViewEncapsulation,
-  ChangeDetectionStrategy,
   Component,
   ViewContainerRef
 } from '@angular/core';
@@ -10,8 +9,8 @@ import { Location } from '@angular/common';
 import './operators';
 
 // libs
-import { ConfigService } from 'ng2-config';
 import { CloudtasksService } from 'angular2-cloudtasks';
+import { ConfigService } from '@nglibs/config';
 
 // app
 import { AnalyticsService } from 'shared/analytics';
@@ -25,7 +24,6 @@ import { LoopBackAuth, UserApi } from 'shared/api';
  */
 @Component({
   selector: 'app',
-  changeDetection: ChangeDetectionStrategy.Default, // Everything else uses OnPush
   styleUrls: [ 'app.component.scss' ],
   template: `
 <div platform scrollSpy>
