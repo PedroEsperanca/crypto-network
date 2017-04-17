@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
-import { ScrollSpyIndexModule } from 'ng2-scrollspy/dist/plugin/index';
-import { ScrollSpyAffixModule } from 'ng2-scrollspy/dist/plugin/affix';
+import { ScrollSpyIndexModule } from 'ngx-scrollspy/dist/plugin/index';
+import { ScrollSpyAffixModule } from 'ngx-scrollspy/dist/plugin/affix';
 
 import { IndexSecurityComponent } from './security.component';
 

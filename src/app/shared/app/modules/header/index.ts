@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
-import { CloudtasksModule } from 'angular2-cloudtasks';
+import { CloudtasksModule } from '@cloudtasks/ngx-image';
 
 import { MultilingualModule } from 'shared/i18n/multilingual.module';
 import { UserMenuModule } from '../user-menu';

@@ -10,8 +10,8 @@ import { BsDropdownModule } from 'ng2-bootstrap/dropdown';
 
 import { SDKBrowserModule, InternalStorage, StorageBrowser } from '../api';
 
-import { CloudtasksModule } from 'angular2-cloudtasks';
-import { ScrollSpyModule } from 'ng2-scrollspy';
+import { CloudtasksModule } from '@cloudtasks/ngx-image';
+import { ScrollSpyModule } from 'ngx-scrollspy';
 
 // ngrx
 // import { NOTIFY_PROVIDERS, NOTIFY_GLOBAL_OPTIONS } from '@ngrx/notify';

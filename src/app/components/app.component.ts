@@ -9,7 +9,7 @@ import { Location } from '@angular/common';
 import './operators';
 
 // libs
-import { CloudtasksService } from 'angular2-cloudtasks';
+import { CloudtasksService } from '@cloudtasks/ngx-image';
 import { ConfigService } from '@nglibs/config';
 
 // app

@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { TooltipModule } from 'ng2-bootstrap/tooltip';
 import { ModalModule } from 'ng2-bootstrap/modal';
-import { CloudtasksModule } from 'angular2-cloudtasks';
+import { CloudtasksModule } from '@cloudtasks/ngx-image';
 
 import { MultilingualModule } from 'shared/i18n/multilingual.module';
 import { AlertModule } from 'shared/app/modules/alert';

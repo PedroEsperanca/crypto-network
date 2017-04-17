@@ -7,7 +7,7 @@ import { FooterModule } from 'shared/app/modules/footer';
 import { IndexComponent } from './index.component';
 import { routing } from './index.routing';
 
-// import { CloudtasksDirective } from 'angular2-cloudtasks';
+// import { CloudtasksDirective } from '@cloudtasks/ngx-image';
 
 @NgModule({
   imports: [
