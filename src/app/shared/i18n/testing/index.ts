@@ -10,7 +10,7 @@ import { TranslateLoaderMock } from './mocks/ng2-translate-loader.mock';
 
 export function TEST_MULTILINGUAL_PROVIDERS(): any[] {
 
-  let providers: any[] = [
+  const providers: any[] = [
     { provide: TranslateLoader, useClass: TranslateLoaderMock },
     { provide: TranslateService, useClass: TranslateMock },
     MultilingualService

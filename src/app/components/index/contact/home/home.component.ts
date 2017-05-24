@@ -33,7 +33,7 @@ export class ContactHomeComponent {
   };
 
   public alert: AlertI = {};
-  public submited: boolean = false;
+  public submited = false;
 
   constructor(public configService: ConfigService) {
     this.config = this.configService.getSettings();

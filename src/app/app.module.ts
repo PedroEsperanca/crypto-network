@@ -39,11 +39,11 @@ const APP_PROVIDERS = [
   ...MY_APP_PROVIDERS
 ];
 
-type StoreType = {
+interface StoreType {
   state: InternalStateType,
   restoreInputValues: () => void,
   disposeOldHosts: () => void
-};
+}
 
 /**
  * `AppModule` is the main entry point into Angular2's bootstraping process
@@ -83,7 +83,7 @@ export class AppModule {
     this.appState._state = store.state;
     // set input values
     if ('restoreInputValues' in store) {
-      let restoreInputValues = store.restoreInputValues;
+      const restoreInputValues = store.restoreInputValues;
       setTimeout(restoreInputValues);
     }
 

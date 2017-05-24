@@ -2,19 +2,10 @@
 import { TestBed, async } from '@angular/core/testing';
 import { Component } from '@angular/core';
 
-// app
-import { t } from '../../test/index';
-
 // module
 import { PlatformDirective } from './platform.directive';
 import { WindowService } from '../../core/index';
 import { WindowMock } from '../../core/testing/index';
-
-const testModuleConfig = () => {
-  TestBed.configureTestingModule({
-    declarations: [PlatformDirective, TestComponent]
-  });
-};
 
 @Component({
   viewProviders: [
@@ -25,18 +16,24 @@ const testModuleConfig = () => {
 })
 class TestComponent { }
 
-t.describe('core: PlatformDirective', () => {
+const testModuleConfig = () => {
+  TestBed.configureTestingModule({
+    declarations: [PlatformDirective, TestComponent]
+  });
+};
 
-  t.be(testModuleConfig);
+describe('core: PlatformDirective', () => {
 
-  t.it('should add platform class',
+  beforeEach(testModuleConfig);
+
+  it('should add platform class',
     async(() => {
       TestBed.compileComponents()
         .then(() => {
-          let fixture = TestBed.createComponent(TestComponent);
+          const fixture = TestBed.createComponent(TestComponent);
           fixture.detectChanges();
-          let compDOMEl = fixture.debugElement.children[0].nativeElement;
-          t.e(compDOMEl.getAttribute('class')).toBe('web');
+          const compDOMEl = fixture.debugElement.children[0].nativeElement;
+          expect(compDOMEl.getAttribute('class')).toBe('web');
         });
     }));
 });

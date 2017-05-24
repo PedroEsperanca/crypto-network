@@ -14,7 +14,7 @@ import { User, UserApi, LoopBackAuth } from 'shared/api';
 export class ProfileUserComponent implements OnInit {
   public config: any;
   public profile: User;
-  public isMe: boolean = false;
+  public isMe = false;
 
   constructor(
     public auth: LoopBackAuth,

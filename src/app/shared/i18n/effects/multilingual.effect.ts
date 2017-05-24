@@ -22,9 +22,9 @@ export class MultilingualEffects {
   @Effect() public change$: Observable<Action> = this.actions$
     .ofType(multilingual.actionTypes.CHANGE)
     .map((action) => {
-      let lang = action.payload;
+      const lang = action.payload;
       if (includes(map(this.multilangService.availableLanguages, 'code'), lang)) {
-        let langChangedAction = new multilingual.LangChangedAction(lang);
+        const langChangedAction = new multilingual.LangChangedAction(lang);
         // track analytics
         this.multilangService.track(langChangedAction.type, { label: langChangedAction.payload });
         // change state

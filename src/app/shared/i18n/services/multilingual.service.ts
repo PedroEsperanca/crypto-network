@@ -58,7 +58,7 @@ export class MultilingualService extends Analytics {
     this.translate.setDefaultLang(this.defaultLanguage.code);
 
     // use browser/platform lang if available
-    let userLang = (this.win.navigator.language &&
+    const userLang = (this.win.navigator.language &&
       this.win.navigator.language.split('-')[0]) || this.defaultLanguage.code;
 
     // init the lang

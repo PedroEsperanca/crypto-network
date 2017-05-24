@@ -26,7 +26,7 @@ export class FileUploaderComponent implements OnInit {
 
   @Input('currentFile') public currentFile: string;
 
-  @Input('autoUpload') public autoUpload: boolean = false;
+  @Input('autoUpload') public autoUpload = false;
 
   @Input('fileNameRewrite') public fileNameRewrite: any;
   @Input('getUploadUrl') public getUploadUrl: any;
@@ -36,11 +36,11 @@ export class FileUploaderComponent implements OnInit {
 
   public uploader: FileUploader;
 
-  public hasDropZoneOver: boolean = false;
+  public hasDropZoneOver = false;
 
   public errorName: string;
-  public uploading: boolean = false;
-  public progress: number = 0;
+  public uploading = false;
+  public progress = 0;
 
   constructor(
     private cd: ChangeDetectorRef,
@@ -48,7 +48,7 @@ export class FileUploaderComponent implements OnInit {
   ) {}
 
   public ngOnInit() {
-    let params: any = {
+    const params: any = {
       disableMultipart: true,
       method: 'PUT',
       maxFileSize: this.maxFileSize || 1024 * 1024, // 1 MB
@@ -69,7 +69,7 @@ export class FileUploaderComponent implements OnInit {
       this.uploading = true;
       this.cd.markForCheck();
 
-      let fileName = this.fileNameRewrite(fileItem.file.name);
+      const fileName = this.fileNameRewrite(fileItem.file.name);
       if (fileName !== fileItem.file.name) {
         fileItem.file.name = fileName;
         // fileItem.some.name = fileName;
@@ -80,7 +80,7 @@ export class FileUploaderComponent implements OnInit {
         (response: string) => {
           fileItem.url = response;
 
-          let parsedUrl = this.parseUrl(response);
+          const parsedUrl = this.parseUrl(response);
           if (parsedUrl.query['Cache-Control']) {
             fileItem.headers.push({
               name: 'Cache-Control',
@@ -168,7 +168,7 @@ export class FileUploaderComponent implements OnInit {
     const pattern = RegExp('^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\\?([^#]*))?(#(.*))?');
     const matches = url.match(pattern);
 
-    let query = {};
+    const query = {};
     matches[7].split('&').map((q: string) => {
       const index = q.indexOf('=');
       query[q.substring(0, index)] = decodeURIComponent(q.substring(index + 1, q.length));

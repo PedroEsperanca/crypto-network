@@ -15,7 +15,6 @@ import { ConfigModule, ConfigLoader, ConfigService, ConfigStaticLoader } from '@
 import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
 
 // app
-import { t } from '../../test/index';
 import { CoreModule } from '../../core/core.module';
 import { ILang, WindowService, ConsoleService } from '../../core/index';
 import {
@@ -97,22 +96,22 @@ const testModuleConfig = (options?: any) => {
     });
 };
 
-t.describe('i18n:', () => {
-  t.describe('MultilingualService', () => {
-    t.be(() => {
+describe('i18n:', () => {
+  describe('MultilingualService', () => {
+    beforeEach(() => {
       testModuleConfig();
     });
 
-    t.it('should at a minimum support english',
+    it('should at a minimum support english',
       inject([ConfigService, MultilingualService],
         (config: ConfigService, multilang: MultilingualService) => {
           multilang.init(config.getSettings().i18n);
 
-          t.e(multilang.availableLanguages.length).toBe(1);
-          t.e(multilang.availableLanguages[0].code).toBe('en');
+          expect(multilang.availableLanguages.length).toBe(1);
+          expect(multilang.availableLanguages[0].code).toBe('en');
         }));
 
-    t.it('changeLang - should not switch unless supported',
+    it('changeLang - should not switch unless supported',
       inject([ConfigService, MultilingualService, Store],
         (config: ConfigService, multilang: MultilingualService, store: Store<any>) => {
           multilang.init(config.getSettings().i18n);
@@ -121,20 +120,20 @@ t.describe('i18n:', () => {
           // only 'en' supported by default so changing to 'fr' should not change state
           store.select('i18n')
             .subscribe((i18n: IMultilingualState) => {
-              t.e(i18n.lang).toBe('en');
+              expect(i18n.lang).toBe('en');
             });
         }));
   });
 
-  t.describe('MultilingualService for French browser/platform', () => {
-    t.be(() => {
+  describe('MultilingualService for French browser/platform', () => {
+    beforeEach(() => {
       testModuleConfig({
         window: WindowMockFrench,
         config: ConfigService
       });
     });
 
-    t.it('should now support french by default',
+    it('should now support french by default',
       async(inject([MockBackend, ConfigService, MultilingualService, Store, WindowService],
         (backend: MockBackend, config: ConfigService,
         multilang: MultilingualService, store: Store<any>, win: WindowService) => {
@@ -142,39 +141,39 @@ t.describe('i18n:', () => {
             .then(() => {
               multilang.init(config.getSettings().i18n);
 
-              t.e(multilang.availableLanguages.length).toBe(2);
-              t.e(multilang.availableLanguages[0].code).toBe('en');
-              t.e(multilang.availableLanguages[1].code).toBe('fr');
-              t.e(win.navigator.language).toBe('fr-US');
+              expect(multilang.availableLanguages.length).toBe(2);
+              expect(multilang.availableLanguages[0].code).toBe('en');
+              expect(multilang.availableLanguages[1].code).toBe('fr');
+              expect(win.navigator.language).toBe('fr-US');
 
               store.select('i18n')
                 .subscribe((i18n: IMultilingualState) => {
-                  t.e(i18n.lang).toBe('fr');
+                  expect(i18n.lang).toBe('fr');
                 });
               });
     })));
   });
 
-  t.describe('MultilingualService for languageless browser/platform', () => {
-    t.be(() => {
+  describe('MultilingualService for languageless browser/platform', () => {
+    beforeEach(() => {
       testModuleConfig({
         window: WindowMockNoLanguage
       });
     });
 
-    t.it('should now support english by default',
+    it('should now support english by default',
       inject([ConfigService, MultilingualService, Store, WindowService],
         (config: ConfigService, multilang: MultilingualService,
         store: Store<any>, win: WindowService) => {
           multilang.init(config.getSettings().i18n);
 
-          t.e(multilang.availableLanguages.length).toBe(1);
-          t.e(multilang.availableLanguages[0].code).toBe('en');
-          t.e(win.navigator.language).toBeUndefined();
+          expect(multilang.availableLanguages.length).toBe(1);
+          expect(multilang.availableLanguages[0].code).toBe('en');
+          expect(win.navigator.language).toBeUndefined();
 
           store.select('i18n')
             .subscribe((i18n: IMultilingualState) => {
-              t.e(i18n.lang).toBe('en');
+              expect(i18n.lang).toBe('en');
             });
     }));
   });

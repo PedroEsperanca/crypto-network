@@ -24,7 +24,7 @@ export class OrganizationsComponent implements OnDestroy {
   public config: any;
 
   public organization$: Observable<Organization>;
-  public isNew: boolean = true;
+  public isNew = true;
 
   private subscriptions: Subscription[] = [];
 

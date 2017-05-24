@@ -12,7 +12,6 @@ import { ConfigService } from '@ngx-config/core';
 import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
 
 // app
-import { t } from '../../test/index';
 import { ILang, WindowService, ConsoleService } from '../../core/index';
 import { CoreModule } from '../../core/core.module';
 import { AnalyticsModule } from '../../analytics/analytics.module';
@@ -34,6 +33,17 @@ const SUPPORTED_LANGUAGES: ILang[] = [
   { code: 'ru', title: 'Russian' },
   { code: 'bg', title: 'Bulgarian' }
 ];
+
+@Component({
+  selector: 'test-cmp',
+  template: '<lang-switcher></lang-switcher>'
+})
+class TestComponent  {
+  constructor(private multilang: MultilingualService,
+              private config: ConfigService) {
+    this.multilang.init(this.config.getSettings().i18n);
+  }
+}
 
 // test module configuration for each test
 const testModuleConfig = (multilang: boolean = false) => {
@@ -66,55 +76,44 @@ const testModuleConfig = (multilang: boolean = false) => {
   });
 };
 
-t.describe('i18n:', () => {
-  t.describe('@Component: LangSwitcherComponent', () => {
-    t.be(() => {
+describe('i18n:', () => {
+  describe('@Component: LangSwitcherComponent', () => {
+    beforeEach(() => {
       testModuleConfig();
     });
 
-    t.it('should work',
+    it('should work',
       async(() => {
         TestBed.compileComponents()
           .then(() => {
-            let fixture = TestBed.createComponent(TestComponent);
+            const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
-            let appDOMEl = fixture.debugElement.children[0].nativeElement;
-            t.e(appDOMEl.querySelectorAll('form > select option').length).toBe(1);
-            t.e(appDOMEl.querySelectorAll('form > select option')[0].value).toBe('en');
+            const appDOMEl = fixture.debugElement.children[0].nativeElement;
+            expect(appDOMEl.querySelectorAll('form > select option').length).toBe(1);
+            expect(appDOMEl.querySelectorAll('form > select option')[0].value).toBe('en');
           });
       }));
   });
 
-  t.describe('@Component: LangSwitcherComponent with multiple languages', () => {
-    t.be(() => {
+  describe('@Component: LangSwitcherComponent with multiple languages', () => {
+    beforeEach(() => {
       testModuleConfig(true);
     });
 
-    t.it('should work',
+    it('should work',
       async(() => {
         TestBed.compileComponents()
           .then(() => {
-            let fixture = TestBed.createComponent(TestComponent);
+            const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
-            let appDOMEl = fixture.debugElement.children[0].nativeElement;
-            t.e(appDOMEl.querySelectorAll('form > select option').length).toBe(5);
-            t.e(appDOMEl.querySelectorAll('form > select option')[0].value).toBe('en');
-            t.e(appDOMEl.querySelectorAll('form > select option')[1].value).toBe('es');
-            t.e(appDOMEl.querySelectorAll('form > select option')[2].value).toBe('fr');
-            t.e(appDOMEl.querySelectorAll('form > select option')[3].value).toBe('ru');
-            t.e(appDOMEl.querySelectorAll('form > select option')[4].value).toBe('bg');
+            const appDOMEl = fixture.debugElement.children[0].nativeElement;
+            expect(appDOMEl.querySelectorAll('form > select option').length).toBe(5);
+            expect(appDOMEl.querySelectorAll('form > select option')[0].value).toBe('en');
+            expect(appDOMEl.querySelectorAll('form > select option')[1].value).toBe('es');
+            expect(appDOMEl.querySelectorAll('form > select option')[2].value).toBe('fr');
+            expect(appDOMEl.querySelectorAll('form > select option')[3].value).toBe('ru');
+            expect(appDOMEl.querySelectorAll('form > select option')[4].value).toBe('bg');
           });
       }));
   });
 });
-
-@Component({
-  selector: 'test-cmp',
-  template: '<lang-switcher></lang-switcher>'
-})
-class TestComponent  {
-  constructor(private multilang: MultilingualService,
-              private config: ConfigService) {
-    this.multilang.init(this.config.getSettings().i18n);
-  }
-}

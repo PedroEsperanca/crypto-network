@@ -30,7 +30,7 @@ export class SettingsComponent implements OnDestroy {
   public config: any;
   public currentUser: User;
 
-  public needToVerifyEmail: boolean = false;
+  public needToVerifyEmail = false;
 
   private subscriptions: Subscription[] = [];
 

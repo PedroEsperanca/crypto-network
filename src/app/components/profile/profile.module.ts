@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule }       from '@angular/common';
+import { CommonModule } from '@angular/common';
 
 import { MultilingualModule } from 'shared/i18n/multilingual.module';
 import { HeaderModule } from 'shared/app/modules/header';

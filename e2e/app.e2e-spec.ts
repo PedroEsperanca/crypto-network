@@ -7,8 +7,8 @@ describe('web-seed App', () => {
     page = new WebSeedPage();
   });
 
-  it('should display message saying app works', () => {
+  it('should display footer copyright text', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('app works!');
+    expect<any>(page.getParagraphText()).toEqual('@ 2017 · SEED');
   });
 });

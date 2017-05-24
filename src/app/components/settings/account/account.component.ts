@@ -106,8 +106,8 @@ export class SettingsAccountComponent implements OnDestroy {
 
   public matchingPasswords(passwordKey: string, confirmPasswordKey: string) {
     return (group: FormGroup): {[key: string]: any} => {
-      let password = group.controls[passwordKey];
-      let confirmPassword = group.controls[confirmPasswordKey];
+      const password = group.controls[passwordKey];
+      const confirmPassword = group.controls[confirmPasswordKey];
 
       if (password.value !== confirmPassword.value && confirmPassword.value !== '') {
         return {
@@ -125,14 +125,14 @@ export class SettingsAccountComponent implements OnDestroy {
     const aNumber = /[0-9]/;
     const aSpecial = /[!|@|#|$|%|^|&|*|(|)|-|_]/;
 
-    let passwordComplexityReport: any = {};
+    const passwordComplexityReport: any = {};
 
     let numUpper = 0;
     let numLower = 0;
     let numNums = 0;
     let numSpecials = 0;
 
-    for (let character of password) {
+    for (const character of password) {
       if (anUpperCase.test(character)) {
         numUpper++;
       }

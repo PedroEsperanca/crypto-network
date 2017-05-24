@@ -56,14 +56,6 @@ const AppConfig: any = {
         title: 'Russian'
       }
     ]
-  },
-  logging: {
-    DEBUG: {
-      LEVEL_1: false,
-      LEVEL_2: false,
-      LEVEL_3: false,
-      LEVEL_4: true
-    }
   }
 };
 

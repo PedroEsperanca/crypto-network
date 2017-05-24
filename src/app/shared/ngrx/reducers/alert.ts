@@ -23,7 +23,7 @@ const initialState: IAlertState = {
 export function reducer(state = initialState, action: Action): IAlertState {
   switch (action.type) {
     case AlertActionTypes.SET_ALERT: {
-      let newState = Object.assign({}, initialState);
+      const newState = Object.assign({}, initialState);
 
       if (action.payload.type === 'error' && action.payload.message.constructor === Object) {
         newState[action.payload.type] = action.payload.message.message;

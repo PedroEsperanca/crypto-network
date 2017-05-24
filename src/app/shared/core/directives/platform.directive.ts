@@ -11,7 +11,7 @@ export class PlatformDirective {
 
   constructor(private el: ElementRef, private renderer: Renderer, private win: WindowService) {
     let platformClass = 'web';
-    let agent = win.navigator.userAgent.toLowerCase();
+    const agent = win.navigator.userAgent.toLowerCase();
     if (agent.indexOf('electron') > -1) {
       platformClass = 'desktop';
     } else if (agent.indexOf('nativescript') > -1) {

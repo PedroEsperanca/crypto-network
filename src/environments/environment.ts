@@ -9,5 +9,13 @@ export const environment = {
   target: 'web',
   base_url: 'http://localhost:54447',
   api_version: 'api',
-  auth_prefix: 'Bearer '
+  auth_prefix: 'Bearer ',
+  logging: {
+    DEBUG: {
+      LEVEL_1: true,
+      LEVEL_2: true,
+      LEVEL_3: true,
+      LEVEL_4: true
+    }
+  }
 };
