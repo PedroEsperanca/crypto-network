@@ -2,12 +2,12 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 
-import { IAppState } from 'shared/ngrx';
+import { IAppState, AlertActions } from 'shared/ngrx';
 import { LoopbackAuthActions } from 'shared/api/actions';
 import { User, UserApi } from 'shared/api';
 
 @Component({
-  selector: 'user.login',
+  selector: 'app-user-passport',
   templateUrl: './passport.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -28,7 +28,8 @@ export class PassportComponent {
           created: new Date().setTime(token.created),
           userId: token.userId,
           user: {},
-          rememberMe: true
+          rememberMe: true,
+          scopes: null
         }));
 
         this.user.findById(token.userId, {
@@ -46,7 +47,8 @@ export class PassportComponent {
               created: new Date().setTime(token.created),
               userId: token.userId,
               user: result,
-              rememberMe: true
+              rememberMe: true,
+              scopes: null
             }));
 
             this.router.navigate(['/' + token.userId]);
@@ -55,6 +57,14 @@ export class PassportComponent {
             this.router.navigate(['/' + token.userId]);
           }
         );
+      } else if (token.error) {
+        this.store.dispatch(new AlertActions.setAlert({
+          message: token.error,
+          type: 'error'
+        }));
+
+        // TODO: redirect to last page
+        this.router.navigate(['/']);
       }
     });
   }

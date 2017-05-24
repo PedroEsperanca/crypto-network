@@ -9,19 +9,19 @@ import {
 } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { ConfigService } from '@nglibs/config';
-import { ModalDirective } from 'ng2-bootstrap';
+import { ConfigService } from '@ngx-config/core';
+import { ModalDirective } from 'ngx-bootstrap';
 
 import {
   User,
   UserApi,
   LoopbackAuthActions,
-  getLoopbackAuthUser
+  getLoopbackAuthAccount
 } from 'shared/api';
 import { IAppState, AlertActions } from 'shared/ngrx';
 
 @Component({
-  selector: 'settingsApplicationsApplication',
+  selector: 'app-settings-applications-application',
   styleUrls: [ './application.component.scss' ],
   templateUrl: './application.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -57,7 +57,7 @@ export class SettingsApplicationsApplicationComponent implements OnInit, OnDestr
   }
 
   public ngOnInit() {
-    this.subscriptions.push(this.store.let(getLoopbackAuthUser()).subscribe((currentUser: User) => {
+    this.subscriptions.push(this.store.let(getLoopbackAuthAccount()).subscribe((currentUser: User) => {
       if (!currentUser) { return; }
 
       this.currentUser = (<any> Object).assign({}, currentUser);
@@ -88,7 +88,7 @@ export class SettingsApplicationsApplicationComponent implements OnInit, OnDestr
   }
 
   public updateApp() {
-    let data = Object.assign({}, this.formModel);
+    const data = Object.assign({}, this.formModel);
     data.redirectURIs = data.redirectURIs.replace(', ', ',').split(',');
 
     this.user.updateByIdOAuthClientApplications(

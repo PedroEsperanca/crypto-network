@@ -28,8 +28,7 @@ export function BaseReducerFactory<S, T>(actionTypes: any): any {
       ids: Array.from(new Set([ ...state.ids, action.payload.id ])),
       entities: Object.assign({}, state.entities, {
         [action.payload.id]: action.payload
-      }),
-      selectedIds: action.payload.id
+      })
     });
   };
 
@@ -49,8 +48,7 @@ export function BaseReducerFactory<S, T>(actionTypes: any): any {
 
     return Object.assign({}, state, {
       ids: Array.from(new Set(state.ids)),
-      entities: Object.assign({}, state.entities),
-      selectedIds: resultIds
+      entities: Object.assign({}, state.entities)
     });
   };
 
@@ -68,8 +66,7 @@ export function BaseReducerFactory<S, T>(actionTypes: any): any {
 
     return Object.assign({}, state, {
       ids: Array.from(ids),
-      entities: Object.assign({}, state.entities),
-      selectedIds: state.selectedIds
+      entities: Object.assign({}, state.entities)
     });
   };
 

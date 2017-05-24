@@ -8,7 +8,7 @@ import { BaseRequestOptions, Http, Response, ResponseOptions } from '@angular/ht
 import { MockBackend, MockConnection } from '@angular/http/testing';
 
 // libs
-import { ConfigModule, ConfigLoader, ConfigService, ConfigHttpLoader } from '@nglibs/config';
+import { ConfigModule, ConfigLoader, ConfigService, ConfigHttpLoader } from '@ngx-config/core';
 
 // app
 import { t } from '../../test/index';

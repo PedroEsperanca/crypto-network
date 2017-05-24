@@ -1,4 +1,4 @@
-// Angular 2
+import { environment } from 'environment';
 import {
   enableDebugTools,
   disableDebugTools
@@ -16,7 +16,7 @@ let PROVIDERS: any[] = [
 // https://github.com/angular/angular/blob/86405345b781a9dc2438c0fbe3e9409245647019/TOOLS_JS.md
 let _decorateModuleRef = <T>(value: T): T => { return value; };
 
-if ('production' === ENV) {
+if (environment.production) {
   enableProdMode();
 
   // Production
@@ -37,7 +37,7 @@ if ('production' === ENV) {
     const appRef = modRef.injector.get(ApplicationRef);
     const cmpRef = appRef.components[0];
 
-    let _ng = (<any> window).ng;
+    const _ng = (<any> window).ng;
     enableDebugTools(cmpRef);
     (<any> window).ng.probe = _ng.probe;
     (<any> window).ng.coreTokens = _ng.coreTokens;

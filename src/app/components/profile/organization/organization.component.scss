@@ -1,4 +1,4 @@
-@import '~assets/styles/_colors.scss';
+@import '~styles/_colors.scss';
 
 :host {
     .container {
@@ -10,8 +10,6 @@
 }
 
 :host /deep/ {
-    @import '~assets/styles/conf/conf.scss';
-    @import '~assets/styles/bootstrap-overrides/overrides.scss';
 
     .btn {
         padding: 7px 10px;

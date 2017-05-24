@@ -12,11 +12,11 @@
         <a routerLink="/settings/account" class="menu-item" routerLinkActive="active">{{'Account' | translate}}</a>
         <a routerLink="/settings/emails" class="menu-item" routerLinkActive="active">
           {{'Emails' | translate}}
-          <svg *ngIf="needToVerifyEmail" aria-hidden="true" class="octicon octicon-alert menu-warning" height="16" title="You have not verified any email addresses" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M8.865 1.52c-.18-.31-.51-.5-.87-.5s-.69.19-.87.5L.275 13.5c-.18.31-.18.69 0 1 .19.31.52.5.87.5h13.7c.36 0 .69-.19.86-.5.17-.31.18-.69.01-1L8.865 1.52zM8.995 13h-2v-2h2v2zm0-3h-2V6h2v4z"></path></svg>
+          <svg *ngIf="config.settings?.login?.strategies?.form && needToVerifyEmail" aria-hidden="true" class="octicon octicon-alert menu-warning" height="16" title="You have not verified any email addresses" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M8.865 1.52c-.18-.31-.51-.5-.87-.5s-.69.19-.87.5L.275 13.5c-.18.31-.18.69 0 1 .19.31.52.5.87.5h13.7c.36 0 .69-.19.86-.5.17-.31.18-.69.01-1L8.865 1.52zM8.995 13h-2v-2h2v2zm0-3h-2V6h2v4z"></path></svg>
         </a>
         <a routerLink="/settings/notifications" class="menu-item" routerLinkActive="active">{{'Notifications' | translate}}</a>
         <a routerLink="/settings/billing" class="menu-item" routerLinkActive="active">{{'Billing' | translate}}</a>
-        <a routerLink="/settings/organizations" class="menu-item" routerLinkActive="active">{{'Organizations' | translate}}</a>
+        <a *ngIf="config.settings?.organizations" routerLink="/settings/organizations" class="menu-item" routerLinkActive="active">{{'Organizations' | translate}}</a>
       </nav>
 
       <nav *ngIf="config.settings?.oauth" class="menu">
@@ -25,7 +25,7 @@
         <a routerLink="/settings/applications" class="menu-item" routerLinkActive="active">{{'OAuth Applications' | translate}}</a>
       </nav>
 
-      <nav *ngIf="currentUser.organizations.length" class="menu">
+      <nav *ngIf="config.settings?.organizations && currentUser.organizations.length" class="menu">
         <span class="menu-heading">{{'Organization settings' | translate}}</span>
 
         <a class="menu-item"

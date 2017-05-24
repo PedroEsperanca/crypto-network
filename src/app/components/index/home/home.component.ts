@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 
-import { ConfigService } from '@nglibs/config';
+import { ConfigService } from '@ngx-config/core';
 
 @Component({
   selector: 'indexHome',

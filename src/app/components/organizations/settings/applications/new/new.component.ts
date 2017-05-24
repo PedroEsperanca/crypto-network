@@ -3,13 +3,13 @@ import { Store } from '@ngrx/store';
 import { Component, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { ConfigService } from '@nglibs/config';
+import { ConfigService } from '@ngx-config/core';
 
 import {
   User,
   UserApi,
   LoopbackAuthActions,
-  getLoopbackAuthUser
+  getLoopbackAuthAccount
 } from 'shared/api';
 import { IAppState, AlertActions } from 'shared/ngrx';
 
@@ -23,7 +23,7 @@ interface FormI {
 }
 
 @Component({
-  selector: 'settingsApplicationsNew',
+  selector: 'app-settings-applications-new',
   styleUrls: [ './new.component.scss' ],
   templateUrl: './new.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -51,7 +51,7 @@ export class SettingsApplicationsNewComponent implements OnDestroy {
   ) {
     this.config = this.configService.getSettings();
 
-    this.subscriptions.push(this.store.let(getLoopbackAuthUser()).subscribe((currentUser: User) => {
+    this.subscriptions.push(this.store.let(getLoopbackAuthAccount()).subscribe((currentUser: User) => {
       if (!currentUser) { return; }
       this.currenUser = (<any> Object).assign({}, currentUser);
     }));

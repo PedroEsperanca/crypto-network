@@ -9,7 +9,7 @@
     <strong><a routerLink="/{{owner.id}}">{{owner.name}}</a></strong> {{'owns this application' | translate}}.
   </p>
 
-    <button type="button" class="btn btn-primary pull-right" (click)="transferModal.show()">
+    <button type="button" class="btn btn-primary float-right" (click)="transferModal.show()">
       {{'Transfer ownership' | translate}}
     </button>
 </div>
@@ -55,7 +55,7 @@
 <hr class="form-hr">
 
 <form (ngSubmit)="updateApp()" #newOAuthAppForm="ngForm">
-  <dl *ngIf="!config.settings.usePhotoUpload" class="profile-avatar pull-right">
+  <dl *ngIf="!config.settings.usePhotoUpload" class="profile-avatar float-right">
     <img class="avatar" [src]="formModel.logo?.url || formModel.logo || config.logo">
   </dl>
 
@@ -69,7 +69,7 @@
     [fileNameRewrite]="fileNameRewrite"
     [getUploadUrl]="getUploadUrl"
     [onCompleteItem]="onUploadComplete"
-    class="profile-avatar pull-right"></file-uploader>
+    class="profile-avatar float-right"></file-uploader>
 
   <div>
     <dl class="form-group">
@@ -126,9 +126,9 @@
     <div class="modal-content">
 
       <div class="modal-header">
-        <h4 class="modal-title pull-left">{{'Where should we transfer' | translate}} {{formModel.name}}?</h4>
+        <h4 class="modal-title float-left">{{'Where should we transfer' | translate}} {{formModel.name}}?</h4>
 
-        <button type="button" class="close pull-right" (click)="transferModal.hide()" aria-label="Close">
+        <button type="button" class="close float-right" (click)="transferModal.hide()" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -168,9 +168,9 @@
     <div class="modal-content">
 
       <div class="modal-header">
-        <h4 class="modal-title pull-left">{{'Revoke all user tokens?' | translate}}</h4>
+        <h4 class="modal-title float-left">{{'Revoke all user tokens?' | translate}}</h4>
 
-        <button type="button" class="close pull-right" (click)="removeModal.hide()" aria-label="Close">
+        <button type="button" class="close float-right" (click)="removeModal.hide()" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -202,9 +202,9 @@
     <div class="modal-content">
 
       <div class="modal-header">
-        <h4 class="modal-title pull-left">{{'Revoke all user tokens?' | translate}}</h4>
+        <h4 class="modal-title float-left">{{'Revoke all user tokens?' | translate}}</h4>
 
-        <button type="button" class="close pull-right" (click)="resetModal.hide()" aria-label="Close">
+        <button type="button" class="close float-right" (click)="resetModal.hide()" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -230,9 +230,9 @@
     <div class="modal-content">
 
       <div class="modal-header">
-        <h4 class="modal-title pull-left">{{'Delete application?' | translate}}</h4>
+        <h4 class="modal-title float-left">{{'Delete application?' | translate}}</h4>
 
-        <button type="button" class="close pull-right" (click)="deleteModal.hide()" aria-label="Close">
+        <button type="button" class="close float-right" (click)="deleteModal.hide()" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>

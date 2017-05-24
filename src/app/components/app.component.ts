@@ -1,4 +1,4 @@
-// angular
+import { environment } from 'environment';
 import {
   ViewEncapsulation,
   Component,
@@ -10,7 +10,7 @@ import './operators';
 
 // libs
 import { CloudtasksService } from '@cloudtasks/ngx-image';
-import { ConfigService } from '@nglibs/config';
+import { ConfigService } from '@ngx-config/core';
 
 // app
 import { AnalyticsService } from 'shared/analytics';
@@ -23,7 +23,7 @@ import { LoopBackAuth, UserApi } from 'shared/api';
  * This class represents the main application component.
  */
 @Component({
-  selector: 'app',
+  selector: 'app-root',
   styleUrls: [ 'app.component.scss' ],
   template: `
 <div platform scrollSpy>
@@ -45,8 +45,8 @@ export class AppComponent {
     private user: UserApi,
     private appService: AppService
   ) {
-    this.analytics.devMode(`${Config.ENVIRONMENT().ENV}` === 'development' ? true : false);
-    logger.debug(`Config env: ${Config.ENVIRONMENT().ENV}`);
+    this.analytics.devMode(!environment.production);
+    logger.debug(!environment.production);
 
     cloudtasks.setId('demo');
 
@@ -59,7 +59,7 @@ export class AppComponent {
   public checkLogginToken() {
     const token = this.auth.getToken();
     if (token  && token.ttl) {
-      let expires = new Date(token.issuedAt ||
+      const expires = new Date(token.issuedAt ||
         token.created ||
         parseInt( token.id.toString().substring(0, 8), 16 ) * 1000);
 

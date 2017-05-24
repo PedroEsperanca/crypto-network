@@ -5,7 +5,7 @@
 
   <form (ngSubmit)="newOrganization()" #newOrganizationForm="ngForm">
 
-    <dl *ngIf="!config.settings.usePhotoUpload" class="profile-avatar pull-right">
+    <dl *ngIf="!config.settings.usePhotoUpload" class="profile-avatar float-right">
       <img class="avatar" [src]="formModel.logo?.url || formModel.logo || config.logo">
     </dl>
 
@@ -14,12 +14,13 @@
       title="Organization logo"
       uploadButton="Upload new image"
       uploadingButton="Uploading"
-      [autoUpload]="true"
+      [autoUpload]="false"
       [currentFile]="formModel.logo?.url || config.logo"
       [fileNameRewrite]="fileNameRewrite"
       [getUploadUrl]="getUploadUrl"
       [onCompleteItem]="onUploadComplete"
-      class="profile-avatar pull-right"></file-uploader>
+      #fileUploader
+      class="profile-avatar float-right"></file-uploader>
 
     <div>
       <dl class="form-group">

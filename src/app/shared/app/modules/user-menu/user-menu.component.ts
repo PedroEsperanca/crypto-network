@@ -3,14 +3,14 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 
-import { ConfigService } from '@nglibs/config';
+import { ConfigService } from '@ngx-config/core';
 
-import { SDKToken, User, getLoopbackAuthToken, getLoopbackAuthUser } from 'shared/api';
+import { SDKToken, User, getLoopbackAuthToken, getLoopbackAuthAccount } from 'shared/api';
 import { IAppState } from 'shared/ngrx';
 import { UserActions } from 'shared/api/actions';
 
 @Component({
-  selector: 'user-menu',
+  selector: 'app-user-menu',
   styleUrls: [ './user-menu.component.scss' ],
   templateUrl: './user-menu.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -26,7 +26,7 @@ export class UserMenuComponent {
   ) {
     this.config = this.configService.getSettings();
     this.currentToken$ = store.let(getLoopbackAuthToken());
-    this.currentUser$ = store.let(getLoopbackAuthUser());
+    this.currentUser$ = store.let(getLoopbackAuthAccount());
   }
 
   public logout() {

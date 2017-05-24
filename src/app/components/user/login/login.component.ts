@@ -1,14 +1,14 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { ConfigService } from '@nglibs/config';
+import { ConfigService } from '@ngx-config/core';
 
 import { UserInterface, LoopBackConfig } from 'shared/api';
 import { IAppState } from 'shared/ngrx';
 import { UserActions } from 'shared/api/actions';
 
 @Component({
-  selector: 'user.login',
+  selector: 'app-user-login',
   templateUrl: './login.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -24,6 +24,7 @@ export class LoginComponent {
     private configService: ConfigService
   ) {
     this.config = this.configService.getSettings();
+    console.log(this.config);
   }
 
   public login() {

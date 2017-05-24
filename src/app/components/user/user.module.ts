@@ -8,7 +8,7 @@ import { AlertModule } from 'shared/app/modules/alert';
 import { SDKStorage } from 'shared/api/storage/storage.swaps';
 import { CookieBrowser } from 'shared/api/storage/cookie.browser';
 
-import { TooltipModule } from 'ng2-bootstrap/tooltip';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 import { routing } from './user.routing';
 import { UserComponent } from './user.component';

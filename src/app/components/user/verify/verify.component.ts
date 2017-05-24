@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef, Inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { ConfigService } from '@nglibs/config';
+import { ConfigService } from '@ngx-config/core';
 
 import {
   SDKToken,
@@ -24,7 +24,7 @@ interface FormI {
 }
 
 @Component({
-  selector: 'user.verify',
+  selector: 'app-user-verify',
   templateUrl: './verify.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -34,7 +34,7 @@ export class VerifyComponent {
     token: ''
   };
 
-  public confirming: boolean = false;
+  public confirming = false;
 
   constructor(
     private store: Store<IAppState>,
@@ -105,7 +105,7 @@ export class VerifyComponent {
   }
 
   public resend() {
-    let data: any = {};
+    const data: any = {};
     if (this.config.settings.login.multipleEmailsAndPhones) {
       const emailToVerify = this.auth.getCurrentUserData()
             .emailAddresses.filter((e) => { return !e.verified; })[0];

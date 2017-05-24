@@ -1,9 +1,9 @@
 <div class="hero">
 	<div class="userCard">
-		<img class="pull-left"
+		<img class="float-left"
 			*ngIf="USER?.photo"
 			[ctSrc]="USER.photo" [ctOptions]="{smart: 'face'}">
-		<img class="pull-left"
+		<img class="float-left"
 			*ngIf="!USER?.photo"
 			[ctSrc]="'https://android.svn.wordpress.org/trunk/res/drawable/placeholder.png'" [ctOptions]="{smart: 'face'}">
 

@@ -2,14 +2,14 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
-import { ConfigService } from '@nglibs/config';
+import { ConfigService } from '@ngx-config/core';
 
 import { UserApi, LoopBackConfig } from 'shared/api';
 import { IAppState } from 'shared/ngrx';
 import { UserActions } from 'shared/api/actions';
 
 @Component({
-  selector: 'user.signup',
+  selector: 'app-user-signup',
   templateUrl: './signup.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -52,14 +52,14 @@ export class SignupComponent {
     const aNumber = /[0-9]/;
     const aSpecial = /[!|@|#|$|%|^|&|*|(|)|-|_]/;
 
-    let passwordComplexityReport: any = {};
+    const passwordComplexityReport: any = {};
 
     let numUpper = 0;
     let numLower = 0;
     let numNums = 0;
     let numSpecials = 0;
 
-    for (let character of password) {
+    for (const character of password) {
       if (anUpperCase.test(character)) {
         numUpper++;
       }

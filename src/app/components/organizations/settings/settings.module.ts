@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule }       from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { TooltipModule } from 'ng2-bootstrap/tooltip';
-import { ModalModule } from 'ng2-bootstrap/modal';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { ModalModule } from 'ngx-bootstrap/modal';
 import { CloudtasksModule } from '@cloudtasks/ngx-image';
 
 import { MultilingualModule } from 'shared/i18n/multilingual.module';

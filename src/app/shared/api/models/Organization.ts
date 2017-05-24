@@ -6,13 +6,13 @@ import {
 
 declare var Object: any;
 export interface OrganizationInterface {
-  "id"?: any;
-  "name"?: any;
-  "displayName"?: any;
-  "description"?: any;
+  "id"?: string;
+  "name"?: string;
+  "displayName"?: string;
+  "description"?: string;
   "logo"?: any;
-  "createdAt"?: any;
-  "updatedAt"?: any;
+  "createdAt"?: Date;
+  "updatedAt"?: Date;
   users?: User[];
   roles?: any[];
   s3Photo?: any[];
@@ -21,13 +21,13 @@ export interface OrganizationInterface {
 }
 
 export class Organization implements OrganizationInterface {
-  "id": any;
-  "name": any;
-  "displayName": any;
-  "description": any;
+  "id": string;
+  "name": string;
+  "displayName": string;
+  "description": string;
   "logo": any;
-  "createdAt": any;
-  "updatedAt": any;
+  "createdAt": Date;
+  "updatedAt": Date;
   users: User[];
   roles: any[];
   s3Photo: any[];
@@ -63,22 +63,23 @@ export class Organization implements OrganizationInterface {
     return {
       name: 'Organization',
       plural: 'Organizations',
+      idName: 'id',
       properties: {
         "id": {
           name: 'id',
-          type: 'any'
+          type: 'string'
         },
         "name": {
           name: 'name',
-          type: 'any'
+          type: 'string'
         },
         "displayName": {
           name: 'displayName',
-          type: 'any'
+          type: 'string'
         },
         "description": {
           name: 'description',
-          type: 'any'
+          type: 'string'
         },
         "logo": {
           name: 'logo',
@@ -86,38 +87,53 @@ export class Organization implements OrganizationInterface {
         },
         "createdAt": {
           name: 'createdAt',
-          type: 'any'
+          type: 'Date'
         },
         "updatedAt": {
           name: 'updatedAt',
-          type: 'any'
+          type: 'Date'
         },
       },
       relations: {
         users: {
           name: 'users',
           type: 'User[]',
-          model: 'User'
+          model: 'User',
+          relationType: 'hasMany',
+          keyFrom: 'id',
+          keyTo: 'organizationId'
         },
         roles: {
           name: 'roles',
           type: 'any[]',
-          model: ''
+          model: '',
+          relationType: 'hasMany',
+          keyFrom: 'id',
+          keyTo: 'organizationId'
         },
         s3Photo: {
           name: 's3Photo',
           type: 'any[]',
-          model: ''
+          model: '',
+          relationType: 'embedsOne',
+          keyFrom: 'logo',
+          keyTo: 'id'
         },
         apps: {
           name: 'apps',
           type: 'App[]',
-          model: 'App'
+          model: 'App',
+          relationType: 'hasMany',
+          keyFrom: 'id',
+          keyTo: 'organizationId'
         },
         oAuthClientApplications: {
           name: 'oAuthClientApplications',
           type: 'any[]',
-          model: ''
+          model: '',
+          relationType: 'hasMany',
+          keyFrom: 'id',
+          keyTo: 'organizationId'
         },
       }
     }

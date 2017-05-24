@@ -45,6 +45,10 @@ const routes: Routes = [
         component: RecoverAccountComponent
       },
       {
+        path: 'passport/error/:error',
+        component: PassportComponent
+      },
+      {
         path: 'passport/:id/:userId/:ttl/:created',
         component: PassportComponent
       }

@@ -2,14 +2,14 @@ import { Subscription } from 'rxjs/Subscription';
 import { Store } from '@ngrx/store';
 import { Component, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 
-import { ConfigService } from '@nglibs/config';
+import { ConfigService } from '@ngx-config/core';
 
 import {
   User,
   UserApi,
   LoopbackAuthActions,
   UserActions,
-  getLoopbackAuthUser
+  getLoopbackAuthAccount
 } from 'shared/api';
 import { IAppState, AlertActions } from 'shared/ngrx';
 
@@ -33,7 +33,7 @@ export class SettingsProfileComponent implements OnDestroy {
   ) {
     this.config = this.configService.getSettings();
 
-    this.subscriptions.push(this.store.let(getLoopbackAuthUser()).subscribe((currentUser: User) => {
+    this.subscriptions.push(this.store.let(getLoopbackAuthAccount()).subscribe((currentUser: User) => {
       if (!currentUser) { return; }
 
       this.formModel = (<any> Object).assign({}, currentUser);

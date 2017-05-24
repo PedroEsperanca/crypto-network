@@ -156,6 +156,10 @@ export class FileUploaderComponent implements OnInit {
     };
   }
 
+  public uploadAll(): void {
+    this.uploader.uploadAll();
+  }
+
   public fileOverBase(e: any): void {
     this.hasDropZoneOver = e;
   }

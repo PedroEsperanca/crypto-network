@@ -1,11 +1,9 @@
 /* tslint:disable */
 import { Observable } from 'rxjs/Observable';
-import { createSelector } from 'reselect';
 import { Action } from '@ngrx/store';
 import { SDKToken } from '../models/BaseModels';
-import { User } from '../models/user';
 import { LoopbackAuthActionTypes } from '../actions/auth';
-import { UserActionTypes } from '../actions/user';
+import { UserActionTypes } from '../actions/User';
 
 const initialState: SDKToken = {
   id: null,
@@ -14,7 +12,8 @@ const initialState: SDKToken = {
   issuedAt: null,
   created: null,
   ttl: null,
-  rememberMe: null
+  rememberMe: null,
+  scopes: null
 };
 
 /**
@@ -75,12 +74,12 @@ export function getLoopbackAuthToken() {
     .select((s) => s.loopbackAuth);
 }
 
-export function getLoopbackAuthUser() {
+export function getLoopbackAuthAccount() {
   return (state$: Observable<any>) => state$
     .select((s) => s.loopbackAuth.user);
 }
 
-export function getLoopbackAuthUserId() {
+export function getLoopbackAuthAccountId() {
   return (state$: Observable<any>) => state$
     .select((s) => s.loopbackAuth.userId);
 }

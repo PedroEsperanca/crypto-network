@@ -94,7 +94,7 @@ export class AppApi extends BaseLoopBackApi {
   }
 
   /**
-   * Fetches hasOne relation options.
+   * Fetches hasOne relation s3Photo.
    *
    * @param {any} id App id
    *
@@ -109,10 +109,10 @@ export class AppApi extends BaseLoopBackApi {
    * This usually means the response is a `App` object.)
    * </em>
    */
-  public getOptions(id: any, refresh: any = {}): Observable<any> {
+  public getS3Photo(id: any, refresh: any = {}): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Apps/:id/options";
+    "/Apps/:id/s3Photo";
     let _routeParams: any = {
       id: id
     };
@@ -124,7 +124,7 @@ export class AppApi extends BaseLoopBackApi {
   }
 
   /**
-   * Creates a new instance in options of this model.
+   * Creates a new instance in s3Photo of this model.
    *
    * @param {any} id App id
    *
@@ -141,10 +141,10 @@ export class AppApi extends BaseLoopBackApi {
    * This usually means the response is a `App` object.)
    * </em>
    */
-  public createOptions(id: any, data: any = {}): Observable<any> {
+  public createS3Photo(id: any, data: any = {}): Observable<any> {
     let _method: string = "POST";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Apps/:id/options";
+    "/Apps/:id/s3Photo";
     let _routeParams: any = {
       id: id
     };
@@ -157,7 +157,7 @@ export class AppApi extends BaseLoopBackApi {
   }
 
   /**
-   * Update options of this model.
+   * Update s3Photo of this model.
    *
    * @param {any} id App id
    *
@@ -174,10 +174,10 @@ export class AppApi extends BaseLoopBackApi {
    * This usually means the response is a `App` object.)
    * </em>
    */
-  public updateOptions(id: any, data: any = {}): Observable<any> {
+  public updateS3Photo(id: any, data: any = {}): Observable<any> {
     let _method: string = "PUT";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Apps/:id/options";
+    "/Apps/:id/s3Photo";
     let _routeParams: any = {
       id: id
     };
@@ -190,7 +190,7 @@ export class AppApi extends BaseLoopBackApi {
   }
 
   /**
-   * Deletes options of this model.
+   * Deletes s3Photo of this model.
    *
    * @param {any} id App id
    *
@@ -200,10 +200,130 @@ export class AppApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  public destroyOptions(id: any): Observable<any> {
+  public destroyS3Photo(id: any): Observable<any> {
     let _method: string = "DELETE";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Apps/:id/options";
+    "/Apps/:id/s3Photo";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    return result;
+  }
+
+  /**
+   * Fetches hasOne relation option.
+   *
+   * @param {any} id App id
+   *
+   * @param {boolean} refresh 
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `App` object.)
+   * </em>
+   */
+  public getOption(id: any, refresh: any = {}): Observable<any> {
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Apps/:id/option";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (refresh) _urlParams.refresh = refresh;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    return result;
+  }
+
+  /**
+   * Creates a new instance in option of this model.
+   *
+   * @param {any} id App id
+   *
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `App` object.)
+   * </em>
+   */
+  public createOption(id: any, data: any = {}): Observable<any> {
+    let _method: string = "POST";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Apps/:id/option";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {
+      data: data
+    };
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    return result;
+  }
+
+  /**
+   * Update option of this model.
+   *
+   * @param {any} id App id
+   *
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `App` object.)
+   * </em>
+   */
+  public updateOption(id: any, data: any = {}): Observable<any> {
+    let _method: string = "PUT";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Apps/:id/option";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {
+      data: data
+    };
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    return result;
+  }
+
+  /**
+   * Deletes option of this model.
+   *
+   * @param {any} id App id
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * This method returns no data.
+   */
+  public destroyOption(id: any): Observable<any> {
+    let _method: string = "DELETE";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Apps/:id/option";
     let _routeParams: any = {
       id: id
     };
@@ -276,6 +396,69 @@ export class AppApi extends BaseLoopBackApi {
   }
 
   /**
+   * Get a S3 Signed URL for direct file uploads.
+   *
+   * @param {any} id App id
+   *
+   * @param {string} key 
+   *
+   * @param {object} options 
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `App` object.)
+   * </em>
+   */
+  public s3PUTSignedUrl(id: any, key: any = {}, options: any = {}): Observable<any> {
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Apps/:id/s3PUTSignedUrl";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (key) _urlParams.key = key;
+    if (options) _urlParams.options = options;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    return result;
+  }
+
+  /**
+   * Get a S3 Signed URL for direct file access.
+   *
+   * @param {any} id App id
+   *
+   * @param {string} key 
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `App` object.)
+   * </em>
+   */
+  public s3GETSignedUrl(id: any, key: any = {}): Observable<any> {
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Apps/:id/s3GETSignedUrl";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (key) _urlParams.key = key;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    return result;
+  }
+
+  /**
    * Statistical information for 'App' registers.
    *
    * @param {string} range hourly, daily, weekly, monthly, yearly, custom
@@ -311,7 +494,7 @@ export class AppApi extends BaseLoopBackApi {
   }
 
   /**
-   * Creates a new instance in options of this model.
+   * Creates a new instance in s3Photo of this model.
    *
    * @param {any} id App id
    *
@@ -328,10 +511,43 @@ export class AppApi extends BaseLoopBackApi {
    * This usually means the response is a `App` object.)
    * </em>
    */
-  public createManyOptions(id: any, data: any[] = []): Observable<any> {
+  public createManyS3Photo(id: any, data: any[] = []): Observable<any> {
     let _method: string = "POST";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Apps/:id/options";
+    "/Apps/:id/s3Photo";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {
+      data: data
+    };
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    return result;
+  }
+
+  /**
+   * Creates a new instance in option of this model.
+   *
+   * @param {any} id App id
+   *
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   *
+   * @returns {object[]} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `App` object.)
+   * </em>
+   */
+  public createManyOption(id: any, data: any[] = []): Observable<any> {
+    let _method: string = "POST";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Apps/:id/option";
     let _routeParams: any = {
       id: id
     };

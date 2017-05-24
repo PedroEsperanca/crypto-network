@@ -1,8 +1,8 @@
+/* tslint:disable */
 import { Observable } from 'rxjs/Observable';
 import { ActionReducer } from '@ngrx/store';
 import '@ngrx/core/add/operator/select';
 import { compose } from '@ngrx/core/compose';
-import { storeFreeze } from 'ngrx-store-freeze';
 import { combineReducers } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
@@ -18,14 +18,14 @@ export interface LoopbackStateInterface {
 
 export const LoopbackReducer = {
   loopbackAuth: reducers.LoopbackAuthReducer,
-  users: reducers.UsersReducer,
-  organizations: reducers.OrganizationsReducer,
-  apps: reducers.AppsReducer
+	Users: reducers.UsersReducer,
+	Organizations: reducers.OrganizationsReducer,
+	Apps: reducers.AppsReducer,
 };
 
 export const LoopbackEffects = [
   EffectsModule.run(effects.LoopbackAuthEffects),
-  EffectsModule.run(effects.UserEffects),
-  EffectsModule.run(effects.OrganizationEffects),
-  EffectsModule.run(effects.AppEffects)
+	EffectsModule.run(effects.UserEffects),
+	EffectsModule.run(effects.OrganizationEffects),
+	EffectsModule.run(effects.AppEffects),
 ];

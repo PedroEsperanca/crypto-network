@@ -9,7 +9,7 @@
     <strong><a routerLink="/{{owner.id}}">{{owner.name}}</a></strong> {{'owns this application' | translate}}.
   </p>
 
-    <button type="button" class="btn btn-primary pull-right" (click)="transferModal.show()">
+    <button type="button" class="btn btn-primary float-right" (click)="transferModal.show()">
       {{'Transfer ownership' | translate}}
     </button>
 </div>
@@ -55,7 +55,7 @@
 <hr class="form-hr">
 
 <form (ngSubmit)="updateApp()" #newOAuthAppForm="ngForm">
-  <dl class="profile-avatar pull-right">
+  <dl class="profile-avatar float-right">
     <img *ngIf="formModel.photo" alt="@{{formModel.username || formModel.name}}" class="avatar" [src]="formModel.photo">
     <img *ngIf="!formModel.photo" alt="" class="avatar" [src]="config.logo">
   </dl>
@@ -115,9 +115,9 @@
     <div class="modal-content">
 
       <div class="modal-header">
-        <h4 class="modal-title pull-left">{{'Where should we transfer' | translate}} {{formModel.name}}?</h4>
+        <h4 class="modal-title float-left">{{'Where should we transfer' | translate}} {{formModel.name}}?</h4>
 
-        <button type="button" class="close pull-right" (click)="transferModal.hide()" aria-label="Close">
+        <button type="button" class="close float-right" (click)="transferModal.hide()" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -157,9 +157,9 @@
     <div class="modal-content">
 
       <div class="modal-header">
-        <h4 class="modal-title pull-left">{{'Revoke all user tokens?' | translate}}</h4>
+        <h4 class="modal-title float-left">{{'Revoke all user tokens?' | translate}}</h4>
 
-        <button type="button" class="close pull-right" (click)="removeModal.hide()" aria-label="Close">
+        <button type="button" class="close float-right" (click)="removeModal.hide()" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -191,9 +191,9 @@
     <div class="modal-content">
 
       <div class="modal-header">
-        <h4 class="modal-title pull-left">{{'Revoke all user tokens?' | translate}}</h4>
+        <h4 class="modal-title float-left">{{'Revoke all user tokens?' | translate}}</h4>
 
-        <button type="button" class="close pull-right" (click)="resetModal.hide()" aria-label="Close">
+        <button type="button" class="close float-right" (click)="resetModal.hide()" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -219,9 +219,9 @@
     <div class="modal-content">
 
       <div class="modal-header">
-        <h4 class="modal-title pull-left">{{'Delete application?' | translate}}</h4>
+        <h4 class="modal-title float-left">{{'Delete application?' | translate}}</h4>
 
-        <button type="button" class="close pull-right" (click)="deleteModal.hide()" aria-label="Close">
+        <button type="button" class="close float-right" (click)="deleteModal.hide()" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>

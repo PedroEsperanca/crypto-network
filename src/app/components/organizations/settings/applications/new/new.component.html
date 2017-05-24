@@ -3,7 +3,7 @@
 </div>
 
 <form (ngSubmit)="newApp()" #newOAuthAppForm="ngForm">
-  <dl class="profile-avatar pull-right">
+  <dl class="profile-avatar float-right">
     <img *ngIf="formModel.photo" alt="@{{formModel.username || formModel.name}}" class="avatar" [src]="formModel.photo">
     <img *ngIf="!formModel.photo" alt="" class="avatar" [src]="config.logo">
   </dl>

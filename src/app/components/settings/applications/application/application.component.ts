@@ -9,19 +9,20 @@ import {
 } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { ConfigService } from '@nglibs/config';
-import { ModalDirective } from 'ng2-bootstrap';
+import { ConfigService } from '@ngx-config/core';
+import { ModalDirective } from 'ngx-bootstrap';
 
 import {
   User,
   UserApi,
+  AppApi,
   LoopbackAuthActions,
-  getLoopbackAuthUser
+  getLoopbackAuthAccount
 } from 'shared/api';
 import { IAppState, AlertActions } from 'shared/ngrx';
 
 @Component({
-  selector: 'settingsApplicationsApplication',
+  selector: 'app-settings-applications-application',
   styleUrls: [ './application.component.scss' ],
   templateUrl: './application.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -50,6 +51,7 @@ export class SettingsApplicationsApplicationComponent implements OnInit, OnDestr
     private router: Router,
     private route: ActivatedRoute,
     private user: UserApi,
+    private application: AppApi,
     private configService: ConfigService,
     private cd: ChangeDetectorRef,
   ) {
@@ -57,7 +59,7 @@ export class SettingsApplicationsApplicationComponent implements OnInit, OnDestr
   }
 
   public ngOnInit() {
-    this.subscriptions.push(this.store.let(getLoopbackAuthUser()).subscribe((currentUser: User) => {
+    this.subscriptions.push(this.store.let(getLoopbackAuthAccount()).subscribe((currentUser: User) => {
       if (!currentUser) { return; }
 
       this.currentUser = (<any> Object).assign({}, currentUser);
@@ -88,7 +90,7 @@ export class SettingsApplicationsApplicationComponent implements OnInit, OnDestr
   }
 
   public updateApp() {
-    let data = Object.assign({}, this.formModel);
+    const data = Object.assign({}, this.formModel);
     data.redirectURIs = data.redirectURIs.replace(', ', ',').split(',');
 
     this.user.updateByIdOAuthClientApplications(
@@ -167,5 +169,40 @@ export class SettingsApplicationsApplicationComponent implements OnInit, OnDestr
           type: 'error'
         }))
       );
+  }
+
+  public fileNameRewrite(fileName: string): string {
+    return 'application/' + this.formModel.id + '/avatar';
+  }
+
+  public getUploadUrl(fileName: string, fileType: string, options: any = {}) {
+    options.fileType = fileType;
+    return this.user.s3PUTSignedUrl(this.formModel.id, fileName, options);
+  }
+
+  public onUploadComplete(item: any) {
+    this.application.updateS3Photo(this.formModel.id, {
+      url: item.url.split('?')[0],
+      key: item.file.name
+    }).subscribe(
+      (response: any) => {
+        if (response.error) {
+          this.store.dispatch(new AlertActions.setAlert({
+            message: response.error_description,
+            type: 'error'
+          }));
+        } else {
+
+          // TODO: update store
+          /*this.store.dispatch(new LoopbackAuthActions.updateUserProperties({
+            photo: response
+          }));*/
+        }
+      },
+      (error) => this.store.dispatch(new AlertActions.setAlert({
+        message: error.message,
+        type: 'error'
+      }))
+    );
   }
 }

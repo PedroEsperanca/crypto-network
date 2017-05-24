@@ -2,18 +2,18 @@ import { Subscription } from 'rxjs/Subscription';
 import { Store } from '@ngrx/store';
 import { Component, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 
-import { ConfigService } from '@nglibs/config';
+import { ConfigService } from '@ngx-config/core';
 
 import {
   User,
   UserApi,
   LoopbackAuthActions,
-  getLoopbackAuthUser
+  getLoopbackAuthAccount
 } from 'shared/api';
 import { IAppState, AlertActions } from 'shared/ngrx';
 
 @Component({
-  selector: 'settingsEmails',
+  selector: 'app-settings-emails',
   styleUrls: [ './emails.component.scss' ],
   templateUrl: './emails.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -22,7 +22,7 @@ export class SettingsEmailsComponent implements OnDestroy  {
   public config: any;
   public currentUser: User;
 
-  public emailModel: string = '';
+  public emailModel = '';
   public updatePreferencesModel: any = 'marketing';
 
   private subscriptions: Subscription[] = [];
@@ -34,7 +34,7 @@ export class SettingsEmailsComponent implements OnDestroy  {
   ) {
     this.config = this.configService.getSettings();
 
-    this.subscriptions.push(this.store.let(getLoopbackAuthUser()).subscribe((currentUser: User) => {
+    this.subscriptions.push(this.store.let(getLoopbackAuthAccount()).subscribe((currentUser: User) => {
       if (!currentUser) { return; }
 
       this.updatePreferencesModel = currentUser.emailPreferences;
@@ -89,7 +89,7 @@ export class SettingsEmailsComponent implements OnDestroy  {
             type: 'error'
           }));
         } else {
-          for (let email of this.currentUser.emailAddresses) {
+          for (const email of this.currentUser.emailAddresses) {
             if (email.id === emailId) {
               email.primary = true;
             } else {

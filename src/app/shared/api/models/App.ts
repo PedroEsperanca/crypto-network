@@ -6,29 +6,33 @@ import {
 
 declare var Object: any;
 export interface AppInterface {
-  "id"?: any;
-  "name"?: any;
+  "id"?: string;
+  "name"?: string;
+  "logo"?: any;
   "userId"?: any;
-  "organizationId"?: any;
-  "createdAt"?: any;
-  "updatedAt"?: any;
-  "_options"?: any;
+  "organizationId"?: string;
+  "createdAt"?: Date;
+  "updatedAt"?: Date;
+  "options"?: any;
   user?: User;
   organization?: Organization;
-  options?: any[];
+  s3Photo?: any[];
+  option?: any[];
 }
 
 export class App implements AppInterface {
-  "id": any;
-  "name": any;
+  "id": string;
+  "name": string;
+  "logo": any;
   "userId": any;
-  "organizationId": any;
-  "createdAt": any;
-  "updatedAt": any;
-  "_options": any;
+  "organizationId": string;
+  "createdAt": Date;
+  "updatedAt": Date;
+  "options": any;
   user: User;
   organization: Organization;
-  options: any[];
+  s3Photo: any[];
+  option: any[];
   constructor(data?: AppInterface) {
     Object.assign(this, data);
   }
@@ -59,13 +63,18 @@ export class App implements AppInterface {
     return {
       name: 'App',
       plural: 'Apps',
+      idName: 'id',
       properties: {
         "id": {
           name: 'id',
-          type: 'any'
+          type: 'string'
         },
         "name": {
           name: 'name',
+          type: 'string'
+        },
+        "logo": {
+          name: 'logo',
           type: 'any'
         },
         "userId": {
@@ -74,18 +83,18 @@ export class App implements AppInterface {
         },
         "organizationId": {
           name: 'organizationId',
-          type: 'any'
+          type: 'string'
         },
         "createdAt": {
           name: 'createdAt',
-          type: 'any'
+          type: 'Date'
         },
         "updatedAt": {
           name: 'updatedAt',
-          type: 'any'
+          type: 'Date'
         },
-        "_options": {
-          name: '_options',
+        "options": {
+          name: 'options',
           type: 'any'
         },
       },
@@ -93,17 +102,34 @@ export class App implements AppInterface {
         user: {
           name: 'user',
           type: 'User',
-          model: 'User'
+          model: 'User',
+          relationType: 'belongsTo',
+          keyFrom: 'userId',
+          keyTo: 'id'
         },
         organization: {
           name: 'organization',
           type: 'Organization',
-          model: 'Organization'
+          model: 'Organization',
+          relationType: 'belongsTo',
+          keyFrom: 'organizationId',
+          keyTo: 'id'
         },
-        options: {
-          name: 'options',
+        s3Photo: {
+          name: 's3Photo',
           type: 'any[]',
-          model: ''
+          model: '',
+          relationType: 'embedsOne',
+          keyFrom: 'logo',
+          keyTo: 'id'
+        },
+        option: {
+          name: 'option',
+          type: 'any[]',
+          model: '',
+          relationType: 'embedsOne',
+          keyFrom: 'options',
+          keyTo: 'id'
         },
       }
     }

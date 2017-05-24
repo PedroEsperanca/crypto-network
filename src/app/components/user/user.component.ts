@@ -1,9 +1,9 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 
-import { ConfigService } from '@nglibs/config';
+import { ConfigService } from '@ngx-config/core';
 
 @Component({
-  selector: 'user.user',
+  selector: 'app-user',
   styleUrls: [ './user.component.scss' ],
   templateUrl: './user.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush

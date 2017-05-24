@@ -9,7 +9,7 @@ interface FormI {
 }
 
 @Component({
-  selector: 'user.recover-account',
+  selector: 'app-user-recover-account',
   templateUrl: './recover-account.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -18,7 +18,7 @@ export class RecoverAccountComponent {
     email: ''
   };
 
-  public submited: boolean = false;
+  public submited = false;
 
   constructor(
     private store: Store<IAppState>,

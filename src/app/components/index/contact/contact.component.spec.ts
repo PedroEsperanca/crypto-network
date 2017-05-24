@@ -6,7 +6,6 @@ import { RouterTestingModule } from '@angular/router/testing';
 // libs
 import { StoreModule } from '@ngrx/store';
 
-import { t } from 'shared/test';
 import { NameListService, nameListReducer } from 'shared/sample';
 import { CoreModule } from 'shared/core/core.module';
 import { AnalyticsModule } from 'shared/analytics/analytics.module';
@@ -23,30 +22,30 @@ const testModuleConfig = () => {
   });
 };
 
-t.describe('@Component: HomeComponent', () => {
+describe('@Component: HomeComponent', () => {
 
-  t.be(testModuleConfig);
+  beforeEach(testModuleConfig);
 
-  t.it('should work',
+  it('should work',
     async(() => {
       TestBed.compileComponents()
         .then(() => {
-          let fixture = TestBed.createComponent(TestComponent);
+          const fixture = TestBed.createComponent(TestComponent);
           fixture.detectChanges();
 
-          let homeInstance = fixture.debugElement.children[0].componentInstance;
-          let homeDOMEl = fixture.debugElement.children[0].nativeElement;
+          const homeInstance = fixture.debugElement.children[0].componentInstance;
+          const homeDOMEl = fixture.debugElement.children[0].nativeElement;
 
-          t.expect(homeInstance.nameListService).toEqual(jasmine.any(NameListService));
-          t.expect(getDOM().querySelectorAll(homeDOMEl, 'li').length).toEqual(0);
+          expect(homeInstance.nameListService).toEqual(jasmine.any(NameListService));
+          expect(getDOM().querySelectorAll(homeDOMEl, 'li').length).toEqual(0);
 
           homeInstance.newName = 'Minko';
           homeInstance.addName();
 
           fixture.detectChanges();
 
-          t.expect(getDOM().querySelectorAll(homeDOMEl, 'li').length).toEqual(1);
-          t.expect(getDOM().querySelectorAll(homeDOMEl, 'li')[0].textContent).toEqual('Minko');
+          expect(getDOM().querySelectorAll(homeDOMEl, 'li').length).toEqual(1);
+          expect(getDOM().querySelectorAll(homeDOMEl, 'li')[0].textContent).toEqual('Minko');
         });
     }));
 });

@@ -6,22 +6,22 @@ import {
 
 declare var Object: any;
 export interface UserInterface {
-  "name"?: any;
-  "emailPreferences"?: any;
+  "name"?: string;
+  "emailPreferences"?: string;
   "notifications"?: any;
   "photo"?: any;
-  "realm"?: any;
-  "username"?: any;
-  "password": any;
-  "email"?: any;
-  "emailVerified"?: any;
-  "verificationToken"?: any;
+  "realm"?: string;
+  "username"?: string;
+  "password": string;
+  "email"?: string;
+  "emailVerified"?: boolean;
+  "verificationToken"?: string;
   "id"?: any;
-  "emailAddresses"?: any;
-  "phoneNumbers"?: any;
-  "phone"?: any;
-  "createdAt"?: any;
-  "updatedAt"?: any;
+  "emailAddresses"?: Array<any>;
+  "phoneNumbers"?: Array<any>;
+  "phone"?: string;
+  "createdAt"?: Date;
+  "updatedAt"?: Date;
   emails?: any[];
   phones?: any[];
   s3Photo?: any[];
@@ -34,22 +34,22 @@ export interface UserInterface {
 }
 
 export class User implements UserInterface {
-  "name": any;
-  "emailPreferences": any;
+  "name": string;
+  "emailPreferences": string;
   "notifications": any;
   "photo": any;
-  "realm": any;
-  "username": any;
-  "password": any;
-  "email": any;
-  "emailVerified": any;
-  "verificationToken": any;
+  "realm": string;
+  "username": string;
+  "password": string;
+  "email": string;
+  "emailVerified": boolean;
+  "verificationToken": string;
   "id": any;
-  "emailAddresses": any;
-  "phoneNumbers": any;
-  "phone": any;
-  "createdAt": any;
-  "updatedAt": any;
+  "emailAddresses": Array<any>;
+  "phoneNumbers": Array<any>;
+  "phone": string;
+  "createdAt": Date;
+  "updatedAt": Date;
   emails: any[];
   phones: any[];
   s3Photo: any[];
@@ -89,14 +89,15 @@ export class User implements UserInterface {
     return {
       name: 'User',
       plural: 'users',
+      idName: 'id',
       properties: {
         "name": {
           name: 'name',
-          type: 'any'
+          type: 'string'
         },
         "emailPreferences": {
           name: 'emailPreferences',
-          type: 'any',
+          type: 'string',
           default: 'marketing'
         },
         "notifications": {
@@ -109,27 +110,27 @@ export class User implements UserInterface {
         },
         "realm": {
           name: 'realm',
-          type: 'any'
+          type: 'string'
         },
         "username": {
           name: 'username',
-          type: 'any'
+          type: 'string'
         },
         "password": {
           name: 'password',
-          type: 'any'
+          type: 'string'
         },
         "email": {
           name: 'email',
-          type: 'any'
+          type: 'string'
         },
         "emailVerified": {
           name: 'emailVerified',
-          type: 'any'
+          type: 'boolean'
         },
         "verificationToken": {
           name: 'verificationToken',
-          type: 'any'
+          type: 'string'
         },
         "id": {
           name: 'id',
@@ -137,72 +138,99 @@ export class User implements UserInterface {
         },
         "emailAddresses": {
           name: 'emailAddresses',
-          type: 'any',
+          type: 'Array&lt;any&gt;',
           default: <any>[]
         },
         "phoneNumbers": {
           name: 'phoneNumbers',
-          type: 'any',
+          type: 'Array&lt;any&gt;',
           default: <any>[]
         },
         "phone": {
           name: 'phone',
-          type: 'any'
+          type: 'string'
         },
         "createdAt": {
           name: 'createdAt',
-          type: 'any'
+          type: 'Date'
         },
         "updatedAt": {
           name: 'updatedAt',
-          type: 'any'
+          type: 'Date'
         },
       },
       relations: {
         emails: {
           name: 'emails',
           type: 'any[]',
-          model: ''
+          model: '',
+          relationType: 'embedsMany',
+          keyFrom: 'emailAddresses',
+          keyTo: 'id'
         },
         phones: {
           name: 'phones',
           type: 'any[]',
-          model: ''
+          model: '',
+          relationType: 'embedsMany',
+          keyFrom: 'phoneNumbers',
+          keyTo: 'id'
         },
         s3Photo: {
           name: 's3Photo',
           type: 'any[]',
-          model: ''
+          model: '',
+          relationType: 'embedsOne',
+          keyFrom: 'photo',
+          keyTo: 'id'
         },
         identities: {
           name: 'identities',
           type: 'any[]',
-          model: ''
+          model: '',
+          relationType: 'hasMany',
+          keyFrom: 'id',
+          keyTo: 'userId'
         },
         credentials: {
           name: 'credentials',
           type: 'any[]',
-          model: ''
+          model: '',
+          relationType: 'hasMany',
+          keyFrom: 'id',
+          keyTo: 'userId'
         },
         accessTokens: {
           name: 'accessTokens',
           type: 'any[]',
-          model: ''
+          model: '',
+          relationType: 'hasMany',
+          keyFrom: 'id',
+          keyTo: 'userId'
         },
         organizations: {
           name: 'organizations',
           type: 'Organization[]',
-          model: 'Organization'
+          model: 'Organization',
+          relationType: 'hasMany',
+          keyFrom: 'id',
+          keyTo: 'userId'
         },
         apps: {
           name: 'apps',
           type: 'App[]',
-          model: 'App'
+          model: 'App',
+          relationType: 'hasMany',
+          keyFrom: 'id',
+          keyTo: 'userId'
         },
         oAuthClientApplications: {
           name: 'oAuthClientApplications',
           type: 'any[]',
-          model: ''
+          model: '',
+          relationType: 'hasMany',
+          keyFrom: 'id',
+          keyTo: 'userId'
         },
       }
     }

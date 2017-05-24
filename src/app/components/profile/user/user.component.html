@@ -17,7 +17,7 @@
         </h1>
       </div>
 
-      <div *ngIf="profile.organizations.length" class="border-top clearfix">
+      <div *ngIf="config.settings?.organizations && profile.organizations.length" class="border-top clearfix">
         <h4>{{'Organizations' | translate}}</h4>
 
         <a *ngFor="let org of profile.organizations" routerLink="/{{org.id}}" class="avatar-group-item">
@@ -25,7 +25,7 @@
         </a>
       </div>
 
-      <br *ngIf="profile.organizations.length">
+      <br *ngIf="config.settings?.organizations && profile.organizations.length">
 
       <a *ngIf="isMe" [routerLink]="['/settings/profile']">{{'Edit profile' | translate}}</a>
     </div>

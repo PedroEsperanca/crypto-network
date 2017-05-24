@@ -7,7 +7,7 @@ import {
   RouterStateSnapshot
 } from '@angular/router';
 
-import { ConfigService } from '@nglibs/config';
+import { ConfigService } from '@ngx-config/core';
 
 import { LoopBackAuth, UserApi } from 'shared/api';
 

@@ -2,9 +2,8 @@ import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import {
-  OrganizationExistsGuard,
-  OrganizationCanDeactivateGuard
-} from 'shared/app/guards';
+  OrganizationExistsGuard
+} from 'shared/api/guards/Organization';
 
 import { OrganizationsComponent } from './organizations.component';
 
@@ -26,10 +25,16 @@ const routes: Routes = [
       },
       {
         path: ':id/settings',
-        loadChildren: './settings/settings.module#SettingsModule'
+        loadChildren: './settings/settings.module#SettingsModule',
+        canActivate: [ OrganizationExistsGuard ]
+      },
+      {
+        path: ':id',
+        loadChildren: './settings/settings.module#SettingsModule',
+        canActivate: [ OrganizationExistsGuard ]
       }
     ]
-  }
+  },
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forChild(routes);

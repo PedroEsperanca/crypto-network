@@ -32,9 +32,6 @@ import { MY_APP_PROVIDERS, MY_APP_IMPORTS } from 'shared/app';
 import { NotFoundComponent } from 'components/not-found/not-found.component';
 import { AlertModule } from 'shared/app/modules/alert';
 
-import '../styles/styles.scss';
-import '../styles/headings.css';
-
 // Application wide providers
 const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,

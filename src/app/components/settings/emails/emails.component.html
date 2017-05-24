@@ -1,60 +1,62 @@
-<div class="Subhead">
-  <h2 class="Subhead-heading">{{'Email' | translate}}</h2>
+<div *ngIf="config.settings?.login?.strategies?.form">
+  <div class="Subhead">
+    <h2 class="Subhead-heading">{{'Email' | translate}}</h2>
+  </div>
+
+  <p *ngIf="config.settings.multipleEmailsAndPhones">{{'Your' | translate}} <strong>{{'primary email address' | translate}}</strong> {{'will be used for account-related notifications (e.g. account changes and billing receipts) as well as any web-based operations.' | translate}}</p>
+
+  <ul *ngIf="config.settings.multipleEmailsAndPhones" id="settings-emails" class="Box list-style-none">
+    <li *ngFor="let email of currentUser.emailAddresses" class="Box-row clearfix css-truncate settings-email">
+      <span class="css-truncate-target" title="{{email.masked}}">{{email.masked}}</span>
+
+      <span *ngIf="email.primary" class="badge badge-success">{{'Primary' | translate}}</span>
+      <span *ngIf="email.public" class="badge badge-default">{{'Public' | translate}}</span>
+      <span *ngIf="!email.verified" class="badge badge-default">{{'Unverified' | translate}}</span>
+
+      <span class="email-actions float-right">
+        <button *ngIf="!email.verified" class="btn btn-warning btn-sm" (click)="verifyEmail(email.id)">{{'Verify email' | translate}}</button>
+        <button *ngIf="!email.primary" class="btn btn-secondary btn-sm" (click)="setPrimary(email.id)">{{'Set as primary' | translate}}</button>
+
+        <button *ngIf="currentUser.emailAddresses.length > 1" class="btn-link settings-remove-email" (click)="removeEmail(email.id)">
+          <svg aria-hidden="true" class="octicon octicon-trashcan" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M11 2H9c0-.55-.45-1-1-1H5c-.55 0-1 .45-1 1H2c-.55 0-1 .45-1 1v1c0 .55.45 1 1 1v9c0 .55.45 1 1 1h7c.55 0 1-.45 1-1V5c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1zm-1 12H3V5h1v8h1V5h1v8h1V5h1v8h1V5h1v9zm1-10H2V3h9v1z"></path></svg>
+        </button>
+      </span>
+    </li>
+  </ul>
+
+  <ul *ngIf="!config.settings.multipleEmailsAndPhones" id="settings-emails" class="Box list-style-none">
+    <li class="Box-row clearfix css-truncate settings-email">
+      <span class="css-truncate-target" title="{{currentUser.email}}">{{currentUser.email}}</span>
+
+      <span class="email-actions float-right">
+        <button *ngIf="!currentUser.emailVerified" class="btn btn-warning btn-sm" (click)="verifyEmail(email.id)">{{'Verify email' | translate}}</button>
+      </span>
+    </li>
+  </ul>
+
+  <form *ngIf="config.settings.multipleEmailsAndPhones" (ngSubmit)="addEmail()" #addEmailForm="ngForm" class="new_user_email">
+    <dl class="form-group">
+      <dt><label for="email">{{'Add email address' | translate}}</label></dt>
+      <dd>
+        <input class="form-control short" type="email" id="email" name="email" [(ngModel)]="emailModel" required>
+        <button type="submit" class="btn btn-primary" [disabled]="!addEmailForm.form.valid">{{'Add' | translate}}</button>
+      </dd>
+    </dl>
+  </form>
+
+  <form *ngIf="!config.settings.multipleEmailsAndPhones" (ngSubmit)="editEmail()" #editEmailForm="ngForm" class="new_user_email">
+    <dl class="form-group">
+      <dt><label for="email">{{'Edit email address' | translate}}</label></dt>
+      <dd>
+        <input class="form-control short" type="email" id="email" name="email" [(ngModel)]="emailModel" required>
+        <button type="submit" class="btn btn-primary" [disabled]="!editEmailForm.form.valid || emailModel !== currentUser.email">{{'Submit' | translate}}</button>
+      </dd>
+    </dl>
+  </form>
+
+  <br>
+  <br>
 </div>
-
-<p *ngIf="config.settings.multipleEmailsAndPhones">{{'Your' | translate}} <strong>{{'primary email address' | translate}}</strong> {{'will be used for account-related notifications (e.g. account changes and billing receipts) as well as any web-based operations.' | translate}}</p>
-
-<ul *ngIf="config.settings.multipleEmailsAndPhones" id="settings-emails" class="Box list-style-none">
-  <li *ngFor="let email of currentUser.emailAddresses" class="Box-row clearfix css-truncate settings-email">
-    <span class="css-truncate-target" title="{{email.masked}}">{{email.masked}}</span>
-
-    <span *ngIf="email.primary" class="badge badge-success">{{'Primary' | translate}}</span>
-    <span *ngIf="email.public" class="badge badge-default">{{'Public' | translate}}</span>
-    <span *ngIf="!email.verified" class="badge badge-default">{{'Unverified' | translate}}</span>
-
-    <span class="email-actions pull-right">
-      <button *ngIf="!email.verified" class="btn btn-warning btn-sm" (click)="verifyEmail(email.id)">{{'Verify email' | translate}}</button>
-      <button *ngIf="!email.primary" class="btn btn-secondary btn-sm" (click)="setPrimary(email.id)">{{'Set as primary' | translate}}</button>
-
-      <button *ngIf="currentUser.emailAddresses.length > 1" class="btn-link settings-remove-email" (click)="removeEmail(email.id)">
-        <svg aria-hidden="true" class="octicon octicon-trashcan" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M11 2H9c0-.55-.45-1-1-1H5c-.55 0-1 .45-1 1H2c-.55 0-1 .45-1 1v1c0 .55.45 1 1 1v9c0 .55.45 1 1 1h7c.55 0 1-.45 1-1V5c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1zm-1 12H3V5h1v8h1V5h1v8h1V5h1v8h1V5h1v9zm1-10H2V3h9v1z"></path></svg>
-      </button>
-    </span>
-  </li>
-</ul>
-
-<ul *ngIf="!config.settings.multipleEmailsAndPhones" id="settings-emails" class="Box list-style-none">
-  <li class="Box-row clearfix css-truncate settings-email">
-    <span class="css-truncate-target" title="{{currentUser.email}}">{{currentUser.email}}</span>
-
-    <span class="email-actions pull-right">
-      <button *ngIf="!currentUser.emailVerified" class="btn btn-warning btn-sm" (click)="verifyEmail(email.id)">{{'Verify email' | translate}}</button>
-    </span>
-  </li>
-</ul>
-
-<form *ngIf="config.settings.multipleEmailsAndPhones" (ngSubmit)="addEmail()" #addEmailForm="ngForm" class="new_user_email">
-  <dl class="form-group">
-    <dt><label for="email">{{'Add email address' | translate}}</label></dt>
-    <dd>
-      <input class="form-control short" type="email" id="email" name="email" [(ngModel)]="emailModel" required>
-      <button type="submit" class="btn btn-primary" [disabled]="!addEmailForm.form.valid">{{'Add' | translate}}</button>
-    </dd>
-  </dl>
-</form>
-
-<form *ngIf="!config.settings.multipleEmailsAndPhones" (ngSubmit)="editEmail()" #editEmailForm="ngForm" class="new_user_email">
-  <dl class="form-group">
-    <dt><label for="email">{{'Edit email address' | translate}}</label></dt>
-    <dd>
-      <input class="form-control short" type="email" id="email" name="email" [(ngModel)]="emailModel" required>
-      <button type="submit" class="btn btn-primary" [disabled]="!editEmailForm.form.valid || emailModel !== currentUser.email">{{'Submit' | translate}}</button>
-    </dd>
-  </dl>
-</form>
-
-<br>
-<br>
 
 <div class="Subhead">
   <h2 class="Subhead-heading">{{'Email preferences' | translate}}</h2>

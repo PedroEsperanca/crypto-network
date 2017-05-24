@@ -3,13 +3,13 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 
-import { ConfigService } from '@nglibs/config';
+import { ConfigService } from '@ngx-config/core';
 
 import { IAppState } from 'shared/ngrx';
-import { User, getLoopbackAuthUser } from 'shared/api';
+import { User, getLoopbackAuthAccount } from 'shared/api';
 
 @Component({
-  selector: 'settingsApplications',
+  selector: 'app-settings-applications',
   styleUrls: [ './applications.component.scss' ],
   templateUrl: './applications.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -23,6 +23,6 @@ export class SettingsApplicationsComponent {
     private configService: ConfigService,
   ) {
     this.config = this.configService.getSettings();
-    this.currentUser$ = this.store.let(getLoopbackAuthUser());
+    this.currentUser$ = this.store.let(getLoopbackAuthAccount());
   }
 }

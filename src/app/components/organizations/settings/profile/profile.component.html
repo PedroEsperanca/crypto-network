@@ -4,7 +4,7 @@
 
 <form (ngSubmit)="submitUpdate()" #profileForm="ngForm">
 
-  <dl *ngIf="!config.settings.usePhotoUpload" class="profile-avatar pull-right">
+  <dl *ngIf="!config.settings.usePhotoUpload" class="profile-avatar float-right">
     <img class="avatar" [src]="formModel.logo?.url || formModel.logo || config.logo">
   </dl>
 
@@ -18,7 +18,7 @@
     [fileNameRewrite]="fileNameRewrite"
     [getUploadUrl]="getUploadUrl"
     [onCompleteItem]="onUploadComplete"
-    class="profile-avatar pull-right"></file-uploader>
+    class="profile-avatar float-right"></file-uploader>
 
   <div>
     <dl class="form-group">

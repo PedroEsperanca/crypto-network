@@ -1,5 +1,6 @@
 // angular
 import { Http } from '@angular/http';
+import { RouterModule, PreloadAllModules } from '@angular/router';
 
 // libs
 import { StoreModule } from '@ngrx/store';
@@ -7,7 +8,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { RouterStoreModule } from '@ngrx/router-store';
-import { ConfigModule, ConfigLoader, ConfigStaticLoader } from '@nglibs/config';
+import { ConfigModule, ConfigLoader, ConfigStaticLoader } from '@ngx-config/core';
 import { TranslateLoader } from '@ngx-translate/core';
 import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
 
@@ -19,12 +20,13 @@ import { MultilingualModule, translateLoaderFactory } from 'shared/i18n/multilin
 import { MultilingualEffects } from 'shared/i18n/index';
 import { LoopbackEffects } from 'shared/api/index';
 
+
+import { ROUTES } from './app.routes';
 // config
+import { environment } from 'environment';
 import { Config } from 'shared/core/index';
 import { WindowService, ConsoleService } from 'shared/core/services/index';
 Config.PLATFORM_TARGET = Config.PLATFORMS.WEB;
-
-import { routerModule } from 'routerModule';
 
 import { AppConfig } from './app.config';
 
@@ -32,7 +34,7 @@ export function configFactory(): ConfigLoader {
   return new ConfigStaticLoader(AppConfig);
 }
 
-if (typeof TARGET_DESKTOP !== 'undefined' && TARGET_DESKTOP === true) {
+if (environment.target === 'desktop') {
   Config.PLATFORM_TARGET = Config.PLATFORMS.DESKTOP;
 }
 
@@ -57,7 +59,10 @@ export const ADVANCE_MODULES = [
     { provide: WindowService, useFactory: (win) },
     { provide: ConsoleService, useFactory: (cons) }
   ]),
-  routerModule,
+  RouterModule.forRoot(ROUTES, {
+    useHash: environment.useHash,
+    preloadingStrategy: PreloadAllModules
+  }),
   AnalyticsModule,
   MultilingualModule.forRoot([{
     provide: TranslateLoader,

@@ -1,17 +1,17 @@
 {
+  "compileOnSave": false,
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
+    "outDir": "./dist/out-tsc",
+    "baseUrl": "src",
+    "sourceMap": true,
+    "declaration": false,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true,
-    "sourceMap": true,
-    "noEmit": true,
-    "noEmitHelpers": true,
-    "importHelpers": true,
-    "strictNullChecks": false,
-    "baseUrl": "./src",
+    "target": "es5",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
     "paths": {
       "shared/*": [
         "app/shared/*"
@@ -21,40 +21,17 @@
       ],
       "assets/*": [
         "app/assets/*"
+      ],
+      "environment": [
+        "environments/environment"
+      ],
+      "styles": [
+        "styles/*"
       ]
     },
     "lib": [
-      "dom",
-      "es7"
-    ],
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "types": [
-      "hammerjs",
-      "jasmine",
-      "lodash",
-      "node",
-      "source-map",
-      "uglify-js",
-      "webpack"
+      "es2016",
+      "dom"
     ]
-  },
-  "exclude": [
-    "desktop",
-    "nativescript",
-    "node_modules",
-    "dist",
-    "src/**/*.spec.ts",
-    "src/**/*.e2e.ts"
-  ],
-  "awesomeTypescriptLoaderOptions": {
-    "forkChecker": true,
-    "useWebpackText": true
-  },
-  "compileOnSave": false,
-  "buildOnSave": false,
-  "atom": {
-    "rewriteTsconfig": false
   }
 }

@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { Component, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 
 import { Store } from '@ngrx/store';
-import { ConfigService } from '@nglibs/config';
+import { ConfigService } from '@ngx-config/core';
 
 import {
   SDKToken,
@@ -12,7 +12,7 @@ import {
   OrganizationInterface,
   LoopBackFilter,
   LoopBackAuth,
-  getLoopbackAuthUser
+  getLoopbackAuthAccount
 } from 'shared/api';
 import {
   IAppState,
@@ -41,7 +41,7 @@ export class SettingsComponent implements OnDestroy {
   ) {
     this.config = this.configService.getSettings();
 
-    this.subscriptions.push(this.store.let(getLoopbackAuthUser()).subscribe((user: User) => {
+    this.subscriptions.push(this.store.let(getLoopbackAuthAccount()).subscribe((user: User) => {
       if (!user) { return; }
 
       this.currentUser = Object.assign({}, user);

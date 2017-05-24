@@ -10,7 +10,6 @@ import { StoreModule } from '@ngrx/store';
 import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
 
 // app
-import { t } from '../shared/test/index';
 import { TEST_CORE_PROVIDERS, TEST_HTTP_PROVIDERS } from '../shared/core/testing/index';
 import { NameListService, NavbarComponent, ToolbarComponent } from '../shared/sample/index';
 import { MultilingualModule } from '../shared/i18n/multilingual.module';
@@ -19,7 +18,7 @@ import { reducer } from '../shared/i18n/index';
 // module
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { AboutComponent } from './about/about.component';
+import { AboutComponent } from './about/aboucomponent';
 
 const config: Route[] = [
   {path: '', component: HomeComponent},
@@ -49,17 +48,17 @@ const testModuleConfig = () => {
   });
 };
 
-t.describe('@Component: AppComponent', () => {
+describe('@Component: AppComponent', () => {
 
-  t.be(testModuleConfig);
+  beforeEach(testModuleConfig);
 
-  t.it('should build without a problem',
+  it('should build without a problem',
     async(() => {
       TestBed.compileComponents()
         .then(() => {
-          let fixture = TestBed.createComponent(TestComponent);
+          const fixture = TestBed.createComponent(TestComponent);
           fixture.detectChanges();
-          t.e(fixture.nativeElement).toBeTruthy();
+          expect(fixture.nativeElement).toBeTruthy();
         });
     }));
 });

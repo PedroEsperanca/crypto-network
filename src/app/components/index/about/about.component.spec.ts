@@ -13,7 +13,6 @@ import { MockBackend } from '@angular/http/testing';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
-import { t } from 'shared/test';
 import { NameListService, nameListReducer, NameListEffects } from 'shared/sample';
 import { CoreModule } from 'shared/core/core.module';
 import { AnalyticsModule } from 'shared/analytics/analytics.module';
@@ -48,29 +47,29 @@ const testModuleConfig = () => {
 };
 
 export function main() {
-  t.describe('@Component: HomeComponent', () => {
+  describe('@Component: HomeComponent', () => {
 
-    t.be(testModuleConfig);
+    beforeEach(testModuleConfig);
 
-    t.it('should work',
+    it('should work',
       async(() => {
         TestBed.compileComponents()
           .then(() => {
-            let fixture = TestBed.createComponent(TestComponent);
+            const fixture = TestBed.createComponent(TestComponent);
             fixture.detectChanges();
 
-            let homeInstance = fixture.debugElement.children[0].componentInstance;
-            let homeDOMEl = fixture.debugElement.children[0].nativeElement;
+            const homeInstance = fixture.debugElement.children[0].componentInstance;
+            const homeDOMEl = fixture.debugElement.children[0].nativeElement;
 
-            t.e(homeDOMEl.querySelectorAll('li').length).toEqual(0);
+            expect(homeDOMEl.querySelectorAll('li').length).toEqual(0);
 
             homeInstance.newName = 'Minko';
             homeInstance.addName();
 
             fixture.detectChanges();
 
-            t.e(homeDOMEl.querySelectorAll('li').length).toEqual(1);
-            t.e(homeDOMEl.querySelectorAll('li')[0].textContent).toEqual('Minko');
+            expect(homeDOMEl.querySelectorAll('li').length).toEqual(1);
+            expect(homeDOMEl.querySelectorAll('li')[0].textContent).toEqual('Minko');
           });
       }));
   });

@@ -110,5 +110,3 @@ export * from './reducers/index';
 export * from './state';
 export * from './guards/index';
 export * from './resolvers/index';
-export * from './util';
-

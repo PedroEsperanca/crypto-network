@@ -1,5 +1,5 @@
 // libs
-import { ConfigService } from '@nglibs/config';
+import { ConfigService } from '@ngx-config/core';
 
 // app
 import { ANALYTICS_PROVIDERS } from '../../../analytics/index';
