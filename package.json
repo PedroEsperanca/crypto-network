@@ -11,7 +11,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "build:docker": "docker build -t web-seed:latest .",
-    "ci": "ng test && ng e2e && ng build --prod",
+    "ci": "ng test && ng e2e",
     "git:merge": "git fetch upstream && git merge upstream/master --allow-unrelated-histories",
     "git:merge:preview": "git fetch upstream && git merge --no-commit upstream/master --allow-unrelated-histories",
     "git:prepare": "git add . && git add -f tools/install.js && git commit -m'setup'",
