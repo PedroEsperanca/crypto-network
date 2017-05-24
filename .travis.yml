@@ -12,8 +12,6 @@ before_script:
   - sleep 3
 script:
   - npm run ci
-after_success:
-  - npm run github-deploy
 cache:
   directories:
     - node_modules
