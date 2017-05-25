@@ -1,7 +1,8 @@
 // angular
 import { Routes } from '@angular/router';
 
-import { UserLoggedGuard, ProfileExistsGuard } from 'shared/app/guards';
+import { AuthGuard } from 'shared/api/guards';
+import { ProfileExistsGuard } from 'shared/app/guards';
 import { ProfileResolver } from 'shared/app/resolvers';
 
 import { NotFoundComponent } from './components/not-found/not-found.component';
@@ -39,12 +40,12 @@ export const ROUTES: Routes = [
   {
     path: 'organizations',
     loadChildren: './components/organizations/organizations.module#OrganizationsModule',
-    canActivate: [ UserLoggedGuard ]
+    canActivate: [ AuthGuard ]
   },
   {
     path: 'settings',
     loadChildren: './components/settings/settings.module#SettingsModule',
-    canActivate: [ UserLoggedGuard ]
+    canActivate: [ AuthGuard ]
   },
 
   // Public

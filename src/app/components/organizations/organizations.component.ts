@@ -15,7 +15,7 @@ import {
 } from 'shared/ngrx';
 
 @Component({
-  selector: 'organizations',
+  selector: 'app-organizations',
   styleUrls: [ './organizations.component.scss' ],
   templateUrl: './organizations.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush

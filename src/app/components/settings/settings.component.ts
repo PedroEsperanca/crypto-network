@@ -15,13 +15,11 @@ import {
   getLoopbackAuthAccount
 } from 'shared/api';
 import {
-  IAppState,
-  getOrganizationsState,
-  getOrganizations
+  IAppState
 } from 'shared/ngrx';
 
 @Component({
-  selector: 'settings.settings',
+  selector: 'app-settings',
   styleUrls: [ './settings.component.scss' ],
   templateUrl: './settings.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush

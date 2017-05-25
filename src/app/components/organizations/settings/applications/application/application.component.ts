@@ -21,7 +21,7 @@ import {
 import { IAppState, AlertActions } from 'shared/ngrx';
 
 @Component({
-  selector: 'app-settings-applications-application',
+  selector: 'app-organizations-settings-applications-application',
   styleUrls: [ './application.component.scss' ],
   templateUrl: './application.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush

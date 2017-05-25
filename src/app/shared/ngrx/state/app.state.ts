@@ -44,15 +44,10 @@ import { LoopbackReducer } from 'shared/api/index';
 import * as fromMultilingual from '../../i18n/index';
 
 import * as fromApplication from '../reducers/application';
-import * as fromSearchOrganizations from '../reducers/searchOrganizations';
-import * as fromOrganizations from '../reducers/organizations';
-import * as fromSearchApps from '../reducers/searchApps';
-import * as fromApps from '../reducers/apps';
 import * as fromAlert from '../reducers/alert';
 
 import { AlertEffects } from 'shared/ngrx/effects/alert';
-import { AppEffects } from 'shared/ngrx/effects/app';
-import { OrganizationEffects } from 'shared/ngrx/effects/organization';
+import { ApplicationEffects } from 'shared/ngrx/effects/application';
 /**
  * As mentioned, we treat each reducer like a table in a database. This means
  * our top level state interface is just a map of keys to inner state types.
@@ -63,16 +58,12 @@ export interface IAppState {
   i18n: fromMultilingual.IMultilingualState;
 
   application: fromApplication.ApplicationState;
-  searchOrganizations: fromSearchOrganizations.SearchOrganizationsState;
-  organizations: fromOrganizations.OrganizationsState;
-  searchApps: fromSearchApps.SearchAppsState;
-  apps: fromApps.AppsState;
   alert: fromAlert.IAlertState;
 };
 
 export const Effects = [
   EffectsModule.run(AlertEffects),
-  EffectsModule.run(AppEffects),
+  EffectsModule.run(ApplicationEffects),
   // EffectsModule.run(OrganizationEffects)
 ];
 
@@ -89,10 +80,6 @@ const reducers = Object.assign({
   i18n: fromMultilingual.reducer,
 
   application: fromApplication.reducer,
-  searchOrganizations: fromSearchOrganizations.reducer,
-  organizations: fromOrganizations.reducer,
-  searchApps: fromSearchApps.reducer,
-  apps: fromApps.reducer,
   alert: fromAlert.reducer
 }, LoopbackReducer);
 
@@ -135,137 +122,7 @@ export function getApplicationState() {
     .select((s) => s.application);
 }
 
-export function getOrganizationsState() {
-  return (state$: Observable<IAppState>) => state$
-    .select((s) => s.organizations);
-}
-
-export function getAppsState() {
-  return (state$: Observable<IAppState>) => state$
-    .select((s) => s.apps);
-}
-
 export function getAlertState() {
   return (state$: Observable<IAppState>) => state$
     .select((s) => s.alert);
-}
-
-/**
- * Every reducer module exports selector functions, however child reducers
- * have no knowledge of the overall state tree. To make them useable, we
- * need to make new selectors that wrap them.
- *
- * Once again our compose function comes in handy. From right to left, we
- * first select the organizations state then we pass the state to the organization
- * reducer's getOrganizations selector, finally returning an observable
- * of searchOrganizations results.
- */
-export function getOrganizationEntities() {
-  return compose(fromOrganizations.getOrganizationEntities(), getOrganizationsState());
-}
-
-export function getOrganization(id: string) {
-  return compose(fromOrganizations.getOrganization(id), getOrganizationsState());
-}
-
-export function hasOrganization(id: string) {
-  return compose(fromOrganizations.hasOrganization(id), getOrganizationsState());
-}
-
-export function getOrganizations(organizationIds: string[]) {
-  return compose(fromOrganizations.getOrganizations(organizationIds), getOrganizationsState());
-}
-
-export function getAppEntities() {
-  return compose(fromApps.getAppEntities(), getAppsState());
-}
-
-export function getApp(id: string) {
-  return compose(fromApps.getApp(id), getAppsState());
-}
-
-export function hasApp(id: string) {
-  return compose(fromApps.hasApp(id), getAppsState());
-}
-
-export function getApps(appIds: string[]) {
-  return compose(fromApps.getApps(appIds), getAppsState());
-}
-
-/**
- * Just like with the organizations selectors, we also have to compose the searchOrganizations
- * reducer's and collection reducer's selectors.
- */
-export function getSearchOrganizationsState() {
-  return (state$: Observable<IAppState>) => state$
-    .select((s) => s.searchOrganizations);
-}
-
-export function getSearchOrganizationsIds() {
-  return compose(fromSearchOrganizations.getOrganizationIds(), getSearchOrganizationsState());
-}
-
-export function getSearchOrganizationsStatus() {
-  return compose(fromSearchOrganizations.getStatus(), getSearchOrganizationsState());
-}
-
-export function getSearchOrganizationsFilter() {
-  return compose(fromSearchOrganizations.getFilter(), getSearchOrganizationsState());
-}
-
-export function getSearchAppsState() {
-  return (state$: Observable<IAppState>) => state$
-    .select((s) => s.searchApps);
-}
-
-export function getSearchAppsIds() {
-  return compose(fromSearchApps.getAppIds(), getSearchAppsState());
-}
-
-export function getSearchAppsStatus() {
-  return compose(fromSearchApps.getStatus(), getSearchAppsState());
-}
-
-export function getSearchAppsFilter() {
-  return compose(fromSearchApps.getFilter(), getSearchAppsState());
-}
-
-/**
- * Some selector functions create joins across parts of state. This selector
- * composes the searchOrganizations result IDs to return an array of organizations in the store.
- */
-export function getSearchOrganizationsResults() {
-  return (state$: Observable<IAppState>) => state$
-    .let(getSearchOrganizationsIds())
-    .switchMap((organizationIds) => state$.let(getOrganizations(organizationIds)));
-}
-
-export function getCurrentOrganization() {
-  return (state$: Observable<IAppState>) => state$
-    .let(getApplicationState())
-    .switchMap((s) => state$.let(getOrganization(s.selectedOrganizationId)));
-}
-
-export function getCurrentOrganizationId() {
-  return (state$: Observable<IAppState>) => state$
-    .let(getApplicationState())
-    .select((s) => s.selectedOrganizationId);
-}
-
-export function getSearchAppsResults() {
-  return (state$: Observable<IAppState>) => state$
-    .let(getSearchAppsIds())
-    .switchMap((appIds) => state$.let(getApps(appIds)));
-}
-
-export function getCurrentApp() {
-  return (state$: Observable<IAppState>) => state$
-    .let(getApplicationState())
-    .switchMap((s) => state$.let(getApp(s.selectedAppId)));
-}
-
-export function getCurrentAppId() {
-  return (state$: Observable<IAppState>) => state$
-    .let(getApplicationState())
-    .select((s) => s.selectedAppId);
 }

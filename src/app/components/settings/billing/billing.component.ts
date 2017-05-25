@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-  selector: 'settingsBilling',
+  selector: 'app-settings-billing',
   styleUrls: [ './billing.component.scss' ],
   templateUrl: './billing.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush

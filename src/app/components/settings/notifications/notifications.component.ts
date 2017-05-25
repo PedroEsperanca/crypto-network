@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-  selector: 'settingsNotifications',
+  selector: 'app-settings-notifications',
   styleUrls: [ './notifications.component.scss' ],
   templateUrl: './notifications.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush

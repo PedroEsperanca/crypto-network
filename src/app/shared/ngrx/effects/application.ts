@@ -15,12 +15,12 @@ import { go } from '@ngrx/router-store';
 
 import { IAppState } from '../state/app.state';
 import { AlertActions } from '../actions/alert';
-import { AppActions } from '../actions/app';
+import { ApplicationActions } from '../actions/application';
 import { LoopbackAction, LoopbackAuthActionTypes, UserActionTypes, UserActions } from 'shared/api';
 import { SDKStorage } from 'shared/api/storage/storage.swaps';
 
 @Injectable()
-export class AppEffects {
+export class ApplicationEffects {
 
   @Effect()
   public loginSuccess$ = this.actions$

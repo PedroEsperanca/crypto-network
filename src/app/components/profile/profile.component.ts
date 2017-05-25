@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'profile',
+  selector: 'app-profile',
   styleUrls: [ './profile.component.scss' ],
   templateUrl: './profile.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush

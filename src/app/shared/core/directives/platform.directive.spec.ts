@@ -12,7 +12,7 @@ import { WindowMock } from '../../core/testing/index';
     { provide: WindowService, useClass: WindowMock }
   ],
   selector: 'test-cmp',
-  template: `<div platform></div>`
+  template: `<div app-core-platform></div>`
 })
 class TestComponent { }
 

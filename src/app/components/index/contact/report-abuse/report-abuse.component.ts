@@ -17,7 +17,7 @@ interface AlertI {
 }
 
 @Component({
-  selector: 'contactReportAbuse',
+  selector: 'app-index-contact-report-abuse',
   styleUrls: [ './report-abuse.component.scss' ],
   templateUrl: './report-abuse.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush

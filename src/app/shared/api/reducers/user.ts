@@ -33,15 +33,15 @@ export function UsersReducer(state = initialState, action: Action): UserState {
   }
 }
 
-export const getUsersState = (state: any) => state.User;
-export const getUsersEntities = (state: any) => state.User.entities;
-export const getUsersIds = (state: any) => state.User.ids;
+export const getUsersState = (state: any) => state.Users;
+export const getUsersEntities = (state: any) => state.Users.entities;
+export const getUsersIds = (state: any) => state.Users.ids;
 
 export const getUsers =
   createSelector(getUsersEntities, getUsersIds, (entities, ids) => ids.map((id) => entities[id]));
 
 export function getUserById(id: string) {
-  return (state: any) => state.User.entities[id];
+  return (state: any) => state.Users.entities[id];
 }
 
 export function getUsersById(ids: string[]) {

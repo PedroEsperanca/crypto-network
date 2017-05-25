@@ -9,7 +9,7 @@ import { IAppState } from 'shared/ngrx';
 import { User, getLoopbackAuthAccount } from 'shared/api';
 
 @Component({
-  selector: 'app-settings-applications',
+  selector: 'app-organizations-settings-applications',
   styleUrls: [ './applications.component.scss' ],
   templateUrl: './applications.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush

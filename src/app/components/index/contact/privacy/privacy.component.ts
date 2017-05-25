@@ -17,7 +17,7 @@ interface AlertI {
 }
 
 @Component({
-  selector: 'contactPrivacy',
+  selector: 'app-index-contact-privacy',
   styleUrls: [ './privacy.component.scss' ],
   templateUrl: './privacy.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush

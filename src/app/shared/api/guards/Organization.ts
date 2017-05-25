@@ -25,7 +25,7 @@ export class OrganizationExistsGuard implements CanActivate {
   }
 
   protected hasEntityInStore(id: string): Observable<boolean> {
-    return this.store.let(getOrganizationById(id))
+    return this.store.select(getOrganizationById(id))
       .map((entitie) => !!entitie)
       .take(1);
   }

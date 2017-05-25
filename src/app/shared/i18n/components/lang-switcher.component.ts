@@ -14,7 +14,7 @@ import { ElectronEventService } from 'shared/electron/index';
 import * as multilingual from '../index';
 
 @Component({
-  selector: 'lang-switcher',
+  selector: 'app-i18n-lang-switcher',
   templateUrl: 'lang-switcher.component.html',
   styleUrls: ['lang-switcher.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush

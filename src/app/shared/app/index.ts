@@ -16,7 +16,7 @@ import { ScrollSpyModule } from 'ngx-scrollspy';
 
 // ngrx
 // import { NOTIFY_PROVIDERS, NOTIFY_GLOBAL_OPTIONS } from '@ngrx/notify';
-
+import { LOOPBACK_GUARDS_PROVIDERS } from '../api/guards';
 import { GUARDS_PROVIDERS } from './guards';
 import { RESOLVERS_PROVIDERS } from './resolvers';
 
@@ -31,6 +31,7 @@ LoopBackConfig.setAuthPrefix(environment.auth_prefix);
 
 export const MY_APP_PROVIDERS: any[] = [
   // IDLE_PROVIDERS,
+  LOOPBACK_GUARDS_PROVIDERS,
   GUARDS_PROVIDERS,
   RESOLVERS_PROVIDERS,
 

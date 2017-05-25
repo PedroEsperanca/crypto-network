@@ -33,15 +33,15 @@ export function AppsReducer(state = initialState, action: Action): AppState {
   }
 }
 
-export const getAppsState = (state: any) => state.App;
-export const getAppsEntities = (state: any) => state.App.entities;
-export const getAppsIds = (state: any) => state.App.ids;
+export const getAppsState = (state: any) => state.Apps;
+export const getAppsEntities = (state: any) => state.Apps.entities;
+export const getAppsIds = (state: any) => state.Apps.ids;
 
 export const getApps =
   createSelector(getAppsEntities, getAppsIds, (entities, ids) => ids.map((id) => entities[id]));
 
 export function getAppById(id: string) {
-  return (state: any) => state.App.entities[id];
+  return (state: any) => state.Apps.entities[id];
 }
 
 export function getAppsById(ids: string[]) {

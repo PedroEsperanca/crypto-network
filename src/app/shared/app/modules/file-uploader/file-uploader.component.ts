@@ -10,7 +10,7 @@ import { UrlSerializer } from '@angular/router';
 import { FileUploader, FileItem } from 'ng2-file-upload';
 
 @Component({
-  selector: 'file-uploader',
+  selector: 'app-file-uploader',
   styleUrls: [ './file-uploader.component.scss' ],
   templateUrl: './file-uploader.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush

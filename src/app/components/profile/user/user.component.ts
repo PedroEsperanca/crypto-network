@@ -6,7 +6,7 @@ import { ConfigService } from '@ngx-config/core';
 import { User, UserApi, LoopBackAuth } from 'shared/api';
 
 @Component({
-  selector: 'profile-user',
+  selector: 'app-profile-user',
   styleUrls: [ './user.component.scss' ],
   templateUrl: './user.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush

@@ -5,7 +5,7 @@ import { ConfigService } from '@ngx-config/core';
 import { User, UserApi, LoopBackAuth } from 'shared/api';
 
 @Component({
-  selector: 'settingsOrganizations',
+  selector: 'app-settings-organizations',
   styleUrls: [ './organizations.component.scss' ],
   templateUrl: './organizations.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush

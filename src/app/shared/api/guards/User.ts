@@ -25,7 +25,7 @@ export class UserExistsGuard implements CanActivate {
   }
 
   protected hasEntityInStore(id: string): Observable<boolean> {
-    return this.store.let(getUserById(id))
+    return this.store.select(getUserById(id))
       .map((entitie) => !!entitie)
       .take(1);
   }

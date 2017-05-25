@@ -33,15 +33,15 @@ export function OrganizationsReducer(state = initialState, action: Action): Orga
   }
 }
 
-export const getOrganizationsState = (state: any) => state.Organization;
-export const getOrganizationsEntities = (state: any) => state.Organization.entities;
-export const getOrganizationsIds = (state: any) => state.Organization.ids;
+export const getOrganizationsState = (state: any) => state.Organizations;
+export const getOrganizationsEntities = (state: any) => state.Organizations.entities;
+export const getOrganizationsIds = (state: any) => state.Organizations.ids;
 
 export const getOrganizations =
   createSelector(getOrganizationsEntities, getOrganizationsIds, (entities, ids) => ids.map((id) => entities[id]));
 
 export function getOrganizationById(id: string) {
-  return (state: any) => state.Organization.entities[id];
+  return (state: any) => state.Organizations.entities[id];
 }
 
 export function getOrganizationsById(ids: string[]) {

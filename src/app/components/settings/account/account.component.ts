@@ -18,7 +18,7 @@ import {
 import { IAppState, AlertActions } from 'shared/ngrx';
 
 @Component({
-  selector: 'settingsAccount',
+  selector: 'app-settings-account',
   styleUrls: [ './account.component.scss' ],
   templateUrl: './account.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush

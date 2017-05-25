@@ -36,7 +36,7 @@ const SUPPORTED_LANGUAGES: ILang[] = [
 
 @Component({
   selector: 'test-cmp',
-  template: '<lang-switcher></lang-switcher>'
+  template: '<app-i18n-lang-switcher></app-i18n-lang-switcher>'
 })
 class TestComponent  {
   constructor(private multilang: MultilingualService,

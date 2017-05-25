@@ -28,7 +28,7 @@ interface FormI {
 }
 
 @Component({
-  selector: 'app-organization-new',
+  selector: 'app-organizations-new',
   styleUrls: [ './new.component.scss' ],
   templateUrl: './new.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush

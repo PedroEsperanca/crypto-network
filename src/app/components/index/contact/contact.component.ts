@@ -3,7 +3,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { ConfigService } from '@ngx-config/core';
 
 @Component({
-  selector: 'indexContact',
+  selector: 'app-index-contact',
   styleUrls: [ './contact.component.scss' ],
   templateUrl: './contact.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush

@@ -59,7 +59,7 @@
     <img class="avatar" [src]="formModel.logo?.url || formModel.logo || config.logo">
   </dl>
 
-  <file-uploader *ngIf="config.settings.usePhotoUpload"
+  <app-file-uploader *ngIf="config.settings.usePhotoUpload"
     type="profile"
     title="Application logo"
     uploadButton="Upload new image"
@@ -69,7 +69,7 @@
     [fileNameRewrite]="fileNameRewrite"
     [getUploadUrl]="getUploadUrl"
     [onCompleteItem]="onUploadComplete"
-    class="profile-avatar float-right"></file-uploader>
+    class="profile-avatar float-right"></app-file-uploader>
 
   <div>
     <dl class="form-group">

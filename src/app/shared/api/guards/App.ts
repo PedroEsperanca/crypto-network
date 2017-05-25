@@ -25,7 +25,7 @@ export class AppExistsGuard implements CanActivate {
   }
 
   protected hasEntityInStore(id: string): Observable<boolean> {
-    return this.store.let(getAppById(id))
+    return this.store.select(getAppById(id))
       .map((entitie) => !!entitie)
       .take(1);
   }
