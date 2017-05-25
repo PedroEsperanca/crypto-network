@@ -1,4 +1,4 @@
-// libs
+import { environment } from 'environment';
 import { Observable } from 'rxjs/Observable';
 // import { combineLatest } from 'rxjs/observable/combineLatest';
 import { ActionReducer } from '@ngrx/store';
@@ -88,7 +88,7 @@ const developmentReducer: ActionReducer<IAppState> =
 const productionReducer: ActionReducer<IAppState> = combineReducers(reducers);
 
 export function Reducer(state: any, action: any) {
-  if (String('<%= BUILD_TYPE %>') === 'dev') {
+  if (!environment.production) {
     return developmentReducer(state, action);
   } else {
     return productionReducer(state, action);
