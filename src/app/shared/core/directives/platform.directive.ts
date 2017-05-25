@@ -5,7 +5,7 @@ import { Directive, ElementRef, Renderer } from '@angular/core';
 import { WindowService } from '../services/window.service';
 
 @Directive({
-  selector: 'app-core-platform'
+  selector: '[app-core-platform]'
 })
 export class PlatformDirective {
 
