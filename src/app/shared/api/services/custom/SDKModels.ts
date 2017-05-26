@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { User } from '../../models/User';
 import { Organization } from '../../models/Organization';
 import { App } from '../../models/App';
+import { OAuthApp } from '../../models/OAuthApp';
 
 export interface Models { [name: string]: any }
 
@@ -13,6 +14,7 @@ export class SDKModels {
     User: User,
     Organization: Organization,
     App: App,
+    OAuthApp: OAuthApp,
     
   };
 

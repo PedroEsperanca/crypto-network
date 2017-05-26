@@ -212,7 +212,10 @@ export class OrganizationEffects extends BaseLoopbackEffects {
     .ofType(OrganizationActionTypes.FIND_BY_ID_OAUTHCLIENTAPPLICATIONS)
     .mergeMap((action: LoopbackAction) =>
       this.organization.findByIdOAuthClientApplications(action.payload.id, action.payload.fk)
-        .map((response) => new OrganizationActions.findByIdOAuthClientApplicationsSuccess(action.payload.id, response, action.meta))
+        .mergeMap((response) => {
+          resolver({id: action.payload.id, data: response, meta: action.meta}, 'OAuthApp', 'findByIdSuccess');
+          return new OrganizationActions.findByIdOAuthClientApplicationsSuccess(action.payload.id, response, action.meta);
+        })
         .catch((error) => concat(
           of(new OrganizationActions.findByIdOAuthClientApplicationsFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))

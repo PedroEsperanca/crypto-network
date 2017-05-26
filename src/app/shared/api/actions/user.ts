@@ -86,6 +86,18 @@ Object.assign(BaseLoopbackActionTypesFactory('User'), {
   UPDATE_BY_ID_ACCESSTOKENS_SUCCESS: type('[User] updateByIdAccessTokens success'),
   UPDATE_BY_ID_ACCESSTOKENS_FAIL: type('[User] updateByIdAccessTokens fail'),
 
+  FIND_BY_ID_ROLES: type('[User] findByIdRoles'),
+  FIND_BY_ID_ROLES_SUCCESS: type('[User] findByIdRoles success'),
+  FIND_BY_ID_ROLES_FAIL: type('[User] findByIdRoles fail'),
+
+  DESTROY_BY_ID_ROLES: type('[User] destroyByIdRoles'),
+  DESTROY_BY_ID_ROLES_SUCCESS: type('[User] destroyByIdRoles success'),
+  DESTROY_BY_ID_ROLES_FAIL: type('[User] destroyByIdRoles fail'),
+
+  UPDATE_BY_ID_ROLES: type('[User] updateByIdRoles'),
+  UPDATE_BY_ID_ROLES_SUCCESS: type('[User] updateByIdRoles success'),
+  UPDATE_BY_ID_ROLES_FAIL: type('[User] updateByIdRoles fail'),
+
   FIND_BY_ID_ORGANIZATIONS: type('[User] findByIdOrganizations'),
   FIND_BY_ID_ORGANIZATIONS_SUCCESS: type('[User] findByIdOrganizations success'),
   FIND_BY_ID_ORGANIZATIONS_FAIL: type('[User] findByIdOrganizations fail'),
@@ -190,6 +202,18 @@ Object.assign(BaseLoopbackActionTypesFactory('User'), {
   DELETE_ACCESSTOKENS_SUCCESS: type('[User] deleteAccessTokens success'),
   DELETE_ACCESSTOKENS_FAIL: type('[User] deleteAccessTokens fail'),
 
+  GET_ROLES: type('[User] getRoles'),
+  GET_ROLES_SUCCESS: type('[User] getRoles success'),
+  GET_ROLES_FAIL: type('[User] getRoles fail'),
+
+  CREATE_ROLES: type('[User] createRoles'),
+  CREATE_ROLES_SUCCESS: type('[User] createRoles success'),
+  CREATE_ROLES_FAIL: type('[User] createRoles fail'),
+
+  DELETE_ROLES: type('[User] deleteRoles'),
+  DELETE_ROLES_SUCCESS: type('[User] deleteRoles success'),
+  DELETE_ROLES_FAIL: type('[User] deleteRoles fail'),
+
   GET_ORGANIZATIONS: type('[User] getOrganizations'),
   GET_ORGANIZATIONS_SUCCESS: type('[User] getOrganizations success'),
   GET_ORGANIZATIONS_FAIL: type('[User] getOrganizations fail'),
@@ -293,6 +317,10 @@ Object.assign(BaseLoopbackActionTypesFactory('User'), {
   CREATE_MANY_ACCESSTOKENS: type('[User] createManyAccessTokens'),
   CREATE_MANY_ACCESSTOKENS_SUCCESS: type('[User] createManyAccessTokens success'),
   CREATE_MANY_ACCESSTOKENS_FAIL: type('[User] createManyAccessTokens fail'),
+
+  CREATE_MANY_ROLES: type('[User] createManyRoles'),
+  CREATE_MANY_ROLES_SUCCESS: type('[User] createManyRoles success'),
+  CREATE_MANY_ROLES_FAIL: type('[User] createManyRoles fail'),
 
   CREATE_MANY_ORGANIZATIONS: type('[User] createManyOrganizations'),
   CREATE_MANY_ORGANIZATIONS_SUCCESS: type('[User] createManyOrganizations success'),
@@ -1252,6 +1280,147 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
    */
   updateByIdAccessTokensFail: class implements Action {
     public readonly type = UserActionTypes.UPDATE_BY_ID_ACCESSTOKENS_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * findByIdRoles Action.
+   * Find a related item by id for roles.
+   *
+   * @param {any} id user id
+   * @param {any} fk Foreign key for roles
+   * @param {any} meta (optional).
+   * 
+   */
+  findByIdRoles: class implements Action {
+    public readonly type = UserActionTypes.FIND_BY_ID_ROLES;
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
+  },
+  /**
+   * findByIdRolesSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  findByIdRolesSuccess: class implements Action {
+    public readonly type = UserActionTypes.FIND_BY_ID_ROLES_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * findByIdRolesFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  findByIdRolesFail: class implements Action {
+    public readonly type = UserActionTypes.FIND_BY_ID_ROLES_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * destroyByIdRoles Action.
+   * Delete a related item by id for roles.
+   *
+   * @param {any} id user id
+   * @param {any} fk Foreign key for roles
+   * @param {any} meta (optional).
+   * 
+   */
+  destroyByIdRoles: class implements Action {
+    public readonly type = UserActionTypes.DESTROY_BY_ID_ROLES;
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
+  },
+  /**
+   * destroyByIdRolesSuccess Action.
+   * 
+   * @param {any} id 
+   * This method returns no data.
+   * @param {any} meta (optional).
+   * 
+   */
+  destroyByIdRolesSuccess: class implements Action {
+    public readonly type = UserActionTypes.DESTROY_BY_ID_ROLES_SUCCESS;
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
+  },
+  /**
+   * destroyByIdRolesFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  destroyByIdRolesFail: class implements Action {
+    public readonly type = UserActionTypes.DESTROY_BY_ID_ROLES_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * updateByIdRoles Action.
+   * Update a related item by id for roles.
+   *
+   * @param {any} id user id
+   * @param {any} fk Foreign key for roles
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   * @param {any} meta (optional).
+   * 
+   */
+  updateByIdRoles: class implements Action {
+    public readonly type = UserActionTypes.UPDATE_BY_ID_ROLES;
+      public payload: {id: any, fk: any, data: any};
+
+    constructor(id: any, fk: any, data: any = {}, public meta?: any) {
+      this.payload = {id, fk, data};
+    }
+  },
+  /**
+   * updateByIdRolesSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  updateByIdRolesSuccess: class implements Action {
+    public readonly type = UserActionTypes.UPDATE_BY_ID_ROLES_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * updateByIdRolesFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  updateByIdRolesFail: class implements Action {
+    public readonly type = UserActionTypes.UPDATE_BY_ID_ROLES_FAIL;
 
     constructor(public payload: any, public meta?: any) { }
   },
@@ -2435,6 +2604,139 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
    */
   deleteAccessTokensFail: class implements Action {
     public readonly type = UserActionTypes.DELETE_ACCESSTOKENS_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * getRoles Action.
+   * Queries roles of user.
+   *
+   * @param {any} id user id
+   * @param {object} filter 
+   * @param {any} meta (optional).
+   * 
+   */
+  getRoles: class implements Action {
+    public readonly type = UserActionTypes.GET_ROLES;
+      public payload: {id: any, filter: LoopBackFilter};
+
+    constructor(id: any, filter: LoopBackFilter = {}, public meta?: any) {
+      this.payload = {id, filter};
+    }
+  },
+  /**
+   * getRolesSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object[]} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  getRolesSuccess: class implements Action {
+    public readonly type = UserActionTypes.GET_ROLES_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * getRolesFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  getRolesFail: class implements Action {
+    public readonly type = UserActionTypes.GET_ROLES_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * createRoles Action.
+   * Creates a new instance in roles of this model.
+   *
+   * @param {any} id user id
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   * @param {any} meta (optional).
+   * 
+   */
+  createRoles: class implements Action {
+    public readonly type = UserActionTypes.CREATE_ROLES;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any = {}, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * createRolesSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  createRolesSuccess: class implements Action {
+    public readonly type = UserActionTypes.CREATE_ROLES_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * createRolesFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  createRolesFail: class implements Action {
+    public readonly type = UserActionTypes.CREATE_ROLES_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * deleteRoles Action.
+   * Deletes all roles of this model.
+   *
+   * @param {any} id user id
+   * @param {any} meta (optional).
+   * 
+   */
+  deleteRoles: class implements Action {
+    public readonly type = UserActionTypes.DELETE_ROLES;
+      
+    constructor(public payload: any, public meta?: any) {}
+  },
+  /**
+   * deleteRolesSuccess Action.
+   * 
+   * @param {any} id 
+   * This method returns no data.
+   * @param {any} meta (optional).
+   * 
+   */
+  deleteRolesSuccess: class implements Action {
+    public readonly type = UserActionTypes.DELETE_ROLES_SUCCESS;
+  
+    constructor(public payload: any, public meta?: any) {}
+  },
+  /**
+   * deleteRolesFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  deleteRolesFail: class implements Action {
+    public readonly type = UserActionTypes.DELETE_ROLES_FAIL;
 
     constructor(public payload: any, public meta?: any) { }
   },
@@ -3637,6 +3939,54 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
    */
   createManyAccessTokensFail: class implements Action {
     public readonly type = UserActionTypes.CREATE_MANY_ACCESSTOKENS_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * createManyRoles Action.
+   * Creates a new instance in roles of this model.
+   *
+   * @param {any} id user id
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   * @param {any} meta (optional).
+   * 
+   */
+  createManyRoles: class implements Action {
+    public readonly type = UserActionTypes.CREATE_MANY_ROLES;
+      public payload: {id: any, data: any[]};
+
+    constructor(id: any, data: any[] = [], public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * createManyRolesSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object[]} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  createManyRolesSuccess: class implements Action {
+    public readonly type = UserActionTypes.CREATE_MANY_ROLES_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * createManyRolesFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  createManyRolesFail: class implements Action {
+    public readonly type = UserActionTypes.CREATE_MANY_ROLES_FAIL;
 
     constructor(public payload: any, public meta?: any) { }
   },

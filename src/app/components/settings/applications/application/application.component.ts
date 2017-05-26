@@ -15,7 +15,7 @@ import { ModalDirective } from 'ngx-bootstrap';
 import {
   User,
   UserApi,
-  AppApi,
+  OAuthAppApi,
   LoopbackAuthActions,
   getLoopbackAuthAccount
 } from 'shared/api';
@@ -51,7 +51,7 @@ export class SettingsApplicationsApplicationComponent implements OnInit, OnDestr
     private router: Router,
     private route: ActivatedRoute,
     private user: UserApi,
-    private application: AppApi,
+    private application: OAuthAppApi,
     private configService: ConfigService,
     private cd: ChangeDetectorRef,
   ) {
@@ -181,7 +181,7 @@ export class SettingsApplicationsApplicationComponent implements OnInit, OnDestr
   }
 
   public onUploadComplete(item: any) {
-    this.application.updateS3Photo(this.formModel.id, {
+    this.application.updateS3Logo(this.formModel.id, {
       url: item.url.split('?')[0],
       key: item.file.name
     }).subscribe(

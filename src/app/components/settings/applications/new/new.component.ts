@@ -9,9 +9,9 @@ import { FileUploaderComponent } from 'shared/app/modules/file-uploader/file-upl
 
 import {
   User,
-  App,
+  OAuthApp,
   UserApi,
-  AppApi,
+  OAuthAppApi,
   LoopbackAuthActions,
   getLoopbackAuthAccount
 } from 'shared/api';
@@ -47,7 +47,7 @@ export class SettingsApplicationsNewComponent implements OnDestroy {
 
   public currenUser: User;
 
-  private app: App;
+  private app: OAuthApp;
 
   private subscriptions: Subscription[] = [];
 
@@ -55,7 +55,7 @@ export class SettingsApplicationsNewComponent implements OnDestroy {
     private store: Store<IAppState>,
     private router: Router,
     private user: UserApi,
-    private application: AppApi,
+    private application: OAuthAppApi,
     private configService: ConfigService
   ) {
     this.config = this.configService.getSettings();
@@ -117,7 +117,7 @@ export class SettingsApplicationsNewComponent implements OnDestroy {
   }
 
   public onUploadComplete(item: any) {
-    this.application.updateS3Photo(this.app.id, {
+    this.application.updateS3Logo(this.app.id, {
       url: item.url.split('?')[0],
       key: item.file.name
     }).subscribe(

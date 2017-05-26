@@ -6,17 +6,17 @@ import { BaseReducerFactory } from './base';
 import { User } from '../models';
 import { UserActionTypes } from '../actions';
 
-export interface UserState {
+export interface UsersState {
   ids: string[];
   entities: { [id: string]: User };
 };
 
-const initialState: UserState = {
+const initialState: UsersState = {
   ids: [],
   entities: {},
 };
 
-const cases = BaseReducerFactory<UserState, User>(UserActionTypes);
+const cases = BaseReducerFactory<UsersState, User>(UserActionTypes);
 
 /**
  * @module UsersReducer
@@ -25,7 +25,7 @@ const cases = BaseReducerFactory<UserState, User>(UserActionTypes);
  * @description
  * Provides with a LoopBack compatible User reducer.
  */
-export function UsersReducer(state = initialState, action: Action): UserState {
+export function UsersReducer(state = initialState, action: Action): UsersState {
   if (cases[action.type]) {
     return cases[action.type](state, action);
   } else {

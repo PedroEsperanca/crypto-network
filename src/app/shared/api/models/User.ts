@@ -1,7 +1,8 @@
 /* tslint:disable */
 import {
   Organization,
-  App
+  App,
+  OAuthApp
 } from '../index';
 
 declare var Object: any;
@@ -28,9 +29,10 @@ export interface UserInterface {
   identities?: any[];
   credentials?: any[];
   accessTokens?: any[];
+  roles?: any[];
   organizations?: Organization[];
   apps?: App[];
-  oAuthClientApplications?: any[];
+  oAuthClientApplications?: OAuthApp[];
 }
 
 export class User implements UserInterface {
@@ -56,9 +58,10 @@ export class User implements UserInterface {
   identities: any[];
   credentials: any[];
   accessTokens: any[];
+  roles: any[];
   organizations: Organization[];
   apps: App[];
-  oAuthClientApplications: any[];
+  oAuthClientApplications: OAuthApp[];
   constructor(data?: UserInterface) {
     Object.assign(this, data);
   }
@@ -208,6 +211,14 @@ export class User implements UserInterface {
           keyFrom: 'id',
           keyTo: 'userId'
         },
+        roles: {
+          name: 'roles',
+          type: 'any[]',
+          model: '',
+          relationType: 'hasMany',
+          keyFrom: 'id',
+          keyTo: 'userId'
+        },
         organizations: {
           name: 'organizations',
           type: 'Organization[]',
@@ -226,8 +237,8 @@ export class User implements UserInterface {
         },
         oAuthClientApplications: {
           name: 'oAuthClientApplications',
-          type: 'any[]',
-          model: '',
+          type: 'OAuthApp[]',
+          model: 'OAuthApp',
           relationType: 'hasMany',
           keyFrom: 'id',
           keyTo: 'userId'

@@ -13,7 +13,11 @@ import * as reducers from './reducers/index';
 import * as effects from './effects/index';
 
 export interface LoopbackStateInterface {
-  auth: SDKToken;
+  loopbackAuth: SDKToken;
+    Users: reducers.UsersState;
+  Organizations: reducers.OrganizationsState;
+  Apps: reducers.AppsState;
+  OAuthApps: reducers.OAuthAppsState;
 };
 
 export const LoopbackReducer = {
@@ -21,6 +25,7 @@ export const LoopbackReducer = {
 	Users: reducers.UsersReducer,
 	Organizations: reducers.OrganizationsReducer,
 	Apps: reducers.AppsReducer,
+	OAuthApps: reducers.OAuthAppsReducer,
 };
 
 export const LoopbackEffects = [
@@ -28,4 +33,5 @@ export const LoopbackEffects = [
 	EffectsModule.run(effects.UserEffects),
 	EffectsModule.run(effects.OrganizationEffects),
 	EffectsModule.run(effects.AppEffects),
+	EffectsModule.run(effects.OAuthAppEffects),
 ];

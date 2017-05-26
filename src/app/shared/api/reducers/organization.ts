@@ -6,17 +6,17 @@ import { BaseReducerFactory } from './base';
 import { Organization } from '../models';
 import { OrganizationActionTypes } from '../actions';
 
-export interface OrganizationState {
+export interface OrganizationsState {
   ids: string[];
   entities: { [id: string]: Organization };
 };
 
-const initialState: OrganizationState = {
+const initialState: OrganizationsState = {
   ids: [],
   entities: {},
 };
 
-const cases = BaseReducerFactory<OrganizationState, Organization>(OrganizationActionTypes);
+const cases = BaseReducerFactory<OrganizationsState, Organization>(OrganizationActionTypes);
 
 /**
  * @module OrganizationsReducer
@@ -25,7 +25,7 @@ const cases = BaseReducerFactory<OrganizationState, Organization>(OrganizationAc
  * @description
  * Provides with a LoopBack compatible Organization reducer.
  */
-export function OrganizationsReducer(state = initialState, action: Action): OrganizationState {
+export function OrganizationsReducer(state = initialState, action: Action): OrganizationsState {
   if (cases[action.type]) {
     return cases[action.type](state, action);
   } else {

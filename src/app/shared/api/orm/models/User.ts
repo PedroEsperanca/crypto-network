@@ -118,6 +118,21 @@ export class OrmUser extends OrmBase<User> {
     this.store.dispatch(new this.actions.updateByIdAccessTokens(id, fk, data, meta));
   }
   
+	public findByIdRoles(id: any, fk: any, meta?: any): Observable<any> {
+    this.store.dispatch(new this.actions.findByIdRoles(id, fk, meta));
+
+    return this.store.select(this.model.getModelDefinition().relations.roles.model + 's')
+      .map((state: any) => state.entities[fk]);
+  }
+  
+	public destroyByIdRoles(id: any, fk: any, meta?: any): void {
+    this.store.dispatch(new this.actions.destroyByIdRoles(id, fk, meta));
+  }
+  
+	public updateByIdRoles(id: any, fk: any, data: any = {}, meta?: any): void {
+    this.store.dispatch(new this.actions.updateByIdRoles(id, fk, data, meta));
+  }
+  
 	public findByIdOrganizations(id: any, fk: any, meta?: any): Observable<any> {
     this.store.dispatch(new this.actions.findByIdOrganizations(id, fk, meta));
 
@@ -256,6 +271,23 @@ export class OrmUser extends OrmBase<User> {
     this.store.dispatch(new this.actions.deleteAccessTokens(id, meta));
   }
   
+	public getRoles(id: any, filter: LoopBackFilter = {}, meta?: any): Observable<any[]> {
+    this.store.dispatch(new this.actions.getRoles(id, filter, meta));
+
+    return applyFilter(
+      this.store.select(this.model.getModelDefinition().relations.roles.model + 's')
+        .map((state: any) => state.entities)
+      , filter, this.store, models[this.model.getModelDefinition().relations.roles.model]);
+  }
+	
+	public createRoles(id: any, data: any = {}, meta?: any): void {
+    this.store.dispatch(new this.actions.createRoles(id, data, meta));
+  }
+  
+	public deleteRoles(id: any, meta?: any): void {
+    this.store.dispatch(new this.actions.deleteRoles(id, meta));
+  }
+  
 	public getOrganizations(id: any, filter: LoopBackFilter = {}, meta?: any): Observable<any[]> {
     this.store.dispatch(new this.actions.getOrganizations(id, filter, meta));
 
@@ -373,6 +405,10 @@ export class OrmUser extends OrmBase<User> {
   
 	public createManyAccessTokens(id: any, data: any[] = [], meta?: any): void {
     this.store.dispatch(new this.actions.createManyAccessTokens(id, data, meta));
+  }
+  
+	public createManyRoles(id: any, data: any[] = [], meta?: any): void {
+    this.store.dispatch(new this.actions.createManyRoles(id, data, meta));
   }
   
 	public createManyOrganizations(id: any, data: any[] = [], meta?: any): void {

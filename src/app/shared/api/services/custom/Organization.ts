@@ -14,6 +14,7 @@ import { Organization } from '../../models/Organization';
 import { SocketConnection } from '../../sockets/socket.connections';
 import { User } from '../../models/User';
 import { App } from '../../models/App';
+import { OAuthApp } from '../../models/OAuthApp';
 
 
 /**

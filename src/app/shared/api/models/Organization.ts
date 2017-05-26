@@ -1,7 +1,8 @@
 /* tslint:disable */
 import {
   User,
-  App
+  App,
+  OAuthApp
 } from '../index';
 
 declare var Object: any;
@@ -17,7 +18,7 @@ export interface OrganizationInterface {
   roles?: any[];
   s3Photo?: any[];
   apps?: App[];
-  oAuthClientApplications?: any[];
+  oAuthClientApplications?: OAuthApp[];
 }
 
 export class Organization implements OrganizationInterface {
@@ -32,7 +33,7 @@ export class Organization implements OrganizationInterface {
   roles: any[];
   s3Photo: any[];
   apps: App[];
-  oAuthClientApplications: any[];
+  oAuthClientApplications: OAuthApp[];
   constructor(data?: OrganizationInterface) {
     Object.assign(this, data);
   }
@@ -129,8 +130,8 @@ export class Organization implements OrganizationInterface {
         },
         oAuthClientApplications: {
           name: 'oAuthClientApplications',
-          type: 'any[]',
-          model: '',
+          type: 'OAuthApp[]',
+          model: 'OAuthApp',
           relationType: 'hasMany',
           keyFrom: 'id',
           keyTo: 'organizationId'

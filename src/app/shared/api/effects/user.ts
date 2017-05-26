@@ -262,6 +262,42 @@ export class UserEffects extends BaseLoopbackEffects {
     );
 
   @Effect()
+  protected findByIdRoles: Observable<LoopbackAction> = this.actions$
+    .ofType(UserActionTypes.FIND_BY_ID_ROLES)
+    .mergeMap((action: LoopbackAction) =>
+      this.user.findByIdRoles(action.payload.id, action.payload.fk)
+        .map((response) => new UserActions.findByIdRolesSuccess(action.payload.id, response, action.meta))
+        .catch((error) => concat(
+          of(new UserActions.findByIdRolesFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  protected destroyByIdRoles: Observable<LoopbackAction> = this.actions$
+    .ofType(UserActionTypes.DESTROY_BY_ID_ROLES)
+    .mergeMap((action: LoopbackAction) =>
+      this.user.destroyByIdRoles(action.payload.id, action.payload.fk)
+        .map((response) => new UserActions.destroyByIdRolesSuccess(action.payload.id, action.payload.fk, action.meta))
+        .catch((error) => concat(
+          of(new UserActions.destroyByIdRolesFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  protected updateByIdRoles: Observable<LoopbackAction> = this.actions$
+    .ofType(UserActionTypes.UPDATE_BY_ID_ROLES)
+    .mergeMap((action: LoopbackAction) =>
+      this.user.updateByIdRoles(action.payload.id, action.payload.fk, action.payload.data)
+        .map((response) => new UserActions.updateByIdRolesSuccess(action.payload.id, response, action.meta))
+        .catch((error) => concat(
+          of(new UserActions.updateByIdRolesFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
   protected findByIdOrganizations: Observable<LoopbackAction> = this.actions$
     .ofType(UserActionTypes.FIND_BY_ID_ORGANIZATIONS)
     .mergeMap((action: LoopbackAction) =>
@@ -368,7 +404,10 @@ export class UserEffects extends BaseLoopbackEffects {
     .ofType(UserActionTypes.FIND_BY_ID_OAUTHCLIENTAPPLICATIONS)
     .mergeMap((action: LoopbackAction) =>
       this.user.findByIdOAuthClientApplications(action.payload.id, action.payload.fk)
-        .map((response) => new UserActions.findByIdOAuthClientApplicationsSuccess(action.payload.id, response, action.meta))
+        .mergeMap((response) => {
+          resolver({id: action.payload.id, data: response, meta: action.meta}, 'OAuthApp', 'findByIdSuccess');
+          return new UserActions.findByIdOAuthClientApplicationsSuccess(action.payload.id, response, action.meta);
+        })
         .catch((error) => concat(
           of(new UserActions.findByIdOAuthClientApplicationsFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
@@ -575,6 +614,42 @@ export class UserEffects extends BaseLoopbackEffects {
         .map((response) => new UserActions.deleteAccessTokensSuccess(action.payload, action.meta))
         .catch((error) => concat(
           of(new UserActions.deleteAccessTokensFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  protected getRoles: Observable<LoopbackAction> = this.actions$
+    .ofType(UserActionTypes.GET_ROLES)
+    .mergeMap((action: LoopbackAction) =>
+      this.user.getRoles(action.payload.id, action.payload.filter)
+        .map((response) => new UserActions.getRolesSuccess(action.payload.id, response, action.meta))
+        .catch((error) => concat(
+          of(new UserActions.getRolesFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  protected createRoles: Observable<LoopbackAction> = this.actions$
+    .ofType(UserActionTypes.CREATE_ROLES)
+    .mergeMap((action: LoopbackAction) =>
+      this.user.createRoles(action.payload.id, action.payload.data)
+        .map((response) => new UserActions.createRolesSuccess(action.payload.id, response, action.meta))
+        .catch((error) => concat(
+          of(new UserActions.createRolesFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  protected deleteRoles: Observable<LoopbackAction> = this.actions$
+    .ofType(UserActionTypes.DELETE_ROLES)
+    .mergeMap((action: LoopbackAction) =>
+      this.user.deleteRoles(action.payload.id)
+        .map((response) => new UserActions.deleteRolesSuccess(action.payload, action.meta))
+        .catch((error) => concat(
+          of(new UserActions.deleteRolesFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
@@ -887,6 +962,18 @@ export class UserEffects extends BaseLoopbackEffects {
         .map((response) => new UserActions.createManyAccessTokensSuccess(action.payload.id, response, action.meta))
         .catch((error) => concat(
           of(new UserActions.createManyAccessTokensFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  protected createManyRoles: Observable<LoopbackAction> = this.actions$
+    .ofType(UserActionTypes.CREATE_MANY_ROLES)
+    .mergeMap((action: LoopbackAction) =>
+      this.user.createManyRoles(action.payload.id, action.payload.data)
+        .map((response) => new UserActions.createManyRolesSuccess(action.payload.id, response, action.meta))
+        .catch((error) => concat(
+          of(new UserActions.createManyRolesFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );

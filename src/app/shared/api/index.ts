@@ -52,6 +52,7 @@ import { RealTime } from './services/core/real.time';
 import { UserApi } from './services/custom/User';
 import { OrganizationApi } from './services/custom/Organization';
 import { AppApi } from './services/custom/App';
+import { OAuthAppApi } from './services/custom/OAuthApp';
 /**
 * @module SDKBrowserModule
 * @description
@@ -86,6 +87,7 @@ export class SDKBrowserModule {
         UserApi,
         OrganizationApi,
         AppApi,
+        OAuthAppApi,
         internalStorageProvider,
         { provide: SDKStorage, useClass: StorageBrowser },
         { provide: SocketDriver, useClass: SocketBrowser }
