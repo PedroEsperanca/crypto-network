@@ -39,7 +39,7 @@ export class SettingsComponent implements OnDestroy {
   ) {
     this.config = this.configService.getSettings();
 
-    this.subscriptions.push(this.store.let(getLoopbackAuthAccount()).subscribe((user: User) => {
+    this.subscriptions.push(this.store.select(getLoopbackAuthAccount()).subscribe((user: User) => {
       if (!user) { return; }
 
       this.currentUser = Object.assign({}, user);

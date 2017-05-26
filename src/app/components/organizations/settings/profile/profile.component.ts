@@ -33,7 +33,7 @@ export class SettingsProfileComponent implements OnDestroy {
   ) {
     this.config = this.configService.getSettings();
 
-    this.subscriptions.push(this.store.let(getLoopbackAuthAccount()).subscribe((currentUser: any) => {
+    this.subscriptions.push(this.store.select(getLoopbackAuthAccount()).subscribe((currentUser: any) => {
       if (!currentUser) { return; }
 
       this.formModel = (<any> Object).assign({}, currentUser);

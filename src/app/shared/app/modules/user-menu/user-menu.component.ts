@@ -25,8 +25,8 @@ export class UserMenuComponent {
     private configService: ConfigService
   ) {
     this.config = this.configService.getSettings();
-    this.currentToken$ = store.let(getLoopbackAuthToken());
-    this.currentUser$ = store.let(getLoopbackAuthAccount());
+    this.currentToken$ = store.select(getLoopbackAuthToken);
+    this.currentUser$ = store.select(getLoopbackAuthAccount);
   }
 
   public logout() {

@@ -23,6 +23,6 @@ export class SettingsApplicationsComponent {
     private configService: ConfigService,
   ) {
     this.config = this.configService.getSettings();
-    this.currentUser$ = this.store.let(getLoopbackAuthAccount());
+    this.currentUser$ = this.store.select(getLoopbackAuthAccount());
   }
 }
