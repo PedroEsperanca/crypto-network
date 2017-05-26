@@ -7,7 +7,7 @@ export const environment = {
   production: false,
   useHash: false,
   target: 'web',
-  base_url: 'http://localhost:54447',
+  base_url: 'https://api-seed.herokuapp.com',
   api_version: 'api',
   auth_prefix: 'Bearer ',
   logging: {
