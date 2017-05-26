@@ -24,7 +24,6 @@ export class LoginComponent {
     private configService: ConfigService
   ) {
     this.config = this.configService.getSettings();
-    console.log(this.config);
   }
 
   public login() {
