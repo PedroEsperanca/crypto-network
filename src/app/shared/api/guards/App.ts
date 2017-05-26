@@ -12,6 +12,7 @@ import { of } from 'rxjs/observable/of';
 
 import { AppApi } from '../services/index';
 import { getAppById } from '../reducers/App';
+import { AppActions } from '../actions/App';
 
 @Injectable()
 export class AppExistsGuard implements CanActivate {
@@ -34,6 +35,7 @@ export class AppExistsGuard implements CanActivate {
     return this.App.exists(id)
       .map((response: any) => !!response.exists)
       .catch(() => {
+        this.store.dispatch(new AppActions.guardFail());
         return of(false);
       });
   }

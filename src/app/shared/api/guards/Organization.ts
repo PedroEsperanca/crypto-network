@@ -12,6 +12,7 @@ import { of } from 'rxjs/observable/of';
 
 import { OrganizationApi } from '../services/index';
 import { getOrganizationById } from '../reducers/Organization';
+import { OrganizationActions } from '../actions/Organization';
 
 @Injectable()
 export class OrganizationExistsGuard implements CanActivate {
@@ -34,6 +35,7 @@ export class OrganizationExistsGuard implements CanActivate {
     return this.Organization.exists(id)
       .map((response: any) => !!response.exists)
       .catch(() => {
+        this.store.dispatch(new OrganizationActions.guardFail());
         return of(false);
       });
   }

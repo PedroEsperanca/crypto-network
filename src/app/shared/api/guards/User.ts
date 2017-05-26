@@ -12,6 +12,7 @@ import { of } from 'rxjs/observable/of';
 
 import { UserApi } from '../services/index';
 import { getUserById } from '../reducers/User';
+import { UserActions } from '../actions/User';
 
 @Injectable()
 export class UserExistsGuard implements CanActivate {
@@ -34,6 +35,7 @@ export class UserExistsGuard implements CanActivate {
     return this.User.exists(id)
       .map((response: any) => !!response.exists)
       .catch(() => {
+        this.store.dispatch(new UserActions.guardFail());
         return of(false);
       });
   }

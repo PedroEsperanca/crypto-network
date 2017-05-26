@@ -74,6 +74,11 @@ export class ApplicationEffects {
       }
     });
 
+  @Effect()
+  public authGuardFail$ = this.actions$
+    .ofType(LoopbackAuthActionTypes.GUARD_FAIL)
+    .map(() => go(['/user/login']));
+
   constructor(
     private store: Store<IAppState>,
     private actions$: Actions,
