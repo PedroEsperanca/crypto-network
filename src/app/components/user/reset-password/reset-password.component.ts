@@ -26,13 +26,12 @@ export class ResetPasswordComponent implements OnDestroy {
     private cd: ChangeDetectorRef,
     private route: ActivatedRoute
   ) {
-    this.route.params.subscribe((params: any) => {
+    this.route.params.take(1).subscribe((params: any) => {
       this.userId = params.userId;
 
       this.store.dispatch(new LoopbackAuthActions.setToken({
         id: params.token,
         ttl: 1000,
-        issuedAt: new Date(),
         created: new Date(),
         userId: params.userId,
         user: {},

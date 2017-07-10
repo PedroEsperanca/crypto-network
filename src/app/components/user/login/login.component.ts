@@ -4,8 +4,7 @@ import { Store } from '@ngrx/store';
 import { ConfigService } from '@ngx-config/core';
 
 import { UserInterface, LoopBackConfig } from 'shared/api';
-import { IAppState } from 'shared/ngrx';
-import { UserActions } from 'shared/api/actions';
+import { Orm } from 'shared/api/orm';
 
 @Component({
   selector: 'app-user-login',
@@ -20,19 +19,19 @@ export class LoginComponent {
   };
 
   constructor(
-    private store: Store<IAppState>,
+    private orm: Orm,
     private configService: ConfigService
   ) {
     this.config = this.configService.getSettings();
   }
 
   public login() {
-    this.store.dispatch(new UserActions.login(this.formModel, [
+    this.orm.User.login(this.formModel, [
       'user',
       'user.oAuthClientApplications',
       'user.identities',
       'user.organizations'
-    ]));
+    ]);
   }
 
   public goTo(provider: string) {

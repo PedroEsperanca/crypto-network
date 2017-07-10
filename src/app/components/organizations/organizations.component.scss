@@ -61,7 +61,8 @@
           border-radius: 20px;
         }
 
-        &:hover {
+        &:hover,
+        &:focus {
           color: #333;
           text-decoration: none;
         }

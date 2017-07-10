@@ -1,9 +1,8 @@
 // angular
 import { Routes } from '@angular/router';
 
-import { AuthGuard } from 'shared/api/guards';
+import { AuthGuard, UserExistsGuard, OrganizationExistsGuard } from 'shared/api/guards';
 import { ProfileExistsGuard } from 'shared/app/guards';
-import { ProfileResolver } from 'shared/app/resolvers';
 
 import { NotFoundComponent } from './components/not-found/not-found.component';
 
@@ -38,23 +37,33 @@ export const ROUTES: Routes = [
 
   // Private
   {
-    path: 'organizations',
-    loadChildren: './components/organizations/organizations.module#OrganizationsModule',
-    canActivate: [ AuthGuard ]
-  },
-  {
     path: 'settings',
     loadChildren: './components/settings/settings.module#SettingsModule',
     canActivate: [ AuthGuard ]
   },
+  // remove once https://github.com/angular/angular/pull/16416
+  {
+    path: 'organizations',
+    loadChildren: './components/organizations/organizations.module#OrganizationsModule',
+    canActivate: [ AuthGuard ]
+  },
 
   // Public
+  // remove once https://github.com/angular/angular/pull/16416
   {
     path: ':id',
     loadChildren: './components/profile/profile.module#ProfileModule',
-    canActivate: [ ProfileExistsGuard ],
-    resolve: {
-      profile: ProfileResolver
-    }
+    canActivate: [ ProfileExistsGuard ]
   }
+
+  // depends on https://github.com/angular/angular/pull/16416
+  /*{
+    path: ':id',
+    loadChildren: './components/profile/profile.module#ProfileModule',
+    canActivate: [ UserExistsGuard ]
+  },
+  {
+    path: ':id',
+    loadChildren: './components/organizations/organizations.module#OrganizationsModule'
+  }*/
 ];

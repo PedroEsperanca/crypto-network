@@ -13,14 +13,5 @@ export class ProfileComponent implements OnInit {
   constructor(private route: ActivatedRoute) {}
 
   public ngOnInit() {
-    this.route.data
-      .subscribe((data: any) => {
-        if (typeof data.profile.email !== 'undefined' ||
-          typeof data.profile.emailAddresses !== 'undefined') {
-          this.type = 'user';
-        } else {
-          this.type = 'organization';
-        }
-      });
   }
 }

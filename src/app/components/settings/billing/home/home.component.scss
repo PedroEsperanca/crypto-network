@@ -1,0 +1,80 @@
+:host {
+  .border-bottom {
+    border-bottom: 1px #e1e4e8 solid !important;
+  }
+
+  .flex-items-baseline {
+    -webkit-box-align: baseline !important;
+    -webkit-align-items: baseline !important;
+    align-items: baseline !important;
+  }
+
+  .text-gray {
+    color: #586069 !important;
+  }
+
+  .flex-shrink-0 {
+    -webkit-flex-shrink: 0 !important;
+    flex-shrink: 0 !important;
+  }
+
+  .py-3 {
+    padding-top: 16px !important;
+    padding-bottom: 16px !important;
+  }
+
+  .d-flex {
+    display: -webkit-box !important;
+    display: -webkit-flex !important;
+    display: flex !important;
+  }
+
+  .flex-auto {
+    -webkit-box-flex: 1 !important;
+    -webkit-flex: 1 1 auto !important;
+    flex: 1 1 auto !important;
+  }
+
+  .billing-section .section-title {
+    width: 100px;
+  }
+
+  .payment-history {
+    background-color: #fff;
+    border: 1px solid #d1d5da;
+    border-radius: 3px;
+  }
+
+  .boxed-group-table {
+    width: 100%;
+    text-align: left;
+
+    th {
+      padding: 9px;
+      background-color: #fafbfc;
+      border-bottom: 1px solid #eaecef;
+    }
+
+    td {
+      padding: 9px;
+      vertical-align: top;
+      border-bottom: 1px solid #eaecef;
+    }
+
+    .id, .date, .receipt, .status, .amount {
+      white-space: nowrap;
+    }
+
+    .status {
+      color: #586069;
+    }
+
+    .receipt {
+      text-align: center;
+    }
+
+    .succeeded .status {
+      color: #28a745;
+    }
+  }
+}

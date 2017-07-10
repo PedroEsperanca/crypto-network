@@ -4,7 +4,7 @@ import 'rxjs/add/operator/finally';
 import 'rxjs/add/operator/takeUntil';
 import { AsyncSubject } from 'rxjs/AsyncSubject';
 import { RealTime } from '../services';
-import { resolver } from '../effects/resolver';
+import { createIO } from './io';
 
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
@@ -19,18 +19,7 @@ export class OrmBase<T> {
   public find(filter: LoopBackFilter = {}, meta?: any): Observable<T[]> {
     if (meta && meta.io) {
       const destroyStream$: AsyncSubject<any> = new AsyncSubject();
-      const reference = this.realTime.FireLoop.ref<T>(this.model);
-      reference.on('change', filter)
-        .map((data: any) => {
-          const resolved = resolver({data, meta}, this.model.getModelName(), 'findSuccess');
-          for (const item of resolved) {
-            this.store.dispatch(item);
-          }
-          return;
-        })
-        .finally(() => reference.dispose())
-        .takeUntil(destroyStream$)
-        .subscribe();
+      createIO(filter, this.store, destroyStream$, this.model, this.realTime, meta);
 
       return applyFilter(
         this.store.select(this.model.getModelName() + 's')
@@ -57,12 +46,7 @@ export class OrmBase<T> {
       newFilter.limit = 1;
 
       const destroyStream$: AsyncSubject<any> = new AsyncSubject();
-      const reference = this.realTime.FireLoop.ref<T>(this.model)
-      reference.on('change', newFilter)
-        .mergeMap((data: any) => resolver({data, meta}, this.model.getModelName(), 'findByIdSuccess'))
-        .finally(() => reference.dispose())
-        .takeUntil(destroyStream$)
-        .subscribe();
+      createIO(newFilter, this.store, destroyStream$, this.model, this.realTime, meta);
 
       return applyFilter(
         this.store.select(this.model.getModelName() + 's')
@@ -71,14 +55,18 @@ export class OrmBase<T> {
             destroyStream$.next(1);
             destroyStream$.complete();
           })
-        , filter, this.store, this.model);
+        , filter, this.store, this.model).map((data: any[]) => {
+          return data[0];
+        });
     } else {
       this.store.dispatch(new this.actions.findById(id, filter, meta));
 
       return applyFilter(
         this.store.select(this.model.getModelName() + 's')
           .map((state: any) => state.entities[id])
-        , filter, this.store, this.model);
+        , filter, this.store, this.model).map((data: any[]) => {
+          return data[0];
+        });
     }
   }
 
@@ -88,12 +76,7 @@ export class OrmBase<T> {
 
     if (meta && meta.io) {
       const destroyStream$: AsyncSubject<any> = new AsyncSubject();
-      const reference = this.realTime.FireLoop.ref<T>(this.model)
-      reference.on('change', newFilter)
-        .mergeMap((data: any) => resolver({data, meta}, this.model.getModelName(), 'findOneSuccess'))
-        .finally(() => reference.dispose())
-        .takeUntil(destroyStream$)
-        .subscribe();
+      createIO(newFilter, this.store, destroyStream$, this.model, this.realTime, meta);
 
       return applyFilter(
         this.store.select(this.model.getModelName() + 's')
@@ -102,14 +85,18 @@ export class OrmBase<T> {
             destroyStream$.next(1);
             destroyStream$.complete();
           })
-        , newFilter, this.store, this.model);
+        , newFilter, this.store, this.model).map((data: any[]) => {
+          return data[0];
+        });
     } else {
       this.store.dispatch(new this.actions.findOne(filter, meta));
 
       return applyFilter(
         this.store.select(this.model.getModelName() + 's')
           .map((state: any) => state.entities)
-        , newFilter, this.store, this.model);
+        , newFilter, this.store, this.model).map((data: any[]) => {
+          return data[0];
+        });
     }
   }
 

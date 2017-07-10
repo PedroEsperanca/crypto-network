@@ -11,6 +11,7 @@ import './operators';
 // libs
 import { CloudtasksService } from '@cloudtasks/ngx-image';
 import { ConfigService } from '@ngx-config/core';
+import { PushNotificationsService } from 'angular2-notifications';
 
 // app
 import { AnalyticsService } from 'shared/analytics';
@@ -33,6 +34,10 @@ import { LoopBackAuth, UserApi } from 'shared/api';
 })
 export class AppComponent {
 
+  public notificationsOptions: any = {
+    timeOut: 5000
+  }
+
   constructor(
     public viewContainerRef: ViewContainerRef,
     public analytics: AnalyticsService,
@@ -43,10 +48,10 @@ export class AppComponent {
     private location: Location,
     private auth: LoopBackAuth,
     private user: UserApi,
-    private appService: AppService
+    private appService: AppService,
+    private pushNotifications: PushNotificationsService
   ) {
     this.analytics.devMode(!environment.production);
-    logger.debug(!environment.production);
 
     cloudtasks.setId('demo');
 
@@ -59,8 +64,7 @@ export class AppComponent {
   public checkLogginToken() {
     const token = this.auth.getToken();
     if (token  && token.ttl) {
-      const expires = new Date(token.issuedAt ||
-        token.created ||
+      const expires = new Date(token.created ||
         parseInt( token.id.toString().substring(0, 8), 16 ) * 1000);
 
       expires.setSeconds(expires.getSeconds() + token.ttl);

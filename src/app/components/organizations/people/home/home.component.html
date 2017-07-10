@@ -1,0 +1,207 @@
+<div class="container">
+  <div class="subnav org-toolbar org-toolbar-next">
+    <div class="auto-search-group">
+      <input class="form-control subnav-search-input input-contrast auto-search-input" type="text" name="query" value="" placeholder="Find a member…" autocomplete="off">
+      
+      <svg aria-hidden="true" class="octicon octicon-search" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M15.7 13.3l-3.81-3.83A5.93 5.93 0 0 0 13 6c0-3.31-2.69-6-6-6S1 2.69 1 6s2.69 6 6 6c1.3 0 2.48-.41 3.47-1.11l3.83 3.81c.19.2.45.3.7.3.25 0 .52-.09.7-.3a.996.996 0 0 0 0-1.41v.01zM7 10.7c-2.59 0-4.7-2.11-4.7-4.7 0-2.59 2.11-4.7 4.7-4.7 2.59 0 4.7 2.11 4.7 4.7 0 2.59-2.11 4.7-4.7 4.7z"></path></svg>
+
+      <div class="spinner">
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+        <div class="rect5"></div>
+      </div>
+    </div>
+
+    <div class="float-right">
+      <a class="btn btn-success" (click)="inviteMember.show()">{{'Invite member' | translate}}</a>
+    </div>
+  </div>
+
+  <div id="org-members-table">
+
+    <div class="d-flex table-list-header table-list-header-next bulk-actions-header">
+
+      <label class="table-list-header-select-all">
+        <input id="select-all-checkbox" type="checkbox" name="select-all-checkbox" class="js-check-all">
+      </label>
+
+      <div class="select-all-dropdown dropdown flex-auto">
+        <label for="select-all-checkbox" class="table-list-header-meta py-1">
+          <span class="none-selected">{{'Select all' | translate}}</span>
+        </label>
+
+      </div>
+
+      <div class="table-list-header-toggle d-flex py-1">
+
+        <div class="flex-self-center select-menu" data-filter-on="role">
+          <div class="select-menu-modal-holder">
+            <div class="btn-group" dropdown placement="bottom right">
+              <button dropdownToggle type="button" class="btn btn-link select-menu-button icon-only dropdown-toggle">
+                {{'Role' | translate}} <span class="caret"></span>
+              </button>
+
+              <div *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu">
+                <div class="select-menu-header">
+                  <span class="select-menu-title">{{'Filter by role' | translate}}</span>
+                </div>
+
+                <div class="select-menu-list" role="menu">
+                  <div>
+                    <a href="#" class="select-menu-item selected" data-filter="" role="menuitem">
+                      <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"></path></svg>
+                      <div class="select-menu-item-text">Everyone</div>
+                    </a>
+                    <a href="#" class="select-menu-item" data-filter="role:owner" role="menuitem">
+                      <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"></path></svg>
+                      <div class="select-menu-item-text">Owners</div>
+                    </a>
+                    <a href="#" class="select-menu-item" data-filter="role:member" role="menuitem">
+                      <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"></path></svg>
+                      <div class="select-menu-item-text">Members</div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ul class="member-listing-next table-list table-list-bordered adminable">
+
+      <li class="table-list-item member-list-item js-bulk-actions-item adminable" data-bulk-actions-id="25533004">
+        <div class="table-list-cell table-list-cell-checkbox py-3 v-align-middle pr-0 pl-3">
+          <input type="checkbox" name="members[]" value="andrerodrigueslopes" id="member-andrerodrigueslopes" class="js-check-all-item js-bulk-actions-toggle">
+        </div>
+
+        <div class="table-list-cell py-3 pl-3 v-align-middle member-avatar-cell css-truncate pr-0">
+          <a href="/orgs/altario/people/andrerodrigueslopes">
+            <img alt="@andrerodrigueslopes" class="avatar float-left" height="48" src="https://avatars3.githubusercontent.com/u/25533004?v=3&amp;s=96" width="48">
+          </a>
+        </div>
+
+        <div class="table-list-cell py-3 v-align-middle member-info css-truncate pl-3">
+          <a class="css-truncate-target f4" href="/orgs/altario/people/andrerodrigueslopes">
+            andrerodrigueslopes
+          </a>
+        </div>
+
+        <div class="text-center text-gray table-list-cell py-3 v-align-middle f5">
+          <svg aria-hidden="true" class="octicon octicon-lock" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M4 13H3v-1h1v1zm8-6v7c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V7c0-.55.45-1 1-1h1V4c0-2.2 1.8-4 4-4s4 1.8 4 4v2h1c.55 0 1 .45 1 1zM3.8 6h4.41V4c0-1.22-.98-2.2-2.2-2.2-1.22 0-2.2.98-2.2 2.2v2H3.8zM11 7H2v7h9V7zM4 8H3v1h1V8zm0 2H3v1h1v-1z"></path></svg>
+          Private
+        </div>
+
+        <div class="text-center text-gray table-list-cell py-3 v-align-middle f5">
+          <span>Owner</span>
+        </div>
+
+        <div class="text-center text-gray table-list-cell py-3 v-align-middle pr-3 f5">
+          <div class="btn-group" dropdown placement="bottom right">
+            <button dropdownToggle type="button" class="btn btn-sm select-menu-button icon-only dropdown-toggle">
+              <svg aria-label="Member settings" class="octicon octicon-gear" height="16" role="img" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M14 8.77v-1.6l-1.94-.64-.45-1.09.88-1.84-1.13-1.13-1.81.91-1.09-.45-.69-1.92h-1.6l-.63 1.94-1.11.45-1.84-.88-1.13 1.13.91 1.81-.45 1.09L0 7.23v1.59l1.94.64.45 1.09-.88 1.84 1.13 1.13 1.81-.91 1.09.45.69 1.92h1.59l.63-1.94 1.11-.45 1.84.88 1.13-1.13-.92-1.81.47-1.09L14 8.75v.02zM7 11c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"></path></svg>
+              <span class="caret"></span>
+            </button>
+
+            <ul *dropdownMenu class="dropdown-menu dropdown-menu-no-overflow dropdown-menu-right" role="menu">
+              <a href="/orgs/altario/people/andrerodrigueslopes" class="dropdown-item" data-ga-click="Orgs, manage member, location:member list; text:Manage">
+                {{'Manage' | translate}}
+              </a>
+
+              <a (click)="changeRole.show()" class="dropdown-item">{{'Change role' | translate}}…</a>
+
+
+              <button type="button" class="btn-link menu-item-danger dropdown-item">{{'Remove from organization' | translate}}</button>
+            </ul>
+          </div>
+        </div>
+
+      </li>
+
+    </ul>
+
+  </div>
+</div>
+
+<div bsModal #inviteMember="bs-modal" class="modal fade invite-member-modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close float-right" aria-label="Close" (click)="inviteMember.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+
+        <div class="invite-member-header">
+          <svg aria-hidden="true" class="octicon octicon-mail-read text-gray-light" height="32" version="1.1" viewBox="0 0 14 16" width="28"><path fill-rule="evenodd" d="M6 5H4V4h2v1zm3 1H4v1h5V6zm5-.48V14c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V5.52c0-.33.16-.63.42-.81L2 3.58V3c0-.55.45-1 1-1h1.2L7 0l2.8 2H11c.55 0 1 .45 1 1v.58l1.58 1.13c.27.19.42.48.42.81zM3 7.5L7 10l4-2.5V3H3v4.5zm-2 6l4.5-3-4.5-3v6zm11 .5l-5-3-5 3h10zm1-6.5l-4.5 3 4.5 3v-6z"></path></svg>
+            <h1 class="add-to-org-title mt-3" data-facebox-id="facebox-header" id="facebox-header">Invite members to Altar.io</h1>
+        </div>
+
+
+        <div class="auto-search-group mt-3 ">
+          <input type="text" name="identifier" aria-label="Search by username, full name or email address" class="form-control input-block input-contrast auto-search-input new-member-field" autofocus="" placeholder="Search by username, full name, or email address" autocomplete="off">
+          <svg aria-hidden="true" class="octicon octicon-person" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 14.002a.998.998 0 0 1-.998.998H1.001A1 1 0 0 1 0 13.999V13c0-2.633 4-4 4-4s.229-.409 0-1c-.841-.62-.944-1.59-1-4 .173-2.413 1.867-3 3-3s2.827.586 3 3c-.056 2.41-.159 3.38-1 4-.229.59 0 1 0 1s4 1.367 4 4v1.002z"></path></svg>
+          <img src="https://assets-cdn.github.com/images/spinners/octocat-spinner-32.gif" width="16" height="16" class="spinner" alt="">
+        </div>
+
+        <div class="invite-member-results autocomplete-results" data-search-url="/orgs/altario/invitations/invitee_suggestions">
+          <ul class="autocomplete-group"></ul>
+          <div class="no-results">
+            No results
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div bsModal #changeRole="bs-modal" class="modal fade change-role-modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header" tabindex="-1">
+        {{'Change the role of' | translate}} andrerodrigueslopes?
+
+        <button type="button" class="close float-right" aria-label="Close" (click)="changeRole.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <p data-facebox-id="facebox-description">{{'Select a new role' | translate}}</p>
+
+        <dl class="form-group">
+          <dd>
+            <div class="form-checkbox">
+              <label>
+                <input name="role" type="radio" value="admin" class="js-change-org-role-selector">
+                Owner
+              </label>
+              <p class="note">
+                Has full administrative access to the entire organization.
+              </p>
+            </div>
+          </dd>
+
+          <dd>
+            <div class="form-checkbox">
+              <label>
+                <input name="role" type="radio" value="direct_member" class="js-change-org-role-selector">
+                Member
+              </label>
+              <p class="note">
+                Can see every team and member in the organization, and can create new repositories.
+              </p>
+            </div>
+          </dd>
+        </dl>
+      </div>
+
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-danger" disabled="disabled">{{'Change role' | translate}}</button>
+      </div>
+    </div>
+  </div>
+</div>

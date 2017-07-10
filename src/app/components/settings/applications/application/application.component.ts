@@ -59,7 +59,7 @@ export class SettingsApplicationsApplicationComponent implements OnInit, OnDestr
   }
 
   public ngOnInit() {
-    this.subscriptions.push(this.store.select(getLoopbackAuthAccount()).subscribe((currentUser: User) => {
+    this.subscriptions.push(this.store.select(getLoopbackAuthAccount).subscribe((currentUser: User) => {
       if (!currentUser) { return; }
 
       this.currentUser = (<any> Object).assign({}, currentUser);

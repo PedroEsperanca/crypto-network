@@ -4,9 +4,8 @@ import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 import { ConfigService } from '@ngx-config/core';
 
-import { UserApi, LoopBackConfig } from 'shared/api';
-import { IAppState } from 'shared/ngrx';
-import { UserActions } from 'shared/api/actions';
+import { LoopBackConfig } from 'shared/api';
+import { Orm } from 'shared/api/orm';
 
 @Component({
   selector: 'app-user-signup',
@@ -18,9 +17,8 @@ export class SignupComponent {
   public registerForm: FormGroup;
 
   constructor(
-    private store: Store<IAppState>,
+    private orm: Orm,
     private configService: ConfigService,
-    private user: UserApi,
     private fb: FormBuilder
   ) {
     this.config = this.configService.getSettings();
@@ -33,11 +31,11 @@ export class SignupComponent {
   }
 
   public signup() {
-    this.store.dispatch(new UserActions.signup({
+    this.orm.User.signup({
       name: this.registerForm.controls['name'].value,
       email: this.registerForm.controls['email'].value,
       password: this.registerForm.controls['password'].value
-    }));
+    });
   }
 
   public goTo(provider: string) {

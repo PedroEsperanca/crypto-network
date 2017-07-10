@@ -7,7 +7,6 @@ import { SettingsProfileComponent } from './profile/profile.component';
 import { SettingsAccountComponent } from './account/account.component';
 import { SettingsEmailsComponent } from './emails/emails.component';
 import { SettingsNotificationsComponent } from './notifications/notifications.component';
-import { SettingsBillingComponent } from './billing/billing.component';
 import { SettingsOrganizationsComponent } from './organizations/organizations.component';
 
 import { SettingsApplicationsComponent } from './applications/applications.component';
@@ -40,7 +39,7 @@ const routes: Routes = [
       },
       {
         path: 'billing',
-        component: SettingsBillingComponent,
+        loadChildren: './billing/billing.module#BillingModule',
       },
       {
         path: 'organizations',

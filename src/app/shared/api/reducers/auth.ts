@@ -7,13 +7,12 @@ import { UserActionTypes } from '../actions/User';
 
 const initialState: SDKToken = {
   id: null,
-  user: null,
-  userId: null,
-  issuedAt: null,
-  created: null,
   ttl: null,
-  rememberMe: null,
-  scopes: null
+  scopes: null,
+  created: null,
+  userId: null,
+  user: null,
+  rememberMe: null
 };
 
 /**
@@ -53,7 +52,7 @@ export function LoopbackAuthReducer(state = initialState, action: Action): SDKTo
       const userProperties: any = action.payload;
       let updateState = Object.assign({}, state);
 
-      updateState.user = Object.assign(updateState.user, userProperties);
+      updateState.user = Object.assign({}, updateState.user, userProperties);
 
       return updateState;
     }

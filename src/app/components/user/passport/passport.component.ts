@@ -19,12 +19,11 @@ export class PassportComponent {
     private route: ActivatedRoute,
     private router: Router
   ) {
-    this.route.params.subscribe((token: any) => {
+    this.route.params.take(1).subscribe((token: any) => {
       if (token.id && token.userId && token.ttl && token.created) {
         this.store.dispatch(new LoopbackAuthActions.setToken({
           id: token.id,
           ttl: parseInt(token.ttl, 10),
-          issuedAt: new Date().setTime(token.created),
           created: new Date().setTime(token.created),
           userId: token.userId,
           user: {},
@@ -38,12 +37,11 @@ export class PassportComponent {
             'identities',
             'organizations'
           ]
-        }).subscribe(
+        }).take(1).subscribe(
           (result: User) => {
             this.store.dispatch(new LoopbackAuthActions.setToken({
               id: token.id,
               ttl: parseInt(token.ttl, 10),
-              issuedAt: new Date().setTime(token.created),
               created: new Date().setTime(token.created),
               userId: token.userId,
               user: result,

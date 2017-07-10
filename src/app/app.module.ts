@@ -30,7 +30,6 @@ import { ADVANCE_MODULES } from './app.advance';
 // App
 import { MY_APP_PROVIDERS, MY_APP_IMPORTS } from 'shared/app';
 import { NotFoundComponent } from 'components/not-found/not-found.component';
-import { AlertModule } from 'shared/app/modules/alert';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -59,8 +58,7 @@ interface StoreType {
     FormsModule,
     HttpModule,
     ...ADVANCE_MODULES,
-    ...MY_APP_IMPORTS,
-    AlertModule
+    ...MY_APP_IMPORTS
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,

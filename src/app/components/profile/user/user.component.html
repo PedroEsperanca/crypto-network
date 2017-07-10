@@ -1,33 +1,33 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-3">
-      <a *ngIf="isMe" [routerLink]="['/settings/profile']" class="vcard-avatar d-block">
-        <img alt="" class="avatar" [src]="profile.photo?.url || profile.photo || config.logo">
+      <a *ngIf="(profile$ | async)?.id === currentUserId" [routerLink]="['/settings/profile']" class="vcard-avatar d-block">
+        <img alt="" class="avatar" [src]="(profile$ | async)?.photo?.url || (profile$ | async)?.photo || config.logo">
       </a>
 
-      <a *ngIf="!isMe" class="vcard-avatar d-block">
-        <img *ngIf="profile.photo" alt="" class="avatar" [src]="profile.photo">
-        <img *ngIf="!profile.photo" alt="" class="avatar" [src]="config.logo">
+      <a *ngIf="!(profile$ | async)?.id === currentUserId" class="vcard-avatar d-block">
+        <img *ngIf="(profile$ | async)?.photo" alt="" class="avatar" [src]="(profile$ | async)?.photo">
+        <img *ngIf="!(profile$ | async)?.photo" alt="" class="avatar" [src]="config.logo">
       </a>
 
       <div class="vcard-names-container">
         <h1 class="vcard-names">
-          <span class="vcard-fullname d-block" itemprop="name">{{profile.name}}</span>
-          <span *ngIf="config.settings?.login.username" class="vcard-username d-block" itemprop="additionalName">{{profile.username}}</span>
+          <span class="vcard-fullname d-block" itemprop="name">{{(profile$ | async)?.name}}</span>
+          <span *ngIf="config.settings?.login.username" class="vcard-username d-block" itemprop="additionalName">{{(profile$ | async)?.username}}</span>
         </h1>
       </div>
 
-      <div *ngIf="config.settings?.organizations && profile.organizations.length" class="border-top clearfix">
+      <div *ngIf="config.settings?.organizations && (profile$ | async)?.organizations?.length" class="border-top clearfix">
         <h4>{{'Organizations' | translate}}</h4>
 
-        <a *ngFor="let org of profile.organizations" routerLink="/{{org.id}}" class="avatar-group-item">
+        <a *ngFor="let org of (profile$ | async)?.organizations" routerLink="/organizations/{{org.id}}" class="avatar-group-item">
           <img alt="@{{org.displayName}}" [src]="org.logo?.url || org.logo || config.logo" height="35" width="35">
         </a>
       </div>
 
-      <br *ngIf="config.settings?.organizations && profile.organizations.length">
+      <br *ngIf="config.settings?.organizations && (profile$ | async)?.organizations?.length">
 
-      <a *ngIf="isMe" [routerLink]="['/settings/profile']">{{'Edit profile' | translate}}</a>
+      <a *ngIf="(profile$ | async)?.id === currentUserId" [routerLink]="['/settings/profile']">{{'Edit profile' | translate}}</a>
     </div>
 
     <div class="col-sm-9">
@@ -35,3 +35,5 @@
     </div>
   </div>
 </div>
+
+<pre>{{profile$ | async | json}}</pre>

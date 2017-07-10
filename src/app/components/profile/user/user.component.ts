@@ -1,9 +1,11 @@
+import { Observable } from 'rxjs/Observable';
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { ConfigService } from '@ngx-config/core';
 
-import { User, UserApi, LoopBackAuth } from 'shared/api';
+import { User, LoopBackAuth } from 'shared/api';
+import { Orm } from 'shared/api/orm';
 
 @Component({
   selector: 'app-profile-user',
@@ -13,26 +15,34 @@ import { User, UserApi, LoopBackAuth } from 'shared/api';
 })
 export class ProfileUserComponent implements OnInit {
   public config: any;
-  public profile: User;
-  public isMe = false;
+  public profile$: Observable<User>;
+  public currentUserId: string;
 
   constructor(
     public auth: LoopBackAuth,
     private route: ActivatedRoute,
-    private user: UserApi,
+    private orm: Orm,
     private configService: ConfigService
   ) {
     this.config = this.configService.getSettings();
   }
 
   public ngOnInit() {
-    this.route.data
-      .subscribe((data: { profile: User }) => {
-        this.profile = data.profile;
+    this.route.params
+      .take(1)
+      .subscribe((params) => {
+        this.profile$ = this.orm.User.findById(params['id'], {
+          include: {
+            relation: 'organizations',
+            scope: {
+              fields: ['name', 'photo']
+            }
+          }
+        });
 
-        if (this.profile.id === this.auth.getCurrentUserId()) {
-          this.isMe = true;
-        }
+        this.profile$.subscribe((data) => console.log(data))
       });
+
+    this.currentUserId = this.auth.getCurrentUserId();
   }
 }

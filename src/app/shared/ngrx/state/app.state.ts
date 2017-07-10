@@ -44,7 +44,6 @@ import { LoopbackReducer } from 'shared/api/index';
 import * as fromMultilingual from '../../i18n/index';
 
 import * as fromApplication from '../reducers/application';
-import * as fromAlert from '../reducers/alert';
 
 import { AlertEffects } from 'shared/ngrx/effects/alert';
 import { ApplicationEffects } from 'shared/ngrx/effects/application';
@@ -58,7 +57,6 @@ export interface IAppState {
   i18n: fromMultilingual.IMultilingualState;
 
   application: fromApplication.ApplicationState;
-  alert: fromAlert.IAlertState;
 };
 
 export const Effects = [
@@ -79,8 +77,7 @@ const reducers = Object.assign({
 
   i18n: fromMultilingual.reducer,
 
-  application: fromApplication.reducer,
-  alert: fromAlert.reducer
+  application: fromApplication.reducer
 }, LoopbackReducer);
 
 const developmentReducer: ActionReducer<IAppState> =
@@ -120,9 +117,4 @@ export const getLang: any = compose(fromMultilingual.getLang, getMultilingualSta
 export function getApplicationState() {
   return (state$: Observable<IAppState>) => state$
     .select((s) => s.application);
-}
-
-export function getAlertState() {
-  return (state$: Observable<IAppState>) => state$
-    .select((s) => s.alert);
 }

@@ -1,17 +1,15 @@
-import { Subscription } from 'rxjs/Subscription';
-import { Store } from '@ngrx/store';
-import { Component, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+import { AsyncSubject } from 'rxjs/AsyncSubject';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { ConfigService } from '@ngx-config/core';
 
+import { Orm } from 'shared/api/orm';
+
 import {
   Organization,
-  UserApi,
-  LoopbackAuthActions,
-  UserActions,
-  getLoopbackAuthAccount
+  OrganizationApi
 } from 'shared/api';
-import { IAppState, AlertActions } from 'shared/ngrx';
 
 @Component({
   selector: 'app-organizations-settings-profile',
@@ -22,23 +20,30 @@ import { IAppState, AlertActions } from 'shared/ngrx';
 export class SettingsProfileComponent implements OnDestroy {
   public config: any;
   public formModel: Organization;
-  public getCurrentUserId: string;
 
-  private subscriptions: Subscription[] = [];
+  private organizationId: string;
+
+  private destroyStream$: AsyncSubject<any> = new AsyncSubject();
 
   constructor(
-    private store: Store<IAppState>,
-    private user: UserApi,
-    private configService: ConfigService
+    private ref: ChangeDetectorRef,
+    private configService: ConfigService,
+    private route: ActivatedRoute,
+    private orm: Orm,
+    private organization: OrganizationApi
   ) {
     this.config = this.configService.getSettings();
 
-    this.subscriptions.push(this.store.select(getLoopbackAuthAccount()).subscribe((currentUser: any) => {
-      if (!currentUser) { return; }
+    route.parent.parent.parent.params.take(1).subscribe((params) => {
+      this.organizationId = params.id;
 
-      this.formModel = (<any> Object).assign({}, currentUser);
-      this.getCurrentUserId = currentUser.id;
-    }));
+      this.orm.Organization.findById(params.id)
+        .takeUntil(this.destroyStream$)
+        .subscribe((org: Organization) => {
+          this.formModel = Object.assign({}, org);
+          this.ref.detectChanges();
+        });
+    });
 
     this.fileNameRewrite = this.fileNameRewrite.bind(this);
     this.getUploadUrl = this.getUploadUrl.bind(this);
@@ -46,56 +51,34 @@ export class SettingsProfileComponent implements OnDestroy {
   }
 
   public ngOnDestroy() {
-    this.subscriptions.forEach((subscription) => {
-      subscription.unsubscribe();
-    });
+    this.destroyStream$.next(1);
+    this.destroyStream$.complete();
   }
 
   public submitUpdate() {
-    /*this.store.dispatch(new LoopbackAuthActions.updateUserProperties({
-      name: this.formModel.name,
-      photo: this.formModel.photo,
-      username: this.formModel.username || null
-    }, {
+    this.orm.Organization.updateAttributes(this.organizationId, this.formModel, {
       alert: {
         success: {
           message: 'Profile updated successfully.',
           type: 'info'
         }
       }
-    }));*/
+    });
   }
 
   public fileNameRewrite(fileName: string): string {
-    return 'user/' + this.getCurrentUserId + '/avatar';
+    return 'organization/' + this.organizationId + '/avatar';
   }
 
   public getUploadUrl(fileName: string, fileType: string, options: any = {}) {
     options.fileType = fileType;
-    return this.user.s3PUTSignedUrl(this.getCurrentUserId, fileName, options);
+    return this.organization.s3PUTSignedUrl(this.organizationId, fileName, options);
   }
 
   public onUploadComplete(item: any) {
-    this.user.updateS3Photo(this.getCurrentUserId, {
+    this.orm.Organization.updateS3Photo(this.organizationId, {
       url: item.url.split('?')[0],
       key: item.file.name
-    }).subscribe(
-      (response: any) => {
-        if (response.error) {
-          this.store.dispatch(new AlertActions.setAlert({
-            message: response.error_description,
-            type: 'error'
-          }));
-        } else {
-          this.store.dispatch(new LoopbackAuthActions.updateUserProperties({
-            photo: response
-          }));
-        }
-      },
-      (error) => this.store.dispatch(new AlertActions.setAlert({
-        message: error.message,
-        type: 'error'
-      }))
-    );
+    });
   }
 }

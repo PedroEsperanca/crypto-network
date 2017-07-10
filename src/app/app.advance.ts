@@ -11,6 +11,7 @@ import { RouterStoreModule } from '@ngrx/router-store';
 import { ConfigModule, ConfigLoader, ConfigStaticLoader } from '@ngx-config/core';
 import { TranslateLoader } from '@ngx-translate/core';
 import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
+import { SimpleNotificationsModule, PushNotificationsModule } from 'angular2-notifications';
 
 // feature modules
 import { CoreModule } from 'shared/core/core.module';
@@ -19,6 +20,7 @@ import { AnalyticsModule } from 'shared/analytics/analytics.module';
 import { MultilingualModule, translateLoaderFactory } from 'shared/i18n/multilingual.module';
 import { MultilingualEffects } from 'shared/i18n/index';
 import { LoopbackEffects } from 'shared/api/index';
+import { OrmModule } from 'shared/api/orm';
 
 
 import { ROUTES } from './app.routes';
@@ -74,5 +76,8 @@ export const ADVANCE_MODULES = [
   RouterStoreModule.connectRouter(),
   EffectsModule.run(MultilingualEffects),
   ...Effects,
-  ...LoopbackEffects
+  ...LoopbackEffects,
+  OrmModule.forRoot(),
+  SimpleNotificationsModule.forRoot(),
+  PushNotificationsModule
 ];

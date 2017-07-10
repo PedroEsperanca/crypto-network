@@ -9,7 +9,6 @@ import { ProfileComponent } from './profile.component';
 import { routing } from './profile.routing';
 
 import { ProfileUserComponent } from './user/user.component';
-import { ProfileOrganizationComponent } from './organization/organization.component';
 
 @NgModule({
   imports: [
@@ -21,8 +20,7 @@ import { ProfileOrganizationComponent } from './organization/organization.compon
   ],
   declarations: [
     ProfileComponent,
-    ProfileUserComponent,
-    ProfileOrganizationComponent
+    ProfileUserComponent
   ]
 })
 export class ProfileModule {}

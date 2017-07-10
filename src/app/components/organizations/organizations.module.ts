@@ -4,16 +4,16 @@ import { FormsModule } from '@angular/forms';
 
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
-// import { TagInputModule } from 'ng2-tag-input';
+// import { TagInputModule } from 'ngx-chips';
 
 import { MultilingualModule } from 'shared/i18n/multilingual.module';
 import { FileUploaderModule } from 'shared/app/modules/file-uploader';
-import { AlertModule } from 'shared/app/modules/alert';
 import { HeaderModule } from 'shared/app/modules/header';
 import { FooterModule } from 'shared/app/modules/footer';
 
 import { routing } from './organizations.routing';
 import { OrganizationsComponent } from './organizations.component';
+import { OrganizationsHomeComponent } from './home/home.component';
 
 import { OrganizationsNewComponent } from './new/new.component';
 import { OrganizationsNotFoundComponent } from './not-found/not-found.component';
@@ -22,7 +22,6 @@ import { OrganizationsNotFoundComponent } from './not-found/not-found.component'
   imports: [
     CommonModule,
     FormsModule,
-    AlertModule,
     MultilingualModule,
     FileUploaderModule,
     HeaderModule,
@@ -34,6 +33,7 @@ import { OrganizationsNotFoundComponent } from './not-found/not-found.component'
   ],
   declarations: [
     OrganizationsComponent,
+    OrganizationsHomeComponent,
     OrganizationsNewComponent,
     OrganizationsNotFoundComponent
   ]

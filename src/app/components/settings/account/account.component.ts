@@ -41,7 +41,7 @@ export class SettingsAccountComponent implements OnDestroy {
   ) {
     this.config = this.configService.getSettings();
 
-    this.subscriptions.push(this.store.select(getLoopbackAuthToken()).subscribe((token: SDKToken) => {
+    this.subscriptions.push(this.store.select(getLoopbackAuthToken).subscribe((token: SDKToken) => {
       if (!token) { return; }
 
       this.currentToken = (<any> Object).assign({}, token);

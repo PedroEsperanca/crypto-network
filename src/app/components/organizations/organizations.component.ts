@@ -1,18 +1,13 @@
 import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
-import { Component, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { ConfigService } from '@ngx-config/core';
 
+import { Orm } from 'shared/api/orm';
+
 import {
-  SDKToken,
-  User,
   Organization,
 } from 'shared/api';
-import {
-  IAppState,
-} from 'shared/ngrx';
 
 @Component({
   selector: 'app-organizations',
@@ -20,33 +15,22 @@ import {
   templateUrl: './organizations.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class OrganizationsComponent implements OnDestroy {
+export class OrganizationsComponent {
   public config: any;
 
   public organization$: Observable<Organization>;
-  public isNew = true;
-
-  private subscriptions: Subscription[] = [];
 
   constructor(
     private configService: ConfigService,
-    private store: Store<IAppState>,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private orm: Orm
   ) {
     this.config = this.configService.getSettings();
 
-    this.subscriptions.push(this.store.select('router').subscribe((router: any) => {
-      if (!router) { return; }
-      console.log(router);
-      this.isNew = /\/(new|not-found)$/.test(router.path);
-    }));
-
-    this.organization$ = this.route.data;
-  }
-
-  public ngOnDestroy() {
-    this.subscriptions.forEach((subscription) => {
-      subscription.unsubscribe();
+    route.params.take(1).subscribe((params) => {
+      this.organization$ = this.orm.Organization.findById(params.id, <any>{
+        counts: ['users']
+      });
     });
   }
 }

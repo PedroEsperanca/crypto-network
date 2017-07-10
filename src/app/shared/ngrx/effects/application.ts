@@ -55,15 +55,15 @@ export class ApplicationEffects {
       ])
     );
 
-  @Effect()
+  @Effect({dispatch: false})
   public logoutSuccess$ = this.actions$
     .ofType(UserActionTypes.LOGOUT_SUCCESS)
-    .map(() => go(['/']));
+    .do(() => (<any>window).location.href = '/');
 
-  @Effect()
+  @Effect({dispatch: false})
   public logoutFail$ = this.actions$
     .ofType(UserActionTypes.LOGOUT_FAIL)
-    .map(() => go(['/']));
+    .do(() => (<any>window).location.href = '/');
 
   @Effect({dispatch: false})
   public updateUserPropertiesSuccess = this.actions$
