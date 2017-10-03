@@ -1,7 +1,5 @@
 <app-header></app-header>
 
-<app-alert></app-alert>
-
 <div class="container">
   <div class="Subhead">
     <h2 class="Subhead-heading">{{'Register a new Organization' | translate}}</h2>
@@ -36,9 +34,9 @@
       </dl>
 
       <dl class="form-group">
-        <dt><label for="displayName">{{'Organization display name' | translate}}</label></dt>
+        <dt><label for="billingEmail">{{'Billing email (Private)' | translate}}</label></dt>
         <dd>
-          <input class="form-control" type="text" id="displayName" name="displayName" [(ngModel)]="formModel.displayName" required>
+          <input class="form-control" type="text" id="billingEmail" name="billingEmail" [(ngModel)]="formModel.billingEmail">
         </dd>
       </dl>
 

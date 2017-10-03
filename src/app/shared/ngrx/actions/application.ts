@@ -1,45 +1,37 @@
-import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
+import { type } from '../util';
 
-/**
- * Instead of passing around action string constants and manually recreating
- * action objects at the point of dispatch, we create services encapsulating
- * each appropriate action group. Action types are included as static
- * members and kept next to their action creator. This promotes a
- * uniform interface and single import for appropriate actions
- * within your application components.
- */
-@Injectable()
-export class ApplicationActions {
-  public static SET_IDLE = '[App] Set App as Idle';
-  public static SET_ACTIVE = '[App] Set App as Active';
+export const ApplicationActionTypes = {
+  SET_IDLE: type('[App] Set App as Idle'),
+  SET_ACTIVE: type('[App] Set App as Active'),
+  SELECT_ORGANIZATION: type('[App] Select Organization'),
+  SELECT_APP: type('[App] Select App'),
+};
 
-  public static SELECT_ORGANIZATION = '[App] Select Organization';
-  public static SELECT_APP = '[App] Select App';
-
-  public setIddle(): Action {
-    return {
-      type: ApplicationActions.SET_IDLE
-    };
+export module ApplicationActions {
+  export class SetIddle implements Action {
+    public readonly type = ApplicationActionTypes.SET_IDLE;
   }
 
-  public setActive(): Action {
-    return {
-      type: ApplicationActions.SET_ACTIVE
-    };
+  export class SetActive implements Action {
+    public readonly type = ApplicationActionTypes.SET_ACTIVE;
   }
 
-  public selectOrganization(id: string): Action {
-    return {
-      type: ApplicationActions.SELECT_ORGANIZATION,
-      payload: id
-    };
+  export class SelectOrganization implements Action {
+    public readonly type = ApplicationActionTypes.SELECT_ORGANIZATION;
+
+    constructor(public payload: string) { }
   }
 
-  public selectApp(id: string): Action {
-    return {
-      type: ApplicationActions.SELECT_APP,
-      payload: id
-    };
+  export class SelectApp implements Action {
+    public readonly type = ApplicationActionTypes.SELECT_APP;
+
+    constructor(public payload: string) { }
   }
 }
+
+export type IApplicationActions =
+  | ApplicationActions.SetIddle
+  | ApplicationActions.SetActive
+  | ApplicationActions.SelectOrganization
+  | ApplicationActions.SelectApp;

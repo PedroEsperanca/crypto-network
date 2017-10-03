@@ -1,5 +1,6 @@
 import { AsyncSubject } from 'rxjs/AsyncSubject';
-import { Component, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { Component, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { ConfigService } from '@ngx-config/core';
@@ -20,13 +21,13 @@ import {
 export class SettingsProfileComponent implements OnDestroy {
   public config: any;
   public formModel: Organization;
+  public formModel$: ReplaySubject<Organization> = new ReplaySubject(1);
 
   private organizationId: string;
 
   private destroyStream$: AsyncSubject<any> = new AsyncSubject();
 
   constructor(
-    private ref: ChangeDetectorRef,
     private configService: ConfigService,
     private route: ActivatedRoute,
     private orm: Orm,
@@ -40,8 +41,10 @@ export class SettingsProfileComponent implements OnDestroy {
       this.orm.Organization.findById(params.id)
         .takeUntil(this.destroyStream$)
         .subscribe((org: Organization) => {
-          this.formModel = Object.assign({}, org);
-          this.ref.detectChanges();
+          if (org) {
+            this.formModel = org;
+            this.formModel$.next(this.formModel);
+          }
         });
     });
 

@@ -9,6 +9,7 @@ import { VerifyComponent } from './verify/verify.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { RecoverAccountComponent } from './recover-account/recover-account.component';
 import { PassportComponent } from './passport/passport.component';
+import { InvitedComponent } from './invited/invited.component';
 
 const routes: Routes = [
   {
@@ -51,6 +52,10 @@ const routes: Routes = [
       {
         path: 'passport/:id/:userId/:ttl/:created',
         component: PassportComponent
+      },
+      {
+        path: 'invited/:token',
+        component: InvitedComponent
       }
     ]
   }

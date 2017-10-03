@@ -100,7 +100,7 @@ export class SettingsApplicationsApplicationComponent implements OnInit, OnDestr
     ).subscribe(
       (response: any) => {
         if (response.error) {
-          this.store.dispatch(new AlertActions.setAlert({
+          this.store.dispatch(new AlertActions.SetAlert({
             message: response.error_description,
             type: 'error'
           }));
@@ -116,7 +116,7 @@ export class SettingsApplicationsApplicationComponent implements OnInit, OnDestr
           }));
         }
       },
-      (error) => this.store.dispatch(new AlertActions.setAlert({
+      (error) => this.store.dispatch(new AlertActions.SetAlert({
         message: error.message,
         type: 'error'
       }))
@@ -150,7 +150,7 @@ export class SettingsApplicationsApplicationComponent implements OnInit, OnDestr
       .subscribe(
         (response: any) => {
           if (response.error) {
-            this.store.dispatch(new AlertActions.setAlert({
+            this.store.dispatch(new AlertActions.SetAlert({
               message: response.error_description,
               type: 'error'
             }));
@@ -164,7 +164,7 @@ export class SettingsApplicationsApplicationComponent implements OnInit, OnDestr
             this.router.navigate(['/settings/applications']);
           }
         },
-        (error) => this.store.dispatch(new AlertActions.setAlert({
+        (error) => this.store.dispatch(new AlertActions.SetAlert({
           message: error.message,
           type: 'error'
         }))
@@ -187,7 +187,7 @@ export class SettingsApplicationsApplicationComponent implements OnInit, OnDestr
     }).subscribe(
       (response: any) => {
         if (response.error) {
-          this.store.dispatch(new AlertActions.setAlert({
+          this.store.dispatch(new AlertActions.SetAlert({
             message: response.error_description,
             type: 'error'
           }));
@@ -199,7 +199,7 @@ export class SettingsApplicationsApplicationComponent implements OnInit, OnDestr
           }));*/
         }
       },
-      (error) => this.store.dispatch(new AlertActions.setAlert({
+      (error) => this.store.dispatch(new AlertActions.SetAlert({
         message: error.message,
         type: 'error'
       }))

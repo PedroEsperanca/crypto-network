@@ -1,4 +1,5 @@
 import { Subscription } from 'rxjs/Subscription';
+import { AsyncSubject } from 'rxjs/AsyncSubject';
 import { Store } from '@ngrx/store';
 import { Component, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 
@@ -24,7 +25,7 @@ export class SettingsProfileComponent implements OnDestroy {
   public formModel: User;
   public getCurrentUserId: string;
 
-  private subscriptions: Subscription[] = [];
+  private destroyStream$: AsyncSubject<any> = new AsyncSubject();
 
   constructor(
     private store: Store<IAppState>,
@@ -33,12 +34,14 @@ export class SettingsProfileComponent implements OnDestroy {
   ) {
     this.config = this.configService.getSettings();
 
-    this.subscriptions.push(this.store.select(getLoopbackAuthAccount).subscribe((currentUser: User) => {
-      if (!currentUser) { return; }
+    this.store.select(getLoopbackAuthAccount)
+      .takeUntil(this.destroyStream$)
+      .subscribe((currentUser: User) => {
+        if (!currentUser) { return; }
 
-      this.formModel = (<any> Object).assign({}, currentUser);
-      this.getCurrentUserId = currentUser.id;
-    }));
+        this.formModel = (<any> Object).assign({}, currentUser);
+        this.getCurrentUserId = currentUser.id;
+      });
 
     this.fileNameRewrite = this.fileNameRewrite.bind(this);
     this.getUploadUrl = this.getUploadUrl.bind(this);
@@ -46,9 +49,8 @@ export class SettingsProfileComponent implements OnDestroy {
   }
 
   public ngOnDestroy() {
-    this.subscriptions.forEach((subscription) => {
-      subscription.unsubscribe();
-    });
+    this.destroyStream$.next(1);
+    this.destroyStream$.complete();
   }
 
   public submitUpdate() {
@@ -82,7 +84,7 @@ export class SettingsProfileComponent implements OnDestroy {
     }).subscribe(
       (response: any) => {
         if (response.error) {
-          this.store.dispatch(new AlertActions.setAlert({
+          this.store.dispatch(new AlertActions.SetAlert({
             message: response.error_description,
             type: 'error'
           }));
@@ -92,7 +94,7 @@ export class SettingsProfileComponent implements OnDestroy {
           }));
         }
       },
-      (error) => this.store.dispatch(new AlertActions.setAlert({
+      (error) => this.store.dispatch(new AlertActions.SetAlert({
         message: error.message,
         type: 'error'
       }))

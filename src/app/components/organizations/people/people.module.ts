@@ -6,6 +6,8 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { CloudtasksModule } from '@cloudtasks/ngx-image';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { SelectModule } from 'ng2-select';
 
 import { MultilingualModule } from 'shared/i18n/multilingual.module';
 
@@ -24,7 +26,9 @@ import { PeopleUserComponent } from './user/user.component';
     ModalModule,
     BsDropdownModule,
     CloudtasksModule,
-    MultilingualModule
+    MultilingualModule,
+    NgxDatatableModule,
+    SelectModule
   ],
   declarations: [
     PeopleComponent,

@@ -10,7 +10,7 @@ export interface AppInterface {
   "name"?: string;
   "logo"?: any;
   "userId"?: any;
-  "organizationId"?: string;
+  "organizationId"?: any;
   "createdAt"?: Date;
   "updatedAt"?: Date;
   "options"?: any;
@@ -25,7 +25,7 @@ export class App implements AppInterface {
   "name": string;
   "logo": any;
   "userId": any;
-  "organizationId": string;
+  "organizationId": any;
   "createdAt": Date;
   "updatedAt": Date;
   "options": any;
@@ -63,6 +63,7 @@ export class App implements AppInterface {
     return {
       name: 'App',
       plural: 'Apps',
+      path: 'Apps',
       idName: 'id',
       properties: {
         "id": {
@@ -83,7 +84,7 @@ export class App implements AppInterface {
         },
         "organizationId": {
           name: 'organizationId',
-          type: 'string'
+          type: 'any'
         },
         "createdAt": {
           name: 'createdAt',
@@ -104,7 +105,7 @@ export class App implements AppInterface {
           type: 'User',
           model: 'User',
           relationType: 'belongsTo',
-          keyFrom: 'userId',
+                  keyFrom: 'userId',
           keyTo: 'id'
         },
         organization: {
@@ -112,7 +113,7 @@ export class App implements AppInterface {
           type: 'Organization',
           model: 'Organization',
           relationType: 'belongsTo',
-          keyFrom: 'organizationId',
+                  keyFrom: 'organizationId',
           keyTo: 'id'
         },
         s3Photo: {
@@ -120,7 +121,7 @@ export class App implements AppInterface {
           type: 'any[]',
           model: '',
           relationType: 'embedsOne',
-          keyFrom: 'logo',
+                  keyFrom: 'logo',
           keyTo: 'id'
         },
         option: {
@@ -128,7 +129,7 @@ export class App implements AppInterface {
           type: 'any[]',
           model: '',
           relationType: 'embedsOne',
-          keyFrom: 'options',
+                  keyFrom: 'options',
           keyTo: 'id'
         },
       }

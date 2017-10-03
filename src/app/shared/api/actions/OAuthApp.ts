@@ -48,7 +48,7 @@ Object.assign(BaseLoopbackActionTypesFactory('OAuthApp'), {
 
 });
 export const OAuthAppActions =
-Object.assign(BaseLoopbackActionsFactory<OAuthApp>('OAuthApp', OAuthAppActionTypes), {
+Object.assign(BaseLoopbackActionsFactory<OAuthApp>(OAuthAppActionTypes), {
 
   /**
    * keysReset Action.
@@ -110,7 +110,7 @@ Object.assign(BaseLoopbackActionsFactory<OAuthApp>('OAuthApp', OAuthAppActionTyp
     public readonly type = OAuthAppActionTypes.GET_USER;
       public payload: {id: any, refresh: any};
 
-    constructor(id: any, refresh: any = {}, public meta?: any) {
+    constructor(id: any, refresh: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, refresh};
     }
   },
@@ -156,7 +156,7 @@ Object.assign(BaseLoopbackActionsFactory<OAuthApp>('OAuthApp', OAuthAppActionTyp
     public readonly type = OAuthAppActionTypes.GET_ORGANIZATION;
       public payload: {id: any, refresh: any};
 
-    constructor(id: any, refresh: any = {}, public meta?: any) {
+    constructor(id: any, refresh: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, refresh};
     }
   },
@@ -202,7 +202,7 @@ Object.assign(BaseLoopbackActionsFactory<OAuthApp>('OAuthApp', OAuthAppActionTyp
     public readonly type = OAuthAppActionTypes.GET_S3LOGO;
       public payload: {id: any, refresh: any};
 
-    constructor(id: any, refresh: any = {}, public meta?: any) {
+    constructor(id: any, refresh: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, refresh};
     }
   },
@@ -250,7 +250,7 @@ Object.assign(BaseLoopbackActionsFactory<OAuthApp>('OAuthApp', OAuthAppActionTyp
     public readonly type = OAuthAppActionTypes.CREATE_S3LOGO;
       public payload: {id: any, data: any};
 
-    constructor(id: any, data: any = {}, public meta?: any) {
+    constructor(id: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },
@@ -298,7 +298,7 @@ Object.assign(BaseLoopbackActionsFactory<OAuthApp>('OAuthApp', OAuthAppActionTyp
     public readonly type = OAuthAppActionTypes.UPDATE_S3LOGO;
       public payload: {id: any, data: any};
 
-    constructor(id: any, data: any = {}, public meta?: any) {
+    constructor(id: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },
@@ -387,7 +387,7 @@ Object.assign(BaseLoopbackActionsFactory<OAuthApp>('OAuthApp', OAuthAppActionTyp
     public readonly type = OAuthAppActionTypes.S3_P_U_T_SIGNED_URL;
       public payload: {id: any, key: any, options: any};
 
-    constructor(id: any, key: any = {}, options: any = {}, public meta?: any) {
+    constructor(id: any, key: any = {}, options: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, key, options};
     }
   },
@@ -433,7 +433,7 @@ Object.assign(BaseLoopbackActionsFactory<OAuthApp>('OAuthApp', OAuthAppActionTyp
     public readonly type = OAuthAppActionTypes.S3_G_E_T_SIGNED_URL;
       public payload: {id: any, key: any};
 
-    constructor(id: any, key: any = {}, public meta?: any) {
+    constructor(id: any, key: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, key};
     }
   },
@@ -481,7 +481,7 @@ Object.assign(BaseLoopbackActionsFactory<OAuthApp>('OAuthApp', OAuthAppActionTyp
     public readonly type = OAuthAppActionTypes.CREATE_MANY_S3LOGO;
       public payload: {id: any, data: any[]};
 
-    constructor(id: any, data: any[] = [], public meta?: any) {
+    constructor(id: any, data: any[] = [], customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },

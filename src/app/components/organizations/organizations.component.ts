@@ -29,7 +29,7 @@ export class OrganizationsComponent {
 
     route.params.take(1).subscribe((params) => {
       this.organization$ = this.orm.Organization.findById(params.id, <any>{
-        counts: ['users']
+        counts: ['users', 'products', 'subscriptions']
       });
     });
   }

@@ -31,6 +31,14 @@ const routes: Routes = [
       {
         path: 'security',
         loadChildren: './security/security.module#IndexSecurityModule'
+      },
+      {
+        path: 'store',
+        loadChildren: './store/store.module#IndexStoreModule'
+      },
+      {
+        path: 'pricing',
+        loadChildren: './pricing/pricing.module#IndexPricingModule'
       }
     ]
   }

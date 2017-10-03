@@ -21,7 +21,7 @@ export class MultilingualEffects {
    */
   @Effect() public change$: Observable<Action> = this.actions$
     .ofType(multilingual.actionTypes.CHANGE)
-    .map((action) => {
+    .map((action: multilingual.ChangeAction) => {
       const lang = action.payload;
       if (includes(map(this.multilangService.availableLanguages, 'code'), lang)) {
         const langChangedAction = new multilingual.LangChangedAction(lang);

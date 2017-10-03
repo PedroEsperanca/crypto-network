@@ -1,9 +1,9 @@
 /* tslint:disable */
-import { Observable } from 'rxjs/Observable';
 import { createSelector } from 'reselect';
 import { Action } from '@ngrx/store';
 import { BaseReducerFactory } from './base';
 import { Organization } from '../models';
+import { LoopbackAction } from '../models/BaseModels';
 import { OrganizationActionTypes } from '../actions';
 
 export interface OrganizationsState {
@@ -25,7 +25,7 @@ const cases = BaseReducerFactory<OrganizationsState, Organization>(OrganizationA
  * @description
  * Provides with a LoopBack compatible Organization reducer.
  */
-export function OrganizationsReducer(state = initialState, action: Action): OrganizationsState {
+export function OrganizationsReducer(state = initialState, action: LoopbackAction): OrganizationsState {
   if (cases[action.type]) {
     return cases[action.type](state, action);
   } else {

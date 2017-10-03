@@ -1,38 +1,56 @@
 /* tslint:disable */
 import {
   User,
+  StripeCustomer,
+  StripeSource,
+  StripeCharge,
+  Contact,
   App,
+  Product,
+  Subscription,
   OAuthApp
 } from '../index';
 
 declare var Object: any;
 export interface OrganizationInterface {
-  "id"?: string;
-  "name"?: string;
-  "displayName"?: string;
+  "name": string;
+  "billingEmail": string;
   "description"?: string;
-  "logo"?: any;
+  "id"?: any;
   "createdAt"?: Date;
   "updatedAt"?: Date;
+  "logo"?: any;
   users?: User[];
   roles?: any[];
   s3Photo?: any[];
+  stripeCustomer?: StripeCustomer;
+  stripeSources?: StripeSource[];
+  stripeCharges?: StripeCharge[];
+  contacts?: Contact[];
   apps?: App[];
+  products?: Product[];
+  subscriptions?: Subscription[];
   oAuthClientApplications?: OAuthApp[];
 }
 
 export class Organization implements OrganizationInterface {
-  "id": string;
   "name": string;
-  "displayName": string;
+  "billingEmail": string;
   "description": string;
-  "logo": any;
+  "id": any;
   "createdAt": Date;
   "updatedAt": Date;
+  "logo": any;
   users: User[];
   roles: any[];
   s3Photo: any[];
+  stripeCustomer: StripeCustomer;
+  stripeSources: StripeSource[];
+  stripeCharges: StripeCharge[];
+  contacts: Contact[];
   apps: App[];
+  products: Product[];
+  subscriptions: Subscription[];
   oAuthClientApplications: OAuthApp[];
   constructor(data?: OrganizationInterface) {
     Object.assign(this, data);
@@ -64,26 +82,23 @@ export class Organization implements OrganizationInterface {
     return {
       name: 'Organization',
       plural: 'Organizations',
+      path: 'Organizations',
       idName: 'id',
       properties: {
-        "id": {
-          name: 'id',
-          type: 'string'
-        },
         "name": {
           name: 'name',
           type: 'string'
         },
-        "displayName": {
-          name: 'displayName',
+        "billingEmail": {
+          name: 'billingEmail',
           type: 'string'
         },
         "description": {
           name: 'description',
           type: 'string'
         },
-        "logo": {
-          name: 'logo',
+        "id": {
+          name: 'id',
           type: 'any'
         },
         "createdAt": {
@@ -94,6 +109,10 @@ export class Organization implements OrganizationInterface {
           name: 'updatedAt',
           type: 'Date'
         },
+        "logo": {
+          name: 'logo',
+          type: 'any'
+        },
       },
       relations: {
         users: {
@@ -101,6 +120,8 @@ export class Organization implements OrganizationInterface {
           type: 'User[]',
           model: 'User',
           relationType: 'hasMany',
+          modelThrough: 'UserRole',
+          keyThrough: 'userId',
           keyFrom: 'id',
           keyTo: 'organizationId'
         },
@@ -109,7 +130,7 @@ export class Organization implements OrganizationInterface {
           type: 'any[]',
           model: '',
           relationType: 'hasMany',
-          keyFrom: 'id',
+                  keyFrom: 'id',
           keyTo: 'organizationId'
         },
         s3Photo: {
@@ -117,15 +138,63 @@ export class Organization implements OrganizationInterface {
           type: 'any[]',
           model: '',
           relationType: 'embedsOne',
-          keyFrom: 'logo',
+                  keyFrom: 'logo',
           keyTo: 'id'
+        },
+        stripeCustomer: {
+          name: 'stripeCustomer',
+          type: 'StripeCustomer',
+          model: 'StripeCustomer',
+          relationType: 'hasOne',
+                  keyFrom: 'id',
+          keyTo: 'organizationId'
+        },
+        stripeSources: {
+          name: 'stripeSources',
+          type: 'StripeSource[]',
+          model: 'StripeSource',
+          relationType: 'hasMany',
+                  keyFrom: 'id',
+          keyTo: 'customer'
+        },
+        stripeCharges: {
+          name: 'stripeCharges',
+          type: 'StripeCharge[]',
+          model: 'StripeCharge',
+          relationType: 'hasMany',
+                  keyFrom: 'id',
+          keyTo: 'customer'
+        },
+        contacts: {
+          name: 'contacts',
+          type: 'Contact[]',
+          model: 'Contact',
+          relationType: 'hasMany',
+                  keyFrom: 'id',
+          keyTo: 'organizationId'
         },
         apps: {
           name: 'apps',
           type: 'App[]',
           model: 'App',
           relationType: 'hasMany',
-          keyFrom: 'id',
+                  keyFrom: 'id',
+          keyTo: 'organizationId'
+        },
+        products: {
+          name: 'products',
+          type: 'Product[]',
+          model: 'Product',
+          relationType: 'hasMany',
+                  keyFrom: 'id',
+          keyTo: 'organizationId'
+        },
+        subscriptions: {
+          name: 'subscriptions',
+          type: 'Subscription[]',
+          model: 'Subscription',
+          relationType: 'hasMany',
+                  keyFrom: 'id',
           keyTo: 'organizationId'
         },
         oAuthClientApplications: {
@@ -133,7 +202,7 @@ export class Organization implements OrganizationInterface {
           type: 'OAuthApp[]',
           model: 'OAuthApp',
           relationType: 'hasMany',
-          keyFrom: 'id',
+                  keyFrom: 'id',
           keyTo: 'organizationId'
         },
       }

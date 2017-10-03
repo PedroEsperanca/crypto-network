@@ -10,7 +10,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { HttpModule, Http } from '@angular/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 // libs
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -24,7 +24,7 @@ import { LangSwitcherComponent } from './components/index';
 import { MultilingualService } from './services/index';
 
 // for AoT compilation
-export function translateLoaderFactory(http: Http) {
+export function translateLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, `${Config.IS_MOBILE_NATIVE() ?
      '/' : ''}assets/i18n/`, '.json');
 };
@@ -38,11 +38,11 @@ export function translateLoaderFactory(http: Http) {
     CommonModule,
     RouterModule,
     FormsModule,
-    HttpModule,
+    HttpClientModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
-        deps: [Http],
+        deps: [HttpClient],
         useFactory: (translateLoaderFactory)
       }
     }),

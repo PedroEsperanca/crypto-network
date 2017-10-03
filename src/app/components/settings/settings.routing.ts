@@ -39,7 +39,11 @@ const routes: Routes = [
       },
       {
         path: 'billing',
-        loadChildren: './billing/billing.module#BillingModule',
+        loadChildren: '../settings/billing/billing.module#BillingModule',
+      },
+      {
+        path: 'referrals',
+        loadChildren: '../settings/referrals/referrals.module#ReferralsModule',
       },
       {
         path: 'organizations',

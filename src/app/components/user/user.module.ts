@@ -18,6 +18,7 @@ import { VerifyComponent } from './verify/verify.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { RecoverAccountComponent } from './recover-account/recover-account.component';
 import { PassportComponent } from './passport/passport.component';
+import { InvitedComponent } from './invited/invited.component';
 
 @NgModule({
   imports: [
@@ -35,7 +36,8 @@ import { PassportComponent } from './passport/passport.component';
     VerifyComponent,
     ResetPasswordComponent,
     RecoverAccountComponent,
-    PassportComponent
+    PassportComponent,
+    InvitedComponent
   ],
   providers: [
     { provide: SDKStorage, useClass: CookieBrowser },

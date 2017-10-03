@@ -32,14 +32,24 @@ const routes: Routes = [
         loadChildren: './people/people.module#PeopleModule',
         canActivate: [ AuthGuard ]
       },
-      {
+      /*{
         path: 'teams',
         loadChildren: './teams/teams.module#TeamsModule',
         canActivate: [ AuthGuard ]
-      },
+      },*/
       {
         path: 'settings',
         loadChildren: './settings/settings.module#SettingsModule',
+        canActivate: [ AuthGuard ]
+      },
+      {
+        path: 'products',
+        loadChildren: './products/products.module#ProductsModule',
+        canActivate: [ AuthGuard ]
+      },
+      {
+        path: 'subscriptions',
+        loadChildren: './subscriptions/subscriptions.module#SubscriptionsModule',
         canActivate: [ AuthGuard ]
       }
     ]

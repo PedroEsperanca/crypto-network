@@ -1,31 +1,28 @@
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/mapTo';
-import 'rxjs/add/operator/filter';
-import 'rxjs/add/operator/mergeMap';
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/switchMapTo';
-import 'rxjs/add/operator/toArray';
-import 'rxjs/add/observable/of';
 import { Injectable, Inject } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { go } from '@ngrx/router-store';
+import { Router } from '@angular/router';
 
 import { IAppState } from '../state/app.state';
 import { AlertActions } from '../actions/alert';
 import { ApplicationActions } from '../actions/application';
-import { LoopbackAction, LoopbackAuthActionTypes, UserActionTypes, UserActions } from 'shared/api';
+import {
+  LoopbackAction,
+  LoopbackAuthActionTypes,
+  LoopbackAuthActions,
+  UserActionTypes,
+  UserActions,
+  UserApi
+} from 'shared/api';
 import { SDKStorage } from 'shared/api/storage/storage.swaps';
 
 @Injectable()
 export class ApplicationEffects {
 
-  @Effect()
+  @Effect({dispatch: false})
   public loginSuccess$ = this.actions$
     .ofType(UserActionTypes.LOGIN_SUCCESS)
-    .map((action) => {
+    .do((action: LoopbackAction) => {
       let emailVerificationToken;
       try {
         emailVerificationToken = this.storage.get(`$LoopBackSDK$emailVerificationToken`);
@@ -33,17 +30,53 @@ export class ApplicationEffects {
         console.error('Cannot access local/session storage:', err);
       }
 
-      if (emailVerificationToken) {
-        return go(['/user/verify-email/' + emailVerificationToken]);
+      if (this.storage.get(`$LoopBackSDK$invitationToken`)) {
+        return this.user.activate(action.payload.user.id, this.storage.get(`$LoopBackSDK$invitationToken`))
+          .take(1)
+          .subscribe(
+            (response: any) => {
+              if (response.error) {
+                this.store.dispatch(new AlertActions.SetAlert({
+                  message: response.error_description,
+                  type: 'error'
+                }));
+              } else {
+                try {
+                  this.storage.remove(`$LoopBackSDK$invitationToken`);
+                } catch (err) {
+                  console.error('Cannot access local/session storage:', err);
+                }
+
+                this.store.dispatch(new LoopbackAuthActions.updateUserProperties({
+                  active: true
+                }));
+              }
+            },
+            (error) => this.store.dispatch(new AlertActions.SetAlert({
+              message: error.message,
+              type: 'error'
+            })),
+            () => {
+              if (emailVerificationToken) {
+                return this.router.navigate(['/user/verify-email/' + emailVerificationToken]);
+              } else {
+                return this.router.navigate(['/' + action.payload.userId]);
+              }
+            }
+          );
       } else {
-        return go(['/' + action.payload.userId]);
+        if (emailVerificationToken) {
+          return this.router.navigate(['/user/verify-email/' + emailVerificationToken]);
+        } else {
+          return this.router.navigate(['/' + action.payload.userId]);
+        }
       }
     });
 
   @Effect()
   public signupSuccess$ = this.actions$
     .ofType(UserActionTypes.SIGNUP_SUCCESS)
-    .map((action) =>
+    .map((action: LoopbackAction) =>
       new UserActions.login({
         email: action.payload.credentials.email,
         password: action.payload.credentials.password
@@ -70,18 +103,20 @@ export class ApplicationEffects {
     .ofType(LoopbackAuthActionTypes.UPDATE_USER_PROPERTIES_SUCCESS)
     .do((action: LoopbackAction) => {
       if (action.meta && action.meta.alert && action.meta.alert.success) {
-        this.store.dispatch(new AlertActions.setAlert(action.meta.alert.success));
+        this.store.dispatch(new AlertActions.SetAlert(action.meta.alert.success));
       }
     });
 
   @Effect()
   public authGuardFail$ = this.actions$
     .ofType(LoopbackAuthActionTypes.GUARD_FAIL)
-    .map(() => go(['/user/login']));
+    .map(() => this.router.navigate(['/user/login']));
 
   constructor(
     private store: Store<IAppState>,
     private actions$: Actions,
-    @Inject(SDKStorage) protected storage: SDKStorage
+    private router: Router,
+    @Inject(SDKStorage) protected storage: SDKStorage,
+    private user: UserApi
   ) {}
 }

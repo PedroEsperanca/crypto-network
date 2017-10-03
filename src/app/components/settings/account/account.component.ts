@@ -63,7 +63,7 @@ export class SettingsAccountComponent implements OnDestroy {
   }
 
   public resetPassword() {
-    this.store.dispatch(new UserActions.updateAttributes(this.currenUser.id, {
+    this.store.dispatch(new UserActions.patchAttributes(this.currenUser.id, {
       password: this.resetPasswordForm.controls['password'].value
     }));
   }
@@ -97,7 +97,7 @@ export class SettingsAccountComponent implements OnDestroy {
           new LoopbackAuthActions.updateUserProperties(this.currenUser.identities)
         );
       },
-      (error) => this.store.dispatch(new AlertActions.setAlert({
+      (error) => this.store.dispatch(new AlertActions.SetAlert({
         message: error.message,
         type: 'error'
       }))

@@ -50,6 +50,46 @@ Object.assign(BaseLoopbackActionTypesFactory('User'), {
   DESTROY_S3PHOTO_SUCCESS: type('[User] destroyS3Photo success'),
   DESTROY_S3PHOTO_FAIL: type('[User] destroyS3Photo fail'),
 
+  GET_STRIPECUSTOMER: type('[User] getStripeCustomer'),
+  GET_STRIPECUSTOMER_SUCCESS: type('[User] getStripeCustomer success'),
+  GET_STRIPECUSTOMER_FAIL: type('[User] getStripeCustomer fail'),
+
+  CREATE_STRIPECUSTOMER: type('[User] createStripeCustomer'),
+  CREATE_STRIPECUSTOMER_SUCCESS: type('[User] createStripeCustomer success'),
+  CREATE_STRIPECUSTOMER_FAIL: type('[User] createStripeCustomer fail'),
+
+  UPDATE_STRIPECUSTOMER: type('[User] updateStripeCustomer'),
+  UPDATE_STRIPECUSTOMER_SUCCESS: type('[User] updateStripeCustomer success'),
+  UPDATE_STRIPECUSTOMER_FAIL: type('[User] updateStripeCustomer fail'),
+
+  DESTROY_STRIPECUSTOMER: type('[User] destroyStripeCustomer'),
+  DESTROY_STRIPECUSTOMER_SUCCESS: type('[User] destroyStripeCustomer success'),
+  DESTROY_STRIPECUSTOMER_FAIL: type('[User] destroyStripeCustomer fail'),
+
+  FIND_BY_ID_STRIPESOURCES: type('[User] findByIdStripeSources'),
+  FIND_BY_ID_STRIPESOURCES_SUCCESS: type('[User] findByIdStripeSources success'),
+  FIND_BY_ID_STRIPESOURCES_FAIL: type('[User] findByIdStripeSources fail'),
+
+  DESTROY_BY_ID_STRIPESOURCES: type('[User] destroyByIdStripeSources'),
+  DESTROY_BY_ID_STRIPESOURCES_SUCCESS: type('[User] destroyByIdStripeSources success'),
+  DESTROY_BY_ID_STRIPESOURCES_FAIL: type('[User] destroyByIdStripeSources fail'),
+
+  UPDATE_BY_ID_STRIPESOURCES: type('[User] updateByIdStripeSources'),
+  UPDATE_BY_ID_STRIPESOURCES_SUCCESS: type('[User] updateByIdStripeSources success'),
+  UPDATE_BY_ID_STRIPESOURCES_FAIL: type('[User] updateByIdStripeSources fail'),
+
+  FIND_BY_ID_STRIPECHARGES: type('[User] findByIdStripeCharges'),
+  FIND_BY_ID_STRIPECHARGES_SUCCESS: type('[User] findByIdStripeCharges success'),
+  FIND_BY_ID_STRIPECHARGES_FAIL: type('[User] findByIdStripeCharges fail'),
+
+  DESTROY_BY_ID_STRIPECHARGES: type('[User] destroyByIdStripeCharges'),
+  DESTROY_BY_ID_STRIPECHARGES_SUCCESS: type('[User] destroyByIdStripeCharges success'),
+  DESTROY_BY_ID_STRIPECHARGES_FAIL: type('[User] destroyByIdStripeCharges fail'),
+
+  UPDATE_BY_ID_STRIPECHARGES: type('[User] updateByIdStripeCharges'),
+  UPDATE_BY_ID_STRIPECHARGES_SUCCESS: type('[User] updateByIdStripeCharges success'),
+  UPDATE_BY_ID_STRIPECHARGES_FAIL: type('[User] updateByIdStripeCharges fail'),
+
   FIND_BY_ID_IDENTITIES: type('[User] findByIdIdentities'),
   FIND_BY_ID_IDENTITIES_SUCCESS: type('[User] findByIdIdentities success'),
   FIND_BY_ID_IDENTITIES_FAIL: type('[User] findByIdIdentities fail'),
@@ -118,6 +158,30 @@ Object.assign(BaseLoopbackActionTypesFactory('User'), {
   UNLINK_ORGANIZATIONS_SUCCESS: type('[User] unlinkOrganizations success'),
   UNLINK_ORGANIZATIONS_FAIL: type('[User] unlinkOrganizations fail'),
 
+  FIND_BY_ID_CONTACTS: type('[User] findByIdContacts'),
+  FIND_BY_ID_CONTACTS_SUCCESS: type('[User] findByIdContacts success'),
+  FIND_BY_ID_CONTACTS_FAIL: type('[User] findByIdContacts fail'),
+
+  DESTROY_BY_ID_CONTACTS: type('[User] destroyByIdContacts'),
+  DESTROY_BY_ID_CONTACTS_SUCCESS: type('[User] destroyByIdContacts success'),
+  DESTROY_BY_ID_CONTACTS_FAIL: type('[User] destroyByIdContacts fail'),
+
+  UPDATE_BY_ID_CONTACTS: type('[User] updateByIdContacts'),
+  UPDATE_BY_ID_CONTACTS_SUCCESS: type('[User] updateByIdContacts success'),
+  UPDATE_BY_ID_CONTACTS_FAIL: type('[User] updateByIdContacts fail'),
+
+  FIND_BY_ID_INVITATIONS: type('[User] findByIdInvitations'),
+  FIND_BY_ID_INVITATIONS_SUCCESS: type('[User] findByIdInvitations success'),
+  FIND_BY_ID_INVITATIONS_FAIL: type('[User] findByIdInvitations fail'),
+
+  DESTROY_BY_ID_INVITATIONS: type('[User] destroyByIdInvitations'),
+  DESTROY_BY_ID_INVITATIONS_SUCCESS: type('[User] destroyByIdInvitations success'),
+  DESTROY_BY_ID_INVITATIONS_FAIL: type('[User] destroyByIdInvitations fail'),
+
+  UPDATE_BY_ID_INVITATIONS: type('[User] updateByIdInvitations'),
+  UPDATE_BY_ID_INVITATIONS_SUCCESS: type('[User] updateByIdInvitations success'),
+  UPDATE_BY_ID_INVITATIONS_FAIL: type('[User] updateByIdInvitations fail'),
+
   FIND_BY_ID_APPS: type('[User] findByIdApps'),
   FIND_BY_ID_APPS_SUCCESS: type('[User] findByIdApps success'),
   FIND_BY_ID_APPS_FAIL: type('[User] findByIdApps fail'),
@@ -165,6 +229,30 @@ Object.assign(BaseLoopbackActionTypesFactory('User'), {
   DELETE_PHONES: type('[User] deletePhones'),
   DELETE_PHONES_SUCCESS: type('[User] deletePhones success'),
   DELETE_PHONES_FAIL: type('[User] deletePhones fail'),
+
+  GET_STRIPESOURCES: type('[User] getStripeSources'),
+  GET_STRIPESOURCES_SUCCESS: type('[User] getStripeSources success'),
+  GET_STRIPESOURCES_FAIL: type('[User] getStripeSources fail'),
+
+  CREATE_STRIPESOURCES: type('[User] createStripeSources'),
+  CREATE_STRIPESOURCES_SUCCESS: type('[User] createStripeSources success'),
+  CREATE_STRIPESOURCES_FAIL: type('[User] createStripeSources fail'),
+
+  DELETE_STRIPESOURCES: type('[User] deleteStripeSources'),
+  DELETE_STRIPESOURCES_SUCCESS: type('[User] deleteStripeSources success'),
+  DELETE_STRIPESOURCES_FAIL: type('[User] deleteStripeSources fail'),
+
+  GET_STRIPECHARGES: type('[User] getStripeCharges'),
+  GET_STRIPECHARGES_SUCCESS: type('[User] getStripeCharges success'),
+  GET_STRIPECHARGES_FAIL: type('[User] getStripeCharges fail'),
+
+  CREATE_STRIPECHARGES: type('[User] createStripeCharges'),
+  CREATE_STRIPECHARGES_SUCCESS: type('[User] createStripeCharges success'),
+  CREATE_STRIPECHARGES_FAIL: type('[User] createStripeCharges fail'),
+
+  DELETE_STRIPECHARGES: type('[User] deleteStripeCharges'),
+  DELETE_STRIPECHARGES_SUCCESS: type('[User] deleteStripeCharges success'),
+  DELETE_STRIPECHARGES_FAIL: type('[User] deleteStripeCharges fail'),
 
   GET_IDENTITIES: type('[User] getIdentities'),
   GET_IDENTITIES_SUCCESS: type('[User] getIdentities success'),
@@ -225,6 +313,30 @@ Object.assign(BaseLoopbackActionTypesFactory('User'), {
   DELETE_ORGANIZATIONS: type('[User] deleteOrganizations'),
   DELETE_ORGANIZATIONS_SUCCESS: type('[User] deleteOrganizations success'),
   DELETE_ORGANIZATIONS_FAIL: type('[User] deleteOrganizations fail'),
+
+  GET_CONTACTS: type('[User] getContacts'),
+  GET_CONTACTS_SUCCESS: type('[User] getContacts success'),
+  GET_CONTACTS_FAIL: type('[User] getContacts fail'),
+
+  CREATE_CONTACTS: type('[User] createContacts'),
+  CREATE_CONTACTS_SUCCESS: type('[User] createContacts success'),
+  CREATE_CONTACTS_FAIL: type('[User] createContacts fail'),
+
+  DELETE_CONTACTS: type('[User] deleteContacts'),
+  DELETE_CONTACTS_SUCCESS: type('[User] deleteContacts success'),
+  DELETE_CONTACTS_FAIL: type('[User] deleteContacts fail'),
+
+  GET_INVITATIONS: type('[User] getInvitations'),
+  GET_INVITATIONS_SUCCESS: type('[User] getInvitations success'),
+  GET_INVITATIONS_FAIL: type('[User] getInvitations fail'),
+
+  CREATE_INVITATIONS: type('[User] createInvitations'),
+  CREATE_INVITATIONS_SUCCESS: type('[User] createInvitations success'),
+  CREATE_INVITATIONS_FAIL: type('[User] createInvitations fail'),
+
+  DELETE_INVITATIONS: type('[User] deleteInvitations'),
+  DELETE_INVITATIONS_SUCCESS: type('[User] deleteInvitations success'),
+  DELETE_INVITATIONS_FAIL: type('[User] deleteInvitations fail'),
 
   GET_APPS: type('[User] getApps'),
   GET_APPS_SUCCESS: type('[User] getApps success'),
@@ -294,9 +406,17 @@ Object.assign(BaseLoopbackActionTypesFactory('User'), {
   S3_G_E_T_SIGNED_URL_SUCCESS: type('[User] s3GETSignedUrl success'),
   S3_G_E_T_SIGNED_URL_FAIL: type('[User] s3GETSignedUrl fail'),
 
+  ACTIVATE: type('[User] activate'),
+  ACTIVATE_SUCCESS: type('[User] activate success'),
+  ACTIVATE_FAIL: type('[User] activate fail'),
+
   CREATE_MANY_S3PHOTO: type('[User] createManyS3Photo'),
   CREATE_MANY_S3PHOTO_SUCCESS: type('[User] createManyS3Photo success'),
   CREATE_MANY_S3PHOTO_FAIL: type('[User] createManyS3Photo fail'),
+
+  CREATE_MANY_STRIPECUSTOMER: type('[User] createManyStripeCustomer'),
+  CREATE_MANY_STRIPECUSTOMER_SUCCESS: type('[User] createManyStripeCustomer success'),
+  CREATE_MANY_STRIPECUSTOMER_FAIL: type('[User] createManyStripeCustomer fail'),
 
   CREATE_MANY_EMAILS: type('[User] createManyEmails'),
   CREATE_MANY_EMAILS_SUCCESS: type('[User] createManyEmails success'),
@@ -305,6 +425,14 @@ Object.assign(BaseLoopbackActionTypesFactory('User'), {
   CREATE_MANY_PHONES: type('[User] createManyPhones'),
   CREATE_MANY_PHONES_SUCCESS: type('[User] createManyPhones success'),
   CREATE_MANY_PHONES_FAIL: type('[User] createManyPhones fail'),
+
+  CREATE_MANY_STRIPESOURCES: type('[User] createManyStripeSources'),
+  CREATE_MANY_STRIPESOURCES_SUCCESS: type('[User] createManyStripeSources success'),
+  CREATE_MANY_STRIPESOURCES_FAIL: type('[User] createManyStripeSources fail'),
+
+  CREATE_MANY_STRIPECHARGES: type('[User] createManyStripeCharges'),
+  CREATE_MANY_STRIPECHARGES_SUCCESS: type('[User] createManyStripeCharges success'),
+  CREATE_MANY_STRIPECHARGES_FAIL: type('[User] createManyStripeCharges fail'),
 
   CREATE_MANY_IDENTITIES: type('[User] createManyIdentities'),
   CREATE_MANY_IDENTITIES_SUCCESS: type('[User] createManyIdentities success'),
@@ -326,6 +454,14 @@ Object.assign(BaseLoopbackActionTypesFactory('User'), {
   CREATE_MANY_ORGANIZATIONS_SUCCESS: type('[User] createManyOrganizations success'),
   CREATE_MANY_ORGANIZATIONS_FAIL: type('[User] createManyOrganizations fail'),
 
+  CREATE_MANY_CONTACTS: type('[User] createManyContacts'),
+  CREATE_MANY_CONTACTS_SUCCESS: type('[User] createManyContacts success'),
+  CREATE_MANY_CONTACTS_FAIL: type('[User] createManyContacts fail'),
+
+  CREATE_MANY_INVITATIONS: type('[User] createManyInvitations'),
+  CREATE_MANY_INVITATIONS_SUCCESS: type('[User] createManyInvitations success'),
+  CREATE_MANY_INVITATIONS_FAIL: type('[User] createManyInvitations fail'),
+
   CREATE_MANY_APPS: type('[User] createManyApps'),
   CREATE_MANY_APPS_SUCCESS: type('[User] createManyApps success'),
   CREATE_MANY_APPS_FAIL: type('[User] createManyApps fail'),
@@ -345,7 +481,7 @@ Object.assign(BaseLoopbackActionTypesFactory('User'), {
   SIGNUP_FAIL: type('[User] Signup fail'),
 });
 export const UserActions =
-Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
+Object.assign(BaseLoopbackActionsFactory<User>(UserActionTypes), {
 
   /**
    * sendVerificationCode Action.
@@ -362,7 +498,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.SEND_VERIFICATION_CODE;
       public payload: {id: any, data: any};
 
-    constructor(id: any, data: any = {}, public meta?: any) {
+    constructor(id: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },
@@ -408,7 +544,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.FIND_BY_ID_EMAILS;
       public payload: {id: any, fk: any};
 
-    constructor(id: any, fk: any, public meta?: any) {
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk};
     }
   },
@@ -454,7 +590,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.DESTROY_BY_ID_EMAILS;
       public payload: {id: any, fk: any};
 
-    constructor(id: any, fk: any, public meta?: any) {
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk};
     }
   },
@@ -503,7 +639,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.UPDATE_BY_ID_EMAILS;
       public payload: {id: any, fk: any, data: any};
 
-    constructor(id: any, fk: any, data: any = {}, public meta?: any) {
+    constructor(id: any, fk: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk, data};
     }
   },
@@ -549,7 +685,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.FIND_BY_ID_PHONES;
       public payload: {id: any, fk: any};
 
-    constructor(id: any, fk: any, public meta?: any) {
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk};
     }
   },
@@ -595,7 +731,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.DESTROY_BY_ID_PHONES;
       public payload: {id: any, fk: any};
 
-    constructor(id: any, fk: any, public meta?: any) {
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk};
     }
   },
@@ -644,7 +780,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.UPDATE_BY_ID_PHONES;
       public payload: {id: any, fk: any, data: any};
 
-    constructor(id: any, fk: any, data: any = {}, public meta?: any) {
+    constructor(id: any, fk: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk, data};
     }
   },
@@ -690,7 +826,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.GET_S3PHOTO;
       public payload: {id: any, refresh: any};
 
-    constructor(id: any, refresh: any = {}, public meta?: any) {
+    constructor(id: any, refresh: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, refresh};
     }
   },
@@ -738,7 +874,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.CREATE_S3PHOTO;
       public payload: {id: any, data: any};
 
-    constructor(id: any, data: any = {}, public meta?: any) {
+    constructor(id: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },
@@ -786,7 +922,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.UPDATE_S3PHOTO;
       public payload: {id: any, data: any};
 
-    constructor(id: any, data: any = {}, public meta?: any) {
+    constructor(id: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },
@@ -862,6 +998,472 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
   },
 
   /**
+   * getStripeCustomer Action.
+   * Fetches hasOne relation stripeCustomer.
+   *
+   * @param {any} id user id
+   * @param {boolean} refresh 
+   * @param {any} meta (optional).
+   * 
+   */
+  getStripeCustomer: class implements Action {
+    public readonly type = UserActionTypes.GET_STRIPECUSTOMER;
+      public payload: {id: any, refresh: any};
+
+    constructor(id: any, refresh: any = {}, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, refresh};
+    }
+  },
+  /**
+   * getStripeCustomerSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  getStripeCustomerSuccess: class implements Action {
+    public readonly type = UserActionTypes.GET_STRIPECUSTOMER_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * getStripeCustomerFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  getStripeCustomerFail: class implements Action {
+    public readonly type = UserActionTypes.GET_STRIPECUSTOMER_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * createStripeCustomer Action.
+   * Creates a new instance in stripeCustomer of this model.
+   *
+   * @param {any} id user id
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   * @param {any} meta (optional).
+   * 
+   */
+  createStripeCustomer: class implements Action {
+    public readonly type = UserActionTypes.CREATE_STRIPECUSTOMER;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any = {}, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * createStripeCustomerSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  createStripeCustomerSuccess: class implements Action {
+    public readonly type = UserActionTypes.CREATE_STRIPECUSTOMER_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * createStripeCustomerFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  createStripeCustomerFail: class implements Action {
+    public readonly type = UserActionTypes.CREATE_STRIPECUSTOMER_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * updateStripeCustomer Action.
+   * Update stripeCustomer of this model.
+   *
+   * @param {any} id user id
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   * @param {any} meta (optional).
+   * 
+   */
+  updateStripeCustomer: class implements Action {
+    public readonly type = UserActionTypes.UPDATE_STRIPECUSTOMER;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any = {}, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * updateStripeCustomerSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  updateStripeCustomerSuccess: class implements Action {
+    public readonly type = UserActionTypes.UPDATE_STRIPECUSTOMER_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * updateStripeCustomerFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  updateStripeCustomerFail: class implements Action {
+    public readonly type = UserActionTypes.UPDATE_STRIPECUSTOMER_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * destroyStripeCustomer Action.
+   * Deletes stripeCustomer of this model.
+   *
+   * @param {any} id user id
+   * @param {any} meta (optional).
+   * 
+   */
+  destroyStripeCustomer: class implements Action {
+    public readonly type = UserActionTypes.DESTROY_STRIPECUSTOMER;
+      
+    constructor(public payload: any, public meta?: any) {}
+  },
+  /**
+   * destroyStripeCustomerSuccess Action.
+   * 
+   * @param {any} id 
+   * This method returns no data.
+   * @param {any} meta (optional).
+   * 
+   */
+  destroyStripeCustomerSuccess: class implements Action {
+    public readonly type = UserActionTypes.DESTROY_STRIPECUSTOMER_SUCCESS;
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
+  },
+  /**
+   * destroyStripeCustomerFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  destroyStripeCustomerFail: class implements Action {
+    public readonly type = UserActionTypes.DESTROY_STRIPECUSTOMER_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * findByIdStripeSources Action.
+   * Find a related item by id for stripeSources.
+   *
+   * @param {any} id user id
+   * @param {any} fk Foreign key for stripeSources
+   * @param {any} meta (optional).
+   * 
+   */
+  findByIdStripeSources: class implements Action {
+    public readonly type = UserActionTypes.FIND_BY_ID_STRIPESOURCES;
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, fk};
+    }
+  },
+  /**
+   * findByIdStripeSourcesSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  findByIdStripeSourcesSuccess: class implements Action {
+    public readonly type = UserActionTypes.FIND_BY_ID_STRIPESOURCES_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * findByIdStripeSourcesFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  findByIdStripeSourcesFail: class implements Action {
+    public readonly type = UserActionTypes.FIND_BY_ID_STRIPESOURCES_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * destroyByIdStripeSources Action.
+   * Delete a related item by id for stripeSources.
+   *
+   * @param {any} id user id
+   * @param {any} fk Foreign key for stripeSources
+   * @param {any} meta (optional).
+   * 
+   */
+  destroyByIdStripeSources: class implements Action {
+    public readonly type = UserActionTypes.DESTROY_BY_ID_STRIPESOURCES;
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, fk};
+    }
+  },
+  /**
+   * destroyByIdStripeSourcesSuccess Action.
+   * 
+   * @param {any} id 
+   * This method returns no data.
+   * @param {any} meta (optional).
+   * 
+   */
+  destroyByIdStripeSourcesSuccess: class implements Action {
+    public readonly type = UserActionTypes.DESTROY_BY_ID_STRIPESOURCES_SUCCESS;
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
+  },
+  /**
+   * destroyByIdStripeSourcesFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  destroyByIdStripeSourcesFail: class implements Action {
+    public readonly type = UserActionTypes.DESTROY_BY_ID_STRIPESOURCES_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * updateByIdStripeSources Action.
+   * Update a related item by id for stripeSources.
+   *
+   * @param {any} id user id
+   * @param {any} fk Foreign key for stripeSources
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   * @param {any} meta (optional).
+   * 
+   */
+  updateByIdStripeSources: class implements Action {
+    public readonly type = UserActionTypes.UPDATE_BY_ID_STRIPESOURCES;
+      public payload: {id: any, fk: any, data: any};
+
+    constructor(id: any, fk: any, data: any = {}, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, fk, data};
+    }
+  },
+  /**
+   * updateByIdStripeSourcesSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  updateByIdStripeSourcesSuccess: class implements Action {
+    public readonly type = UserActionTypes.UPDATE_BY_ID_STRIPESOURCES_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * updateByIdStripeSourcesFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  updateByIdStripeSourcesFail: class implements Action {
+    public readonly type = UserActionTypes.UPDATE_BY_ID_STRIPESOURCES_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * findByIdStripeCharges Action.
+   * Find a related item by id for stripeCharges.
+   *
+   * @param {any} id user id
+   * @param {any} fk Foreign key for stripeCharges
+   * @param {any} meta (optional).
+   * 
+   */
+  findByIdStripeCharges: class implements Action {
+    public readonly type = UserActionTypes.FIND_BY_ID_STRIPECHARGES;
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, fk};
+    }
+  },
+  /**
+   * findByIdStripeChargesSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  findByIdStripeChargesSuccess: class implements Action {
+    public readonly type = UserActionTypes.FIND_BY_ID_STRIPECHARGES_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * findByIdStripeChargesFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  findByIdStripeChargesFail: class implements Action {
+    public readonly type = UserActionTypes.FIND_BY_ID_STRIPECHARGES_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * destroyByIdStripeCharges Action.
+   * Delete a related item by id for stripeCharges.
+   *
+   * @param {any} id user id
+   * @param {any} fk Foreign key for stripeCharges
+   * @param {any} meta (optional).
+   * 
+   */
+  destroyByIdStripeCharges: class implements Action {
+    public readonly type = UserActionTypes.DESTROY_BY_ID_STRIPECHARGES;
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, fk};
+    }
+  },
+  /**
+   * destroyByIdStripeChargesSuccess Action.
+   * 
+   * @param {any} id 
+   * This method returns no data.
+   * @param {any} meta (optional).
+   * 
+   */
+  destroyByIdStripeChargesSuccess: class implements Action {
+    public readonly type = UserActionTypes.DESTROY_BY_ID_STRIPECHARGES_SUCCESS;
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
+  },
+  /**
+   * destroyByIdStripeChargesFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  destroyByIdStripeChargesFail: class implements Action {
+    public readonly type = UserActionTypes.DESTROY_BY_ID_STRIPECHARGES_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * updateByIdStripeCharges Action.
+   * Update a related item by id for stripeCharges.
+   *
+   * @param {any} id user id
+   * @param {any} fk Foreign key for stripeCharges
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   * @param {any} meta (optional).
+   * 
+   */
+  updateByIdStripeCharges: class implements Action {
+    public readonly type = UserActionTypes.UPDATE_BY_ID_STRIPECHARGES;
+      public payload: {id: any, fk: any, data: any};
+
+    constructor(id: any, fk: any, data: any = {}, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, fk, data};
+    }
+  },
+  /**
+   * updateByIdStripeChargesSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  updateByIdStripeChargesSuccess: class implements Action {
+    public readonly type = UserActionTypes.UPDATE_BY_ID_STRIPECHARGES_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * updateByIdStripeChargesFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  updateByIdStripeChargesFail: class implements Action {
+    public readonly type = UserActionTypes.UPDATE_BY_ID_STRIPECHARGES_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
    * findByIdIdentities Action.
    * Find a related item by id for identities.
    *
@@ -874,7 +1476,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.FIND_BY_ID_IDENTITIES;
       public payload: {id: any, fk: any};
 
-    constructor(id: any, fk: any, public meta?: any) {
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk};
     }
   },
@@ -920,7 +1522,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.DESTROY_BY_ID_IDENTITIES;
       public payload: {id: any, fk: any};
 
-    constructor(id: any, fk: any, public meta?: any) {
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk};
     }
   },
@@ -969,7 +1571,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.UPDATE_BY_ID_IDENTITIES;
       public payload: {id: any, fk: any, data: any};
 
-    constructor(id: any, fk: any, data: any = {}, public meta?: any) {
+    constructor(id: any, fk: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk, data};
     }
   },
@@ -1015,7 +1617,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.FIND_BY_ID_CREDENTIALS;
       public payload: {id: any, fk: any};
 
-    constructor(id: any, fk: any, public meta?: any) {
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk};
     }
   },
@@ -1061,7 +1663,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.DESTROY_BY_ID_CREDENTIALS;
       public payload: {id: any, fk: any};
 
-    constructor(id: any, fk: any, public meta?: any) {
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk};
     }
   },
@@ -1110,7 +1712,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.UPDATE_BY_ID_CREDENTIALS;
       public payload: {id: any, fk: any, data: any};
 
-    constructor(id: any, fk: any, data: any = {}, public meta?: any) {
+    constructor(id: any, fk: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk, data};
     }
   },
@@ -1156,7 +1758,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.FIND_BY_ID_ACCESSTOKENS;
       public payload: {id: any, fk: any};
 
-    constructor(id: any, fk: any, public meta?: any) {
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk};
     }
   },
@@ -1202,7 +1804,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.DESTROY_BY_ID_ACCESSTOKENS;
       public payload: {id: any, fk: any};
 
-    constructor(id: any, fk: any, public meta?: any) {
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk};
     }
   },
@@ -1251,7 +1853,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.UPDATE_BY_ID_ACCESSTOKENS;
       public payload: {id: any, fk: any, data: any};
 
-    constructor(id: any, fk: any, data: any = {}, public meta?: any) {
+    constructor(id: any, fk: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk, data};
     }
   },
@@ -1297,7 +1899,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.FIND_BY_ID_ROLES;
       public payload: {id: any, fk: any};
 
-    constructor(id: any, fk: any, public meta?: any) {
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk};
     }
   },
@@ -1343,7 +1945,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.DESTROY_BY_ID_ROLES;
       public payload: {id: any, fk: any};
 
-    constructor(id: any, fk: any, public meta?: any) {
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk};
     }
   },
@@ -1392,7 +1994,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.UPDATE_BY_ID_ROLES;
       public payload: {id: any, fk: any, data: any};
 
-    constructor(id: any, fk: any, data: any = {}, public meta?: any) {
+    constructor(id: any, fk: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk, data};
     }
   },
@@ -1438,7 +2040,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.FIND_BY_ID_ORGANIZATIONS;
       public payload: {id: any, fk: any};
 
-    constructor(id: any, fk: any, public meta?: any) {
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk};
     }
   },
@@ -1484,7 +2086,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.DESTROY_BY_ID_ORGANIZATIONS;
       public payload: {id: any, fk: any};
 
-    constructor(id: any, fk: any, public meta?: any) {
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk};
     }
   },
@@ -1533,7 +2135,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.UPDATE_BY_ID_ORGANIZATIONS;
       public payload: {id: any, fk: any, data: any};
 
-    constructor(id: any, fk: any, data: any = {}, public meta?: any) {
+    constructor(id: any, fk: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk, data};
     }
   },
@@ -1582,7 +2184,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.LINK_ORGANIZATIONS;
       public payload: {id: any, fk: any, data: any};
 
-    constructor(id: any, fk: any, data: any = {}, public meta?: any) {
+    constructor(id: any, fk: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk, data};
     }
   },
@@ -1628,7 +2230,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.UNLINK_ORGANIZATIONS;
       public payload: {id: any, fk: any};
 
-    constructor(id: any, fk: any, public meta?: any) {
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk};
     }
   },
@@ -1662,6 +2264,288 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
   },
 
   /**
+   * findByIdContacts Action.
+   * Find a related item by id for contacts.
+   *
+   * @param {any} id user id
+   * @param {any} fk Foreign key for contacts
+   * @param {any} meta (optional).
+   * 
+   */
+  findByIdContacts: class implements Action {
+    public readonly type = UserActionTypes.FIND_BY_ID_CONTACTS;
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, fk};
+    }
+  },
+  /**
+   * findByIdContactsSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  findByIdContactsSuccess: class implements Action {
+    public readonly type = UserActionTypes.FIND_BY_ID_CONTACTS_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * findByIdContactsFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  findByIdContactsFail: class implements Action {
+    public readonly type = UserActionTypes.FIND_BY_ID_CONTACTS_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * destroyByIdContacts Action.
+   * Delete a related item by id for contacts.
+   *
+   * @param {any} id user id
+   * @param {any} fk Foreign key for contacts
+   * @param {any} meta (optional).
+   * 
+   */
+  destroyByIdContacts: class implements Action {
+    public readonly type = UserActionTypes.DESTROY_BY_ID_CONTACTS;
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, fk};
+    }
+  },
+  /**
+   * destroyByIdContactsSuccess Action.
+   * 
+   * @param {any} id 
+   * This method returns no data.
+   * @param {any} meta (optional).
+   * 
+   */
+  destroyByIdContactsSuccess: class implements Action {
+    public readonly type = UserActionTypes.DESTROY_BY_ID_CONTACTS_SUCCESS;
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
+  },
+  /**
+   * destroyByIdContactsFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  destroyByIdContactsFail: class implements Action {
+    public readonly type = UserActionTypes.DESTROY_BY_ID_CONTACTS_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * updateByIdContacts Action.
+   * Update a related item by id for contacts.
+   *
+   * @param {any} id user id
+   * @param {any} fk Foreign key for contacts
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   * @param {any} meta (optional).
+   * 
+   */
+  updateByIdContacts: class implements Action {
+    public readonly type = UserActionTypes.UPDATE_BY_ID_CONTACTS;
+      public payload: {id: any, fk: any, data: any};
+
+    constructor(id: any, fk: any, data: any = {}, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, fk, data};
+    }
+  },
+  /**
+   * updateByIdContactsSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  updateByIdContactsSuccess: class implements Action {
+    public readonly type = UserActionTypes.UPDATE_BY_ID_CONTACTS_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * updateByIdContactsFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  updateByIdContactsFail: class implements Action {
+    public readonly type = UserActionTypes.UPDATE_BY_ID_CONTACTS_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * findByIdInvitations Action.
+   * Find a related item by id for invitations.
+   *
+   * @param {any} id user id
+   * @param {any} fk Foreign key for invitations
+   * @param {any} meta (optional).
+   * 
+   */
+  findByIdInvitations: class implements Action {
+    public readonly type = UserActionTypes.FIND_BY_ID_INVITATIONS;
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, fk};
+    }
+  },
+  /**
+   * findByIdInvitationsSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  findByIdInvitationsSuccess: class implements Action {
+    public readonly type = UserActionTypes.FIND_BY_ID_INVITATIONS_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * findByIdInvitationsFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  findByIdInvitationsFail: class implements Action {
+    public readonly type = UserActionTypes.FIND_BY_ID_INVITATIONS_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * destroyByIdInvitations Action.
+   * Delete a related item by id for invitations.
+   *
+   * @param {any} id user id
+   * @param {any} fk Foreign key for invitations
+   * @param {any} meta (optional).
+   * 
+   */
+  destroyByIdInvitations: class implements Action {
+    public readonly type = UserActionTypes.DESTROY_BY_ID_INVITATIONS;
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, fk};
+    }
+  },
+  /**
+   * destroyByIdInvitationsSuccess Action.
+   * 
+   * @param {any} id 
+   * This method returns no data.
+   * @param {any} meta (optional).
+   * 
+   */
+  destroyByIdInvitationsSuccess: class implements Action {
+    public readonly type = UserActionTypes.DESTROY_BY_ID_INVITATIONS_SUCCESS;
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
+  },
+  /**
+   * destroyByIdInvitationsFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  destroyByIdInvitationsFail: class implements Action {
+    public readonly type = UserActionTypes.DESTROY_BY_ID_INVITATIONS_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * updateByIdInvitations Action.
+   * Update a related item by id for invitations.
+   *
+   * @param {any} id user id
+   * @param {any} fk Foreign key for invitations
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   * @param {any} meta (optional).
+   * 
+   */
+  updateByIdInvitations: class implements Action {
+    public readonly type = UserActionTypes.UPDATE_BY_ID_INVITATIONS;
+      public payload: {id: any, fk: any, data: any};
+
+    constructor(id: any, fk: any, data: any = {}, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, fk, data};
+    }
+  },
+  /**
+   * updateByIdInvitationsSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  updateByIdInvitationsSuccess: class implements Action {
+    public readonly type = UserActionTypes.UPDATE_BY_ID_INVITATIONS_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * updateByIdInvitationsFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  updateByIdInvitationsFail: class implements Action {
+    public readonly type = UserActionTypes.UPDATE_BY_ID_INVITATIONS_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
    * findByIdApps Action.
    * Find a related item by id for apps.
    *
@@ -1674,7 +2558,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.FIND_BY_ID_APPS;
       public payload: {id: any, fk: any};
 
-    constructor(id: any, fk: any, public meta?: any) {
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk};
     }
   },
@@ -1720,7 +2604,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.DESTROY_BY_ID_APPS;
       public payload: {id: any, fk: any};
 
-    constructor(id: any, fk: any, public meta?: any) {
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk};
     }
   },
@@ -1769,7 +2653,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.UPDATE_BY_ID_APPS;
       public payload: {id: any, fk: any, data: any};
 
-    constructor(id: any, fk: any, data: any = {}, public meta?: any) {
+    constructor(id: any, fk: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk, data};
     }
   },
@@ -1815,7 +2699,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.FIND_BY_ID_OAUTHCLIENTAPPLICATIONS;
       public payload: {id: any, fk: any};
 
-    constructor(id: any, fk: any, public meta?: any) {
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk};
     }
   },
@@ -1861,7 +2745,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.DESTROY_BY_ID_OAUTHCLIENTAPPLICATIONS;
       public payload: {id: any, fk: any};
 
-    constructor(id: any, fk: any, public meta?: any) {
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk};
     }
   },
@@ -1910,7 +2794,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.UPDATE_BY_ID_OAUTHCLIENTAPPLICATIONS;
       public payload: {id: any, fk: any, data: any};
 
-    constructor(id: any, fk: any, data: any = {}, public meta?: any) {
+    constructor(id: any, fk: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk, data};
     }
   },
@@ -1956,7 +2840,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.GET_EMAILS;
       public payload: {id: any, filter: LoopBackFilter};
 
-    constructor(id: any, filter: LoopBackFilter = {}, public meta?: any) {
+    constructor(id: any, filter: LoopBackFilter = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, filter};
     }
   },
@@ -2004,7 +2888,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.CREATE_EMAILS;
       public payload: {id: any, data: any};
 
-    constructor(id: any, data: any = {}, public meta?: any) {
+    constructor(id: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },
@@ -2089,7 +2973,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.GET_PHONES;
       public payload: {id: any, filter: LoopBackFilter};
 
-    constructor(id: any, filter: LoopBackFilter = {}, public meta?: any) {
+    constructor(id: any, filter: LoopBackFilter = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, filter};
     }
   },
@@ -2137,7 +3021,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.CREATE_PHONES;
       public payload: {id: any, data: any};
 
-    constructor(id: any, data: any = {}, public meta?: any) {
+    constructor(id: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },
@@ -2210,6 +3094,272 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
   },
 
   /**
+   * getStripeSources Action.
+   * Queries stripeSources of user.
+   *
+   * @param {any} id user id
+   * @param {object} filter 
+   * @param {any} meta (optional).
+   * 
+   */
+  getStripeSources: class implements Action {
+    public readonly type = UserActionTypes.GET_STRIPESOURCES;
+      public payload: {id: any, filter: LoopBackFilter};
+
+    constructor(id: any, filter: LoopBackFilter = {}, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, filter};
+    }
+  },
+  /**
+   * getStripeSourcesSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object[]} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  getStripeSourcesSuccess: class implements Action {
+    public readonly type = UserActionTypes.GET_STRIPESOURCES_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * getStripeSourcesFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  getStripeSourcesFail: class implements Action {
+    public readonly type = UserActionTypes.GET_STRIPESOURCES_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * createStripeSources Action.
+   * Creates a new instance in stripeSources of this model.
+   *
+   * @param {any} id user id
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   * @param {any} meta (optional).
+   * 
+   */
+  createStripeSources: class implements Action {
+    public readonly type = UserActionTypes.CREATE_STRIPESOURCES;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any = {}, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * createStripeSourcesSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  createStripeSourcesSuccess: class implements Action {
+    public readonly type = UserActionTypes.CREATE_STRIPESOURCES_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * createStripeSourcesFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  createStripeSourcesFail: class implements Action {
+    public readonly type = UserActionTypes.CREATE_STRIPESOURCES_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * deleteStripeSources Action.
+   * Deletes all stripeSources of this model.
+   *
+   * @param {any} id user id
+   * @param {any} meta (optional).
+   * 
+   */
+  deleteStripeSources: class implements Action {
+    public readonly type = UserActionTypes.DELETE_STRIPESOURCES;
+      
+    constructor(public payload: any, public meta?: any) {}
+  },
+  /**
+   * deleteStripeSourcesSuccess Action.
+   * 
+   * @param {any} id 
+   * This method returns no data.
+   * @param {any} meta (optional).
+   * 
+   */
+  deleteStripeSourcesSuccess: class implements Action {
+    public readonly type = UserActionTypes.DELETE_STRIPESOURCES_SUCCESS;
+  
+    constructor(public payload: any, public meta?: any) {}
+  },
+  /**
+   * deleteStripeSourcesFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  deleteStripeSourcesFail: class implements Action {
+    public readonly type = UserActionTypes.DELETE_STRIPESOURCES_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * getStripeCharges Action.
+   * Queries stripeCharges of user.
+   *
+   * @param {any} id user id
+   * @param {object} filter 
+   * @param {any} meta (optional).
+   * 
+   */
+  getStripeCharges: class implements Action {
+    public readonly type = UserActionTypes.GET_STRIPECHARGES;
+      public payload: {id: any, filter: LoopBackFilter};
+
+    constructor(id: any, filter: LoopBackFilter = {}, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, filter};
+    }
+  },
+  /**
+   * getStripeChargesSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object[]} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  getStripeChargesSuccess: class implements Action {
+    public readonly type = UserActionTypes.GET_STRIPECHARGES_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * getStripeChargesFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  getStripeChargesFail: class implements Action {
+    public readonly type = UserActionTypes.GET_STRIPECHARGES_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * createStripeCharges Action.
+   * Creates a new instance in stripeCharges of this model.
+   *
+   * @param {any} id user id
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   * @param {any} meta (optional).
+   * 
+   */
+  createStripeCharges: class implements Action {
+    public readonly type = UserActionTypes.CREATE_STRIPECHARGES;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any = {}, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * createStripeChargesSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  createStripeChargesSuccess: class implements Action {
+    public readonly type = UserActionTypes.CREATE_STRIPECHARGES_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * createStripeChargesFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  createStripeChargesFail: class implements Action {
+    public readonly type = UserActionTypes.CREATE_STRIPECHARGES_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * deleteStripeCharges Action.
+   * Deletes all stripeCharges of this model.
+   *
+   * @param {any} id user id
+   * @param {any} meta (optional).
+   * 
+   */
+  deleteStripeCharges: class implements Action {
+    public readonly type = UserActionTypes.DELETE_STRIPECHARGES;
+      
+    constructor(public payload: any, public meta?: any) {}
+  },
+  /**
+   * deleteStripeChargesSuccess Action.
+   * 
+   * @param {any} id 
+   * This method returns no data.
+   * @param {any} meta (optional).
+   * 
+   */
+  deleteStripeChargesSuccess: class implements Action {
+    public readonly type = UserActionTypes.DELETE_STRIPECHARGES_SUCCESS;
+  
+    constructor(public payload: any, public meta?: any) {}
+  },
+  /**
+   * deleteStripeChargesFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  deleteStripeChargesFail: class implements Action {
+    public readonly type = UserActionTypes.DELETE_STRIPECHARGES_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
    * getIdentities Action.
    * Queries identities of user.
    *
@@ -2222,7 +3372,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.GET_IDENTITIES;
       public payload: {id: any, filter: LoopBackFilter};
 
-    constructor(id: any, filter: LoopBackFilter = {}, public meta?: any) {
+    constructor(id: any, filter: LoopBackFilter = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, filter};
     }
   },
@@ -2270,7 +3420,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.CREATE_IDENTITIES;
       public payload: {id: any, data: any};
 
-    constructor(id: any, data: any = {}, public meta?: any) {
+    constructor(id: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },
@@ -2355,7 +3505,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.GET_CREDENTIALS;
       public payload: {id: any, filter: LoopBackFilter};
 
-    constructor(id: any, filter: LoopBackFilter = {}, public meta?: any) {
+    constructor(id: any, filter: LoopBackFilter = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, filter};
     }
   },
@@ -2403,7 +3553,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.CREATE_CREDENTIALS;
       public payload: {id: any, data: any};
 
-    constructor(id: any, data: any = {}, public meta?: any) {
+    constructor(id: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },
@@ -2488,7 +3638,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.GET_ACCESSTOKENS;
       public payload: {id: any, filter: LoopBackFilter};
 
-    constructor(id: any, filter: LoopBackFilter = {}, public meta?: any) {
+    constructor(id: any, filter: LoopBackFilter = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, filter};
     }
   },
@@ -2536,7 +3686,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.CREATE_ACCESSTOKENS;
       public payload: {id: any, data: any};
 
-    constructor(id: any, data: any = {}, public meta?: any) {
+    constructor(id: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },
@@ -2621,7 +3771,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.GET_ROLES;
       public payload: {id: any, filter: LoopBackFilter};
 
-    constructor(id: any, filter: LoopBackFilter = {}, public meta?: any) {
+    constructor(id: any, filter: LoopBackFilter = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, filter};
     }
   },
@@ -2669,7 +3819,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.CREATE_ROLES;
       public payload: {id: any, data: any};
 
-    constructor(id: any, data: any = {}, public meta?: any) {
+    constructor(id: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },
@@ -2754,7 +3904,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.GET_ORGANIZATIONS;
       public payload: {id: any, filter: LoopBackFilter};
 
-    constructor(id: any, filter: LoopBackFilter = {}, public meta?: any) {
+    constructor(id: any, filter: LoopBackFilter = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, filter};
     }
   },
@@ -2802,7 +3952,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.CREATE_ORGANIZATIONS;
       public payload: {id: any, data: any};
 
-    constructor(id: any, data: any = {}, public meta?: any) {
+    constructor(id: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },
@@ -2875,6 +4025,272 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
   },
 
   /**
+   * getContacts Action.
+   * Queries contacts of user.
+   *
+   * @param {any} id user id
+   * @param {object} filter 
+   * @param {any} meta (optional).
+   * 
+   */
+  getContacts: class implements Action {
+    public readonly type = UserActionTypes.GET_CONTACTS;
+      public payload: {id: any, filter: LoopBackFilter};
+
+    constructor(id: any, filter: LoopBackFilter = {}, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, filter};
+    }
+  },
+  /**
+   * getContactsSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object[]} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  getContactsSuccess: class implements Action {
+    public readonly type = UserActionTypes.GET_CONTACTS_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * getContactsFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  getContactsFail: class implements Action {
+    public readonly type = UserActionTypes.GET_CONTACTS_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * createContacts Action.
+   * Creates a new instance in contacts of this model.
+   *
+   * @param {any} id user id
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   * @param {any} meta (optional).
+   * 
+   */
+  createContacts: class implements Action {
+    public readonly type = UserActionTypes.CREATE_CONTACTS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any = {}, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * createContactsSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  createContactsSuccess: class implements Action {
+    public readonly type = UserActionTypes.CREATE_CONTACTS_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * createContactsFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  createContactsFail: class implements Action {
+    public readonly type = UserActionTypes.CREATE_CONTACTS_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * deleteContacts Action.
+   * Deletes all contacts of this model.
+   *
+   * @param {any} id user id
+   * @param {any} meta (optional).
+   * 
+   */
+  deleteContacts: class implements Action {
+    public readonly type = UserActionTypes.DELETE_CONTACTS;
+      
+    constructor(public payload: any, public meta?: any) {}
+  },
+  /**
+   * deleteContactsSuccess Action.
+   * 
+   * @param {any} id 
+   * This method returns no data.
+   * @param {any} meta (optional).
+   * 
+   */
+  deleteContactsSuccess: class implements Action {
+    public readonly type = UserActionTypes.DELETE_CONTACTS_SUCCESS;
+  
+    constructor(public payload: any, public meta?: any) {}
+  },
+  /**
+   * deleteContactsFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  deleteContactsFail: class implements Action {
+    public readonly type = UserActionTypes.DELETE_CONTACTS_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * getInvitations Action.
+   * Queries invitations of user.
+   *
+   * @param {any} id user id
+   * @param {object} filter 
+   * @param {any} meta (optional).
+   * 
+   */
+  getInvitations: class implements Action {
+    public readonly type = UserActionTypes.GET_INVITATIONS;
+      public payload: {id: any, filter: LoopBackFilter};
+
+    constructor(id: any, filter: LoopBackFilter = {}, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, filter};
+    }
+  },
+  /**
+   * getInvitationsSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object[]} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  getInvitationsSuccess: class implements Action {
+    public readonly type = UserActionTypes.GET_INVITATIONS_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * getInvitationsFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  getInvitationsFail: class implements Action {
+    public readonly type = UserActionTypes.GET_INVITATIONS_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * createInvitations Action.
+   * Creates a new instance in invitations of this model.
+   *
+   * @param {any} id user id
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   * @param {any} meta (optional).
+   * 
+   */
+  createInvitations: class implements Action {
+    public readonly type = UserActionTypes.CREATE_INVITATIONS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any = {}, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * createInvitationsSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  createInvitationsSuccess: class implements Action {
+    public readonly type = UserActionTypes.CREATE_INVITATIONS_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * createInvitationsFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  createInvitationsFail: class implements Action {
+    public readonly type = UserActionTypes.CREATE_INVITATIONS_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * deleteInvitations Action.
+   * Deletes all invitations of this model.
+   *
+   * @param {any} id user id
+   * @param {any} meta (optional).
+   * 
+   */
+  deleteInvitations: class implements Action {
+    public readonly type = UserActionTypes.DELETE_INVITATIONS;
+      
+    constructor(public payload: any, public meta?: any) {}
+  },
+  /**
+   * deleteInvitationsSuccess Action.
+   * 
+   * @param {any} id 
+   * This method returns no data.
+   * @param {any} meta (optional).
+   * 
+   */
+  deleteInvitationsSuccess: class implements Action {
+    public readonly type = UserActionTypes.DELETE_INVITATIONS_SUCCESS;
+  
+    constructor(public payload: any, public meta?: any) {}
+  },
+  /**
+   * deleteInvitationsFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  deleteInvitationsFail: class implements Action {
+    public readonly type = UserActionTypes.DELETE_INVITATIONS_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
    * getApps Action.
    * Queries apps of user.
    *
@@ -2887,7 +4303,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.GET_APPS;
       public payload: {id: any, filter: LoopBackFilter};
 
-    constructor(id: any, filter: LoopBackFilter = {}, public meta?: any) {
+    constructor(id: any, filter: LoopBackFilter = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, filter};
     }
   },
@@ -2935,7 +4351,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.CREATE_APPS;
       public payload: {id: any, data: any};
 
-    constructor(id: any, data: any = {}, public meta?: any) {
+    constructor(id: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },
@@ -3020,7 +4436,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.GET_OAUTHCLIENTAPPLICATIONS;
       public payload: {id: any, filter: LoopBackFilter};
 
-    constructor(id: any, filter: LoopBackFilter = {}, public meta?: any) {
+    constructor(id: any, filter: LoopBackFilter = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, filter};
     }
   },
@@ -3068,7 +4484,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.CREATE_OAUTHCLIENTAPPLICATIONS;
       public payload: {id: any, data: any};
 
-    constructor(id: any, data: any = {}, public meta?: any) {
+    constructor(id: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },
@@ -3159,7 +4575,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.LOGIN;
       public payload: {credentials: any, include: any};
 
-    constructor(credentials: any, include: any = 'user', rememberMe: boolean = true, public meta?: any) {
+    constructor(credentials: any, include: any = 'user', rememberMe: boolean = true, customHeaders?: Function, public meta?: any) {
       this.payload = {credentials, include};
     }
   },
@@ -3294,7 +4710,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.CONFIRM;
       public payload: {uid: any, token: any, redirect: any};
 
-    constructor(uid: any, token: any, redirect: any = {}, public meta?: any) {
+    constructor(uid: any, token: any, redirect: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {uid, token, redirect};
     }
   },
@@ -3387,7 +4803,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.CHANGE_PASSWORD;
       public payload: {oldPassword: any, newPassword: any};
 
-    constructor(oldPassword: any, newPassword: any, public meta?: any) {
+    constructor(oldPassword: any, newPassword: any, customHeaders?: Function, public meta?: any) {
       this.payload = {oldPassword, newPassword};
     }
   },
@@ -3480,7 +4896,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.SET_PRIMARY_EMAIL;
       public payload: {id: any, fk: any};
 
-    constructor(id: any, fk: any, public meta?: any) {
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk};
     }
   },
@@ -3529,7 +4945,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.SET_PRIMARY_PHONE;
       public payload: {id: any, fk: any};
 
-    constructor(id: any, fk: any, public meta?: any) {
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
       this.payload = {id, fk};
     }
   },
@@ -3576,7 +4992,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.S3_P_U_T_SIGNED_URL;
       public payload: {id: any, key: any, options: any};
 
-    constructor(id: any, key: any = {}, options: any = {}, public meta?: any) {
+    constructor(id: any, key: any = {}, options: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, key, options};
     }
   },
@@ -3622,7 +5038,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.S3_G_E_T_SIGNED_URL;
       public payload: {id: any, key: any};
 
-    constructor(id: any, key: any = {}, public meta?: any) {
+    constructor(id: any, key: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, key};
     }
   },
@@ -3656,6 +5072,53 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
   },
 
   /**
+   * activate Action.
+   * Activate a user registration with invitation token.
+   *
+   * @param {string} uid 
+   * @param {string} token 
+   * @param {string} redirect 
+   * @param {any} meta (optional).
+   * 
+   */
+  activate: class implements Action {
+    public readonly type = UserActionTypes.ACTIVATE;
+      public payload: {uid: any, token: any, redirect: any};
+
+    constructor(uid: any, token: any, redirect: any = {}, customHeaders?: Function, public meta?: any) {
+      this.payload = {uid, token, redirect};
+    }
+  },
+  /**
+   * activateSuccess Action.
+   * 
+   * @param {any} id 
+   * This method returns no data.
+   * @param {any} meta (optional).
+   * 
+   */
+  activateSuccess: class implements Action {
+    public readonly type = UserActionTypes.ACTIVATE_SUCCESS;
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
+  },
+  /**
+   * activateFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  activateFail: class implements Action {
+    public readonly type = UserActionTypes.ACTIVATE_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
    * createManyS3Photo Action.
    * Creates a new instance in s3Photo of this model.
    *
@@ -3670,7 +5133,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.CREATE_MANY_S3PHOTO;
       public payload: {id: any, data: any[]};
 
-    constructor(id: any, data: any[] = [], public meta?: any) {
+    constructor(id: any, data: any[] = [], customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },
@@ -3704,6 +5167,54 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
   },
 
   /**
+   * createManyStripeCustomer Action.
+   * Creates a new instance in stripeCustomer of this model.
+   *
+   * @param {any} id user id
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   * @param {any} meta (optional).
+   * 
+   */
+  createManyStripeCustomer: class implements Action {
+    public readonly type = UserActionTypes.CREATE_MANY_STRIPECUSTOMER;
+      public payload: {id: any, data: any[]};
+
+    constructor(id: any, data: any[] = [], customHeaders?: Function, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * createManyStripeCustomerSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object[]} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  createManyStripeCustomerSuccess: class implements Action {
+    public readonly type = UserActionTypes.CREATE_MANY_STRIPECUSTOMER_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * createManyStripeCustomerFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  createManyStripeCustomerFail: class implements Action {
+    public readonly type = UserActionTypes.CREATE_MANY_STRIPECUSTOMER_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
    * createManyEmails Action.
    * Creates a new instance in emails of this model.
    *
@@ -3718,7 +5229,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.CREATE_MANY_EMAILS;
       public payload: {id: any, data: any[]};
 
-    constructor(id: any, data: any[] = [], public meta?: any) {
+    constructor(id: any, data: any[] = [], customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },
@@ -3766,7 +5277,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.CREATE_MANY_PHONES;
       public payload: {id: any, data: any[]};
 
-    constructor(id: any, data: any[] = [], public meta?: any) {
+    constructor(id: any, data: any[] = [], customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },
@@ -3800,6 +5311,102 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
   },
 
   /**
+   * createManyStripeSources Action.
+   * Creates a new instance in stripeSources of this model.
+   *
+   * @param {any} id user id
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   * @param {any} meta (optional).
+   * 
+   */
+  createManyStripeSources: class implements Action {
+    public readonly type = UserActionTypes.CREATE_MANY_STRIPESOURCES;
+      public payload: {id: any, data: any[]};
+
+    constructor(id: any, data: any[] = [], customHeaders?: Function, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * createManyStripeSourcesSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object[]} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  createManyStripeSourcesSuccess: class implements Action {
+    public readonly type = UserActionTypes.CREATE_MANY_STRIPESOURCES_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * createManyStripeSourcesFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  createManyStripeSourcesFail: class implements Action {
+    public readonly type = UserActionTypes.CREATE_MANY_STRIPESOURCES_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * createManyStripeCharges Action.
+   * Creates a new instance in stripeCharges of this model.
+   *
+   * @param {any} id user id
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   * @param {any} meta (optional).
+   * 
+   */
+  createManyStripeCharges: class implements Action {
+    public readonly type = UserActionTypes.CREATE_MANY_STRIPECHARGES;
+      public payload: {id: any, data: any[]};
+
+    constructor(id: any, data: any[] = [], customHeaders?: Function, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * createManyStripeChargesSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object[]} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  createManyStripeChargesSuccess: class implements Action {
+    public readonly type = UserActionTypes.CREATE_MANY_STRIPECHARGES_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * createManyStripeChargesFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  createManyStripeChargesFail: class implements Action {
+    public readonly type = UserActionTypes.CREATE_MANY_STRIPECHARGES_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
    * createManyIdentities Action.
    * Creates a new instance in identities of this model.
    *
@@ -3814,7 +5421,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.CREATE_MANY_IDENTITIES;
       public payload: {id: any, data: any[]};
 
-    constructor(id: any, data: any[] = [], public meta?: any) {
+    constructor(id: any, data: any[] = [], customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },
@@ -3862,7 +5469,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.CREATE_MANY_CREDENTIALS;
       public payload: {id: any, data: any[]};
 
-    constructor(id: any, data: any[] = [], public meta?: any) {
+    constructor(id: any, data: any[] = [], customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },
@@ -3910,7 +5517,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.CREATE_MANY_ACCESSTOKENS;
       public payload: {id: any, data: any[]};
 
-    constructor(id: any, data: any[] = [], public meta?: any) {
+    constructor(id: any, data: any[] = [], customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },
@@ -3958,7 +5565,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.CREATE_MANY_ROLES;
       public payload: {id: any, data: any[]};
 
-    constructor(id: any, data: any[] = [], public meta?: any) {
+    constructor(id: any, data: any[] = [], customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },
@@ -4006,7 +5613,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.CREATE_MANY_ORGANIZATIONS;
       public payload: {id: any, data: any[]};
 
-    constructor(id: any, data: any[] = [], public meta?: any) {
+    constructor(id: any, data: any[] = [], customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },
@@ -4040,6 +5647,102 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
   },
 
   /**
+   * createManyContacts Action.
+   * Creates a new instance in contacts of this model.
+   *
+   * @param {any} id user id
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   * @param {any} meta (optional).
+   * 
+   */
+  createManyContacts: class implements Action {
+    public readonly type = UserActionTypes.CREATE_MANY_CONTACTS;
+      public payload: {id: any, data: any[]};
+
+    constructor(id: any, data: any[] = [], customHeaders?: Function, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * createManyContactsSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object[]} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  createManyContactsSuccess: class implements Action {
+    public readonly type = UserActionTypes.CREATE_MANY_CONTACTS_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * createManyContactsFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  createManyContactsFail: class implements Action {
+    public readonly type = UserActionTypes.CREATE_MANY_CONTACTS_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * createManyInvitations Action.
+   * Creates a new instance in invitations of this model.
+   *
+   * @param {any} id user id
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   * @param {any} meta (optional).
+   * 
+   */
+  createManyInvitations: class implements Action {
+    public readonly type = UserActionTypes.CREATE_MANY_INVITATIONS;
+      public payload: {id: any, data: any[]};
+
+    constructor(id: any, data: any[] = [], customHeaders?: Function, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * createManyInvitationsSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object[]} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  createManyInvitationsSuccess: class implements Action {
+    public readonly type = UserActionTypes.CREATE_MANY_INVITATIONS_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * createManyInvitationsFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  createManyInvitationsFail: class implements Action {
+    public readonly type = UserActionTypes.CREATE_MANY_INVITATIONS_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
    * createManyApps Action.
    * Creates a new instance in apps of this model.
    *
@@ -4054,7 +5757,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.CREATE_MANY_APPS;
       public payload: {id: any, data: any[]};
 
-    constructor(id: any, data: any[] = [], public meta?: any) {
+    constructor(id: any, data: any[] = [], customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },
@@ -4102,7 +5805,7 @@ Object.assign(BaseLoopbackActionsFactory<User>('User', UserActionTypes), {
     public readonly type = UserActionTypes.CREATE_MANY_OAUTHCLIENTAPPLICATIONS;
       public payload: {id: any, data: any[]};
 
-    constructor(id: any, data: any[] = [], public meta?: any) {
+    constructor(id: any, data: any[] = [], customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },

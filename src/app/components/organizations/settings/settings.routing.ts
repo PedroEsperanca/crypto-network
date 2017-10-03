@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { SettingsComponent } from './settings.component';
 
 import { SettingsProfileComponent } from './profile/profile.component';
-import { SettingsBillingComponent } from './billing/billing.component';
+import { SettingsStoreComponent } from './store/store.component';
 
 import { SettingsApplicationsComponent } from './applications/applications.component';
 import { SettingsApplicationsNewComponent } from './applications/new/new.component';
@@ -24,7 +24,11 @@ const routes: Routes = [
       },
       {
         path: 'billing',
-        component: SettingsBillingComponent,
+        loadChildren: './billing/billing.module#BillingModule',
+      },
+      {
+        path: 'store',
+        component: SettingsStoreComponent,
       },
       {
         path: 'applications',

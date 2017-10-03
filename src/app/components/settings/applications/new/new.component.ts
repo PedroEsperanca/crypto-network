@@ -82,7 +82,7 @@ export class SettingsApplicationsNewComponent implements OnDestroy {
     }).subscribe(
       (response: any) => {
         if (response.error) {
-          this.store.dispatch(new AlertActions.setAlert({
+          this.store.dispatch(new AlertActions.SetAlert({
             message: response.error_description,
             type: 'error'
           }));
@@ -100,7 +100,7 @@ export class SettingsApplicationsNewComponent implements OnDestroy {
           }
         }
       },
-      (error) => this.store.dispatch(new AlertActions.setAlert({
+      (error) => this.store.dispatch(new AlertActions.SetAlert({
         message: error.message,
         type: 'error'
       }))
@@ -123,7 +123,7 @@ export class SettingsApplicationsNewComponent implements OnDestroy {
     }).subscribe(
       (response: any) => {
         if (response.error) {
-          this.store.dispatch(new AlertActions.setAlert({
+          this.store.dispatch(new AlertActions.SetAlert({
             message: response.error_description,
             type: 'error'
           }));
@@ -135,7 +135,7 @@ export class SettingsApplicationsNewComponent implements OnDestroy {
           this.router.navigate(['/settings/applications/' + this.app.id]);
         }
       },
-      (error) => this.store.dispatch(new AlertActions.setAlert({
+      (error) => this.store.dispatch(new AlertActions.SetAlert({
         message: error.message,
         type: 'error'
       }))

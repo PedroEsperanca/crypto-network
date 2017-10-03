@@ -1,9 +1,9 @@
 /* tslint:disable */
-import { Observable } from 'rxjs/Observable';
 import { createSelector } from 'reselect';
 import { Action } from '@ngrx/store';
 import { BaseReducerFactory } from './base';
 import { OAuthApp } from '../models';
+import { LoopbackAction } from '../models/BaseModels';
 import { OAuthAppActionTypes } from '../actions';
 
 export interface OAuthAppsState {
@@ -25,7 +25,7 @@ const cases = BaseReducerFactory<OAuthAppsState, OAuthApp>(OAuthAppActionTypes);
  * @description
  * Provides with a LoopBack compatible OAuthApp reducer.
  */
-export function OAuthAppsReducer(state = initialState, action: Action): OAuthAppsState {
+export function OAuthAppsReducer(state = initialState, action: LoopbackAction): OAuthAppsState {
   if (cases[action.type]) {
     return cases[action.type](state, action);
   } else {

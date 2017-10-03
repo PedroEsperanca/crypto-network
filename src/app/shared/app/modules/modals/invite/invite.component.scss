@@ -1,0 +1,83 @@
+:host {
+  .modal-inviteFriends {
+    .modal-content {
+      background-color: rgb(240, 239, 238);
+      .modal-body {
+        .modal-title {
+          font-size: 24px;
+          margin: 0;
+          text-align: center;
+        }
+        .modal-subTitle {
+          margin: 20px 0 40px;
+          font-size: 14px;
+          text-align: center;
+          $number-size: 40px;
+          .number {
+            width: $number-size;
+            height: $number-size;
+            text-align: center;
+            vertical-align: middle;
+            display: block;
+            margin: 0 auto 5px;
+            border-radius: 40px;
+            padding: 8px 0;
+            border: 1px solid #000000;
+          }
+        }
+        .container {
+          @media screen and (max-width: 575px) and (min-width: 401px) { width: 90% !important; }
+          @media screen and (max-width: 400px) {
+            width: 95% !important;
+            padding: 0 10px !important;
+          }
+        }
+        .form-group {
+          margin: 20px 0 10px;
+          width: 100%;
+          display: block;
+          border: 2px solid #ffffff;
+          $button-width: 100px;
+          input,
+          button {
+            display: inline-block;
+          }
+          input {
+            width: calc( 100% - #{$button-width});
+            border-radius: 0;
+            border: 0px hidden transparent;
+            box-shadow: none;
+            outline: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+          }
+          button {
+            width: $button-width;
+            margin-left: -5px;
+            border-radius: 0;
+            height: 66px;
+            float: right;
+            margin-top: -33px;
+          }
+          @media screen and (max-width: 400px){
+            input,
+            button {
+              display: block;
+              width: 100%;
+              margin: 0px;
+            }
+          }
+        }
+
+        .modal-button {
+          display: block;
+          text-align: center;
+          margin: 10px 0 30px;
+        }
+        .container {
+          padding: 0 30px;
+        }
+      }
+    }
+  }
+}

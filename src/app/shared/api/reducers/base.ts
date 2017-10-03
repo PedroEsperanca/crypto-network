@@ -1,5 +1,5 @@
 /* tslint:disable */
-import { Action } from '@ngrx/store';
+import { LoopbackAction } from '../models/BaseModels';
 
 /**
 * @module BaseReducerFactory
@@ -23,13 +23,13 @@ export function BaseReducerFactory<S, T>(actionTypes: any): any {
   cases[actionTypes.PATCH_ATTRIBUTES_SUCCESS] =
   cases[actionTypes.FIND_BY_ID_SUCCESS] =
   cases[actionTypes.FIND_ONE_SUCCESS] =
-  (state: any, action: Action) => {
+  (state: any, action: LoopbackAction) => {
     if (Array.isArray(action.payload)) {
       let newIds = [...state.ids];
       let newEntities = Object.assign({}, state.entities);
       for (let value of action.payload) {
         newIds = [ ...newIds, value.id ];
-        newEntities = Object.assign({}, {
+        newEntities = Object.assign({}, newEntities, {
           [value.id]: Object.assign({}, newEntities[value.id], value)
         });
       }
@@ -42,24 +42,24 @@ export function BaseReducerFactory<S, T>(actionTypes: any): any {
       return Object.assign({}, state, {
         ids: Array.from(new Set([ ...state.ids, action.payload.id ])),
         entities: Object.assign({}, state.entities, {
-          [action.payload.id]: action.payload
+          [action.payload.id]: Object.assign({}, state.entities[action.payload.id], action.payload)
         })
       });
     }
   };
 
   cases[actionTypes.CREATE_MANY_SUCCESS] =
-  (state: any, action: Action) => {
+  (state: any, action: LoopbackAction) => {
     // TODO: check what is the response for this...
   };
 
   cases[actionTypes.FIND_SUCCESS] =
-  (state: any, action: Action) => {
+  (state: any, action: LoopbackAction) => {
     let newIds = [...state.ids];
     let newEntities = Object.assign({}, state.entities);
     for (let value of action.payload) {
       newIds = [ ...newIds, value.id ];
-      newEntities = Object.assign({}, {
+      newEntities = Object.assign({}, newEntities, {
         [value.id]: Object.assign({}, newEntities[value.id], value)
       });
     }
@@ -71,12 +71,12 @@ export function BaseReducerFactory<S, T>(actionTypes: any): any {
   };
 
   cases[actionTypes.UPDATE_ALL_SUCCESS] =
-  (state: any, action: Action) => {
+  (state: any, action: LoopbackAction) => {
     // TODO: figure out how to do this...
   };
 
   cases[actionTypes.DELETE_BY_ID_SUCCESS] =
-  (state: any, action: Action) => {
+  (state: any, action: LoopbackAction) => {
     delete state.entities[action.payload];
     
     let ids: Set<{}> = new Set(state.ids);

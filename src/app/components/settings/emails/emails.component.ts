@@ -61,19 +61,19 @@ export class SettingsEmailsComponent implements OnDestroy  {
     this.user.sendVerificationCode(this.currentUser.id, data).subscribe(
       (response: any) => {
         if (response.error) {
-          this.store.dispatch(new AlertActions.setAlert({
+          this.store.dispatch(new AlertActions.SetAlert({
             message: response.error_description,
             type: 'error'
           }));
         } else {
-          this.store.dispatch(new AlertActions.setAlert({
+          this.store.dispatch(new AlertActions.SetAlert({
             message: 'Verification Code sent to ' +
               this.currentUser.emailAddresses.filter((e) => { return e.id === emailId; })[0].masked,
             type: 'info'
           }));
         }
       },
-      (error) => this.store.dispatch(new AlertActions.setAlert({
+      (error) => this.store.dispatch(new AlertActions.SetAlert({
         message: error.message,
         type: 'error'
       }))
@@ -84,25 +84,31 @@ export class SettingsEmailsComponent implements OnDestroy  {
     this.user.setPrimaryEmail(this.currentUser.id, emailId).subscribe(
       (response: any) => {
         if (response.error) {
-          this.store.dispatch(new AlertActions.setAlert({
+          this.store.dispatch(new AlertActions.SetAlert({
             message: response.error_description,
             type: 'error'
           }));
         } else {
-          for (const email of this.currentUser.emailAddresses) {
+          const emailAddresses = Object.assign({}, this.currentUser).emailAddresses;
+          const newEmailAddresses = [];
+          for (const email of emailAddresses) {
             if (email.id === emailId) {
-              email.primary = true;
+              newEmailAddresses.push(Object.assign({}, email, {
+                primary: true
+              }));
             } else {
-              email.primary = false;
+              newEmailAddresses.push(Object.assign({}, email, {
+                primary: false
+              }));
             }
           }
 
           this.store.dispatch(new LoopbackAuthActions.updateUserProperties({
-            emailAddresses: this.currentUser.emailAddresses
+            emailAddresses: newEmailAddresses
           }));
         }
       },
-      (error) => this.store.dispatch(new AlertActions.setAlert({
+      (error) => this.store.dispatch(new AlertActions.SetAlert({
         message: error.message,
         type: 'error'
       }))
@@ -127,7 +133,7 @@ export class SettingsEmailsComponent implements OnDestroy  {
     this.user.destroyByIdEmails(this.currentUser.id, emailId).subscribe(
       (response: any) => {
         if (response.error) {
-          this.store.dispatch(new AlertActions.setAlert({
+          this.store.dispatch(new AlertActions.SetAlert({
             message: response.error_description,
             type: 'error'
           }));
@@ -144,7 +150,7 @@ export class SettingsEmailsComponent implements OnDestroy  {
           }));
         }
       },
-      (error) => this.store.dispatch(new AlertActions.setAlert({
+      (error) => this.store.dispatch(new AlertActions.SetAlert({
         message: error.message,
         type: 'error'
       }))
@@ -155,7 +161,7 @@ export class SettingsEmailsComponent implements OnDestroy  {
     this.user.createEmails(this.currentUser.id, {email: this.emailModel}).subscribe(
       (response: any) => {
         if (response.error) {
-          this.store.dispatch(new AlertActions.setAlert({
+          this.store.dispatch(new AlertActions.SetAlert({
             message: response.error_description,
             type: 'error'
           }));
@@ -165,7 +171,7 @@ export class SettingsEmailsComponent implements OnDestroy  {
           }));
         }
       },
-      (error) => this.store.dispatch(new AlertActions.setAlert({
+      (error) => this.store.dispatch(new AlertActions.SetAlert({
         message: error.message,
         type: 'error'
       }))

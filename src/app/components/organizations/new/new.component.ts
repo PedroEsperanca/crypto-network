@@ -19,7 +19,7 @@ import { IAppState, AlertActions } from 'shared/ngrx';
 
 interface FormI {
   name: string;
-  displayName: string;
+  billingEmail?: string;
   photo: string;
   clientURI: string;
   logo?: string;
@@ -39,7 +39,7 @@ export class OrganizationsNewComponent implements OnDestroy {
   public config: any;
   public formModel: FormI = {
     name: '',
-    displayName: '',
+    billingEmail: '',
     photo: '',
     clientURI: '',
     logo: '',
@@ -78,7 +78,7 @@ export class OrganizationsNewComponent implements OnDestroy {
     this.user.createOrganizations(this.currenUser.id, this.formModel).subscribe(
       (response: any) => {
         if (response.error) {
-          this.store.dispatch(new AlertActions.setAlert({
+          this.store.dispatch(new AlertActions.SetAlert({
             message: response.error_description,
             type: 'error'
           }));
@@ -96,7 +96,7 @@ export class OrganizationsNewComponent implements OnDestroy {
           }
         }
       },
-      (error) => this.store.dispatch(new AlertActions.setAlert({
+      (error) => this.store.dispatch(new AlertActions.SetAlert({
         message: error.message,
         type: 'error'
       }))
@@ -119,7 +119,7 @@ export class OrganizationsNewComponent implements OnDestroy {
     }).subscribe(
       (response: any) => {
         if (response.error) {
-          this.store.dispatch(new AlertActions.setAlert({
+          this.store.dispatch(new AlertActions.SetAlert({
             message: response.error_description,
             type: 'error'
           }));
@@ -131,7 +131,7 @@ export class OrganizationsNewComponent implements OnDestroy {
           this.router.navigate(['organizations/' + this.org.id + '/settings/']);
         }
       },
-      (error) => this.store.dispatch(new AlertActions.setAlert({
+      (error) => this.store.dispatch(new AlertActions.SetAlert({
         message: error.message,
         type: 'error'
       }))

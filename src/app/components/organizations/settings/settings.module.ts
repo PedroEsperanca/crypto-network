@@ -13,7 +13,7 @@ import { routing } from './settings.routing';
 import { SettingsComponent } from './settings.component';
 
 import { SettingsProfileComponent } from './profile/profile.component';
-import { SettingsBillingComponent } from './billing/billing.component';
+import { SettingsStoreComponent } from './store/store.component';
 
 import { SettingsApplicationsComponent } from './applications/applications.component';
 import { SettingsApplicationsNewComponent } from './applications/new/new.component';
@@ -36,7 +36,7 @@ import {
   declarations: [
     SettingsComponent,
     SettingsProfileComponent,
-    SettingsBillingComponent,
+    SettingsStoreComponent,
 
     SettingsApplicationsComponent,
     SettingsApplicationsNewComponent,

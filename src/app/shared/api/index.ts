@@ -51,7 +51,13 @@ import { SocketConnection } from './sockets/socket.connections';
 import { RealTime } from './services/core/real.time';
 import { UserApi } from './services/custom/User';
 import { OrganizationApi } from './services/custom/Organization';
+import { ContactApi } from './services/custom/Contact';
+import { StripeCustomerApi } from './services/custom/StripeCustomer';
+import { StripeSourceApi } from './services/custom/StripeSource';
+import { StripeChargeApi } from './services/custom/StripeCharge';
 import { AppApi } from './services/custom/App';
+import { ProductApi } from './services/custom/Product';
+import { SubscriptionApi } from './services/custom/Subscription';
 import { OAuthAppApi } from './services/custom/OAuthApp';
 /**
 * @module SDKBrowserModule
@@ -86,7 +92,13 @@ export class SDKBrowserModule {
         RealTime,
         UserApi,
         OrganizationApi,
+        ContactApi,
+        StripeCustomerApi,
+        StripeSourceApi,
+        StripeChargeApi,
         AppApi,
+        ProductApi,
+        SubscriptionApi,
         OAuthAppApi,
         internalStorageProvider,
         { provide: SDKStorage, useClass: StorageBrowser },
@@ -107,7 +119,6 @@ export { CookieBrowser } from './storage/cookie.browser';
 export { StorageBrowser } from './storage/storage.browser';
 
 export * from './actions/index';
-export * from './effects/index';
 export * from './reducers/index';
 export * from './state';
 export * from './guards/index';

@@ -1,6 +1,7 @@
+import './operators';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import {
   NgModule,
   ApplicationRef
@@ -26,7 +27,7 @@ import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
 
 // Advance
-import { ADVANCE_MODULES } from './app.advance';
+import { ADVANCE_MODULES, ADVANCE_PROVIDERS } from './app.advance';
 // App
 import { MY_APP_PROVIDERS, MY_APP_IMPORTS } from 'shared/app';
 import { NotFoundComponent } from 'components/not-found/not-found.component';
@@ -39,9 +40,9 @@ const APP_PROVIDERS = [
 ];
 
 interface StoreType {
-  state: InternalStateType,
-  restoreInputValues: () => void,
-  disposeOldHosts: () => void
+  state: InternalStateType;
+  restoreInputValues: () => void;
+  disposeOldHosts: () => void;
 }
 
 /**
@@ -56,13 +57,14 @@ interface StoreType {
   imports: [ // import Angular's modules
     BrowserModule,
     FormsModule,
-    HttpModule,
+    HttpClientModule,
     ...ADVANCE_MODULES,
     ...MY_APP_IMPORTS
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
-    APP_PROVIDERS
+    APP_PROVIDERS,
+    ...ADVANCE_PROVIDERS
   ]
 })
 export class AppModule {

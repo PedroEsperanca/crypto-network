@@ -7,6 +7,15 @@
     color: white !important;
   }
 
+  .menu-item-danger, .menu-item-danger.selected {
+    color: #cb2431;
+
+    &:hover {
+      color: #fff;
+      background: #d73a49;
+    }
+  }
+
   .spinner {
     > div {
       background-color: blue;
@@ -78,6 +87,18 @@
     margin-right: 5px;
     margin-left: -1px;
     text-align: center;
+  }
+
+  .select-menu-modal-holder .dropdown-item {
+    i {
+      margin-top: 3px;
+      position: absolute;
+      float: left;
+    }
+
+    span {
+      margin-left: 24px;
+    }
   }
 
   .table-list-header-next {
@@ -217,6 +238,22 @@
     .modal-header {
       font-size: 18px;
       font-weight: normal;
+    }
+  }
+
+  .ngx-datatable.material {
+    box-shadow: none;
+    border: 1px solid #e1e4e8;
+    border-top: none;
+    overflow: visible;
+    
+    .datatable-body-row > div {
+      align-items: center;
+      justify-content: center;
+    }
+
+    img {
+      max-width: 100%;
     }
   }
 }

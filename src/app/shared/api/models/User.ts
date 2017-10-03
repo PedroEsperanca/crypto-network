@@ -1,6 +1,10 @@
 /* tslint:disable */
 import {
+  StripeCustomer,
+  StripeSource,
+  StripeCharge,
   Organization,
+  Contact,
   App,
   OAuthApp
 } from '../index';
@@ -10,27 +14,29 @@ export interface UserInterface {
   "name"?: string;
   "emailPreferences"?: string;
   "notifications"?: any;
-  "photo"?: any;
   "realm"?: string;
   "username"?: string;
-  "password": string;
-  "email"?: string;
   "emailVerified"?: boolean;
-  "verificationToken"?: string;
   "id"?: any;
   "emailAddresses"?: Array<any>;
   "phoneNumbers"?: Array<any>;
-  "phone"?: string;
   "createdAt"?: Date;
   "updatedAt"?: Date;
+  "photo"?: any;
+  "password"?: string;
   emails?: any[];
   phones?: any[];
   s3Photo?: any[];
+  stripeCustomer?: StripeCustomer;
+  stripeSources?: StripeSource[];
+  stripeCharges?: StripeCharge[];
   identities?: any[];
   credentials?: any[];
   accessTokens?: any[];
   roles?: any[];
   organizations?: Organization[];
+  contacts?: Contact[];
+  invitations?: any[];
   apps?: App[];
   oAuthClientApplications?: OAuthApp[];
 }
@@ -39,27 +45,29 @@ export class User implements UserInterface {
   "name": string;
   "emailPreferences": string;
   "notifications": any;
-  "photo": any;
   "realm": string;
   "username": string;
-  "password": string;
-  "email": string;
   "emailVerified": boolean;
-  "verificationToken": string;
   "id": any;
   "emailAddresses": Array<any>;
   "phoneNumbers": Array<any>;
-  "phone": string;
   "createdAt": Date;
   "updatedAt": Date;
+  "photo": any;
+  "password": string;
   emails: any[];
   phones: any[];
   s3Photo: any[];
+  stripeCustomer: StripeCustomer;
+  stripeSources: StripeSource[];
+  stripeCharges: StripeCharge[];
   identities: any[];
   credentials: any[];
   accessTokens: any[];
   roles: any[];
   organizations: Organization[];
+  contacts: Contact[];
+  invitations: any[];
   apps: App[];
   oAuthClientApplications: OAuthApp[];
   constructor(data?: UserInterface) {
@@ -92,6 +100,7 @@ export class User implements UserInterface {
     return {
       name: 'User',
       plural: 'users',
+      path: 'users',
       idName: 'id',
       properties: {
         "name": {
@@ -107,10 +116,6 @@ export class User implements UserInterface {
           name: 'notifications',
           type: 'any'
         },
-        "photo": {
-          name: 'photo',
-          type: 'any'
-        },
         "realm": {
           name: 'realm',
           type: 'string'
@@ -119,21 +124,9 @@ export class User implements UserInterface {
           name: 'username',
           type: 'string'
         },
-        "password": {
-          name: 'password',
-          type: 'string'
-        },
-        "email": {
-          name: 'email',
-          type: 'string'
-        },
         "emailVerified": {
           name: 'emailVerified',
           type: 'boolean'
-        },
-        "verificationToken": {
-          name: 'verificationToken',
-          type: 'string'
         },
         "id": {
           name: 'id',
@@ -149,10 +142,6 @@ export class User implements UserInterface {
           type: 'Array&lt;any&gt;',
           default: <any>[]
         },
-        "phone": {
-          name: 'phone',
-          type: 'string'
-        },
         "createdAt": {
           name: 'createdAt',
           type: 'Date'
@@ -161,6 +150,14 @@ export class User implements UserInterface {
           name: 'updatedAt',
           type: 'Date'
         },
+        "photo": {
+          name: 'photo',
+          type: 'any'
+        },
+        "password": {
+          name: 'password',
+          type: 'string'
+        },
       },
       relations: {
         emails: {
@@ -168,7 +165,7 @@ export class User implements UserInterface {
           type: 'any[]',
           model: '',
           relationType: 'embedsMany',
-          keyFrom: 'emailAddresses',
+                  keyFrom: 'emailAddresses',
           keyTo: 'id'
         },
         phones: {
@@ -176,7 +173,7 @@ export class User implements UserInterface {
           type: 'any[]',
           model: '',
           relationType: 'embedsMany',
-          keyFrom: 'phoneNumbers',
+                  keyFrom: 'phoneNumbers',
           keyTo: 'id'
         },
         s3Photo: {
@@ -184,15 +181,39 @@ export class User implements UserInterface {
           type: 'any[]',
           model: '',
           relationType: 'embedsOne',
-          keyFrom: 'photo',
+                  keyFrom: 'photo',
           keyTo: 'id'
+        },
+        stripeCustomer: {
+          name: 'stripeCustomer',
+          type: 'StripeCustomer',
+          model: 'StripeCustomer',
+          relationType: 'hasOne',
+                  keyFrom: 'id',
+          keyTo: 'userId'
+        },
+        stripeSources: {
+          name: 'stripeSources',
+          type: 'StripeSource[]',
+          model: 'StripeSource',
+          relationType: 'hasMany',
+                  keyFrom: 'id',
+          keyTo: 'customer'
+        },
+        stripeCharges: {
+          name: 'stripeCharges',
+          type: 'StripeCharge[]',
+          model: 'StripeCharge',
+          relationType: 'hasMany',
+                  keyFrom: 'id',
+          keyTo: 'customer'
         },
         identities: {
           name: 'identities',
           type: 'any[]',
           model: '',
           relationType: 'hasMany',
-          keyFrom: 'id',
+                  keyFrom: 'id',
           keyTo: 'userId'
         },
         credentials: {
@@ -200,7 +221,7 @@ export class User implements UserInterface {
           type: 'any[]',
           model: '',
           relationType: 'hasMany',
-          keyFrom: 'id',
+                  keyFrom: 'id',
           keyTo: 'userId'
         },
         accessTokens: {
@@ -208,7 +229,7 @@ export class User implements UserInterface {
           type: 'any[]',
           model: '',
           relationType: 'hasMany',
-          keyFrom: 'id',
+                  keyFrom: 'id',
           keyTo: 'userId'
         },
         roles: {
@@ -216,7 +237,7 @@ export class User implements UserInterface {
           type: 'any[]',
           model: '',
           relationType: 'hasMany',
-          keyFrom: 'id',
+                  keyFrom: 'id',
           keyTo: 'userId'
         },
         organizations: {
@@ -224,7 +245,25 @@ export class User implements UserInterface {
           type: 'Organization[]',
           model: 'Organization',
           relationType: 'hasMany',
+          modelThrough: 'UserRole',
+          keyThrough: 'organizationId',
           keyFrom: 'id',
+          keyTo: 'userId'
+        },
+        contacts: {
+          name: 'contacts',
+          type: 'Contact[]',
+          model: 'Contact',
+          relationType: 'hasMany',
+                  keyFrom: 'id',
+          keyTo: 'userId'
+        },
+        invitations: {
+          name: 'invitations',
+          type: 'any[]',
+          model: '',
+          relationType: 'hasMany',
+                  keyFrom: 'id',
           keyTo: 'userId'
         },
         apps: {
@@ -232,7 +271,7 @@ export class User implements UserInterface {
           type: 'App[]',
           model: 'App',
           relationType: 'hasMany',
-          keyFrom: 'id',
+                  keyFrom: 'id',
           keyTo: 'userId'
         },
         oAuthClientApplications: {
@@ -240,7 +279,7 @@ export class User implements UserInterface {
           type: 'OAuthApp[]',
           model: 'OAuthApp',
           relationType: 'hasMany',
-          keyFrom: 'id',
+                  keyFrom: 'id',
           keyTo: 'userId'
         },
       }

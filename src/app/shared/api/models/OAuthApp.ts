@@ -6,7 +6,6 @@ import {
 
 declare var Object: any;
 export interface OAuthAppInterface {
-  "logo"?: any;
   "id"?: string;
   "clientType"?: string;
   "redirectURIs"?: Array<any>;
@@ -43,16 +42,16 @@ export interface OAuthAppInterface {
   "created"?: Date;
   "modified"?: Date;
   "userId"?: any;
-  "organizationId"?: string;
+  "organizationId"?: any;
   "createdAt"?: Date;
   "updatedAt"?: Date;
+  "logo"?: any;
   user?: User;
   organization?: Organization;
   s3Logo?: any[];
 }
 
 export class OAuthApp implements OAuthAppInterface {
-  "logo": any;
   "id": string;
   "clientType": string;
   "redirectURIs": Array<any>;
@@ -89,9 +88,10 @@ export class OAuthApp implements OAuthAppInterface {
   "created": Date;
   "modified": Date;
   "userId": any;
-  "organizationId": string;
+  "organizationId": any;
   "createdAt": Date;
   "updatedAt": Date;
+  "logo": any;
   user: User;
   organization: Organization;
   s3Logo: any[];
@@ -125,12 +125,9 @@ export class OAuthApp implements OAuthAppInterface {
     return {
       name: 'OAuthApp',
       plural: 'OAuthApps',
+      path: 'OAuthApps',
       idName: 'id',
       properties: {
-        "logo": {
-          name: 'logo',
-          type: 'any'
-        },
         "id": {
           name: 'id',
           type: 'string'
@@ -278,7 +275,7 @@ export class OAuthApp implements OAuthAppInterface {
         },
         "organizationId": {
           name: 'organizationId',
-          type: 'string'
+          type: 'any'
         },
         "createdAt": {
           name: 'createdAt',
@@ -288,6 +285,10 @@ export class OAuthApp implements OAuthAppInterface {
           name: 'updatedAt',
           type: 'Date'
         },
+        "logo": {
+          name: 'logo',
+          type: 'any'
+        },
       },
       relations: {
         user: {
@@ -295,7 +296,7 @@ export class OAuthApp implements OAuthAppInterface {
           type: 'User',
           model: 'User',
           relationType: 'belongsTo',
-          keyFrom: 'userId',
+                  keyFrom: 'userId',
           keyTo: 'id'
         },
         organization: {
@@ -303,7 +304,7 @@ export class OAuthApp implements OAuthAppInterface {
           type: 'Organization',
           model: 'Organization',
           relationType: 'belongsTo',
-          keyFrom: 'organizationId',
+                  keyFrom: 'organizationId',
           keyTo: 'id'
         },
         s3Logo: {
@@ -311,7 +312,7 @@ export class OAuthApp implements OAuthAppInterface {
           type: 'any[]',
           model: '',
           relationType: 'embedsOne',
-          keyFrom: 'logo',
+                  keyFrom: 'logo',
           keyTo: 'id'
         },
       }

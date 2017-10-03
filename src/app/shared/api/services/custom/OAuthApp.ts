@@ -50,7 +50,7 @@ export class OAuthAppApi extends BaseLoopBackApi {
    *
    *  - `data` – `{object}` - new keys
    */
-  public keysReset(id: any): Observable<any> {
+  public keysReset(id: any, customHeaders?: Function): Observable<any> {
     let _method: string = "PUT";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/OAuthApps/:id/resetKeys";
@@ -59,7 +59,7 @@ export class OAuthAppApi extends BaseLoopBackApi {
     };
     let _postBody: any = {};
     let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
 
@@ -79,7 +79,7 @@ export class OAuthAppApi extends BaseLoopBackApi {
    * This usually means the response is a `OAuthApp` object.)
    * </em>
    */
-  public getUser(id: any, refresh: any = {}): Observable<any> {
+  public getUser(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/OAuthApps/:id/user";
@@ -88,8 +88,8 @@ export class OAuthAppApi extends BaseLoopBackApi {
     };
     let _postBody: any = {};
     let _urlParams: any = {};
-    if (refresh) _urlParams.refresh = refresh;
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    if (typeof refresh !== 'undefined' && refresh !== null) _urlParams.refresh = refresh;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
 
@@ -109,7 +109,7 @@ export class OAuthAppApi extends BaseLoopBackApi {
    * This usually means the response is a `OAuthApp` object.)
    * </em>
    */
-  public getOrganization(id: any, refresh: any = {}): Observable<any> {
+  public getOrganization(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/OAuthApps/:id/organization";
@@ -118,8 +118,8 @@ export class OAuthAppApi extends BaseLoopBackApi {
     };
     let _postBody: any = {};
     let _urlParams: any = {};
-    if (refresh) _urlParams.refresh = refresh;
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    if (typeof refresh !== 'undefined' && refresh !== null) _urlParams.refresh = refresh;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
 
@@ -139,7 +139,7 @@ export class OAuthAppApi extends BaseLoopBackApi {
    * This usually means the response is a `OAuthApp` object.)
    * </em>
    */
-  public getS3Logo(id: any, refresh: any = {}): Observable<any> {
+  public getS3Logo(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/OAuthApps/:id/s3Logo";
@@ -148,8 +148,8 @@ export class OAuthAppApi extends BaseLoopBackApi {
     };
     let _postBody: any = {};
     let _urlParams: any = {};
-    if (refresh) _urlParams.refresh = refresh;
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    if (typeof refresh !== 'undefined' && refresh !== null) _urlParams.refresh = refresh;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
 
@@ -171,7 +171,7 @@ export class OAuthAppApi extends BaseLoopBackApi {
    * This usually means the response is a `OAuthApp` object.)
    * </em>
    */
-  public createS3Logo(id: any, data: any = {}): Observable<any> {
+  public createS3Logo(id: any, data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "POST";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/OAuthApps/:id/s3Logo";
@@ -182,7 +182,7 @@ export class OAuthAppApi extends BaseLoopBackApi {
       data: data
     };
     let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
 
@@ -204,7 +204,7 @@ export class OAuthAppApi extends BaseLoopBackApi {
    * This usually means the response is a `OAuthApp` object.)
    * </em>
    */
-  public updateS3Logo(id: any, data: any = {}): Observable<any> {
+  public updateS3Logo(id: any, data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PUT";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/OAuthApps/:id/s3Logo";
@@ -215,7 +215,7 @@ export class OAuthAppApi extends BaseLoopBackApi {
       data: data
     };
     let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
 
@@ -230,7 +230,7 @@ export class OAuthAppApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  public destroyS3Logo(id: any): Observable<any> {
+  public destroyS3Logo(id: any, customHeaders?: Function): Observable<any> {
     let _method: string = "DELETE";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/OAuthApps/:id/s3Logo";
@@ -239,7 +239,7 @@ export class OAuthAppApi extends BaseLoopBackApi {
     };
     let _postBody: any = {};
     let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
 
@@ -259,7 +259,7 @@ export class OAuthAppApi extends BaseLoopBackApi {
    * This usually means the response is a `OAuthApp` object.)
    * </em>
    */
-  public patchOrCreate(data: any = {}): Observable<any> {
+  public patchOrCreate(data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PATCH";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/OAuthApps";
@@ -268,7 +268,7 @@ export class OAuthAppApi extends BaseLoopBackApi {
       data: data
     };
     let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
 
@@ -290,7 +290,7 @@ export class OAuthAppApi extends BaseLoopBackApi {
    * This usually means the response is a `OAuthApp` object.)
    * </em>
    */
-  public patchAttributes(id: any, data: any = {}): Observable<any> {
+  public patchAttributes(id: any, data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PATCH";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/OAuthApps/:id";
@@ -301,7 +301,7 @@ export class OAuthAppApi extends BaseLoopBackApi {
       data: data
     };
     let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
 
@@ -323,7 +323,7 @@ export class OAuthAppApi extends BaseLoopBackApi {
    * This usually means the response is a `OAuthApp` object.)
    * </em>
    */
-  public s3PUTSignedUrl(id: any, key: any = {}, options: any = {}): Observable<any> {
+  public s3PUTSignedUrl(id: any, key: any = {}, options: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/OAuthApps/:id/s3PUTSignedUrl";
@@ -332,9 +332,9 @@ export class OAuthAppApi extends BaseLoopBackApi {
     };
     let _postBody: any = {};
     let _urlParams: any = {};
-    if (key) _urlParams.key = key;
-    if (options) _urlParams.options = options;
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    if (typeof key !== 'undefined' && key !== null) _urlParams.key = key;
+    if (typeof options !== 'undefined' && options !== null) _urlParams.options = options;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
 
@@ -354,7 +354,7 @@ export class OAuthAppApi extends BaseLoopBackApi {
    * This usually means the response is a `OAuthApp` object.)
    * </em>
    */
-  public s3GETSignedUrl(id: any, key: any = {}): Observable<any> {
+  public s3GETSignedUrl(id: any, key: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/OAuthApps/:id/s3GETSignedUrl";
@@ -363,8 +363,8 @@ export class OAuthAppApi extends BaseLoopBackApi {
     };
     let _postBody: any = {};
     let _urlParams: any = {};
-    if (key) _urlParams.key = key;
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    if (typeof key !== 'undefined' && key !== null) _urlParams.key = key;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
 
@@ -388,18 +388,18 @@ export class OAuthAppApi extends BaseLoopBackApi {
    * This usually means the response is a `OAuthApp` object.)
    * </em>
    */
-  public stats(range: any, custom: any = {}, where: any = {}, groupBy: any = {}): Observable<any> {
+  public stats(range: any, custom: any = {}, where: any = {}, groupBy: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/OAuthApps/stats";
     let _routeParams: any = {};
     let _postBody: any = {};
     let _urlParams: any = {};
-    if (range) _urlParams.range = range;
-    if (custom) _urlParams.custom = custom;
-    if (where) _urlParams.where = where;
-    if (groupBy) _urlParams.groupBy = groupBy;
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    if (typeof range !== 'undefined' && range !== null) _urlParams.range = range;
+    if (typeof custom !== 'undefined' && custom !== null) _urlParams.custom = custom;
+    if (typeof where !== 'undefined' && where !== null) _urlParams.where = where;
+    if (typeof groupBy !== 'undefined' && groupBy !== null) _urlParams.groupBy = groupBy;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
 
@@ -421,7 +421,7 @@ export class OAuthAppApi extends BaseLoopBackApi {
    * This usually means the response is a `OAuthApp` object.)
    * </em>
    */
-  public createManyS3Logo(id: any, data: any[] = []): Observable<any> {
+  public createManyS3Logo(id: any, data: any[] = [], customHeaders?: Function): Observable<any> {
     let _method: string = "POST";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/OAuthApps/:id/s3Logo";
@@ -432,7 +432,7 @@ export class OAuthAppApi extends BaseLoopBackApi {
       data: data
     };
     let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
 

@@ -6,6 +6,4 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   templateUrl: './billing.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SettingsBillingComponent {
-  public USER: any = {};
-}
+export class SettingsBillingComponent {}

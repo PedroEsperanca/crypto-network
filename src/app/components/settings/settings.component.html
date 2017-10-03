@@ -14,6 +14,7 @@
         </a>
         <a routerLink="/settings/notifications" class="menu-item" routerLinkActive="active">{{'Notifications' | translate}}</a>
         <a routerLink="/settings/billing" class="menu-item" routerLinkActive="active">{{'Billing' | translate}}</a>
+        <a routerLink="/settings/referrals" class="menu-item" routerLinkActive="active">{{'Referrals' | translate}}</a>
         <a *ngIf="config.settings?.organizations" routerLink="/settings/organizations" class="menu-item" routerLinkActive="active">{{'Organizations' | translate}}</a>
       </nav>
 
@@ -30,8 +31,8 @@
           *ngFor="let org of currentUser.organizations"
           routerLink="/organizations/{{org.id}}/settings">
 
-          <img alt="@{{org.displayName}}" class="avatar org-avatar" height="20" [src]="org.logo?.url || org.logo || config.logo" width="20" />
-          {{org.displayName}}
+          <img alt="@{{org.name}}" class="avatar org-avatar" height="20" [src]="org.logo?.url || org.logo || config.logo" width="20" />
+          {{org.name}}
         </a>
       </nav>
     </div>

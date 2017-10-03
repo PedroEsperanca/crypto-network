@@ -1,16 +1,15 @@
-import '@ngrx/core/add/operator/select';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/let';
 import { Observable } from 'rxjs/Observable';
 import { Action } from '@ngrx/store';
 
-import { ApplicationActions } from '../actions/application';
+import { ApplicationActionTypes, IApplicationActions, ApplicationActions } from '../actions/application';
 
 export interface ApplicationState {
   idle: boolean;
   selectedOrganizationId: string;
   selectedAppId: string;
-};
+}
 
 const initialState: ApplicationState = {
   idle: false,
@@ -18,10 +17,10 @@ const initialState: ApplicationState = {
   selectedAppId: null
 };
 
-export function reducer(state = initialState, action: Action): ApplicationState {
+export function reducer(state = initialState, action: IApplicationActions | any): ApplicationState {
   switch (action.type) {
 
-    case ApplicationActions.SET_IDLE: {
+    case ApplicationActionTypes.SET_IDLE: {
       return {
         idle: true,
         selectedOrganizationId: state.selectedOrganizationId,
@@ -29,7 +28,7 @@ export function reducer(state = initialState, action: Action): ApplicationState 
       };
     }
 
-    case ApplicationActions.SET_ACTIVE: {
+    case ApplicationActionTypes.SET_ACTIVE: {
       return {
         idle: false,
         selectedOrganizationId: state.selectedOrganizationId,
@@ -37,23 +36,19 @@ export function reducer(state = initialState, action: Action): ApplicationState 
       };
     }
 
-    case ApplicationActions.SELECT_ORGANIZATION: {
-      const id: string = action.payload;
-
+    case ApplicationActionTypes.SELECT_ORGANIZATION: {
       return {
         idle: state.idle,
-        selectedOrganizationId: id,
+        selectedOrganizationId: action.payload,
         selectedAppId: state.selectedAppId
       };
     }
 
-    case ApplicationActions.SELECT_APP: {
-      const id: string = action.payload;
-
+    case ApplicationActionTypes.SELECT_APP: {
       return {
         idle: state.idle,
         selectedOrganizationId: state.selectedOrganizationId,
-        selectedAppId: id
+        selectedAppId: action.payload
       };
     }
 

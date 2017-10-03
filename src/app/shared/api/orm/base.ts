@@ -9,7 +9,7 @@ import { createIO } from './io';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 
-import { applyFilter } from './filter';
+import { applyFilter, toArray } from './filter';
 
 import { LoopBackFilter } from '../models';
 
@@ -22,8 +22,8 @@ export class OrmBase<T> {
       createIO(filter, this.store, destroyStream$, this.model, this.realTime, meta);
 
       return applyFilter(
-        this.store.select(this.model.getModelName() + 's')
-          .map((state: any) => state.entities)
+        this.store.select<any>(this.model.getModelName() + 's')
+          .map(toArray)
           .finally(() => {
             destroyStream$.next(1);
             destroyStream$.complete();
@@ -33,8 +33,8 @@ export class OrmBase<T> {
       this.store.dispatch(new this.actions.find(filter, meta));
 
       return applyFilter(
-        this.store.select(this.model.getModelName() + 's')
-          .map((state: any) => state.entities)
+        this.store.select<any>(this.model.getModelName() + 's')
+          .map(toArray)
         , filter, this.store, this.model);
     }
   }
@@ -49,7 +49,7 @@ export class OrmBase<T> {
       createIO(newFilter, this.store, destroyStream$, this.model, this.realTime, meta);
 
       return applyFilter(
-        this.store.select(this.model.getModelName() + 's')
+        this.store.select<any>(this.model.getModelName() + 's')
           .map((state: any) => state.entities[id])
           .finally(() => {
             destroyStream$.next(1);
@@ -62,7 +62,7 @@ export class OrmBase<T> {
       this.store.dispatch(new this.actions.findById(id, filter, meta));
 
       return applyFilter(
-        this.store.select(this.model.getModelName() + 's')
+        this.store.select<any>(this.model.getModelName() + 's')
           .map((state: any) => state.entities[id])
         , filter, this.store, this.model).map((data: any[]) => {
           return data[0];
@@ -79,8 +79,8 @@ export class OrmBase<T> {
       createIO(newFilter, this.store, destroyStream$, this.model, this.realTime, meta);
 
       return applyFilter(
-        this.store.select(this.model.getModelName() + 's')
-          .map((state: any) => state.entities)
+        this.store.select<any>(this.model.getModelName() + 's')
+          .map(toArray)
           .finally(() => {
             destroyStream$.next(1);
             destroyStream$.complete();
@@ -92,8 +92,8 @@ export class OrmBase<T> {
       this.store.dispatch(new this.actions.findOne(filter, meta));
 
       return applyFilter(
-        this.store.select(this.model.getModelName() + 's')
-          .map((state: any) => state.entities)
+        this.store.select<any>(this.model.getModelName() + 's')
+          .map(toArray)
         , newFilter, this.store, this.model).map((data: any[]) => {
           return data[0];
         });

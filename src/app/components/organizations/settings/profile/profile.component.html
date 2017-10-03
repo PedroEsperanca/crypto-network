@@ -4,23 +4,23 @@
 
 <form (ngSubmit)="submitUpdate()" #profileForm="ngForm">
 
-  <dl *ngIf="!config.settings.usePhotoUpload" class="profile-avatar float-right">
+  <dl *ngIf="!config?.settings.usePhotoUpload" class="profile-avatar float-right">
     <img class="avatar" [src]="formModel.logo?.url || formModel.logo || config.logo">
   </dl>
 
-  <app-file-uploader *ngIf="config.settings.usePhotoUpload"
+  <app-file-uploader *ngIf="config?.settings.usePhotoUpload"
     type="profile"
     title="Organization logo"
     uploadButton="Upload new image"
     uploadingButton="Uploading"
     [autoUpload]="true"
-    [currentFile]="formModel.logo?.url || config.logo"
+    [currentFile]="formModel?.logo?.url || config.logo"
     [fileNameRewrite]="fileNameRewrite"
     [getUploadUrl]="getUploadUrl"
     [onCompleteItem]="onUploadComplete"
     class="profile-avatar float-right"></app-file-uploader>
 
-  <div>
+  <div *ngIf="formModel$ | async">
     <dl class="form-group">
       <dt><label for="name">{{'Organization name' | translate}}</label></dt>
       <dd>
@@ -30,13 +30,13 @@
     </dl>
 
     <dl class="form-group">
-      <dt><label for="displayName">{{'Organization display name' | translate}}</label></dt>
+      <dt><label for="billingEmail">{{'Billing email (Private)' | translate}}</label></dt>
       <dd>
-        <input class="form-control" type="text" id="displayName" name="displayName" [(ngModel)]="formModel.displayName" required>
+        <input class="form-control" type="text" id="billingEmail" name="billingEmail" [(ngModel)]="formModel.billingEmail" required>
       </dd>
     </dl>
 
-    <dl *ngIf="!config.settings.usePhotoUpload" class="form-group">
+    <dl *ngIf="!config?.settings.usePhotoUpload" class="form-group">
       <dt><label for="logo">{{'Organization Logo Url' | translate}}</label></dt>
       <dd>
         <input class="form-control" type="text" id="logo" name="logo" [(ngModel)]="formModel.logo">
@@ -46,12 +46,10 @@
     <dl class="form-group">
       <dt><label for="description">{{'Organization description' | translate}}</label></dt>
       <dd>
-        <textarea class="form-control short" cols="40" id="description" name="description" [(ngModel)]="formModel.description" placeholder="{{'Organization description is optional' | translate}}" rows="20" tabindex="4"></textarea>
+        <textarea class="form-control" id="description" name="description" [(ngModel)]="formModel.description" placeholder="{{'Organization description is optional' | translate}}" rows="4" tabindex="4"></textarea>
       </dd>
     </dl>
 
     <p><button type="submit" class="btn btn-primary" [disabled]="!profileForm.form.valid">{{'Update profile' | translate}}</button></p>
   </div>
 </form>
-
-<pre>{{formModel | json}}</pre>

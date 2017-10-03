@@ -1,8 +1,4 @@
 import { environment } from 'environment';
-// libs
-import { DBModule } from '@ngrx/db';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-// import { StoreLogMonitorModule, useLogMonitor } from '@ngrx/store-log-monitor';
 
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
@@ -15,15 +11,12 @@ import { CloudtasksModule } from '@cloudtasks/ngx-image';
 import { ScrollSpyModule } from 'ngx-scrollspy';
 
 // ngrx
-// import { NOTIFY_PROVIDERS, NOTIFY_GLOBAL_OPTIONS } from '@ngrx/notify';
 import { LOOPBACK_GUARDS_PROVIDERS } from '../api/guards';
 import { GUARDS_PROVIDERS } from './guards';
 import { RESOLVERS_PROVIDERS } from './resolvers';
+import { MODAL_MODULES } from './modules/modals';
 
 import { LoopBackConfig } from 'shared/api';
-
-import { schema } from 'shared/ngrx/db-schema';
-import { ACTIONS } from 'shared/ngrx/actions';
 
 LoopBackConfig.setBaseURL(environment.base_url);
 LoopBackConfig.setApiVersion(environment.api_version);
@@ -34,10 +27,6 @@ export const MY_APP_PROVIDERS: any[] = [
   LOOPBACK_GUARDS_PROVIDERS,
   GUARDS_PROVIDERS,
   RESOLVERS_PROVIDERS,
-
-  // ngrx
-  // NOTIFY_PROVIDERS,
-  // { provide: NOTIFY_GLOBAL_OPTIONS, multi: true, useValue: { /* global options here */ } }
 ];
 
 export const MY_APP_IMPORTS: any[] = [
@@ -53,13 +42,5 @@ export const MY_APP_IMPORTS: any[] = [
     useClass: StorageBrowser
   }),
 
-  DBModule.provideDB(schema),
-
-  /*StoreDevtoolsModule.instrumentStore({
-    monitor: useLogMonitor({
-      visible: true,
-      position: 'right'
-    })
-  }),*/
-  // StoreLogMonitorModule
+  ...MODAL_MODULES
 ];

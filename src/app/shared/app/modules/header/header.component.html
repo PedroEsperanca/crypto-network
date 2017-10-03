@@ -1,10 +1,6 @@
 <header>
   <div class="container-fluid">
-    <nav class="navbar navbar-toggleable-md">
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
+    <nav class="navbar navbar-expand-md">
       <a *ngIf="!auth.getCurrentUserId()" routerLink="/" class="navbar-brand logo">
         <h2 style="margin: 0 7px 8px;">
           <img src="{{config.logo}}">
@@ -18,14 +14,25 @@
           <!--<img [ctSrc]="config.settings?.logo" ctSize="32x32">-->
         </h2>
       </a>
+
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
       
       <div class="navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto"></ul>
-        <ul class="navbar-nav">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" [routerLink]="['/store']">{{'Store' | translate}}</a>
+          </li>
+
+          <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" [routerLink]="['/pricing']">{{'Pricing' | translate}}</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav float-right">
           <li *ngIf="config.links?.blog" class="nav-item" routerLinkActive="active">
-  					<a class="nav-link" [routerLink]="['/about']">{{'About' | translate}}</a>
-            <a href="{{config.links.blog}}">{{'Blog' | translate}}</a>
-  				</li>
+            <a class="nav-link" href="{{config.links.blog}}">{{'Blog' | translate}}</a>
+          </li>
           
           <li *ngIf="!auth.getCurrentUserId()" class="nav-item">
             <a class="nav-link" routerLink="/user/login">{{'Log in' | translate}}</a>

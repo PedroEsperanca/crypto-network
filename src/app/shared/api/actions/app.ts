@@ -64,7 +64,7 @@ Object.assign(BaseLoopbackActionTypesFactory('App'), {
 
 });
 export const AppActions =
-Object.assign(BaseLoopbackActionsFactory<App>('App', AppActionTypes), {
+Object.assign(BaseLoopbackActionsFactory<App>(AppActionTypes), {
 
   /**
    * getUser Action.
@@ -79,7 +79,7 @@ Object.assign(BaseLoopbackActionsFactory<App>('App', AppActionTypes), {
     public readonly type = AppActionTypes.GET_USER;
       public payload: {id: any, refresh: any};
 
-    constructor(id: any, refresh: any = {}, public meta?: any) {
+    constructor(id: any, refresh: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, refresh};
     }
   },
@@ -125,7 +125,7 @@ Object.assign(BaseLoopbackActionsFactory<App>('App', AppActionTypes), {
     public readonly type = AppActionTypes.GET_ORGANIZATION;
       public payload: {id: any, refresh: any};
 
-    constructor(id: any, refresh: any = {}, public meta?: any) {
+    constructor(id: any, refresh: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, refresh};
     }
   },
@@ -171,7 +171,7 @@ Object.assign(BaseLoopbackActionsFactory<App>('App', AppActionTypes), {
     public readonly type = AppActionTypes.GET_S3PHOTO;
       public payload: {id: any, refresh: any};
 
-    constructor(id: any, refresh: any = {}, public meta?: any) {
+    constructor(id: any, refresh: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, refresh};
     }
   },
@@ -219,7 +219,7 @@ Object.assign(BaseLoopbackActionsFactory<App>('App', AppActionTypes), {
     public readonly type = AppActionTypes.CREATE_S3PHOTO;
       public payload: {id: any, data: any};
 
-    constructor(id: any, data: any = {}, public meta?: any) {
+    constructor(id: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },
@@ -267,7 +267,7 @@ Object.assign(BaseLoopbackActionsFactory<App>('App', AppActionTypes), {
     public readonly type = AppActionTypes.UPDATE_S3PHOTO;
       public payload: {id: any, data: any};
 
-    constructor(id: any, data: any = {}, public meta?: any) {
+    constructor(id: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },
@@ -355,7 +355,7 @@ Object.assign(BaseLoopbackActionsFactory<App>('App', AppActionTypes), {
     public readonly type = AppActionTypes.GET_OPTION;
       public payload: {id: any, refresh: any};
 
-    constructor(id: any, refresh: any = {}, public meta?: any) {
+    constructor(id: any, refresh: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, refresh};
     }
   },
@@ -403,7 +403,7 @@ Object.assign(BaseLoopbackActionsFactory<App>('App', AppActionTypes), {
     public readonly type = AppActionTypes.CREATE_OPTION;
       public payload: {id: any, data: any};
 
-    constructor(id: any, data: any = {}, public meta?: any) {
+    constructor(id: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },
@@ -451,7 +451,7 @@ Object.assign(BaseLoopbackActionsFactory<App>('App', AppActionTypes), {
     public readonly type = AppActionTypes.UPDATE_OPTION;
       public payload: {id: any, data: any};
 
-    constructor(id: any, data: any = {}, public meta?: any) {
+    constructor(id: any, data: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },
@@ -540,7 +540,7 @@ Object.assign(BaseLoopbackActionsFactory<App>('App', AppActionTypes), {
     public readonly type = AppActionTypes.S3_P_U_T_SIGNED_URL;
       public payload: {id: any, key: any, options: any};
 
-    constructor(id: any, key: any = {}, options: any = {}, public meta?: any) {
+    constructor(id: any, key: any = {}, options: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, key, options};
     }
   },
@@ -586,7 +586,7 @@ Object.assign(BaseLoopbackActionsFactory<App>('App', AppActionTypes), {
     public readonly type = AppActionTypes.S3_G_E_T_SIGNED_URL;
       public payload: {id: any, key: any};
 
-    constructor(id: any, key: any = {}, public meta?: any) {
+    constructor(id: any, key: any = {}, customHeaders?: Function, public meta?: any) {
       this.payload = {id, key};
     }
   },
@@ -634,7 +634,7 @@ Object.assign(BaseLoopbackActionsFactory<App>('App', AppActionTypes), {
     public readonly type = AppActionTypes.CREATE_MANY_S3PHOTO;
       public payload: {id: any, data: any[]};
 
-    constructor(id: any, data: any[] = [], public meta?: any) {
+    constructor(id: any, data: any[] = [], customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },
@@ -682,7 +682,7 @@ Object.assign(BaseLoopbackActionsFactory<App>('App', AppActionTypes), {
     public readonly type = AppActionTypes.CREATE_MANY_OPTION;
       public payload: {id: any, data: any[]};
 
-    constructor(id: any, data: any[] = [], public meta?: any) {
+    constructor(id: any, data: any[] = [], customHeaders?: Function, public meta?: any) {
       this.payload = {id, data};
     }
   },

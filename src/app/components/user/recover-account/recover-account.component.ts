@@ -32,7 +32,7 @@ export class RecoverAccountComponent {
         this.submited = true;
         this.cd.markForCheck();
       },
-      (error) => this.store.dispatch(new AlertActions.setAlert({
+      (error) => this.store.dispatch(new AlertActions.SetAlert({
         message: error.message,
         type: 'error'
       }))

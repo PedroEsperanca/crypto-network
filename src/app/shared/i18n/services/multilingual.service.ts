@@ -9,6 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Analytics, AnalyticsService } from 'shared/analytics/index';
 import { WindowService } from 'shared/core/services/index';
 import { ILang } from 'shared/core/interfaces/index';
+import { IAppState } from 'shared/ngrx/state/app.state';
 
 // module
 import { CATEGORY } from '../common/category.common';
@@ -33,7 +34,7 @@ export class MultilingualService extends Analytics {
     public analytics: AnalyticsService,
     private translate: TranslateService,
     private win: WindowService,
-    private store: Store<IMultilingualState>
+    private store: Store<IAppState>
   ) {
     super(analytics);
     this.category = CATEGORY;

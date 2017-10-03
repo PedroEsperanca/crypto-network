@@ -1,37 +1,58 @@
 /* tslint:disable */
-import { Observable } from 'rxjs/Observable';
-import { ActionReducer } from '@ngrx/store';
-import '@ngrx/core/add/operator/select';
-import { compose } from '@ngrx/core/compose';
-import { combineReducers } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
-
 import { SDKToken } from './models/BaseModels';
 
 import * as reducers from './reducers/index';
 
-import * as effects from './effects/index';
+import { LoopbackAuthEffects } from './effects/auth';
+import { UserEffects } from './effects/User';
+import { OrganizationEffects } from './effects/Organization';
+import { ContactEffects } from './effects/Contact';
+import { StripeCustomerEffects } from './effects/StripeCustomer';
+import { StripeSourceEffects } from './effects/StripeSource';
+import { StripeChargeEffects } from './effects/StripeCharge';
+import { AppEffects } from './effects/App';
+import { ProductEffects } from './effects/Product';
+import { SubscriptionEffects } from './effects/Subscription';
+import { OAuthAppEffects } from './effects/OAuthApp';
 
 export interface LoopbackStateInterface {
-  loopbackAuth: SDKToken;
-    Users: reducers.UsersState;
+  LoopbackAuth: SDKToken;
+  Users: reducers.UsersState;
   Organizations: reducers.OrganizationsState;
+  Contacts: reducers.ContactsState;
+  StripeCustomers: reducers.StripeCustomersState;
+  StripeSources: reducers.StripeSourcesState;
+  StripeCharges: reducers.StripeChargesState;
   Apps: reducers.AppsState;
+  Products: reducers.ProductsState;
+  Subscriptions: reducers.SubscriptionsState;
   OAuthApps: reducers.OAuthAppsState;
 };
 
 export const LoopbackReducer = {
-  loopbackAuth: reducers.LoopbackAuthReducer,
+  LoopbackAuth: reducers.LoopbackAuthReducer,
 	Users: reducers.UsersReducer,
 	Organizations: reducers.OrganizationsReducer,
+	Contacts: reducers.ContactsReducer,
+	StripeCustomers: reducers.StripeCustomersReducer,
+	StripeSources: reducers.StripeSourcesReducer,
+	StripeCharges: reducers.StripeChargesReducer,
 	Apps: reducers.AppsReducer,
+	Products: reducers.ProductsReducer,
+	Subscriptions: reducers.SubscriptionsReducer,
 	OAuthApps: reducers.OAuthAppsReducer,
 };
 
 export const LoopbackEffects = [
-  EffectsModule.run(effects.LoopbackAuthEffects),
-	EffectsModule.run(effects.UserEffects),
-	EffectsModule.run(effects.OrganizationEffects),
-	EffectsModule.run(effects.AppEffects),
-	EffectsModule.run(effects.OAuthAppEffects),
+  LoopbackAuthEffects,
+  UserEffects,
+  OrganizationEffects,
+  ContactEffects,
+  StripeCustomerEffects,
+  StripeSourceEffects,
+  StripeChargeEffects,
+  AppEffects,
+  ProductEffects,
+  SubscriptionEffects,
+  OAuthAppEffects,
 ];

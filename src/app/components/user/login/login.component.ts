@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 
 import { ConfigService } from '@ngx-config/core';
 
-import { UserInterface, LoopBackConfig } from 'shared/api';
+import { LoopBackConfig } from 'shared/api';
 import { Orm } from 'shared/api/orm';
 
 @Component({
@@ -13,7 +13,7 @@ import { Orm } from 'shared/api/orm';
 })
 export class LoginComponent {
   public config: any;
-  public formModel: UserInterface = {
+  public formModel: any = {
     email: '',
     password: ''
   };

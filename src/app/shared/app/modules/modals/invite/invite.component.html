@@ -1,0 +1,68 @@
+
+ <div [config]="{ show: false }" (onHidden)="onHidden()" (onShow)="onShow()" bsModal #inviteFriendsModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+
+  <div class="modal-dialog modal-md modal-inviteFriends" style="max-width: 700px">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="pull-left"> </h4>
+          <button type="button" class="close pull" aria-label="Close" (click)="hideModal()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+        	<div class="modal-title"><h4>Invite Friends to Join Teezler</h4></div>
+
+			<div class="row">
+				 <!--  <form class="container" [formGroup]="form" (ngSubmit)="onSubmit(form.value)"> -->
+				 <form class="container" [formGroup]="form">
+           <div class="modal-subTitle">
+             <h5>Select Friends</h5>
+           </div>
+
+		        <!-- friend 1 -->
+		        <div class="form-group">
+		        	<input type="text" class="form-control name" formControlName="invite1Name" [(ngModel)]="invite1.name" placeholder="Your friend's name.">
+		          <input type="email" class="form-control" formControlName="invite1Email" [(ngModel)]="invite1.email" placeholder="Your friend's email.">
+		          <button [disabled]="!form.controls.invite1Name.valid || !form.controls.invite1Email.valid" class="btn--post invert" (click)="sendSingleInvitation(invite1, 1)">Invite</button>
+		        </div>
+		        <!-- friend 2 -->
+		        <div class="form-group">
+		        	<input type="text" class="form-control name" formControlName="invite2Name" [(ngModel)]="invite2.name" placeholder="Your friend's name.">
+		          <input type="email" class="form-control" formControlName="invite2Email" [(ngModel)]="invite2.email" placeholder="Your friend's email.">
+		          <button [disabled]="!form.controls.invite2Name.valid || !form.controls.invite2Email.valid" class="btn--post invert" (click)="sendSingleInvitation(invite2, 2)">Invite</button>
+
+		        </div>
+		        <!-- friend 3 -->
+		        <div class="form-group">
+		        	<input type="text" class="form-control name" formControlName="invite3Name" [(ngModel)]="invite3.name" placeholder="Your friend's name.">
+		          <input type="email" class="form-control" formControlName="invite3Email" [(ngModel)]="invite3.email" placeholder="Your friend's email.">
+		          <button [disabled]="!form.controls.invite3Name.valid || !form.controls.invite3Email.valid" class="btn--post invert" (click)="sendSingleInvitation(invite3, 3)">Invite</button>
+		        </div>
+		        <!-- friend 4 -->
+		        <div class="form-group">
+		        	<input type="text" class="form-control name" formControlName="invite4Name" [(ngModel)]="invite4.name" placeholder="Your friend's name.">
+		          <input type="email" class="form-control" formControlName="invite4Email" [(ngModel)]="invite4.email" placeholder="Your friend's email.">
+		          <button [disabled]="!form.controls.invite4Name.valid || !form.controls.invite4Email.valid" class="btn--post invert" (click)="sendSingleInvitation(invite4, 4)">Invite</button>
+		        </div>
+		        <!-- friend 5 -->
+		        <div class="form-group">
+		        	<input type="text" class="form-control name" formControlName="invite5Name" [(ngModel)]="invite5.name" placeholder="Your friend's name.">
+		          <input type="email" class="form-control" formControlName="invite5Email" [(ngModel)]="invite5.email" placeholder="Your friend's email.">
+		          <button [disabled]="!form.controls.invite5Name.valid || !form.controls.invite5Email.valid" class="btn--post invert" (click)="sendSingleInvitation(invite5, 5)">Invite</button>
+		        </div>
+
+
+			</form>
+
+
+
+			</div>
+
+
+        </div>
+      </div>
+  </div>
+</div>
+
+

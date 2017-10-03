@@ -1,20 +1,9 @@
 import { environment } from 'environment';
-import { Observable } from 'rxjs/Observable';
-// import { combineLatest } from 'rxjs/observable/combineLatest';
-import { ActionReducer } from '@ngrx/store';
+import { ActionReducer, ActionReducerMap, MetaReducer, createSelector, createFeatureSelector } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { RouterState, routerReducer } from '@ngrx/router-store';
-import '@ngrx/core/add/operator/select';
-
-/**
- * The compose function is one of our most handy tools. In basic terms, you give
- * it any number of functions and it returns a function. This new function
- * takes a value and chains it through every composed function, returning
- * the output.
- *
- * More: https://drboolean.gitbooks.io/mostly-adequate-guide/content/ch5.html
- */
-import { compose } from '@ngrx/core/compose';
+import { InjectionToken } from '@angular/core';
+import { RouterStateUrl, CustomRouterStateSerializer } from '../util';
+import * as fromRouter from '@ngrx/router-store';
 
 /**
  * storeFreeze prevents state from being mutated. When mutation occurs, an
@@ -24,97 +13,58 @@ import { compose } from '@ngrx/core/compose';
 import { storeFreeze } from 'ngrx-store-freeze';
 
 /**
- * combineReducers is another useful metareducer that takes a map of reducer
- * functions and creates a new reducer that stores the gathers the values
- * of each reducer and stores them using the reducer's key. Think of it
- * almost like a database, where every reducer is a table in the db.
- *
- * More: https://egghead.io/lessons/javascript-redux-implementing-combinereducers-from-scratch
- */
-import { combineReducers } from '@ngrx/store';
-
-/**
  * Every reducer module's default export is the reducer function itself. In
  * addition, each module should export a type or interface that describes
  * the state of the reducer plus any selector functions. The `* as`
  * notation packages up all of the exports into a single object.
  */
-import { LoopbackReducer } from 'shared/api/index';
+import { LoopbackStateInterface, LoopbackReducer, LoopbackEffects } from 'shared/api/index';
 
 import * as fromMultilingual from '../../i18n/index';
 
 import * as fromApplication from '../reducers/application';
+import * as fromModal from '../reducers/modal';
 
 import { AlertEffects } from 'shared/ngrx/effects/alert';
 import { ApplicationEffects } from 'shared/ngrx/effects/application';
+import { MultilingualEffects } from 'shared/i18n/index';
+
 /**
  * As mentioned, we treat each reducer like a table in a database. This means
  * our top level state interface is just a map of keys to inner state types.
  */
-export interface IAppState {
-  router: RouterState;
-
+export interface IAppState extends LoopbackStateInterface {
+  router: fromRouter.RouterReducerState<RouterStateUrl>;
   i18n: fromMultilingual.IMultilingualState;
-
   application: fromApplication.ApplicationState;
-};
+  modal: fromModal.ModalState;
+}
 
-export const Effects = [
-  EffectsModule.run(AlertEffects),
-  EffectsModule.run(ApplicationEffects),
-  // EffectsModule.run(OrganizationEffects)
+export const effects = [
+  ...LoopbackEffects,
+  AlertEffects,
+  ApplicationEffects,
+  MultilingualEffects
 ];
 
-/**
- * Because metareducers take a reducer function and return a new reducer,
- * we can use our compose helper to chain them together. Here we are
- * using combineReducers to make our top level reducer, and then
- * wrapping that in storeLogger. Remember that compose applies
- * the result from right to left.
- */
-const reducers = Object.assign({
-  router: routerReducer,
-
+export const reducers: ActionReducerMap<IAppState> = Object.assign(LoopbackReducer, {
+  router: fromRouter.routerReducer,
   i18n: fromMultilingual.reducer,
+  application: fromApplication.reducer,
+  modal: fromModal.reducer
+});
 
-  application: fromApplication.reducer
-}, LoopbackReducer);
+export const reducerToken = new InjectionToken<ActionReducerMap<IAppState>>('Reducers');
 
-const developmentReducer: ActionReducer<IAppState> =
-  compose(storeFreeze, combineReducers)(reducers);
-const productionReducer: ActionReducer<IAppState> = combineReducers(reducers);
-
-export function Reducer(state: any, action: any) {
-  if (!environment.production) {
-    return developmentReducer(state, action);
-  } else {
-    return productionReducer(state, action);
-  }
+export function getReducers() {
+    return reducers;
 }
 
-export function getMultilingualState(state$: Observable<IAppState>) {
-  return state$.select((s) => s.i18n);
-}
+export const reducerProvider = [
+    { provide: reducerToken, useFactory: getReducers }
+];
 
-export const getLang: any = compose(fromMultilingual.getLang, getMultilingualState);
+export const metaReducers: MetaReducer<IAppState>[] = !environment.production ? [storeFreeze] : [];
 
-/**
- * A selector function is a map function factory. We pass it parameters and it
- * returns a function that maps from the larger state tree into a smaller
- * piece of state. This selector simply selects the `apps` state.
- *
- * Selectors are used with the `let` operator. They take an input observable
- * and return a new observable. Here's how you would use this selector:
- *
- * ```ts
- * class MyComponent {
- *   constructor(state$: Observable<IAppState>) {
- *     this.appsState$ = state$.let(getOrganizationsState());
- *   }
- * }
- * ```
- */
-export function getApplicationState() {
-  return (state$: Observable<IAppState>) => state$
-    .select((s) => s.application);
-}
+export const getApplicationState = createFeatureSelector<fromApplication.ApplicationState>('application');
+export const getModalState = createFeatureSelector<fromModal.ModalState>('modal');

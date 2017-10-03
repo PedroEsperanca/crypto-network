@@ -6,14 +6,18 @@ export const AlertActionTypes = {
   CLEAR_ALERT: type('[Alert] Clear Alert'),
 };
 
-export const AlertActions = {
-  setAlert: class implements Action {
-    public type = AlertActionTypes.SET_ALERT;
+export module AlertActions {
+  export class SetAlert implements Action {
+    public readonly type = AlertActionTypes.SET_ALERT;
 
-    constructor(public payload: {message: string, type: string}) { }
-  },
+    constructor(public payload: {title?: string, message?: string | any, type?: string}) { }
+  }
 
-  clearAlert: class implements Action {
-    public type = AlertActionTypes.CLEAR_ALERT;
-  },
+  export class ClearAlert implements Action {
+    public readonly type = AlertActionTypes.CLEAR_ALERT;
+  }
 };
+
+export type IAlertActions =
+  | AlertActions.SetAlert
+  | AlertActions.ClearAlert;

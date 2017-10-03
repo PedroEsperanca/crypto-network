@@ -1,7 +1,6 @@
 import 'rxjs/add/operator/let';
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/last';
-import '@ngrx/core/add/operator/select';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef, Inject } from '@angular/core';
@@ -76,7 +75,7 @@ export class VerifyComponent {
     this.user.confirm(this.auth.getCurrentUserId(), this.formModel.token).subscribe(
       (response: any) => {
         if (response.error) {
-          this.store.dispatch(new AlertActions.setAlert({
+          this.store.dispatch(new AlertActions.SetAlert({
             message: response.error_description,
             type: 'error'
           }));
@@ -97,7 +96,7 @@ export class VerifyComponent {
           this.router.navigate(['/apps']);
         }
       },
-      (error) => this.store.dispatch(new AlertActions.setAlert({
+      (error) => this.store.dispatch(new AlertActions.SetAlert({
         message: error.message,
         type: 'error'
       }))
@@ -125,18 +124,18 @@ export class VerifyComponent {
     this.user.sendVerificationCode(this.auth.getCurrentUserId(), data).subscribe(
       (response: any) => {
         if (response.error) {
-          this.store.dispatch(new AlertActions.setAlert({
+          this.store.dispatch(new AlertActions.SetAlert({
             message: response.error_description,
             type: 'error'
           }));
         } else {
-          this.store.dispatch(new AlertActions.setAlert({
+          this.store.dispatch(new AlertActions.SetAlert({
             message: 'New email sent!',
             type: 'info'
           }));
         }
       },
-      (error) => this.store.dispatch(new AlertActions.setAlert({
+      (error) => this.store.dispatch(new AlertActions.SetAlert({
         message: error.message,
         type: 'error'
       }))

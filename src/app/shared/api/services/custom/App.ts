@@ -49,7 +49,7 @@ export class AppApi extends BaseLoopBackApi {
    * This usually means the response is a `App` object.)
    * </em>
    */
-  public getUser(id: any, refresh: any = {}): Observable<any> {
+  public getUser(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Apps/:id/user";
@@ -58,8 +58,8 @@ export class AppApi extends BaseLoopBackApi {
     };
     let _postBody: any = {};
     let _urlParams: any = {};
-    if (refresh) _urlParams.refresh = refresh;
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    if (typeof refresh !== 'undefined' && refresh !== null) _urlParams.refresh = refresh;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
 
@@ -79,7 +79,7 @@ export class AppApi extends BaseLoopBackApi {
    * This usually means the response is a `App` object.)
    * </em>
    */
-  public getOrganization(id: any, refresh: any = {}): Observable<any> {
+  public getOrganization(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Apps/:id/organization";
@@ -88,8 +88,8 @@ export class AppApi extends BaseLoopBackApi {
     };
     let _postBody: any = {};
     let _urlParams: any = {};
-    if (refresh) _urlParams.refresh = refresh;
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    if (typeof refresh !== 'undefined' && refresh !== null) _urlParams.refresh = refresh;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
 
@@ -109,7 +109,7 @@ export class AppApi extends BaseLoopBackApi {
    * This usually means the response is a `App` object.)
    * </em>
    */
-  public getS3Photo(id: any, refresh: any = {}): Observable<any> {
+  public getS3Photo(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Apps/:id/s3Photo";
@@ -118,8 +118,8 @@ export class AppApi extends BaseLoopBackApi {
     };
     let _postBody: any = {};
     let _urlParams: any = {};
-    if (refresh) _urlParams.refresh = refresh;
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    if (typeof refresh !== 'undefined' && refresh !== null) _urlParams.refresh = refresh;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
 
@@ -141,7 +141,7 @@ export class AppApi extends BaseLoopBackApi {
    * This usually means the response is a `App` object.)
    * </em>
    */
-  public createS3Photo(id: any, data: any = {}): Observable<any> {
+  public createS3Photo(id: any, data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "POST";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Apps/:id/s3Photo";
@@ -152,7 +152,7 @@ export class AppApi extends BaseLoopBackApi {
       data: data
     };
     let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
 
@@ -174,7 +174,7 @@ export class AppApi extends BaseLoopBackApi {
    * This usually means the response is a `App` object.)
    * </em>
    */
-  public updateS3Photo(id: any, data: any = {}): Observable<any> {
+  public updateS3Photo(id: any, data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PUT";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Apps/:id/s3Photo";
@@ -185,7 +185,7 @@ export class AppApi extends BaseLoopBackApi {
       data: data
     };
     let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
 
@@ -200,7 +200,7 @@ export class AppApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  public destroyS3Photo(id: any): Observable<any> {
+  public destroyS3Photo(id: any, customHeaders?: Function): Observable<any> {
     let _method: string = "DELETE";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Apps/:id/s3Photo";
@@ -209,7 +209,7 @@ export class AppApi extends BaseLoopBackApi {
     };
     let _postBody: any = {};
     let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
 
@@ -229,7 +229,7 @@ export class AppApi extends BaseLoopBackApi {
    * This usually means the response is a `App` object.)
    * </em>
    */
-  public getOption(id: any, refresh: any = {}): Observable<any> {
+  public getOption(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Apps/:id/option";
@@ -238,8 +238,8 @@ export class AppApi extends BaseLoopBackApi {
     };
     let _postBody: any = {};
     let _urlParams: any = {};
-    if (refresh) _urlParams.refresh = refresh;
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    if (typeof refresh !== 'undefined' && refresh !== null) _urlParams.refresh = refresh;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
 
@@ -261,7 +261,7 @@ export class AppApi extends BaseLoopBackApi {
    * This usually means the response is a `App` object.)
    * </em>
    */
-  public createOption(id: any, data: any = {}): Observable<any> {
+  public createOption(id: any, data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "POST";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Apps/:id/option";
@@ -272,7 +272,7 @@ export class AppApi extends BaseLoopBackApi {
       data: data
     };
     let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
 
@@ -294,7 +294,7 @@ export class AppApi extends BaseLoopBackApi {
    * This usually means the response is a `App` object.)
    * </em>
    */
-  public updateOption(id: any, data: any = {}): Observable<any> {
+  public updateOption(id: any, data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PUT";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Apps/:id/option";
@@ -305,7 +305,7 @@ export class AppApi extends BaseLoopBackApi {
       data: data
     };
     let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
 
@@ -320,7 +320,7 @@ export class AppApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  public destroyOption(id: any): Observable<any> {
+  public destroyOption(id: any, customHeaders?: Function): Observable<any> {
     let _method: string = "DELETE";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Apps/:id/option";
@@ -329,7 +329,7 @@ export class AppApi extends BaseLoopBackApi {
     };
     let _postBody: any = {};
     let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
 
@@ -349,7 +349,7 @@ export class AppApi extends BaseLoopBackApi {
    * This usually means the response is a `App` object.)
    * </em>
    */
-  public patchOrCreate(data: any = {}): Observable<any> {
+  public patchOrCreate(data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PATCH";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Apps";
@@ -358,7 +358,7 @@ export class AppApi extends BaseLoopBackApi {
       data: data
     };
     let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
 
@@ -380,7 +380,7 @@ export class AppApi extends BaseLoopBackApi {
    * This usually means the response is a `App` object.)
    * </em>
    */
-  public patchAttributes(id: any, data: any = {}): Observable<any> {
+  public patchAttributes(id: any, data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PATCH";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Apps/:id";
@@ -391,7 +391,7 @@ export class AppApi extends BaseLoopBackApi {
       data: data
     };
     let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
 
@@ -413,7 +413,7 @@ export class AppApi extends BaseLoopBackApi {
    * This usually means the response is a `App` object.)
    * </em>
    */
-  public s3PUTSignedUrl(id: any, key: any = {}, options: any = {}): Observable<any> {
+  public s3PUTSignedUrl(id: any, key: any = {}, options: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Apps/:id/s3PUTSignedUrl";
@@ -422,9 +422,9 @@ export class AppApi extends BaseLoopBackApi {
     };
     let _postBody: any = {};
     let _urlParams: any = {};
-    if (key) _urlParams.key = key;
-    if (options) _urlParams.options = options;
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    if (typeof key !== 'undefined' && key !== null) _urlParams.key = key;
+    if (typeof options !== 'undefined' && options !== null) _urlParams.options = options;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
 
@@ -444,7 +444,7 @@ export class AppApi extends BaseLoopBackApi {
    * This usually means the response is a `App` object.)
    * </em>
    */
-  public s3GETSignedUrl(id: any, key: any = {}): Observable<any> {
+  public s3GETSignedUrl(id: any, key: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Apps/:id/s3GETSignedUrl";
@@ -453,8 +453,8 @@ export class AppApi extends BaseLoopBackApi {
     };
     let _postBody: any = {};
     let _urlParams: any = {};
-    if (key) _urlParams.key = key;
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    if (typeof key !== 'undefined' && key !== null) _urlParams.key = key;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
 
@@ -478,18 +478,18 @@ export class AppApi extends BaseLoopBackApi {
    * This usually means the response is a `App` object.)
    * </em>
    */
-  public stats(range: any, custom: any = {}, where: any = {}, groupBy: any = {}): Observable<any> {
+  public stats(range: any, custom: any = {}, where: any = {}, groupBy: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Apps/stats";
     let _routeParams: any = {};
     let _postBody: any = {};
     let _urlParams: any = {};
-    if (range) _urlParams.range = range;
-    if (custom) _urlParams.custom = custom;
-    if (where) _urlParams.where = where;
-    if (groupBy) _urlParams.groupBy = groupBy;
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    if (typeof range !== 'undefined' && range !== null) _urlParams.range = range;
+    if (typeof custom !== 'undefined' && custom !== null) _urlParams.custom = custom;
+    if (typeof where !== 'undefined' && where !== null) _urlParams.where = where;
+    if (typeof groupBy !== 'undefined' && groupBy !== null) _urlParams.groupBy = groupBy;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
 
@@ -511,7 +511,7 @@ export class AppApi extends BaseLoopBackApi {
    * This usually means the response is a `App` object.)
    * </em>
    */
-  public createManyS3Photo(id: any, data: any[] = []): Observable<any> {
+  public createManyS3Photo(id: any, data: any[] = [], customHeaders?: Function): Observable<any> {
     let _method: string = "POST";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Apps/:id/s3Photo";
@@ -522,7 +522,7 @@ export class AppApi extends BaseLoopBackApi {
       data: data
     };
     let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
 
@@ -544,7 +544,7 @@ export class AppApi extends BaseLoopBackApi {
    * This usually means the response is a `App` object.)
    * </em>
    */
-  public createManyOption(id: any, data: any[] = []): Observable<any> {
+  public createManyOption(id: any, data: any[] = [], customHeaders?: Function): Observable<any> {
     let _method: string = "POST";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
     "/Apps/:id/option";
@@ -555,7 +555,7 @@ export class AppApi extends BaseLoopBackApi {
       data: data
     };
     let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody);
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
 

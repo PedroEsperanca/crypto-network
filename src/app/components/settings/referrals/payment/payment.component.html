@@ -1,0 +1,60 @@
+<div class="Subhead">
+	<h2 class="Subhead-heading">
+		<a routerLink="../">{{'Referrals' | translate}}</a>
+		/ {{'Payment details' | translate}}
+	</h2>
+</div>
+
+<div class="referrals-credit-card">
+
+	<div class="payment-methods">
+		<!--<span class="strong-label pay-with-header">{{'Pay with' | translate}}</span>
+
+		<div class="radio-group clearfix">
+			<input name="payment_method" type="radio" value="credit_card" checked="checked" class="radio-input" data-selected-tab="pay-by-credit-card" id="pay-by-credit-card">
+			<label for="pay-by-credit-card" class="radio-label">
+				{{'Credit card' | translate}}
+			</label>
+
+			<input name="payment_method" type="radio" value="paypal" class="radio-input" data-selected-tab="pay-with-paypal" id="pay-with-paypal">
+			<label for="pay-with-paypal" class="radio-label">
+				{{'PayPal account' | translate}}
+			</label>
+		</div>-->
+
+		<div class="selected-payment-method pay-by-credit-card active">
+			<form (ngSubmit)="submit()" #paymentForm="ngForm">
+
+				<dl class="form-group">
+					<dt class="input-label">
+						<label for="card-element">{{'Credit or debit card' | translate}}</label>
+					</dt>
+					<dd>
+						<div id="card-element" class="field" #card></div>
+					</dd>
+				</dl>
+
+				<div class="clearfix">
+					<dl class="form-group vat-field">
+						<dt class="input-label">
+							<label for="input-vat">{{'VAT ID' | translate}} <small class="help-text"></small></label>
+						</dt>
+						<dd>
+							<input id="input-vat" class="form-control input-vat" type="text" autocomplete="off" name="vat" [(ngModel)]="formModel.vat">
+						</dd>
+					</dl>
+
+					<p class="vat-field"><strong>{{'Note' | translate}}:</strong> {{'Please provide your' | translate}} {{'VAT' | translate}} {{'number if you are purchasing GitHub for a business purpose.' | translate}}</p>
+				</div>
+
+
+				<div class="referrals-actions">
+					<button type="submit" class="btn btn-primary" [disabled]="!paymentForm.form.valid">{{'Submit credit card' | translate}}</button>
+					<a routerLink="../" class="btn">{{'Cancel' | translate}}</a>
+				</div>
+			</form>
+
+		</div>
+	</div>
+
+</div>

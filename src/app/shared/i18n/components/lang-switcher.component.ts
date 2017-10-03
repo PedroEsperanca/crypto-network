@@ -11,7 +11,8 @@ import { LogService } from 'shared/core/services/index';
 import { ILang } from 'shared/core/interfaces/index';
 import { IAppState } from 'shared/ngrx/index';
 import { ElectronEventService } from 'shared/electron/index';
-import * as multilingual from '../index';
+import { MultilingualService } from '../services';
+import { IMultilingualState } from '../states';
 
 @Component({
   selector: 'app-i18n-lang-switcher',
@@ -24,7 +25,7 @@ export class LangSwitcherComponent implements OnInit, OnDestroy {
   public supportedLanguages: ILang[];
   private _sub: Subscription;
 
-  constructor(public multilang: multilingual.MultilingualService,
+  constructor(public multilang: MultilingualService,
               private log: LogService,
               private store: Store<IAppState>) {
 
@@ -52,7 +53,7 @@ export class LangSwitcherComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit() {
-    this._sub = this.store.select('i18n').subscribe((s: multilingual.IMultilingualState) => {
+    this._sub = this.store.select('i18n').subscribe((s: IMultilingualState) => {
       if (s.lang) {
         this.lang = s.lang;
         this.supportedLanguages = this.multilang.availableLanguages;

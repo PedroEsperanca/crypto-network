@@ -5,8 +5,7 @@ import {
   ViewContainerRef
 } from '@angular/core';
 import { Location } from '@angular/common';
-// any operators needed throughout your application
-import './operators';
+import { Store } from '@ngrx/store';
 
 // libs
 import { CloudtasksService } from '@cloudtasks/ngx-image';
@@ -18,7 +17,8 @@ import { AnalyticsService } from 'shared/analytics';
 import { MultilingualService } from 'shared/i18n';
 import { Config } from 'shared/core';
 import { LogService, AppService } from 'shared/core/services';
-import { LoopBackAuth, UserApi } from 'shared/api';
+import { LoopBackAuth, LoopbackAuthActions, UserApi } from 'shared/api';
+import { IAppState, AlertActions } from 'shared/ngrx';
 
 /**
  * This class represents the main application component.
@@ -29,6 +29,8 @@ import { LoopBackAuth, UserApi } from 'shared/api';
   template: `
 <div platform scrollSpy>
   <router-outlet></router-outlet>
+
+  <app-modal-invite></app-modal-invite>
 </div>
   `
 })
@@ -45,6 +47,7 @@ export class AppComponent {
     public cloudtasks: CloudtasksService,
     // private idle: Idle,
     // private notify: Notify,
+    private store: Store<IAppState>,
     private location: Location,
     private auth: LoopBackAuth,
     private user: UserApi,
@@ -70,6 +73,27 @@ export class AppComponent {
       expires.setSeconds(expires.getSeconds() + token.ttl);
       if (expires <= new Date()) {
         this.user.logout().subscribe((response) => this.location.replaceState(''));
+      } else {
+        this.user.findById(token.userId, {
+          include: ['oAuthClientApplications', 'identities', 'organizations']
+        })
+        .take(1)
+        .subscribe(
+          (response: any) => {
+            if (response.error) {
+              this.store.dispatch(new AlertActions.SetAlert({
+                message: response.error_description,
+                type: 'error'
+              }));
+            } else {
+              this.store.dispatch(new LoopbackAuthActions.updateUserState(response));
+            }
+          },
+          (error) => this.store.dispatch(new AlertActions.SetAlert({
+            message: error.message,
+            type: 'error'
+          }))
+        );
       }
     }
   }

@@ -1,9 +1,9 @@
 /* tslint:disable */
-import { Observable } from 'rxjs/Observable';
 import { createSelector } from 'reselect';
 import { Action } from '@ngrx/store';
 import { BaseReducerFactory } from './base';
 import { App } from '../models';
+import { LoopbackAction } from '../models/BaseModels';
 import { AppActionTypes } from '../actions';
 
 export interface AppsState {
@@ -25,7 +25,7 @@ const cases = BaseReducerFactory<AppsState, App>(AppActionTypes);
  * @description
  * Provides with a LoopBack compatible App reducer.
  */
-export function AppsReducer(state = initialState, action: Action): AppsState {
+export function AppsReducer(state = initialState, action: LoopbackAction): AppsState {
   if (cases[action.type]) {
     return cases[action.type](state, action);
   } else {

@@ -21,7 +21,7 @@
         <h4>{{'Organizations' | translate}}</h4>
 
         <a *ngFor="let org of (profile$ | async)?.organizations" routerLink="/organizations/{{org.id}}" class="avatar-group-item">
-          <img alt="@{{org.displayName}}" [src]="org.logo?.url || org.logo || config.logo" height="35" width="35">
+          <img alt="@{{org.name}}" [src]="org.logo?.url || org.logo || config.logo" height="35" width="35">
         </a>
       </div>
 
@@ -35,5 +35,3 @@
     </div>
   </div>
 </div>
-
-<pre>{{profile$ | async | json}}</pre>
