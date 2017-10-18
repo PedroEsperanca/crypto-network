@@ -6,7 +6,7 @@ import {
   StripeCharge,
   StripeStoreIdentity,
   Contact,
-  App,
+  Post,
   Product,
   Subscription,
   OAuthApp
@@ -20,8 +20,8 @@ export interface OrganizationInterface {
   "id"?: any;
   "createdAt"?: Date;
   "updatedAt"?: Date;
-  "logo"?: any;
   "slug"?: string;
+  "logo"?: any;
   users?: User[];
   roles?: any[];
   s3Photo?: any[];
@@ -30,7 +30,7 @@ export interface OrganizationInterface {
   stripeCharges?: StripeCharge[];
   stripeStoreIdentity?: StripeStoreIdentity;
   contacts?: Contact[];
-  apps?: App[];
+  posts?: Post[];
   products?: Product[];
   subscriptions?: Subscription[];
   oAuthClientApplications?: OAuthApp[];
@@ -43,8 +43,8 @@ export class Organization implements OrganizationInterface {
   "id": any;
   "createdAt": Date;
   "updatedAt": Date;
-  "logo": any;
   "slug": string;
+  "logo": any;
   users: User[];
   roles: any[];
   s3Photo: any[];
@@ -53,7 +53,7 @@ export class Organization implements OrganizationInterface {
   stripeCharges: StripeCharge[];
   stripeStoreIdentity: StripeStoreIdentity;
   contacts: Contact[];
-  apps: App[];
+  posts: Post[];
   products: Product[];
   subscriptions: Subscription[];
   oAuthClientApplications: OAuthApp[];
@@ -114,13 +114,13 @@ export class Organization implements OrganizationInterface {
           name: 'updatedAt',
           type: 'Date'
         },
-        "logo": {
-          name: 'logo',
-          type: 'any'
-        },
         "slug": {
           name: 'slug',
           type: 'string'
+        },
+        "logo": {
+          name: 'logo',
+          type: 'any'
         },
       },
       relations: {
@@ -190,10 +190,10 @@ export class Organization implements OrganizationInterface {
                   keyFrom: 'id',
           keyTo: 'organizationId'
         },
-        apps: {
-          name: 'apps',
-          type: 'App[]',
-          model: 'App',
+        posts: {
+          name: 'posts',
+          type: 'Post[]',
+          model: 'Post',
           relationType: 'hasMany',
                   keyFrom: 'id',
           keyTo: 'organizationId'

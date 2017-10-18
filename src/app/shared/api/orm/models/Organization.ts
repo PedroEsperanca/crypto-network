@@ -304,14 +304,14 @@ export class OrmOrganization extends OrmBase<Organization> {
     this.store.dispatch(new this.actions.updateByIdContacts(id, fk, data, meta));
   }
   
-	public findByIdApps(id: any, fk: any, customHeaders?: Function, meta?: any): Observable<any> {
+	public findByIdPosts(id: any, fk: any, customHeaders?: Function, meta?: any): Observable<any> {
     
     if (meta && meta.io) {
       const destroyStream$: AsyncSubject<any> = new AsyncSubject();
 
       createIO({}, this.store, destroyStream$, models[this.model.getModelDefinition().relations.rooms.model], this.realTime, meta);
 
-      return this.store.select<any>(this.model.getModelDefinition().relations.apps.model + 's')
+      return this.store.select<any>(this.model.getModelDefinition().relations.posts.model + 's')
         .map((state: any) => state.entities[fk])
         .finally(() => {
           destroyStream$.next(1);
@@ -319,21 +319,21 @@ export class OrmOrganization extends OrmBase<Organization> {
         });
     } else {
       if (!meta || !meta.justCache) {
-        this.store.dispatch(new this.actions.findByIdApps(id, fk, meta));
+        this.store.dispatch(new this.actions.findByIdPosts(id, fk, meta));
       }
 
-      return this.store.select<any>(this.model.getModelDefinition().relations.apps.model + 's')
+      return this.store.select<any>(this.model.getModelDefinition().relations.posts.model + 's')
         .map((state: any) => state.entities[fk]);
     }
     
   }
   
-	public destroyByIdApps(id: any, fk: any, customHeaders?: Function, meta?: any): void {
-    this.store.dispatch(new this.actions.destroyByIdApps(id, fk, meta));
+	public destroyByIdPosts(id: any, fk: any, customHeaders?: Function, meta?: any): void {
+    this.store.dispatch(new this.actions.destroyByIdPosts(id, fk, meta));
   }
   
-	public updateByIdApps(id: any, fk: any, data: any = {}, customHeaders?: Function, meta?: any): void {
-    this.store.dispatch(new this.actions.updateByIdApps(id, fk, data, meta));
+	public updateByIdPosts(id: any, fk: any, data: any = {}, customHeaders?: Function, meta?: any): void {
+    this.store.dispatch(new this.actions.updateByIdPosts(id, fk, data, meta));
   }
   
 	public findByIdProducts(id: any, fk: any, customHeaders?: Function, meta?: any): Observable<any> {
@@ -622,42 +622,42 @@ export class OrmOrganization extends OrmBase<Organization> {
     this.store.dispatch(new this.actions.deleteContacts(id, meta));
   }
   
-	public getApps(id: any, filter: LoopBackFilter = {}, customHeaders?: Function, meta?: any): Observable<any[]> {
+	public getPosts(id: any, filter: LoopBackFilter = {}, customHeaders?: Function, meta?: any): Observable<any[]> {
     
     if (meta && meta.io) {
       const destroyStream$: AsyncSubject<any> = new AsyncSubject();
 
-      createIO(filter, this.store, destroyStream$, models[this.model.getModelDefinition().relations.apps.model], this.realTime, meta);
+      createIO(filter, this.store, destroyStream$, models[this.model.getModelDefinition().relations.posts.model], this.realTime, meta);
 
       return applyFilter(
-        this.store.select<any>(this.model.getModelDefinition().relations.apps.model + 's')
+        this.store.select<any>(this.model.getModelDefinition().relations.posts.model + 's')
           .map(toArray)
-          .map((state: any[]) => filterById(state, id, 'apps', Organization))
+          .map((state: any[]) => filterById(state, id, 'posts', Organization))
           .finally(() => {
             destroyStream$.next(1);
             destroyStream$.complete();
           })
-        , filter, this.store, models[this.model.getModelDefinition().relations.apps.model]);
+        , filter, this.store, models[this.model.getModelDefinition().relations.posts.model]);
     } else {
       if (!meta || !meta.justCache) {
-        this.store.dispatch(new this.actions.getApps(id, filter, meta));
+        this.store.dispatch(new this.actions.getPosts(id, filter, meta));
       }
 
       return applyFilter(
-        this.store.select<any>(this.model.getModelDefinition().relations.apps.model + 's')
+        this.store.select<any>(this.model.getModelDefinition().relations.posts.model + 's')
           .map(toArray)
-          .map((state: any[]) => filterById(state, id, 'apps', Organization))
-        , filter, this.store, models[this.model.getModelDefinition().relations.apps.model]);
+          .map((state: any[]) => filterById(state, id, 'posts', Organization))
+        , filter, this.store, models[this.model.getModelDefinition().relations.posts.model]);
     }
     
   }
 	
-	public createApps(id: any, data: any = {}, customHeaders?: Function, meta?: any): void {
-    this.store.dispatch(new this.actions.createApps(id, data, meta));
+	public createPosts(id: any, data: any = {}, customHeaders?: Function, meta?: any): void {
+    this.store.dispatch(new this.actions.createPosts(id, data, meta));
   }
   
-	public deleteApps(id: any, customHeaders?: Function, meta?: any): void {
-    this.store.dispatch(new this.actions.deleteApps(id, meta));
+	public deletePosts(id: any, customHeaders?: Function, meta?: any): void {
+    this.store.dispatch(new this.actions.deletePosts(id, meta));
   }
   
 	public getProducts(id: any, filter: LoopBackFilter = {}, customHeaders?: Function, meta?: any): Observable<any[]> {
@@ -814,8 +814,8 @@ export class OrmOrganization extends OrmBase<Organization> {
     this.store.dispatch(new this.actions.createManyContacts(id, data, meta));
   }
   
-	public createManyApps(id: any, data: any[] = [], customHeaders?: Function, meta?: any): void {
-    this.store.dispatch(new this.actions.createManyApps(id, data, meta));
+	public createManyPosts(id: any, data: any[] = [], customHeaders?: Function, meta?: any): void {
+    this.store.dispatch(new this.actions.createManyPosts(id, data, meta));
   }
   
 	public createManyProducts(id: any, data: any[] = [], customHeaders?: Function, meta?: any): void {

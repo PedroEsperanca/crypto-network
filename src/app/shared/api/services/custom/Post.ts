@@ -10,17 +10,19 @@ import { JSONSearchParams } from '../core/search.params';
 import { ErrorHandler } from '../core/error.service';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
-import { Product } from '../../models/Product';
+import { Post } from '../../models/Post';
 import { SocketConnection } from '../../sockets/socket.connections';
-import { Organization } from '../../models/Organization';
 import { User } from '../../models/User';
+import { Organization } from '../../models/Organization';
+import { Vote } from '../../models/Vote';
+import { Share } from '../../models/Share';
 
 
 /**
- * Api services for the `Product` model.
+ * Api services for the `Post` model.
  */
 @Injectable()
-export class ProductApi extends BaseLoopBackApi {
+export class PostApi extends BaseLoopBackApi {
 
   constructor(
     @Inject(Http) protected http: Http,
@@ -34,9 +36,9 @@ export class ProductApi extends BaseLoopBackApi {
   }
 
   /**
-   * Fetches belongsTo relation organization.
+   * Fetches belongsTo relation user.
    *
-   * @param {any} id Product id
+   * @param {any} id Post id
    *
    * @param {boolean} refresh 
    *
@@ -46,13 +48,43 @@ export class ProductApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Product` object.)
+   * This usually means the response is a `Post` object.)
+   * </em>
+   */
+  public getUser(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Posts/:id/user";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (typeof refresh !== 'undefined' && refresh !== null) _urlParams.refresh = refresh;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
+   * Fetches belongsTo relation organization.
+   *
+   * @param {any} id Post id
+   *
+   * @param {boolean} refresh 
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Post` object.)
    * </em>
    */
   public getOrganization(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Products/:id/organization";
+    "/Posts/:id/organization";
     let _routeParams: any = {
       id: id
     };
@@ -64,11 +96,11 @@ export class ProductApi extends BaseLoopBackApi {
   }
 
   /**
-   * Find a related item by id for shoppingCard.
+   * Find a related item by id for votes.
    *
-   * @param {any} id Product id
+   * @param {any} id Post id
    *
-   * @param {any} fk Foreign key for shoppingCard
+   * @param {any} fk Foreign key for votes
    *
    * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -76,13 +108,13 @@ export class ProductApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Product` object.)
+   * This usually means the response is a `Post` object.)
    * </em>
    */
-  public findByIdShoppingCard(id: any, fk: any, customHeaders?: Function): Observable<any> {
+  public findByIdVotes(id: any, fk: any, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Products/:id/shoppingCard/:fk";
+    "/Posts/:id/votes/:fk";
     let _routeParams: any = {
       id: id,
       fk: fk
@@ -94,42 +126,11 @@ export class ProductApi extends BaseLoopBackApi {
   }
 
   /**
-   * Delete a related item by id for shoppingCard.
+   * Find a related item by id for s3Images.
    *
-   * @param {any} id Product id
+   * @param {any} id Post id
    *
-   * @param {any} fk Foreign key for shoppingCard
-   *
-   * @returns {object} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * This method returns no data.
-   */
-  public destroyByIdShoppingCard(id: any, fk: any, customHeaders?: Function): Observable<any> {
-    let _method: string = "DELETE";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Products/:id/shoppingCard/:fk";
-    let _routeParams: any = {
-      id: id,
-      fk: fk
-    };
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
-  }
-
-  /**
-   * Update a related item by id for shoppingCard.
-   *
-   * @param {any} id Product id
-   *
-   * @param {any} fk Foreign key for shoppingCard
-   *
-   * @param {object} data Request data.
-   *
-   * This method expects a subset of model properties as request parameters.
+   * @param {any} fk Foreign key for s3Images
    *
    * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -137,138 +138,13 @@ export class ProductApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Product` object.)
+   * This usually means the response is a `Post` object.)
    * </em>
    */
-  public updateByIdShoppingCard(id: any, fk: any, data: any = {}, customHeaders?: Function): Observable<any> {
-    let _method: string = "PUT";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Products/:id/shoppingCard/:fk";
-    let _routeParams: any = {
-      id: id,
-      fk: fk
-    };
-    let _postBody: any = {
-      data: data
-    };
-    let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
-  }
-
-  /**
-   * Add a related item by id for shoppingCard.
-   *
-   * @param {any} id Product id
-   *
-   * @param {any} fk Foreign key for shoppingCard
-   *
-   * @param {object} data Request data.
-   *
-   * This method expects a subset of model properties as request parameters.
-   *
-   * @returns {object} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Product` object.)
-   * </em>
-   */
-  public linkShoppingCard(id: any, fk: any, data: any = {}, customHeaders?: Function): Observable<any> {
-    let _method: string = "PUT";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Products/:id/shoppingCard/rel/:fk";
-    let _routeParams: any = {
-      id: id,
-      fk: fk
-    };
-    let _postBody: any = {
-      data: data
-    };
-    let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
-  }
-
-  /**
-   * Remove the shoppingCard relation to an item by id.
-   *
-   * @param {any} id Product id
-   *
-   * @param {any} fk Foreign key for shoppingCard
-   *
-   * @returns {object} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * This method returns no data.
-   */
-  public unlinkShoppingCard(id: any, fk: any, customHeaders?: Function): Observable<any> {
-    let _method: string = "DELETE";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Products/:id/shoppingCard/rel/:fk";
-    let _routeParams: any = {
-      id: id,
-      fk: fk
-    };
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
-  }
-
-  /**
-   * Check the existence of shoppingCard relation to an item by id.
-   *
-   * @param {any} id Product id
-   *
-   * @param {any} fk Foreign key for shoppingCard
-   *
-   * @returns {object} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Product` object.)
-   * </em>
-   */
-  public existsShoppingCard(id: any, fk: any, customHeaders?: Function): Observable<any> {
-    let _method: string = "HEAD";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Products/:id/shoppingCard/rel/:fk";
-    let _routeParams: any = {
-      id: id,
-      fk: fk
-    };
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
-  }
-
-  /**
-   * Find a related item by id for whishList.
-   *
-   * @param {any} id Product id
-   *
-   * @param {any} fk Foreign key for whishList
-   *
-   * @returns {object} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Product` object.)
-   * </em>
-   */
-  public findByIdWhishList(id: any, fk: any, customHeaders?: Function): Observable<any> {
+  public findByIdS3Images(id: any, fk: any, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Products/:id/whishList/:fk";
+    "/Posts/:id/s3Images/:fk";
     let _routeParams: any = {
       id: id,
       fk: fk
@@ -280,11 +156,11 @@ export class ProductApi extends BaseLoopBackApi {
   }
 
   /**
-   * Delete a related item by id for whishList.
+   * Delete a related item by id for s3Images.
    *
-   * @param {any} id Product id
+   * @param {any} id Post id
    *
-   * @param {any} fk Foreign key for whishList
+   * @param {any} fk Foreign key for s3Images
    *
    * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -292,10 +168,10 @@ export class ProductApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  public destroyByIdWhishList(id: any, fk: any, customHeaders?: Function): Observable<any> {
+  public destroyByIdS3Images(id: any, fk: any, customHeaders?: Function): Observable<any> {
     let _method: string = "DELETE";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Products/:id/whishList/:fk";
+    "/Posts/:id/s3Images/:fk";
     let _routeParams: any = {
       id: id,
       fk: fk
@@ -307,11 +183,11 @@ export class ProductApi extends BaseLoopBackApi {
   }
 
   /**
-   * Update a related item by id for whishList.
+   * Update a related item by id for s3Images.
    *
-   * @param {any} id Product id
+   * @param {any} id Post id
    *
-   * @param {any} fk Foreign key for whishList
+   * @param {any} fk Foreign key for s3Images
    *
    * @param {object} data Request data.
    *
@@ -323,13 +199,13 @@ export class ProductApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Product` object.)
+   * This usually means the response is a `Post` object.)
    * </em>
    */
-  public updateByIdWhishList(id: any, fk: any, data: any = {}, customHeaders?: Function): Observable<any> {
+  public updateByIdS3Images(id: any, fk: any, data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PUT";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Products/:id/whishList/:fk";
+    "/Posts/:id/s3Images/:fk";
     let _routeParams: any = {
       id: id,
       fk: fk
@@ -343,11 +219,41 @@ export class ProductApi extends BaseLoopBackApi {
   }
 
   /**
-   * Add a related item by id for whishList.
+   * Find a related item by id for replies.
    *
-   * @param {any} id Product id
+   * @param {any} id Post id
    *
-   * @param {any} fk Foreign key for whishList
+   * @param {any} fk Foreign key for replies
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Post` object.)
+   * </em>
+   */
+  public findByIdReplies(id: any, fk: any, customHeaders?: Function): Observable<any> {
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Posts/:id/replies/:fk";
+    let _routeParams: any = {
+      id: id,
+      fk: fk
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
+   * Add a related item by id for replies.
+   *
+   * @param {any} id Post id
+   *
+   * @param {any} fk Foreign key for replies
    *
    * @param {object} data Request data.
    *
@@ -359,13 +265,13 @@ export class ProductApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Product` object.)
+   * This usually means the response is a `Post` object.)
    * </em>
    */
-  public linkWhishList(id: any, fk: any, data: any = {}, customHeaders?: Function): Observable<any> {
+  public linkReplies(id: any, fk: any, data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PUT";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Products/:id/whishList/rel/:fk";
+    "/Posts/:id/replies/rel/:fk";
     let _routeParams: any = {
       id: id,
       fk: fk
@@ -379,11 +285,11 @@ export class ProductApi extends BaseLoopBackApi {
   }
 
   /**
-   * Remove the whishList relation to an item by id.
+   * Remove the replies relation to an item by id.
    *
-   * @param {any} id Product id
+   * @param {any} id Post id
    *
-   * @param {any} fk Foreign key for whishList
+   * @param {any} fk Foreign key for replies
    *
    * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -391,10 +297,10 @@ export class ProductApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  public unlinkWhishList(id: any, fk: any, customHeaders?: Function): Observable<any> {
+  public unlinkReplies(id: any, fk: any, customHeaders?: Function): Observable<any> {
     let _method: string = "DELETE";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Products/:id/whishList/rel/:fk";
+    "/Posts/:id/replies/rel/:fk";
     let _routeParams: any = {
       id: id,
       fk: fk
@@ -406,11 +312,11 @@ export class ProductApi extends BaseLoopBackApi {
   }
 
   /**
-   * Check the existence of whishList relation to an item by id.
+   * Check the existence of replies relation to an item by id.
    *
-   * @param {any} id Product id
+   * @param {any} id Post id
    *
-   * @param {any} fk Foreign key for whishList
+   * @param {any} fk Foreign key for replies
    *
    * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -418,13 +324,13 @@ export class ProductApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Product` object.)
+   * This usually means the response is a `Post` object.)
    * </em>
    */
-  public existsWhishList(id: any, fk: any, customHeaders?: Function): Observable<any> {
+  public existsReplies(id: any, fk: any, customHeaders?: Function): Observable<any> {
     let _method: string = "HEAD";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Products/:id/whishList/rel/:fk";
+    "/Posts/:id/replies/rel/:fk";
     let _routeParams: any = {
       id: id,
       fk: fk
@@ -436,9 +342,9 @@ export class ProductApi extends BaseLoopBackApi {
   }
 
   /**
-   * Fetches hasOne relation s3Photo.
+   * Fetches hasOne relation replying.
    *
-   * @param {any} id Product id
+   * @param {any} id Post id
    *
    * @param {boolean} refresh 
    *
@@ -448,13 +354,13 @@ export class ProductApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Product` object.)
+   * This usually means the response is a `Post` object.)
    * </em>
    */
-  public getS3Photo(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
+  public getReplying(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Products/:id/s3Photo";
+    "/Posts/:id/replying";
     let _routeParams: any = {
       id: id
     };
@@ -466,42 +372,9 @@ export class ProductApi extends BaseLoopBackApi {
   }
 
   /**
-   * Creates a new instance in s3Photo of this model.
+   * Update replying of this model.
    *
-   * @param {any} id Product id
-   *
-   * @param {object} data Request data.
-   *
-   * This method expects a subset of model properties as request parameters.
-   *
-   * @returns {object} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Product` object.)
-   * </em>
-   */
-  public createS3Photo(id: any, data: any = {}, customHeaders?: Function): Observable<any> {
-    let _method: string = "POST";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Products/:id/s3Photo";
-    let _routeParams: any = {
-      id: id
-    };
-    let _postBody: any = {
-      data: data
-    };
-    let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
-  }
-
-  /**
-   * Update s3Photo of this model.
-   *
-   * @param {any} id Product id
+   * @param {any} id Post id
    *
    * @param {object} data Request data.
    *
@@ -513,13 +386,13 @@ export class ProductApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Product` object.)
+   * This usually means the response is a `Post` object.)
    * </em>
    */
-  public updateS3Photo(id: any, data: any = {}, customHeaders?: Function): Observable<any> {
+  public updateReplying(id: any, data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PUT";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Products/:id/s3Photo";
+    "/Posts/:id/replying";
     let _routeParams: any = {
       id: id
     };
@@ -532,9 +405,9 @@ export class ProductApi extends BaseLoopBackApi {
   }
 
   /**
-   * Deletes s3Photo of this model.
+   * Deletes replying of this model.
    *
-   * @param {any} id Product id
+   * @param {any} id Post id
    *
    * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -542,10 +415,10 @@ export class ProductApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  public destroyS3Photo(id: any, customHeaders?: Function): Observable<any> {
+  public destroyReplying(id: any, customHeaders?: Function): Observable<any> {
     let _method: string = "DELETE";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Products/:id/s3Photo";
+    "/Posts/:id/replying";
     let _routeParams: any = {
       id: id
     };
@@ -556,9 +429,132 @@ export class ProductApi extends BaseLoopBackApi {
   }
 
   /**
-   * Queries shoppingCard of Product.
+   * Find a related item by id for shared.
    *
-   * @param {any} id Product id
+   * @param {any} id Post id
+   *
+   * @param {any} fk Foreign key for shared
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Post` object.)
+   * </em>
+   */
+  public findByIdShared(id: any, fk: any, customHeaders?: Function): Observable<any> {
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Posts/:id/shared/:fk";
+    let _routeParams: any = {
+      id: id,
+      fk: fk
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
+   * Add a related item by id for shared.
+   *
+   * @param {any} id Post id
+   *
+   * @param {any} fk Foreign key for shared
+   *
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Post` object.)
+   * </em>
+   */
+  public linkShared(id: any, fk: any, data: any = {}, customHeaders?: Function): Observable<any> {
+    let _method: string = "PUT";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Posts/:id/shared/rel/:fk";
+    let _routeParams: any = {
+      id: id,
+      fk: fk
+    };
+    let _postBody: any = {
+      data: data
+    };
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
+   * Remove the shared relation to an item by id.
+   *
+   * @param {any} id Post id
+   *
+   * @param {any} fk Foreign key for shared
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * This method returns no data.
+   */
+  public unlinkShared(id: any, fk: any, customHeaders?: Function): Observable<any> {
+    let _method: string = "DELETE";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Posts/:id/shared/rel/:fk";
+    let _routeParams: any = {
+      id: id,
+      fk: fk
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
+   * Check the existence of shared relation to an item by id.
+   *
+   * @param {any} id Post id
+   *
+   * @param {any} fk Foreign key for shared
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Post` object.)
+   * </em>
+   */
+  public existsShared(id: any, fk: any, customHeaders?: Function): Observable<any> {
+    let _method: string = "HEAD";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Posts/:id/shared/rel/:fk";
+    let _routeParams: any = {
+      id: id,
+      fk: fk
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
+   * Queries votes of Post.
+   *
+   * @param {any} id Post id
    *
    * @param {object} filter 
    *
@@ -568,13 +564,13 @@ export class ProductApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Product` object.)
+   * This usually means the response is a `Post` object.)
    * </em>
    */
-  public getShoppingCard(id: any, filter: LoopBackFilter = {}, customHeaders?: Function): Observable<any> {
+  public getVotes(id: any, filter: LoopBackFilter = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Products/:id/shoppingCard";
+    "/Posts/:id/votes";
     let _routeParams: any = {
       id: id
     };
@@ -586,66 +582,9 @@ export class ProductApi extends BaseLoopBackApi {
   }
 
   /**
-   * Creates a new instance in shoppingCard of this model.
+   * Counts votes of Post.
    *
-   * @param {any} id Product id
-   *
-   * @param {object} data Request data.
-   *
-   * This method expects a subset of model properties as request parameters.
-   *
-   * @returns {object} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Product` object.)
-   * </em>
-   */
-  public createShoppingCard(id: any, data: any = {}, customHeaders?: Function): Observable<any> {
-    let _method: string = "POST";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Products/:id/shoppingCard";
-    let _routeParams: any = {
-      id: id
-    };
-    let _postBody: any = {
-      data: data
-    };
-    let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
-  }
-
-  /**
-   * Deletes all shoppingCard of this model.
-   *
-   * @param {any} id Product id
-   *
-   * @returns {object} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * This method returns no data.
-   */
-  public deleteShoppingCard(id: any, customHeaders?: Function): Observable<any> {
-    let _method: string = "DELETE";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Products/:id/shoppingCard";
-    let _routeParams: any = {
-      id: id
-    };
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
-  }
-
-  /**
-   * Counts shoppingCard of Product.
-   *
-   * @param {any} id Product id
+   * @param {any} id Post id
    *
    * @param {object} where Criteria to match model instances
    *
@@ -657,10 +596,10 @@ export class ProductApi extends BaseLoopBackApi {
    *
    *  - `count` – `{number}` - 
    */
-  public countShoppingCard(id: any, where: any = {}, customHeaders?: Function): Observable<any> {
+  public countVotes(id: any, where: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Products/:id/shoppingCard/count";
+    "/Posts/:id/votes/count";
     let _routeParams: any = {
       id: id
     };
@@ -672,9 +611,9 @@ export class ProductApi extends BaseLoopBackApi {
   }
 
   /**
-   * Queries whishList of Product.
+   * Queries s3Images of Post.
    *
-   * @param {any} id Product id
+   * @param {any} id Post id
    *
    * @param {object} filter 
    *
@@ -684,13 +623,13 @@ export class ProductApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Product` object.)
+   * This usually means the response is a `Post` object.)
    * </em>
    */
-  public getWhishList(id: any, filter: LoopBackFilter = {}, customHeaders?: Function): Observable<any> {
+  public getS3Images(id: any, filter: LoopBackFilter = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Products/:id/whishList";
+    "/Posts/:id/s3Images";
     let _routeParams: any = {
       id: id
     };
@@ -702,9 +641,9 @@ export class ProductApi extends BaseLoopBackApi {
   }
 
   /**
-   * Creates a new instance in whishList of this model.
+   * Creates a new instance in s3Images of this model.
    *
-   * @param {any} id Product id
+   * @param {any} id Post id
    *
    * @param {object} data Request data.
    *
@@ -716,13 +655,13 @@ export class ProductApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Product` object.)
+   * This usually means the response is a `Post` object.)
    * </em>
    */
-  public createWhishList(id: any, data: any = {}, customHeaders?: Function): Observable<any> {
+  public createS3Images(id: any, data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "POST";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Products/:id/whishList";
+    "/Posts/:id/s3Images";
     let _routeParams: any = {
       id: id
     };
@@ -735,9 +674,9 @@ export class ProductApi extends BaseLoopBackApi {
   }
 
   /**
-   * Deletes all whishList of this model.
+   * Deletes all s3Images of this model.
    *
-   * @param {any} id Product id
+   * @param {any} id Post id
    *
    * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -745,10 +684,10 @@ export class ProductApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  public deleteWhishList(id: any, customHeaders?: Function): Observable<any> {
+  public deleteS3Images(id: any, customHeaders?: Function): Observable<any> {
     let _method: string = "DELETE";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Products/:id/whishList";
+    "/Posts/:id/s3Images";
     let _routeParams: any = {
       id: id
     };
@@ -759,9 +698,9 @@ export class ProductApi extends BaseLoopBackApi {
   }
 
   /**
-   * Counts whishList of Product.
+   * Counts s3Images of Post.
    *
-   * @param {any} id Product id
+   * @param {any} id Post id
    *
    * @param {object} where Criteria to match model instances
    *
@@ -773,10 +712,128 @@ export class ProductApi extends BaseLoopBackApi {
    *
    *  - `count` – `{number}` - 
    */
-  public countWhishList(id: any, where: any = {}, customHeaders?: Function): Observable<any> {
+  public countS3Images(id: any, where: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Products/:id/whishList/count";
+    "/Posts/:id/s3Images/count";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (typeof where !== 'undefined' && where !== null) _urlParams.where = where;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
+   * Queries replies of Post.
+   *
+   * @param {any} id Post id
+   *
+   * @param {object} filter 
+   *
+   * @returns {object[]} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Post` object.)
+   * </em>
+   */
+  public getReplies(id: any, filter: LoopBackFilter = {}, customHeaders?: Function): Observable<any> {
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Posts/:id/replies";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (typeof filter !== 'undefined' && filter !== null) _urlParams.filter = filter;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
+   * Counts replies of Post.
+   *
+   * @param {any} id Post id
+   *
+   * @param {object} where Criteria to match model instances
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * Data properties:
+   *
+   *  - `count` – `{number}` - 
+   */
+  public countReplies(id: any, where: any = {}, customHeaders?: Function): Observable<any> {
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Posts/:id/replies/count";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (typeof where !== 'undefined' && where !== null) _urlParams.where = where;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
+   * Queries shared of Post.
+   *
+   * @param {any} id Post id
+   *
+   * @param {object} filter 
+   *
+   * @returns {object[]} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Post` object.)
+   * </em>
+   */
+  public getShared(id: any, filter: LoopBackFilter = {}, customHeaders?: Function): Observable<any> {
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Posts/:id/shared";
+    let _routeParams: any = {
+      id: id
+    };
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (typeof filter !== 'undefined' && filter !== null) _urlParams.filter = filter;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
+   * Counts shared of Post.
+   *
+   * @param {any} id Post id
+   *
+   * @param {object} where Criteria to match model instances
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * Data properties:
+   *
+   *  - `count` – `{number}` - 
+   */
+  public countShared(id: any, where: any = {}, customHeaders?: Function): Observable<any> {
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Posts/:id/shared/count";
     let _routeParams: any = {
       id: id
     };
@@ -800,13 +857,13 @@ export class ProductApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Product` object.)
+   * This usually means the response is a `Post` object.)
    * </em>
    */
   public patchOrCreate(data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PATCH";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Products";
+    "/Posts";
     let _routeParams: any = {};
     let _postBody: any = {
       data: data
@@ -819,7 +876,7 @@ export class ProductApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param {any} id Product id
+   * @param {any} id Post id
    *
    * @param {object} data Request data.
    *
@@ -831,13 +888,13 @@ export class ProductApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Product` object.)
+   * This usually means the response is a `Post` object.)
    * </em>
    */
   public patchAttributes(id: any, data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PATCH";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Products/:id";
+    "/Posts/:id";
     let _routeParams: any = {
       id: id
     };
@@ -850,7 +907,7 @@ export class ProductApi extends BaseLoopBackApi {
   }
 
   /**
-   * Statistical information for 'App' registers.
+   * Statistical information for 'Post' registers.
    *
    * @param {string} range hourly, daily, weekly, monthly, yearly, custom
    *
@@ -866,13 +923,13 @@ export class ProductApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Product` object.)
+   * This usually means the response is a `Post` object.)
    * </em>
    */
   public stats(range: any, custom: any = {}, where: any = {}, groupBy: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Products/stats";
+    "/Posts/stats";
     let _routeParams: any = {};
     let _postBody: any = {};
     let _urlParams: any = {};
@@ -887,7 +944,7 @@ export class ProductApi extends BaseLoopBackApi {
   /**
    * Get a S3 Signed URL for direct file uploads.
    *
-   * @param {any} id Product id
+   * @param {any} id Post id
    *
    * @param {string} key 
    *
@@ -899,13 +956,13 @@ export class ProductApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Product` object.)
+   * This usually means the response is a `Post` object.)
    * </em>
    */
   public s3PUTSignedUrl(id: any, key: any = {}, options: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Products/:id/s3PUTSignedUrl";
+    "/Posts/:id/s3PUTSignedUrl";
     let _routeParams: any = {
       id: id
     };
@@ -920,7 +977,7 @@ export class ProductApi extends BaseLoopBackApi {
   /**
    * Get a S3 Signed URL for direct file access.
    *
-   * @param {any} id Product id
+   * @param {any} id Post id
    *
    * @param {string} key 
    *
@@ -930,13 +987,13 @@ export class ProductApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Product` object.)
+   * This usually means the response is a `Post` object.)
    * </em>
    */
   public s3GETSignedUrl(id: any, key: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Products/:id/s3GETSignedUrl";
+    "/Posts/:id/s3GETSignedUrl";
     let _routeParams: any = {
       id: id
     };
@@ -948,42 +1005,9 @@ export class ProductApi extends BaseLoopBackApi {
   }
 
   /**
-   * Creates a new instance in s3Photo of this model.
+   * Creates a new instance in s3Images of this model.
    *
-   * @param {any} id Product id
-   *
-   * @param {object} data Request data.
-   *
-   * This method expects a subset of model properties as request parameters.
-   *
-   * @returns {object[]} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Product` object.)
-   * </em>
-   */
-  public createManyS3Photo(id: any, data: any[] = [], customHeaders?: Function): Observable<any> {
-    let _method: string = "POST";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Products/:id/s3Photo";
-    let _routeParams: any = {
-      id: id
-    };
-    let _postBody: any = {
-      data: data
-    };
-    let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
-  }
-
-  /**
-   * Creates a new instance in shoppingCard of this model.
-   *
-   * @param {any} id Product id
+   * @param {any} id Post id
    *
    * @param {object} data Request data.
    *
@@ -995,46 +1019,13 @@ export class ProductApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Product` object.)
+   * This usually means the response is a `Post` object.)
    * </em>
    */
-  public createManyShoppingCard(id: any, data: any[] = [], customHeaders?: Function): Observable<any> {
+  public createManyS3Images(id: any, data: any[] = [], customHeaders?: Function): Observable<any> {
     let _method: string = "POST";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Products/:id/shoppingCard";
-    let _routeParams: any = {
-      id: id
-    };
-    let _postBody: any = {
-      data: data
-    };
-    let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
-  }
-
-  /**
-   * Creates a new instance in whishList of this model.
-   *
-   * @param {any} id Product id
-   *
-   * @param {object} data Request data.
-   *
-   * This method expects a subset of model properties as request parameters.
-   *
-   * @returns {object[]} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Product` object.)
-   * </em>
-   */
-  public createManyWhishList(id: any, data: any[] = [], customHeaders?: Function): Observable<any> {
-    let _method: string = "POST";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Products/:id/whishList";
+    "/Posts/:id/s3Images";
     let _routeParams: any = {
       id: id
     };
@@ -1048,9 +1039,9 @@ export class ProductApi extends BaseLoopBackApi {
 
   /**
    * The name of the model represented by this $resource,
-   * i.e. `Product`.
+   * i.e. `Post`.
    */
   public getModelName() {
-    return "Product";
+    return "Post";
   }
 }

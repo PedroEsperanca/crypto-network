@@ -438,46 +438,46 @@ export class OrganizationEffects extends BaseLoopbackEffects {
     );
 
   @Effect()
-  public findByIdApps$ = this.actions$
-    .ofType(OrganizationActionTypes.FIND_BY_ID_APPS)
+  public findByIdPosts$ = this.actions$
+    .ofType(OrganizationActionTypes.FIND_BY_ID_POSTS)
     .mergeMap((action: LoopbackAction) =>
-      this.organization.findByIdApps(action.payload.id, action.payload.fk)
+      this.organization.findByIdPosts(action.payload.id, action.payload.fk)
         .mergeMap((response: any) => concat(
-          resolver({id: action.payload.id, data: response, meta: action.meta}, 'App', 'findByIdSuccess'),
-          of(new OrganizationActions.findByIdAppsSuccess(action.payload.id, response, action.meta))
+          resolver({id: action.payload.id, data: response, meta: action.meta}, 'Post', 'findByIdSuccess'),
+          of(new OrganizationActions.findByIdPostsSuccess(action.payload.id, response, action.meta))
         ))
         .catch((error: any) => concat(
-          of(new OrganizationActions.findByIdAppsFail(error, action.meta)),
+          of(new OrganizationActions.findByIdPostsFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  public destroyByIdApps$ = this.actions$
-    .ofType(OrganizationActionTypes.DESTROY_BY_ID_APPS)
+  public destroyByIdPosts$ = this.actions$
+    .ofType(OrganizationActionTypes.DESTROY_BY_ID_POSTS)
     .mergeMap((action: LoopbackAction) =>
-      this.organization.destroyByIdApps(action.payload.id, action.payload.fk)
+      this.organization.destroyByIdPosts(action.payload.id, action.payload.fk)
         .mergeMap((response: any) => concat(
-          resolver({data: response, meta: action.meta}, 'App', 'deleteByIdSuccess'),
-          of(new OrganizationActions.destroyByIdAppsSuccess(action.payload.id, response, action.meta))
+          resolver({data: response, meta: action.meta}, 'Post', 'deleteByIdSuccess'),
+          of(new OrganizationActions.destroyByIdPostsSuccess(action.payload.id, response, action.meta))
         ))
         .catch((error: any) => concat(
-          of(new OrganizationActions.destroyByIdAppsFail(error, action.meta)),
+          of(new OrganizationActions.destroyByIdPostsFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  public updateByIdApps$ = this.actions$
-    .ofType(OrganizationActionTypes.UPDATE_BY_ID_APPS)
+  public updateByIdPosts$ = this.actions$
+    .ofType(OrganizationActionTypes.UPDATE_BY_ID_POSTS)
     .mergeMap((action: LoopbackAction) =>
-      this.organization.updateByIdApps(action.payload.id, action.payload.fk, action.payload.data)
+      this.organization.updateByIdPosts(action.payload.id, action.payload.fk, action.payload.data)
         .mergeMap((response: any) => concat(
-          resolver({id: action.payload.id, data: response, meta: action.meta}, 'App', 'findByIdSuccess'),
-          of(new OrganizationActions.updateByIdAppsSuccess(action.payload.id, response, action.meta))
+          resolver({id: action.payload.id, data: response, meta: action.meta}, 'Post', 'findByIdSuccess'),
+          of(new OrganizationActions.updateByIdPostsSuccess(action.payload.id, response, action.meta))
         ))
         .catch((error: any) => concat(
-          of(new OrganizationActions.updateByIdAppsFail(error, action.meta)),
+          of(new OrganizationActions.updateByIdPostsFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
@@ -822,43 +822,43 @@ export class OrganizationEffects extends BaseLoopbackEffects {
     );
 
   @Effect()
-  public getApps$ = this.actions$
-    .ofType(OrganizationActionTypes.GET_APPS)
+  public getPosts$ = this.actions$
+    .ofType(OrganizationActionTypes.GET_POSTS)
     .mergeMap((action: LoopbackAction) =>
-      this.organization.getApps(action.payload.id, action.payload.filter)
+      this.organization.getPosts(action.payload.id, action.payload.filter)
         .mergeMap((response: any) => concat(
-          resolver({data: response, meta: action.meta}, 'App', 'findSuccess'),
-          of(new OrganizationActions.getAppsSuccess(action.payload.id, response, action.meta))
+          resolver({data: response, meta: action.meta}, 'Post', 'findSuccess'),
+          of(new OrganizationActions.getPostsSuccess(action.payload.id, response, action.meta))
         ))
         .catch((error: any) => concat(
-          of(new OrganizationActions.getAppsFail(error, action.meta)),
+          of(new OrganizationActions.getPostsFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  public createApps$ = this.actions$
-    .ofType(OrganizationActionTypes.CREATE_APPS)
+  public createPosts$ = this.actions$
+    .ofType(OrganizationActionTypes.CREATE_POSTS)
     .mergeMap((action: LoopbackAction) =>
-      this.organization.createApps(action.payload.id, action.payload.data)
+      this.organization.createPosts(action.payload.id, action.payload.data)
         .mergeMap((response: any) => concat(
-          resolver({data: response, meta: action.meta}, 'App', 'findSuccess'),
-          of(new OrganizationActions.createAppsSuccess(action.payload.id, response, action.meta))
+          resolver({data: response, meta: action.meta}, 'Post', 'findSuccess'),
+          of(new OrganizationActions.createPostsSuccess(action.payload.id, response, action.meta))
         ))
         .catch((error: any) => concat(
-          of(new OrganizationActions.createAppsFail(error, action.meta)),
+          of(new OrganizationActions.createPostsFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  public deleteApps$ = this.actions$
-    .ofType(OrganizationActionTypes.DELETE_APPS)
+  public deletePosts$ = this.actions$
+    .ofType(OrganizationActionTypes.DELETE_POSTS)
     .mergeMap((action: LoopbackAction) =>
-      this.organization.deleteApps(action.payload.id)
-        .map((response: any) => new OrganizationActions.deleteAppsSuccess(action.payload, action.meta))
+      this.organization.deletePosts(action.payload.id)
+        .map((response: any) => new OrganizationActions.deletePostsSuccess(action.payload, action.meta))
         .catch((error: any) => concat(
-          of(new OrganizationActions.deleteAppsFail(error, action.meta)),
+          of(new OrganizationActions.deletePostsFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
@@ -1128,16 +1128,16 @@ export class OrganizationEffects extends BaseLoopbackEffects {
     );
 
   @Effect()
-  public createManyApps$ = this.actions$
-    .ofType(OrganizationActionTypes.CREATE_MANY_APPS)
+  public createManyPosts$ = this.actions$
+    .ofType(OrganizationActionTypes.CREATE_MANY_POSTS)
     .mergeMap((action: LoopbackAction) =>
-      this.organization.createManyApps(action.payload.id, action.payload.data)
+      this.organization.createManyPosts(action.payload.id, action.payload.data)
         .mergeMap((response: any) => concat(
-          resolver({data: response, meta: action.meta}, 'App', 'findSuccess'),
-          of(new OrganizationActions.createManyAppsSuccess(action.payload.id, response, action.meta))
+          resolver({data: response, meta: action.meta}, 'Post', 'findSuccess'),
+          of(new OrganizationActions.createManyPostsSuccess(action.payload.id, response, action.meta))
         ))
         .catch((error: any) => concat(
-          of(new OrganizationActions.createManyAppsFail(error, action.meta)),
+          of(new OrganizationActions.createManyPostsFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );

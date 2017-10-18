@@ -18,7 +18,7 @@ import { StripeSource } from '../../models/StripeSource';
 import { StripeCharge } from '../../models/StripeCharge';
 import { StripeStoreIdentity } from '../../models/StripeStoreIdentity';
 import { Contact } from '../../models/Contact';
-import { App } from '../../models/App';
+import { Post } from '../../models/Post';
 import { Product } from '../../models/Product';
 import { Subscription } from '../../models/Subscription';
 import { OAuthApp } from '../../models/OAuthApp';
@@ -1008,11 +1008,11 @@ export class OrganizationApi extends BaseLoopBackApi {
   }
 
   /**
-   * Find a related item by id for apps.
+   * Find a related item by id for posts.
    *
    * @param {any} id Organization id
    *
-   * @param {any} fk Foreign key for apps
+   * @param {any} fk Foreign key for posts
    *
    * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -1023,10 +1023,10 @@ export class OrganizationApi extends BaseLoopBackApi {
    * This usually means the response is a `Organization` object.)
    * </em>
    */
-  public findByIdApps(id: any, fk: any, customHeaders?: Function): Observable<any> {
+  public findByIdPosts(id: any, fk: any, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Organizations/:id/apps/:fk";
+    "/Organizations/:id/posts/:fk";
     let _routeParams: any = {
       id: id,
       fk: fk
@@ -1038,11 +1038,11 @@ export class OrganizationApi extends BaseLoopBackApi {
   }
 
   /**
-   * Delete a related item by id for apps.
+   * Delete a related item by id for posts.
    *
    * @param {any} id Organization id
    *
-   * @param {any} fk Foreign key for apps
+   * @param {any} fk Foreign key for posts
    *
    * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -1050,10 +1050,10 @@ export class OrganizationApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  public destroyByIdApps(id: any, fk: any, customHeaders?: Function): Observable<any> {
+  public destroyByIdPosts(id: any, fk: any, customHeaders?: Function): Observable<any> {
     let _method: string = "DELETE";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Organizations/:id/apps/:fk";
+    "/Organizations/:id/posts/:fk";
     let _routeParams: any = {
       id: id,
       fk: fk
@@ -1065,11 +1065,11 @@ export class OrganizationApi extends BaseLoopBackApi {
   }
 
   /**
-   * Update a related item by id for apps.
+   * Update a related item by id for posts.
    *
    * @param {any} id Organization id
    *
-   * @param {any} fk Foreign key for apps
+   * @param {any} fk Foreign key for posts
    *
    * @param {object} data Request data.
    *
@@ -1084,10 +1084,10 @@ export class OrganizationApi extends BaseLoopBackApi {
    * This usually means the response is a `Organization` object.)
    * </em>
    */
-  public updateByIdApps(id: any, fk: any, data: any = {}, customHeaders?: Function): Observable<any> {
+  public updateByIdPosts(id: any, fk: any, data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PUT";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Organizations/:id/apps/:fk";
+    "/Organizations/:id/posts/:fk";
     let _routeParams: any = {
       id: id,
       fk: fk
@@ -1960,7 +1960,7 @@ export class OrganizationApi extends BaseLoopBackApi {
   }
 
   /**
-   * Queries apps of Organization.
+   * Queries posts of Organization.
    *
    * @param {any} id Organization id
    *
@@ -1975,10 +1975,10 @@ export class OrganizationApi extends BaseLoopBackApi {
    * This usually means the response is a `Organization` object.)
    * </em>
    */
-  public getApps(id: any, filter: LoopBackFilter = {}, customHeaders?: Function): Observable<any> {
+  public getPosts(id: any, filter: LoopBackFilter = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Organizations/:id/apps";
+    "/Organizations/:id/posts";
     let _routeParams: any = {
       id: id
     };
@@ -1990,7 +1990,7 @@ export class OrganizationApi extends BaseLoopBackApi {
   }
 
   /**
-   * Creates a new instance in apps of this model.
+   * Creates a new instance in posts of this model.
    *
    * @param {any} id Organization id
    *
@@ -2007,10 +2007,10 @@ export class OrganizationApi extends BaseLoopBackApi {
    * This usually means the response is a `Organization` object.)
    * </em>
    */
-  public createApps(id: any, data: any = {}, customHeaders?: Function): Observable<any> {
+  public createPosts(id: any, data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "POST";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Organizations/:id/apps";
+    "/Organizations/:id/posts";
     let _routeParams: any = {
       id: id
     };
@@ -2023,7 +2023,7 @@ export class OrganizationApi extends BaseLoopBackApi {
   }
 
   /**
-   * Deletes all apps of this model.
+   * Deletes all posts of this model.
    *
    * @param {any} id Organization id
    *
@@ -2033,10 +2033,10 @@ export class OrganizationApi extends BaseLoopBackApi {
    *
    * This method returns no data.
    */
-  public deleteApps(id: any, customHeaders?: Function): Observable<any> {
+  public deletePosts(id: any, customHeaders?: Function): Observable<any> {
     let _method: string = "DELETE";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Organizations/:id/apps";
+    "/Organizations/:id/posts";
     let _routeParams: any = {
       id: id
     };
@@ -2047,7 +2047,7 @@ export class OrganizationApi extends BaseLoopBackApi {
   }
 
   /**
-   * Counts apps of Organization.
+   * Counts posts of Organization.
    *
    * @param {any} id Organization id
    *
@@ -2061,10 +2061,10 @@ export class OrganizationApi extends BaseLoopBackApi {
    *
    *  - `count` – `{number}` - 
    */
-  public countApps(id: any, where: any = {}, customHeaders?: Function): Observable<any> {
+  public countPosts(id: any, where: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Organizations/:id/apps/count";
+    "/Organizations/:id/posts/count";
     let _routeParams: any = {
       id: id
     };
@@ -2486,6 +2486,41 @@ export class OrganizationApi extends BaseLoopBackApi {
   }
 
   /**
+   * Statistical information for 'Organization' registers.
+   *
+   * @param {string} range hourly, daily, weekly, monthly, yearly, custom
+   *
+   * @param {object} custom {"start": date, "end": date }
+   *
+   * @param {object} where where filter 
+   *
+   * @param {string} groupBy group by filter 
+   *
+   * @returns {object[]} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Organization` object.)
+   * </em>
+   */
+  public stats(range: any, custom: any = {}, where: any = {}, groupBy: any = {}, customHeaders?: Function): Observable<any> {
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Organizations/stats";
+    let _routeParams: any = {};
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (typeof range !== 'undefined' && range !== null) _urlParams.range = range;
+    if (typeof custom !== 'undefined' && custom !== null) _urlParams.custom = custom;
+    if (typeof where !== 'undefined' && where !== null) _urlParams.where = where;
+    if (typeof groupBy !== 'undefined' && groupBy !== null) _urlParams.groupBy = groupBy;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
    * Get a S3 Signed URL for direct file uploads.
    *
    * @param {any} id Organization id
@@ -2544,41 +2579,6 @@ export class OrganizationApi extends BaseLoopBackApi {
     let _postBody: any = {};
     let _urlParams: any = {};
     if (typeof key !== 'undefined' && key !== null) _urlParams.key = key;
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
-  }
-
-  /**
-   * Statistical information for 'Organization' registers.
-   *
-   * @param {string} range hourly, daily, weekly, monthly, yearly, custom
-   *
-   * @param {object} custom {"start": date, "end": date }
-   *
-   * @param {object} where where filter 
-   *
-   * @param {string} groupBy group by filter 
-   *
-   * @returns {object[]} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Organization` object.)
-   * </em>
-   */
-  public stats(range: any, custom: any = {}, where: any = {}, groupBy: any = {}, customHeaders?: Function): Observable<any> {
-    let _method: string = "GET";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Organizations/stats";
-    let _routeParams: any = {};
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    if (typeof range !== 'undefined' && range !== null) _urlParams.range = range;
-    if (typeof custom !== 'undefined' && custom !== null) _urlParams.custom = custom;
-    if (typeof where !== 'undefined' && where !== null) _urlParams.where = where;
-    if (typeof groupBy !== 'undefined' && groupBy !== null) _urlParams.groupBy = groupBy;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -2848,7 +2848,7 @@ export class OrganizationApi extends BaseLoopBackApi {
   }
 
   /**
-   * Creates a new instance in apps of this model.
+   * Creates a new instance in posts of this model.
    *
    * @param {any} id Organization id
    *
@@ -2865,10 +2865,10 @@ export class OrganizationApi extends BaseLoopBackApi {
    * This usually means the response is a `Organization` object.)
    * </em>
    */
-  public createManyApps(id: any, data: any[] = [], customHeaders?: Function): Observable<any> {
+  public createManyPosts(id: any, data: any[] = [], customHeaders?: Function): Observable<any> {
     let _method: string = "POST";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Organizations/:id/apps";
+    "/Organizations/:id/posts";
     let _routeParams: any = {
       id: id
     };

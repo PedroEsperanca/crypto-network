@@ -52,11 +52,15 @@ import { RealTime } from './services/core/real.time';
 import { UserApi } from './services/custom/User';
 import { OrganizationApi } from './services/custom/Organization';
 import { ContactApi } from './services/custom/Contact';
+import { FollowApi } from './services/custom/Follow';
+import { VoteApi } from './services/custom/Vote';
+import { PostApi } from './services/custom/Post';
+import { ReplyApi } from './services/custom/Reply';
+import { ShareApi } from './services/custom/Share';
 import { StripeCustomerApi } from './services/custom/StripeCustomer';
 import { StripeSourceApi } from './services/custom/StripeSource';
 import { StripeChargeApi } from './services/custom/StripeCharge';
 import { StripeStoreIdentityApi } from './services/custom/StripeStoreIdentity';
-import { AppApi } from './services/custom/App';
 import { ProductApi } from './services/custom/Product';
 import { SubscriptionApi } from './services/custom/Subscription';
 import { OAuthAppApi } from './services/custom/OAuthApp';
@@ -94,11 +98,15 @@ export class SDKBrowserModule {
         UserApi,
         OrganizationApi,
         ContactApi,
+        FollowApi,
+        VoteApi,
+        PostApi,
+        ReplyApi,
+        ShareApi,
         StripeCustomerApi,
         StripeSourceApi,
         StripeChargeApi,
         StripeStoreIdentityApi,
-        AppApi,
         ProductApi,
         SubscriptionApi,
         OAuthAppApi,

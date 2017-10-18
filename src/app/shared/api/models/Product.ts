@@ -1,6 +1,7 @@
 /* tslint:disable */
 import {
-  Organization
+  Organization,
+  User
 } from '../index';
 
 declare var Object: any;
@@ -13,9 +14,11 @@ export interface ProductInterface {
   "organizationId"?: any;
   "createdAt"?: Date;
   "updatedAt"?: Date;
-  "image"?: any;
   "slug"?: string;
+  "image"?: any;
   organization?: Organization;
+  shoppingCard?: User[];
+  whishList?: User[];
   s3Photo?: any[];
 }
 
@@ -28,9 +31,11 @@ export class Product implements ProductInterface {
   "organizationId": any;
   "createdAt": Date;
   "updatedAt": Date;
-  "image": any;
   "slug": string;
+  "image": any;
   organization: Organization;
+  shoppingCard: User[];
+  whishList: User[];
   s3Photo: any[];
   constructor(data?: ProductInterface) {
     Object.assign(this, data);
@@ -97,13 +102,13 @@ export class Product implements ProductInterface {
           name: 'updatedAt',
           type: 'Date'
         },
-        "image": {
-          name: 'image',
-          type: 'any'
-        },
         "slug": {
           name: 'slug',
           type: 'string'
+        },
+        "image": {
+          name: 'image',
+          type: 'any'
         },
       },
       relations: {
@@ -114,6 +119,26 @@ export class Product implements ProductInterface {
           relationType: 'belongsTo',
                   keyFrom: 'organizationId',
           keyTo: 'id'
+        },
+        shoppingCard: {
+          name: 'shoppingCard',
+          type: 'User[]',
+          model: 'User',
+          relationType: 'hasMany',
+          modelThrough: 'userProduct',
+          keyThrough: 'userId',
+          keyFrom: 'id',
+          keyTo: 'productId'
+        },
+        whishList: {
+          name: 'whishList',
+          type: 'User[]',
+          model: 'User',
+          relationType: 'hasMany',
+          modelThrough: 'userProduct',
+          keyThrough: 'userId',
+          keyFrom: 'id',
+          keyTo: 'productId'
         },
         s3Photo: {
           name: 's3Photo',

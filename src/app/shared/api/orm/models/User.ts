@@ -88,42 +88,6 @@ export class OrmUser extends OrmBase<User> {
     this.store.dispatch(new this.actions.updateByIdPhones(id, fk, data, meta));
   }
   
-	public getS3Photo(id: any, refresh: any = {}, customHeaders?: Function, meta?: any): Observable<any> {
-    
-    if (meta && meta.io) {
-      const destroyStream$: AsyncSubject<any> = new AsyncSubject();
-
-      createIO({}, this.store, destroyStream$, models[this.model.getModelDefinition().relations.rooms.model], this.realTime, meta);
-
-      return this.store.select<any>(this.model.getModelDefinition().relations.s3Photo.model + 's')
-        .map((state: any) => state.entities[id])
-        .finally(() => {
-          destroyStream$.next(1);
-          destroyStream$.complete();
-        });
-    } else {
-      if (!meta || !meta.justCache) {
-        this.store.dispatch(new this.actions.getS3Photo(id, refresh, meta));
-      }
-
-      return this.store.select<any>(this.model.getModelDefinition().relations.s3Photo.model + 's')
-        .map((state: any) => state.entities[id]);
-    }
-    
-  }
-  
-	public createS3Photo(id: any, data: any = {}, customHeaders?: Function, meta?: any): void {
-    this.store.dispatch(new this.actions.createS3Photo(id, data, meta));
-  }
-  
-	public updateS3Photo(id: any, data: any = {}, customHeaders?: Function, meta?: any): void {
-    this.store.dispatch(new this.actions.updateS3Photo(id, data, meta));
-  }
-  
-	public destroyS3Photo(id: any, customHeaders?: Function, meta?: any): void {
-    this.store.dispatch(new this.actions.destroyS3Photo(id, meta));
-  }
-  
 	public getStripeCustomer(id: any, refresh: any = {}, customHeaders?: Function, meta?: any): Observable<any> {
     
     if (meta && meta.io) {
@@ -352,6 +316,42 @@ export class OrmUser extends OrmBase<User> {
     this.store.dispatch(new this.actions.updateByIdRoles(id, fk, data, meta));
   }
   
+	public getS3Photo(id: any, refresh: any = {}, customHeaders?: Function, meta?: any): Observable<any> {
+    
+    if (meta && meta.io) {
+      const destroyStream$: AsyncSubject<any> = new AsyncSubject();
+
+      createIO({}, this.store, destroyStream$, models[this.model.getModelDefinition().relations.rooms.model], this.realTime, meta);
+
+      return this.store.select<any>(this.model.getModelDefinition().relations.s3Photo.model + 's')
+        .map((state: any) => state.entities[id])
+        .finally(() => {
+          destroyStream$.next(1);
+          destroyStream$.complete();
+        });
+    } else {
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.getS3Photo(id, refresh, meta));
+      }
+
+      return this.store.select<any>(this.model.getModelDefinition().relations.s3Photo.model + 's')
+        .map((state: any) => state.entities[id]);
+    }
+    
+  }
+  
+	public createS3Photo(id: any, data: any = {}, customHeaders?: Function, meta?: any): void {
+    this.store.dispatch(new this.actions.createS3Photo(id, data, meta));
+  }
+  
+	public updateS3Photo(id: any, data: any = {}, customHeaders?: Function, meta?: any): void {
+    this.store.dispatch(new this.actions.updateS3Photo(id, data, meta));
+  }
+  
+	public destroyS3Photo(id: any, customHeaders?: Function, meta?: any): void {
+    this.store.dispatch(new this.actions.destroyS3Photo(id, meta));
+  }
+  
 	public findByIdOrganizations(id: any, fk: any, customHeaders?: Function, meta?: any): Observable<any> {
     
     if (meta && meta.io) {
@@ -456,14 +456,14 @@ export class OrmUser extends OrmBase<User> {
     this.store.dispatch(new this.actions.updateByIdInvitations(id, fk, data, meta));
   }
   
-	public findByIdApps(id: any, fk: any, customHeaders?: Function, meta?: any): Observable<any> {
+	public findByIdFollowers(id: any, fk: any, customHeaders?: Function, meta?: any): Observable<any> {
     
     if (meta && meta.io) {
       const destroyStream$: AsyncSubject<any> = new AsyncSubject();
 
       createIO({}, this.store, destroyStream$, models[this.model.getModelDefinition().relations.rooms.model], this.realTime, meta);
 
-      return this.store.select<any>(this.model.getModelDefinition().relations.apps.model + 's')
+      return this.store.select<any>(this.model.getModelDefinition().relations.followers.model + 's')
         .map((state: any) => state.entities[fk])
         .finally(() => {
           destroyStream$.next(1);
@@ -471,21 +471,197 @@ export class OrmUser extends OrmBase<User> {
         });
     } else {
       if (!meta || !meta.justCache) {
-        this.store.dispatch(new this.actions.findByIdApps(id, fk, meta));
+        this.store.dispatch(new this.actions.findByIdFollowers(id, fk, meta));
       }
 
-      return this.store.select<any>(this.model.getModelDefinition().relations.apps.model + 's')
+      return this.store.select<any>(this.model.getModelDefinition().relations.followers.model + 's')
         .map((state: any) => state.entities[fk]);
     }
     
   }
   
-	public destroyByIdApps(id: any, fk: any, customHeaders?: Function, meta?: any): void {
-    this.store.dispatch(new this.actions.destroyByIdApps(id, fk, meta));
+	public linkFollowers(id: any, fk: any, data: any = {}, customHeaders?: Function, meta?: any): void {
+    this.store.dispatch(new this.actions.linkFollowers(id, fk, data, meta));
   }
   
-	public updateByIdApps(id: any, fk: any, data: any = {}, customHeaders?: Function, meta?: any): void {
-    this.store.dispatch(new this.actions.updateByIdApps(id, fk, data, meta));
+	public unlinkFollowers(id: any, fk: any, customHeaders?: Function, meta?: any): void {
+    this.store.dispatch(new this.actions.unlinkFollowers(id, fk, meta));
+  }
+  
+	public findByIdFollowing(id: any, fk: any, customHeaders?: Function, meta?: any): Observable<any> {
+    
+    if (meta && meta.io) {
+      const destroyStream$: AsyncSubject<any> = new AsyncSubject();
+
+      createIO({}, this.store, destroyStream$, models[this.model.getModelDefinition().relations.rooms.model], this.realTime, meta);
+
+      return this.store.select<any>(this.model.getModelDefinition().relations.following.model + 's')
+        .map((state: any) => state.entities[fk])
+        .finally(() => {
+          destroyStream$.next(1);
+          destroyStream$.complete();
+        });
+    } else {
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.findByIdFollowing(id, fk, meta));
+      }
+
+      return this.store.select<any>(this.model.getModelDefinition().relations.following.model + 's')
+        .map((state: any) => state.entities[fk]);
+    }
+    
+  }
+  
+	public linkFollowing(id: any, fk: any, data: any = {}, customHeaders?: Function, meta?: any): void {
+    this.store.dispatch(new this.actions.linkFollowing(id, fk, data, meta));
+  }
+  
+	public unlinkFollowing(id: any, fk: any, customHeaders?: Function, meta?: any): void {
+    this.store.dispatch(new this.actions.unlinkFollowing(id, fk, meta));
+  }
+  
+	public findByIdPosts(id: any, fk: any, customHeaders?: Function, meta?: any): Observable<any> {
+    
+    if (meta && meta.io) {
+      const destroyStream$: AsyncSubject<any> = new AsyncSubject();
+
+      createIO({}, this.store, destroyStream$, models[this.model.getModelDefinition().relations.rooms.model], this.realTime, meta);
+
+      return this.store.select<any>(this.model.getModelDefinition().relations.posts.model + 's')
+        .map((state: any) => state.entities[fk])
+        .finally(() => {
+          destroyStream$.next(1);
+          destroyStream$.complete();
+        });
+    } else {
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.findByIdPosts(id, fk, meta));
+      }
+
+      return this.store.select<any>(this.model.getModelDefinition().relations.posts.model + 's')
+        .map((state: any) => state.entities[fk]);
+    }
+    
+  }
+  
+	public destroyByIdPosts(id: any, fk: any, customHeaders?: Function, meta?: any): void {
+    this.store.dispatch(new this.actions.destroyByIdPosts(id, fk, meta));
+  }
+  
+	public updateByIdPosts(id: any, fk: any, data: any = {}, customHeaders?: Function, meta?: any): void {
+    this.store.dispatch(new this.actions.updateByIdPosts(id, fk, data, meta));
+  }
+  
+	public findByIdShares(id: any, fk: any, customHeaders?: Function, meta?: any): Observable<any> {
+    
+    if (meta && meta.io) {
+      const destroyStream$: AsyncSubject<any> = new AsyncSubject();
+
+      createIO({}, this.store, destroyStream$, models[this.model.getModelDefinition().relations.rooms.model], this.realTime, meta);
+
+      return this.store.select<any>(this.model.getModelDefinition().relations.shares.model + 's')
+        .map((state: any) => state.entities[fk])
+        .finally(() => {
+          destroyStream$.next(1);
+          destroyStream$.complete();
+        });
+    } else {
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.findByIdShares(id, fk, meta));
+      }
+
+      return this.store.select<any>(this.model.getModelDefinition().relations.shares.model + 's')
+        .map((state: any) => state.entities[fk]);
+    }
+    
+  }
+  
+	public linkShares(id: any, fk: any, data: any = {}, customHeaders?: Function, meta?: any): void {
+    this.store.dispatch(new this.actions.linkShares(id, fk, data, meta));
+  }
+  
+	public unlinkShares(id: any, fk: any, customHeaders?: Function, meta?: any): void {
+    this.store.dispatch(new this.actions.unlinkShares(id, fk, meta));
+  }
+  
+	public findByIdShoppingCard(id: any, fk: any, customHeaders?: Function, meta?: any): Observable<any> {
+    
+    if (meta && meta.io) {
+      const destroyStream$: AsyncSubject<any> = new AsyncSubject();
+
+      createIO({}, this.store, destroyStream$, models[this.model.getModelDefinition().relations.rooms.model], this.realTime, meta);
+
+      return this.store.select<any>(this.model.getModelDefinition().relations.shoppingCard.model + 's')
+        .map((state: any) => state.entities[fk])
+        .finally(() => {
+          destroyStream$.next(1);
+          destroyStream$.complete();
+        });
+    } else {
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.findByIdShoppingCard(id, fk, meta));
+      }
+
+      return this.store.select<any>(this.model.getModelDefinition().relations.shoppingCard.model + 's')
+        .map((state: any) => state.entities[fk]);
+    }
+    
+  }
+  
+	public destroyByIdShoppingCard(id: any, fk: any, customHeaders?: Function, meta?: any): void {
+    this.store.dispatch(new this.actions.destroyByIdShoppingCard(id, fk, meta));
+  }
+  
+	public updateByIdShoppingCard(id: any, fk: any, data: any = {}, customHeaders?: Function, meta?: any): void {
+    this.store.dispatch(new this.actions.updateByIdShoppingCard(id, fk, data, meta));
+  }
+  
+	public linkShoppingCard(id: any, fk: any, data: any = {}, customHeaders?: Function, meta?: any): void {
+    this.store.dispatch(new this.actions.linkShoppingCard(id, fk, data, meta));
+  }
+  
+	public unlinkShoppingCard(id: any, fk: any, customHeaders?: Function, meta?: any): void {
+    this.store.dispatch(new this.actions.unlinkShoppingCard(id, fk, meta));
+  }
+  
+	public findByIdWhishList(id: any, fk: any, customHeaders?: Function, meta?: any): Observable<any> {
+    
+    if (meta && meta.io) {
+      const destroyStream$: AsyncSubject<any> = new AsyncSubject();
+
+      createIO({}, this.store, destroyStream$, models[this.model.getModelDefinition().relations.rooms.model], this.realTime, meta);
+
+      return this.store.select<any>(this.model.getModelDefinition().relations.whishList.model + 's')
+        .map((state: any) => state.entities[fk])
+        .finally(() => {
+          destroyStream$.next(1);
+          destroyStream$.complete();
+        });
+    } else {
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.findByIdWhishList(id, fk, meta));
+      }
+
+      return this.store.select<any>(this.model.getModelDefinition().relations.whishList.model + 's')
+        .map((state: any) => state.entities[fk]);
+    }
+    
+  }
+  
+	public destroyByIdWhishList(id: any, fk: any, customHeaders?: Function, meta?: any): void {
+    this.store.dispatch(new this.actions.destroyByIdWhishList(id, fk, meta));
+  }
+  
+	public updateByIdWhishList(id: any, fk: any, data: any = {}, customHeaders?: Function, meta?: any): void {
+    this.store.dispatch(new this.actions.updateByIdWhishList(id, fk, data, meta));
+  }
+  
+	public linkWhishList(id: any, fk: any, data: any = {}, customHeaders?: Function, meta?: any): void {
+    this.store.dispatch(new this.actions.linkWhishList(id, fk, data, meta));
+  }
+  
+	public unlinkWhishList(id: any, fk: any, customHeaders?: Function, meta?: any): void {
+    this.store.dispatch(new this.actions.unlinkWhishList(id, fk, meta));
   }
   
 	public findByIdOAuthClientApplications(id: any, fk: any, customHeaders?: Function, meta?: any): Observable<any> {
@@ -938,42 +1114,208 @@ export class OrmUser extends OrmBase<User> {
     this.store.dispatch(new this.actions.deleteInvitations(id, meta));
   }
   
-	public getApps(id: any, filter: LoopBackFilter = {}, customHeaders?: Function, meta?: any): Observable<any[]> {
+	public getFollowers(id: any, filter: LoopBackFilter = {}, customHeaders?: Function, meta?: any): Observable<any[]> {
     
     if (meta && meta.io) {
       const destroyStream$: AsyncSubject<any> = new AsyncSubject();
 
-      createIO(filter, this.store, destroyStream$, models[this.model.getModelDefinition().relations.apps.model], this.realTime, meta);
+      createIO(filter, this.store, destroyStream$, models[this.model.getModelDefinition().relations.followers.model], this.realTime, meta);
 
       return applyFilter(
-        this.store.select<any>(this.model.getModelDefinition().relations.apps.model + 's')
+        this.store.select<any>(this.model.getModelDefinition().relations.followers.model + 's')
           .map(toArray)
-          .map((state: any[]) => filterById(state, id, 'apps', User))
+          .map((state: any[]) => filterById(state, id, 'followers', User))
           .finally(() => {
             destroyStream$.next(1);
             destroyStream$.complete();
           })
-        , filter, this.store, models[this.model.getModelDefinition().relations.apps.model]);
+        , filter, this.store, models[this.model.getModelDefinition().relations.followers.model]);
     } else {
       if (!meta || !meta.justCache) {
-        this.store.dispatch(new this.actions.getApps(id, filter, meta));
+        this.store.dispatch(new this.actions.getFollowers(id, filter, meta));
       }
 
       return applyFilter(
-        this.store.select<any>(this.model.getModelDefinition().relations.apps.model + 's')
+        this.store.select<any>(this.model.getModelDefinition().relations.followers.model + 's')
           .map(toArray)
-          .map((state: any[]) => filterById(state, id, 'apps', User))
-        , filter, this.store, models[this.model.getModelDefinition().relations.apps.model]);
+          .map((state: any[]) => filterById(state, id, 'followers', User))
+        , filter, this.store, models[this.model.getModelDefinition().relations.followers.model]);
     }
     
   }
 	
-	public createApps(id: any, data: any = {}, customHeaders?: Function, meta?: any): void {
-    this.store.dispatch(new this.actions.createApps(id, data, meta));
+	public getFollowing(id: any, filter: LoopBackFilter = {}, customHeaders?: Function, meta?: any): Observable<any[]> {
+    
+    if (meta && meta.io) {
+      const destroyStream$: AsyncSubject<any> = new AsyncSubject();
+
+      createIO(filter, this.store, destroyStream$, models[this.model.getModelDefinition().relations.following.model], this.realTime, meta);
+
+      return applyFilter(
+        this.store.select<any>(this.model.getModelDefinition().relations.following.model + 's')
+          .map(toArray)
+          .map((state: any[]) => filterById(state, id, 'following', User))
+          .finally(() => {
+            destroyStream$.next(1);
+            destroyStream$.complete();
+          })
+        , filter, this.store, models[this.model.getModelDefinition().relations.following.model]);
+    } else {
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.getFollowing(id, filter, meta));
+      }
+
+      return applyFilter(
+        this.store.select<any>(this.model.getModelDefinition().relations.following.model + 's')
+          .map(toArray)
+          .map((state: any[]) => filterById(state, id, 'following', User))
+        , filter, this.store, models[this.model.getModelDefinition().relations.following.model]);
+    }
+    
+  }
+	
+	public getPosts(id: any, filter: LoopBackFilter = {}, customHeaders?: Function, meta?: any): Observable<any[]> {
+    
+    if (meta && meta.io) {
+      const destroyStream$: AsyncSubject<any> = new AsyncSubject();
+
+      createIO(filter, this.store, destroyStream$, models[this.model.getModelDefinition().relations.posts.model], this.realTime, meta);
+
+      return applyFilter(
+        this.store.select<any>(this.model.getModelDefinition().relations.posts.model + 's')
+          .map(toArray)
+          .map((state: any[]) => filterById(state, id, 'posts', User))
+          .finally(() => {
+            destroyStream$.next(1);
+            destroyStream$.complete();
+          })
+        , filter, this.store, models[this.model.getModelDefinition().relations.posts.model]);
+    } else {
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.getPosts(id, filter, meta));
+      }
+
+      return applyFilter(
+        this.store.select<any>(this.model.getModelDefinition().relations.posts.model + 's')
+          .map(toArray)
+          .map((state: any[]) => filterById(state, id, 'posts', User))
+        , filter, this.store, models[this.model.getModelDefinition().relations.posts.model]);
+    }
+    
+  }
+	
+	public createPosts(id: any, data: any = {}, customHeaders?: Function, meta?: any): void {
+    this.store.dispatch(new this.actions.createPosts(id, data, meta));
   }
   
-	public deleteApps(id: any, customHeaders?: Function, meta?: any): void {
-    this.store.dispatch(new this.actions.deleteApps(id, meta));
+	public deletePosts(id: any, customHeaders?: Function, meta?: any): void {
+    this.store.dispatch(new this.actions.deletePosts(id, meta));
+  }
+  
+	public getShares(id: any, filter: LoopBackFilter = {}, customHeaders?: Function, meta?: any): Observable<any[]> {
+    
+    if (meta && meta.io) {
+      const destroyStream$: AsyncSubject<any> = new AsyncSubject();
+
+      createIO(filter, this.store, destroyStream$, models[this.model.getModelDefinition().relations.shares.model], this.realTime, meta);
+
+      return applyFilter(
+        this.store.select<any>(this.model.getModelDefinition().relations.shares.model + 's')
+          .map(toArray)
+          .map((state: any[]) => filterById(state, id, 'shares', User))
+          .finally(() => {
+            destroyStream$.next(1);
+            destroyStream$.complete();
+          })
+        , filter, this.store, models[this.model.getModelDefinition().relations.shares.model]);
+    } else {
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.getShares(id, filter, meta));
+      }
+
+      return applyFilter(
+        this.store.select<any>(this.model.getModelDefinition().relations.shares.model + 's')
+          .map(toArray)
+          .map((state: any[]) => filterById(state, id, 'shares', User))
+        , filter, this.store, models[this.model.getModelDefinition().relations.shares.model]);
+    }
+    
+  }
+	
+	public getShoppingCard(id: any, filter: LoopBackFilter = {}, customHeaders?: Function, meta?: any): Observable<any[]> {
+    
+    if (meta && meta.io) {
+      const destroyStream$: AsyncSubject<any> = new AsyncSubject();
+
+      createIO(filter, this.store, destroyStream$, models[this.model.getModelDefinition().relations.shoppingCard.model], this.realTime, meta);
+
+      return applyFilter(
+        this.store.select<any>(this.model.getModelDefinition().relations.shoppingCard.model + 's')
+          .map(toArray)
+          .map((state: any[]) => filterById(state, id, 'shoppingCard', User))
+          .finally(() => {
+            destroyStream$.next(1);
+            destroyStream$.complete();
+          })
+        , filter, this.store, models[this.model.getModelDefinition().relations.shoppingCard.model]);
+    } else {
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.getShoppingCard(id, filter, meta));
+      }
+
+      return applyFilter(
+        this.store.select<any>(this.model.getModelDefinition().relations.shoppingCard.model + 's')
+          .map(toArray)
+          .map((state: any[]) => filterById(state, id, 'shoppingCard', User))
+        , filter, this.store, models[this.model.getModelDefinition().relations.shoppingCard.model]);
+    }
+    
+  }
+	
+	public createShoppingCard(id: any, data: any = {}, customHeaders?: Function, meta?: any): void {
+    this.store.dispatch(new this.actions.createShoppingCard(id, data, meta));
+  }
+  
+	public deleteShoppingCard(id: any, customHeaders?: Function, meta?: any): void {
+    this.store.dispatch(new this.actions.deleteShoppingCard(id, meta));
+  }
+  
+	public getWhishList(id: any, filter: LoopBackFilter = {}, customHeaders?: Function, meta?: any): Observable<any[]> {
+    
+    if (meta && meta.io) {
+      const destroyStream$: AsyncSubject<any> = new AsyncSubject();
+
+      createIO(filter, this.store, destroyStream$, models[this.model.getModelDefinition().relations.whishList.model], this.realTime, meta);
+
+      return applyFilter(
+        this.store.select<any>(this.model.getModelDefinition().relations.whishList.model + 's')
+          .map(toArray)
+          .map((state: any[]) => filterById(state, id, 'whishList', User))
+          .finally(() => {
+            destroyStream$.next(1);
+            destroyStream$.complete();
+          })
+        , filter, this.store, models[this.model.getModelDefinition().relations.whishList.model]);
+    } else {
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.getWhishList(id, filter, meta));
+      }
+
+      return applyFilter(
+        this.store.select<any>(this.model.getModelDefinition().relations.whishList.model + 's')
+          .map(toArray)
+          .map((state: any[]) => filterById(state, id, 'whishList', User))
+        , filter, this.store, models[this.model.getModelDefinition().relations.whishList.model]);
+    }
+    
+  }
+	
+	public createWhishList(id: any, data: any = {}, customHeaders?: Function, meta?: any): void {
+    this.store.dispatch(new this.actions.createWhishList(id, data, meta));
+  }
+  
+	public deleteWhishList(id: any, customHeaders?: Function, meta?: any): void {
+    this.store.dispatch(new this.actions.deleteWhishList(id, meta));
   }
   
 	public getOAuthClientApplications(id: any, filter: LoopBackFilter = {}, customHeaders?: Function, meta?: any): Observable<any[]> {
@@ -1050,6 +1392,10 @@ export class OrmUser extends OrmBase<User> {
     this.store.dispatch(new this.actions.setPrimaryPhone(id, fk, meta));
   }
   
+	public activate(uid: any, token: any, redirect: any = {}, customHeaders?: Function, meta?: any): void {
+    this.store.dispatch(new this.actions.activate(uid, token, redirect, meta));
+  }
+  
 	public s3PUTSignedUrl(id: any, key: any = {}, options: any = {}, customHeaders?: Function, meta?: any): void {
     this.store.dispatch(new this.actions.s3PUTSignedUrl(id, key, options, meta));
   }
@@ -1058,16 +1404,12 @@ export class OrmUser extends OrmBase<User> {
     this.store.dispatch(new this.actions.s3GETSignedUrl(id, key, meta));
   }
   
-	public activate(uid: any, token: any, redirect: any = {}, customHeaders?: Function, meta?: any): void {
-    this.store.dispatch(new this.actions.activate(uid, token, redirect, meta));
+	public createManyStripeCustomer(id: any, data: any[] = [], customHeaders?: Function, meta?: any): void {
+    this.store.dispatch(new this.actions.createManyStripeCustomer(id, data, meta));
   }
   
 	public createManyS3Photo(id: any, data: any[] = [], customHeaders?: Function, meta?: any): void {
     this.store.dispatch(new this.actions.createManyS3Photo(id, data, meta));
-  }
-  
-	public createManyStripeCustomer(id: any, data: any[] = [], customHeaders?: Function, meta?: any): void {
-    this.store.dispatch(new this.actions.createManyStripeCustomer(id, data, meta));
   }
   
 	public createManyEmails(id: any, data: any[] = [], customHeaders?: Function, meta?: any): void {
@@ -1114,8 +1456,16 @@ export class OrmUser extends OrmBase<User> {
     this.store.dispatch(new this.actions.createManyInvitations(id, data, meta));
   }
   
-	public createManyApps(id: any, data: any[] = [], customHeaders?: Function, meta?: any): void {
-    this.store.dispatch(new this.actions.createManyApps(id, data, meta));
+	public createManyPosts(id: any, data: any[] = [], customHeaders?: Function, meta?: any): void {
+    this.store.dispatch(new this.actions.createManyPosts(id, data, meta));
+  }
+  
+	public createManyShoppingCard(id: any, data: any[] = [], customHeaders?: Function, meta?: any): void {
+    this.store.dispatch(new this.actions.createManyShoppingCard(id, data, meta));
+  }
+  
+	public createManyWhishList(id: any, data: any[] = [], customHeaders?: Function, meta?: any): void {
+    this.store.dispatch(new this.actions.createManyWhishList(id, data, meta));
   }
   
 	public createManyOAuthClientApplications(id: any, data: any[] = [], customHeaders?: Function, meta?: any): void {

@@ -9,32 +9,32 @@ import { CanActivate, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 
-import { AppApi } from '../services/index';
-import { getAppById } from '../reducers/App';
-import { AppActions } from '../actions/App';
+import { ShareApi } from '../services/index';
+import { getShareById } from '../reducers/Share';
+import { ShareActions } from '../actions/Share';
 
 @Injectable()
-export class AppExistsGuard implements CanActivate {
+export class ShareExistsGuard implements CanActivate {
   constructor(
     private store: Store<any>,
-    private App: AppApi
+    private Share: ShareApi
   ) {}
 
   public canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
-    return this.hasEntity(route.params['AppId'] || route.params['id']);
+    return this.hasEntity(route.params['ShareId'] || route.params['id']);
   }
 
   protected hasEntityInStore(id: string): Observable<boolean> {
-    return this.store.select(getAppById(id))
+    return this.store.select(getShareById(id))
       .map((entitie) => !!entitie)
       .take(1);
   }
 
   protected hasEntityInApi(id: string): Observable<boolean> {
-    return this.App.exists(id)
+    return this.Share.exists(id)
       .map((response: any) => !!response.exists)
       .catch(() => {
-        this.store.dispatch(new AppActions.guardFail());
+        this.store.dispatch(new ShareActions.guardFail());
         return of(false);
       });
   }

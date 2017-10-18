@@ -102,54 +102,6 @@ export class UserEffects extends BaseLoopbackEffects {
     );
 
   @Effect()
-  public getS3Photo$ = this.actions$
-    .ofType(UserActionTypes.GET_S3PHOTO)
-    .mergeMap((action: LoopbackAction) =>
-      this.user.getS3Photo(action.payload.id, action.payload.refresh)
-        .map((response: any) => new UserActions.getS3PhotoSuccess(action.payload.id, response, action.meta))
-        .catch((error: any) => concat(
-          of(new UserActions.getS3PhotoFail(error, action.meta)),
-          of(new LoopbackErrorActions.error(error, action.meta))
-        ))
-    );
-
-  @Effect()
-  public createS3Photo$ = this.actions$
-    .ofType(UserActionTypes.CREATE_S3PHOTO)
-    .mergeMap((action: LoopbackAction) =>
-      this.user.createS3Photo(action.payload.id, action.payload.data)
-        .map((response: any) => new UserActions.createS3PhotoSuccess(action.payload.id, response, action.meta))
-        .catch((error: any) => concat(
-          of(new UserActions.createS3PhotoFail(error, action.meta)),
-          of(new LoopbackErrorActions.error(error, action.meta))
-        ))
-    );
-
-  @Effect()
-  public updateS3Photo$ = this.actions$
-    .ofType(UserActionTypes.UPDATE_S3PHOTO)
-    .mergeMap((action: LoopbackAction) =>
-      this.user.updateS3Photo(action.payload.id, action.payload.data)
-        .map((response: any) => new UserActions.updateS3PhotoSuccess(action.payload.id, response, action.meta))
-        .catch((error: any) => concat(
-          of(new UserActions.updateS3PhotoFail(error, action.meta)),
-          of(new LoopbackErrorActions.error(error, action.meta))
-        ))
-    );
-
-  @Effect()
-  public destroyS3Photo$ = this.actions$
-    .ofType(UserActionTypes.DESTROY_S3PHOTO)
-    .mergeMap((action: LoopbackAction) =>
-      this.user.destroyS3Photo(action.payload.id)
-        .map((response: any) => new UserActions.destroyS3PhotoSuccess(action.payload.id, action.payload.fk, action.meta))
-        .catch((error: any) => concat(
-          of(new UserActions.destroyS3PhotoFail(error, action.meta)),
-          of(new LoopbackErrorActions.error(error, action.meta))
-        ))
-    );
-
-  @Effect()
   public getStripeCustomer$ = this.actions$
     .ofType(UserActionTypes.GET_STRIPECUSTOMER)
     .mergeMap((action: LoopbackAction) =>
@@ -438,6 +390,54 @@ export class UserEffects extends BaseLoopbackEffects {
     );
 
   @Effect()
+  public getS3Photo$ = this.actions$
+    .ofType(UserActionTypes.GET_S3PHOTO)
+    .mergeMap((action: LoopbackAction) =>
+      this.user.getS3Photo(action.payload.id, action.payload.refresh)
+        .map((response: any) => new UserActions.getS3PhotoSuccess(action.payload.id, response, action.meta))
+        .catch((error: any) => concat(
+          of(new UserActions.getS3PhotoFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  public createS3Photo$ = this.actions$
+    .ofType(UserActionTypes.CREATE_S3PHOTO)
+    .mergeMap((action: LoopbackAction) =>
+      this.user.createS3Photo(action.payload.id, action.payload.data)
+        .map((response: any) => new UserActions.createS3PhotoSuccess(action.payload.id, response, action.meta))
+        .catch((error: any) => concat(
+          of(new UserActions.createS3PhotoFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  public updateS3Photo$ = this.actions$
+    .ofType(UserActionTypes.UPDATE_S3PHOTO)
+    .mergeMap((action: LoopbackAction) =>
+      this.user.updateS3Photo(action.payload.id, action.payload.data)
+        .map((response: any) => new UserActions.updateS3PhotoSuccess(action.payload.id, response, action.meta))
+        .catch((error: any) => concat(
+          of(new UserActions.updateS3PhotoFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  public destroyS3Photo$ = this.actions$
+    .ofType(UserActionTypes.DESTROY_S3PHOTO)
+    .mergeMap((action: LoopbackAction) =>
+      this.user.destroyS3Photo(action.payload.id)
+        .map((response: any) => new UserActions.destroyS3PhotoSuccess(action.payload.id, action.payload.fk, action.meta))
+        .catch((error: any) => concat(
+          of(new UserActions.destroyS3PhotoFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
   public findByIdOrganizations$ = this.actions$
     .ofType(UserActionTypes.FIND_BY_ID_ORGANIZATIONS)
     .mergeMap((action: LoopbackAction) =>
@@ -588,46 +588,301 @@ export class UserEffects extends BaseLoopbackEffects {
     );
 
   @Effect()
-  public findByIdApps$ = this.actions$
-    .ofType(UserActionTypes.FIND_BY_ID_APPS)
+  public findByIdFollowers$ = this.actions$
+    .ofType(UserActionTypes.FIND_BY_ID_FOLLOWERS)
     .mergeMap((action: LoopbackAction) =>
-      this.user.findByIdApps(action.payload.id, action.payload.fk)
+      this.user.findByIdFollowers(action.payload.id, action.payload.fk)
         .mergeMap((response: any) => concat(
-          resolver({id: action.payload.id, data: response, meta: action.meta}, 'App', 'findByIdSuccess'),
-          of(new UserActions.findByIdAppsSuccess(action.payload.id, response, action.meta))
+          resolver({id: action.payload.id, data: response, meta: action.meta}, 'User', 'findByIdSuccess'),
+          of(new UserActions.findByIdFollowersSuccess(action.payload.id, response, action.meta))
         ))
         .catch((error: any) => concat(
-          of(new UserActions.findByIdAppsFail(error, action.meta)),
+          of(new UserActions.findByIdFollowersFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  public destroyByIdApps$ = this.actions$
-    .ofType(UserActionTypes.DESTROY_BY_ID_APPS)
+  public linkFollowers$ = this.actions$
+    .ofType(UserActionTypes.LINK_FOLLOWERS)
     .mergeMap((action: LoopbackAction) =>
-      this.user.destroyByIdApps(action.payload.id, action.payload.fk)
-        .mergeMap((response: any) => concat(
-          resolver({data: response, meta: action.meta}, 'App', 'deleteByIdSuccess'),
-          of(new UserActions.destroyByIdAppsSuccess(action.payload.id, response, action.meta))
-        ))
+      this.user.linkFollowers(action.payload.id, action.payload.fk, action.payload.data)
+        .map((response: any) => new UserActions.linkFollowersSuccess(action.payload.id, response, action.meta))
         .catch((error: any) => concat(
-          of(new UserActions.destroyByIdAppsFail(error, action.meta)),
+          of(new UserActions.linkFollowersFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  public updateByIdApps$ = this.actions$
-    .ofType(UserActionTypes.UPDATE_BY_ID_APPS)
+  public unlinkFollowers$ = this.actions$
+    .ofType(UserActionTypes.UNLINK_FOLLOWERS)
     .mergeMap((action: LoopbackAction) =>
-      this.user.updateByIdApps(action.payload.id, action.payload.fk, action.payload.data)
+      this.user.unlinkFollowers(action.payload.id, action.payload.fk)
+        .map((response: any) => new UserActions.unlinkFollowersSuccess(action.payload.id, action.payload.fk, action.meta))
+        .catch((error: any) => concat(
+          of(new UserActions.unlinkFollowersFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  public findByIdFollowing$ = this.actions$
+    .ofType(UserActionTypes.FIND_BY_ID_FOLLOWING)
+    .mergeMap((action: LoopbackAction) =>
+      this.user.findByIdFollowing(action.payload.id, action.payload.fk)
         .mergeMap((response: any) => concat(
-          resolver({id: action.payload.id, data: response, meta: action.meta}, 'App', 'findByIdSuccess'),
-          of(new UserActions.updateByIdAppsSuccess(action.payload.id, response, action.meta))
+          resolver({id: action.payload.id, data: response, meta: action.meta}, 'User', 'findByIdSuccess'),
+          of(new UserActions.findByIdFollowingSuccess(action.payload.id, response, action.meta))
         ))
         .catch((error: any) => concat(
-          of(new UserActions.updateByIdAppsFail(error, action.meta)),
+          of(new UserActions.findByIdFollowingFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  public linkFollowing$ = this.actions$
+    .ofType(UserActionTypes.LINK_FOLLOWING)
+    .mergeMap((action: LoopbackAction) =>
+      this.user.linkFollowing(action.payload.id, action.payload.fk, action.payload.data)
+        .map((response: any) => new UserActions.linkFollowingSuccess(action.payload.id, response, action.meta))
+        .catch((error: any) => concat(
+          of(new UserActions.linkFollowingFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  public unlinkFollowing$ = this.actions$
+    .ofType(UserActionTypes.UNLINK_FOLLOWING)
+    .mergeMap((action: LoopbackAction) =>
+      this.user.unlinkFollowing(action.payload.id, action.payload.fk)
+        .map((response: any) => new UserActions.unlinkFollowingSuccess(action.payload.id, action.payload.fk, action.meta))
+        .catch((error: any) => concat(
+          of(new UserActions.unlinkFollowingFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  public findByIdPosts$ = this.actions$
+    .ofType(UserActionTypes.FIND_BY_ID_POSTS)
+    .mergeMap((action: LoopbackAction) =>
+      this.user.findByIdPosts(action.payload.id, action.payload.fk)
+        .mergeMap((response: any) => concat(
+          resolver({id: action.payload.id, data: response, meta: action.meta}, 'Post', 'findByIdSuccess'),
+          of(new UserActions.findByIdPostsSuccess(action.payload.id, response, action.meta))
+        ))
+        .catch((error: any) => concat(
+          of(new UserActions.findByIdPostsFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  public destroyByIdPosts$ = this.actions$
+    .ofType(UserActionTypes.DESTROY_BY_ID_POSTS)
+    .mergeMap((action: LoopbackAction) =>
+      this.user.destroyByIdPosts(action.payload.id, action.payload.fk)
+        .mergeMap((response: any) => concat(
+          resolver({data: response, meta: action.meta}, 'Post', 'deleteByIdSuccess'),
+          of(new UserActions.destroyByIdPostsSuccess(action.payload.id, response, action.meta))
+        ))
+        .catch((error: any) => concat(
+          of(new UserActions.destroyByIdPostsFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  public updateByIdPosts$ = this.actions$
+    .ofType(UserActionTypes.UPDATE_BY_ID_POSTS)
+    .mergeMap((action: LoopbackAction) =>
+      this.user.updateByIdPosts(action.payload.id, action.payload.fk, action.payload.data)
+        .mergeMap((response: any) => concat(
+          resolver({id: action.payload.id, data: response, meta: action.meta}, 'Post', 'findByIdSuccess'),
+          of(new UserActions.updateByIdPostsSuccess(action.payload.id, response, action.meta))
+        ))
+        .catch((error: any) => concat(
+          of(new UserActions.updateByIdPostsFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  public findByIdShares$ = this.actions$
+    .ofType(UserActionTypes.FIND_BY_ID_SHARES)
+    .mergeMap((action: LoopbackAction) =>
+      this.user.findByIdShares(action.payload.id, action.payload.fk)
+        .mergeMap((response: any) => concat(
+          resolver({id: action.payload.id, data: response, meta: action.meta}, 'Post', 'findByIdSuccess'),
+          of(new UserActions.findByIdSharesSuccess(action.payload.id, response, action.meta))
+        ))
+        .catch((error: any) => concat(
+          of(new UserActions.findByIdSharesFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  public linkShares$ = this.actions$
+    .ofType(UserActionTypes.LINK_SHARES)
+    .mergeMap((action: LoopbackAction) =>
+      this.user.linkShares(action.payload.id, action.payload.fk, action.payload.data)
+        .map((response: any) => new UserActions.linkSharesSuccess(action.payload.id, response, action.meta))
+        .catch((error: any) => concat(
+          of(new UserActions.linkSharesFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  public unlinkShares$ = this.actions$
+    .ofType(UserActionTypes.UNLINK_SHARES)
+    .mergeMap((action: LoopbackAction) =>
+      this.user.unlinkShares(action.payload.id, action.payload.fk)
+        .map((response: any) => new UserActions.unlinkSharesSuccess(action.payload.id, action.payload.fk, action.meta))
+        .catch((error: any) => concat(
+          of(new UserActions.unlinkSharesFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  public findByIdShoppingCard$ = this.actions$
+    .ofType(UserActionTypes.FIND_BY_ID_SHOPPINGCARD)
+    .mergeMap((action: LoopbackAction) =>
+      this.user.findByIdShoppingCard(action.payload.id, action.payload.fk)
+        .mergeMap((response: any) => concat(
+          resolver({id: action.payload.id, data: response, meta: action.meta}, 'Product', 'findByIdSuccess'),
+          of(new UserActions.findByIdShoppingCardSuccess(action.payload.id, response, action.meta))
+        ))
+        .catch((error: any) => concat(
+          of(new UserActions.findByIdShoppingCardFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  public destroyByIdShoppingCard$ = this.actions$
+    .ofType(UserActionTypes.DESTROY_BY_ID_SHOPPINGCARD)
+    .mergeMap((action: LoopbackAction) =>
+      this.user.destroyByIdShoppingCard(action.payload.id, action.payload.fk)
+        .mergeMap((response: any) => concat(
+          resolver({data: response, meta: action.meta}, 'Product', 'deleteByIdSuccess'),
+          of(new UserActions.destroyByIdShoppingCardSuccess(action.payload.id, response, action.meta))
+        ))
+        .catch((error: any) => concat(
+          of(new UserActions.destroyByIdShoppingCardFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  public updateByIdShoppingCard$ = this.actions$
+    .ofType(UserActionTypes.UPDATE_BY_ID_SHOPPINGCARD)
+    .mergeMap((action: LoopbackAction) =>
+      this.user.updateByIdShoppingCard(action.payload.id, action.payload.fk, action.payload.data)
+        .mergeMap((response: any) => concat(
+          resolver({id: action.payload.id, data: response, meta: action.meta}, 'Product', 'findByIdSuccess'),
+          of(new UserActions.updateByIdShoppingCardSuccess(action.payload.id, response, action.meta))
+        ))
+        .catch((error: any) => concat(
+          of(new UserActions.updateByIdShoppingCardFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  public linkShoppingCard$ = this.actions$
+    .ofType(UserActionTypes.LINK_SHOPPINGCARD)
+    .mergeMap((action: LoopbackAction) =>
+      this.user.linkShoppingCard(action.payload.id, action.payload.fk, action.payload.data)
+        .map((response: any) => new UserActions.linkShoppingCardSuccess(action.payload.id, response, action.meta))
+        .catch((error: any) => concat(
+          of(new UserActions.linkShoppingCardFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  public unlinkShoppingCard$ = this.actions$
+    .ofType(UserActionTypes.UNLINK_SHOPPINGCARD)
+    .mergeMap((action: LoopbackAction) =>
+      this.user.unlinkShoppingCard(action.payload.id, action.payload.fk)
+        .map((response: any) => new UserActions.unlinkShoppingCardSuccess(action.payload.id, action.payload.fk, action.meta))
+        .catch((error: any) => concat(
+          of(new UserActions.unlinkShoppingCardFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  public findByIdWhishList$ = this.actions$
+    .ofType(UserActionTypes.FIND_BY_ID_WHISHLIST)
+    .mergeMap((action: LoopbackAction) =>
+      this.user.findByIdWhishList(action.payload.id, action.payload.fk)
+        .mergeMap((response: any) => concat(
+          resolver({id: action.payload.id, data: response, meta: action.meta}, 'Product', 'findByIdSuccess'),
+          of(new UserActions.findByIdWhishListSuccess(action.payload.id, response, action.meta))
+        ))
+        .catch((error: any) => concat(
+          of(new UserActions.findByIdWhishListFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  public destroyByIdWhishList$ = this.actions$
+    .ofType(UserActionTypes.DESTROY_BY_ID_WHISHLIST)
+    .mergeMap((action: LoopbackAction) =>
+      this.user.destroyByIdWhishList(action.payload.id, action.payload.fk)
+        .mergeMap((response: any) => concat(
+          resolver({data: response, meta: action.meta}, 'Product', 'deleteByIdSuccess'),
+          of(new UserActions.destroyByIdWhishListSuccess(action.payload.id, response, action.meta))
+        ))
+        .catch((error: any) => concat(
+          of(new UserActions.destroyByIdWhishListFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  public updateByIdWhishList$ = this.actions$
+    .ofType(UserActionTypes.UPDATE_BY_ID_WHISHLIST)
+    .mergeMap((action: LoopbackAction) =>
+      this.user.updateByIdWhishList(action.payload.id, action.payload.fk, action.payload.data)
+        .mergeMap((response: any) => concat(
+          resolver({id: action.payload.id, data: response, meta: action.meta}, 'Product', 'findByIdSuccess'),
+          of(new UserActions.updateByIdWhishListSuccess(action.payload.id, response, action.meta))
+        ))
+        .catch((error: any) => concat(
+          of(new UserActions.updateByIdWhishListFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  public linkWhishList$ = this.actions$
+    .ofType(UserActionTypes.LINK_WHISHLIST)
+    .mergeMap((action: LoopbackAction) =>
+      this.user.linkWhishList(action.payload.id, action.payload.fk, action.payload.data)
+        .map((response: any) => new UserActions.linkWhishListSuccess(action.payload.id, response, action.meta))
+        .catch((error: any) => concat(
+          of(new UserActions.linkWhishListFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  public unlinkWhishList$ = this.actions$
+    .ofType(UserActionTypes.UNLINK_WHISHLIST)
+    .mergeMap((action: LoopbackAction) =>
+      this.user.unlinkWhishList(action.payload.id, action.payload.fk)
+        .map((response: any) => new UserActions.unlinkWhishListSuccess(action.payload.id, action.payload.fk, action.meta))
+        .catch((error: any) => concat(
+          of(new UserActions.unlinkWhishListFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
@@ -1098,43 +1353,172 @@ export class UserEffects extends BaseLoopbackEffects {
     );
 
   @Effect()
-  public getApps$ = this.actions$
-    .ofType(UserActionTypes.GET_APPS)
+  public getFollowers$ = this.actions$
+    .ofType(UserActionTypes.GET_FOLLOWERS)
     .mergeMap((action: LoopbackAction) =>
-      this.user.getApps(action.payload.id, action.payload.filter)
+      this.user.getFollowers(action.payload.id, action.payload.filter)
         .mergeMap((response: any) => concat(
-          resolver({data: response, meta: action.meta}, 'App', 'findSuccess'),
-          of(new UserActions.getAppsSuccess(action.payload.id, response, action.meta))
+          resolver({data: response, meta: action.meta}, 'User', 'findSuccess'),
+          of(new UserActions.getFollowersSuccess(action.payload.id, response, action.meta))
         ))
         .catch((error: any) => concat(
-          of(new UserActions.getAppsFail(error, action.meta)),
+          of(new UserActions.getFollowersFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  public createApps$ = this.actions$
-    .ofType(UserActionTypes.CREATE_APPS)
+  public getFollowing$ = this.actions$
+    .ofType(UserActionTypes.GET_FOLLOWING)
     .mergeMap((action: LoopbackAction) =>
-      this.user.createApps(action.payload.id, action.payload.data)
+      this.user.getFollowing(action.payload.id, action.payload.filter)
         .mergeMap((response: any) => concat(
-          resolver({data: response, meta: action.meta}, 'App', 'findSuccess'),
-          of(new UserActions.createAppsSuccess(action.payload.id, response, action.meta))
+          resolver({data: response, meta: action.meta}, 'User', 'findSuccess'),
+          of(new UserActions.getFollowingSuccess(action.payload.id, response, action.meta))
         ))
         .catch((error: any) => concat(
-          of(new UserActions.createAppsFail(error, action.meta)),
+          of(new UserActions.getFollowingFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
 
   @Effect()
-  public deleteApps$ = this.actions$
-    .ofType(UserActionTypes.DELETE_APPS)
+  public getPosts$ = this.actions$
+    .ofType(UserActionTypes.GET_POSTS)
     .mergeMap((action: LoopbackAction) =>
-      this.user.deleteApps(action.payload.id)
-        .map((response: any) => new UserActions.deleteAppsSuccess(action.payload, action.meta))
+      this.user.getPosts(action.payload.id, action.payload.filter)
+        .mergeMap((response: any) => concat(
+          resolver({data: response, meta: action.meta}, 'Post', 'findSuccess'),
+          of(new UserActions.getPostsSuccess(action.payload.id, response, action.meta))
+        ))
         .catch((error: any) => concat(
-          of(new UserActions.deleteAppsFail(error, action.meta)),
+          of(new UserActions.getPostsFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  public createPosts$ = this.actions$
+    .ofType(UserActionTypes.CREATE_POSTS)
+    .mergeMap((action: LoopbackAction) =>
+      this.user.createPosts(action.payload.id, action.payload.data)
+        .mergeMap((response: any) => concat(
+          resolver({data: response, meta: action.meta}, 'Post', 'findSuccess'),
+          of(new UserActions.createPostsSuccess(action.payload.id, response, action.meta))
+        ))
+        .catch((error: any) => concat(
+          of(new UserActions.createPostsFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  public deletePosts$ = this.actions$
+    .ofType(UserActionTypes.DELETE_POSTS)
+    .mergeMap((action: LoopbackAction) =>
+      this.user.deletePosts(action.payload.id)
+        .map((response: any) => new UserActions.deletePostsSuccess(action.payload, action.meta))
+        .catch((error: any) => concat(
+          of(new UserActions.deletePostsFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  public getShares$ = this.actions$
+    .ofType(UserActionTypes.GET_SHARES)
+    .mergeMap((action: LoopbackAction) =>
+      this.user.getShares(action.payload.id, action.payload.filter)
+        .mergeMap((response: any) => concat(
+          resolver({data: response, meta: action.meta}, 'Post', 'findSuccess'),
+          of(new UserActions.getSharesSuccess(action.payload.id, response, action.meta))
+        ))
+        .catch((error: any) => concat(
+          of(new UserActions.getSharesFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  public getShoppingCard$ = this.actions$
+    .ofType(UserActionTypes.GET_SHOPPINGCARD)
+    .mergeMap((action: LoopbackAction) =>
+      this.user.getShoppingCard(action.payload.id, action.payload.filter)
+        .mergeMap((response: any) => concat(
+          resolver({data: response, meta: action.meta}, 'Product', 'findSuccess'),
+          of(new UserActions.getShoppingCardSuccess(action.payload.id, response, action.meta))
+        ))
+        .catch((error: any) => concat(
+          of(new UserActions.getShoppingCardFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  public createShoppingCard$ = this.actions$
+    .ofType(UserActionTypes.CREATE_SHOPPINGCARD)
+    .mergeMap((action: LoopbackAction) =>
+      this.user.createShoppingCard(action.payload.id, action.payload.data)
+        .mergeMap((response: any) => concat(
+          resolver({data: response, meta: action.meta}, 'Product', 'findSuccess'),
+          of(new UserActions.createShoppingCardSuccess(action.payload.id, response, action.meta))
+        ))
+        .catch((error: any) => concat(
+          of(new UserActions.createShoppingCardFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  public deleteShoppingCard$ = this.actions$
+    .ofType(UserActionTypes.DELETE_SHOPPINGCARD)
+    .mergeMap((action: LoopbackAction) =>
+      this.user.deleteShoppingCard(action.payload.id)
+        .map((response: any) => new UserActions.deleteShoppingCardSuccess(action.payload, action.meta))
+        .catch((error: any) => concat(
+          of(new UserActions.deleteShoppingCardFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  public getWhishList$ = this.actions$
+    .ofType(UserActionTypes.GET_WHISHLIST)
+    .mergeMap((action: LoopbackAction) =>
+      this.user.getWhishList(action.payload.id, action.payload.filter)
+        .mergeMap((response: any) => concat(
+          resolver({data: response, meta: action.meta}, 'Product', 'findSuccess'),
+          of(new UserActions.getWhishListSuccess(action.payload.id, response, action.meta))
+        ))
+        .catch((error: any) => concat(
+          of(new UserActions.getWhishListFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  public createWhishList$ = this.actions$
+    .ofType(UserActionTypes.CREATE_WHISHLIST)
+    .mergeMap((action: LoopbackAction) =>
+      this.user.createWhishList(action.payload.id, action.payload.data)
+        .mergeMap((response: any) => concat(
+          resolver({data: response, meta: action.meta}, 'Product', 'findSuccess'),
+          of(new UserActions.createWhishListSuccess(action.payload.id, response, action.meta))
+        ))
+        .catch((error: any) => concat(
+          of(new UserActions.createWhishListFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  public deleteWhishList$ = this.actions$
+    .ofType(UserActionTypes.DELETE_WHISHLIST)
+    .mergeMap((action: LoopbackAction) =>
+      this.user.deleteWhishList(action.payload.id)
+        .map((response: any) => new UserActions.deleteWhishListSuccess(action.payload, action.meta))
+        .catch((error: any) => concat(
+          of(new UserActions.deleteWhishListFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
@@ -1290,6 +1674,18 @@ export class UserEffects extends BaseLoopbackEffects {
     );
 
   @Effect()
+  public activate$ = this.actions$
+    .ofType(UserActionTypes.ACTIVATE)
+    .mergeMap((action: LoopbackAction) =>
+      this.user.activate(action.payload.uid, action.payload.token, action.payload.redirect)
+        .map((response: any) => new UserActions.activateSuccess(action.payload.id, action.payload.fk, action.meta))
+        .catch((error: any) => concat(
+          of(new UserActions.activateFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
   public s3PUTSignedUrl$ = this.actions$
     .ofType(UserActionTypes.S3_P_U_T_SIGNED_URL)
     .mergeMap((action: LoopbackAction) =>
@@ -1314,13 +1710,16 @@ export class UserEffects extends BaseLoopbackEffects {
     );
 
   @Effect()
-  public activate$ = this.actions$
-    .ofType(UserActionTypes.ACTIVATE)
+  public createManyStripeCustomer$ = this.actions$
+    .ofType(UserActionTypes.CREATE_MANY_STRIPECUSTOMER)
     .mergeMap((action: LoopbackAction) =>
-      this.user.activate(action.payload.uid, action.payload.token, action.payload.redirect)
-        .map((response: any) => new UserActions.activateSuccess(action.payload.id, action.payload.fk, action.meta))
+      this.user.createManyStripeCustomer(action.payload.id, action.payload.data)
+        .mergeMap((response: any) => concat(
+          resolver({data: response, meta: action.meta}, 'StripeCustomer', 'findSuccess'),
+          of(new UserActions.createManyStripeCustomerSuccess(action.payload.id, response, action.meta))
+        ))
         .catch((error: any) => concat(
-          of(new UserActions.activateFail(error, action.meta)),
+          of(new UserActions.createManyStripeCustomerFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
@@ -1333,21 +1732,6 @@ export class UserEffects extends BaseLoopbackEffects {
         .map((response: any) => new UserActions.createManyS3PhotoSuccess(action.payload.id, response, action.meta))
         .catch((error: any) => concat(
           of(new UserActions.createManyS3PhotoFail(error, action.meta)),
-          of(new LoopbackErrorActions.error(error, action.meta))
-        ))
-    );
-
-  @Effect()
-  public createManyStripeCustomer$ = this.actions$
-    .ofType(UserActionTypes.CREATE_MANY_STRIPECUSTOMER)
-    .mergeMap((action: LoopbackAction) =>
-      this.user.createManyStripeCustomer(action.payload.id, action.payload.data)
-        .mergeMap((response: any) => concat(
-          resolver({data: response, meta: action.meta}, 'StripeCustomer', 'findSuccess'),
-          of(new UserActions.createManyStripeCustomerSuccess(action.payload.id, response, action.meta))
-        ))
-        .catch((error: any) => concat(
-          of(new UserActions.createManyStripeCustomerFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
@@ -1497,16 +1881,46 @@ export class UserEffects extends BaseLoopbackEffects {
     );
 
   @Effect()
-  public createManyApps$ = this.actions$
-    .ofType(UserActionTypes.CREATE_MANY_APPS)
+  public createManyPosts$ = this.actions$
+    .ofType(UserActionTypes.CREATE_MANY_POSTS)
     .mergeMap((action: LoopbackAction) =>
-      this.user.createManyApps(action.payload.id, action.payload.data)
+      this.user.createManyPosts(action.payload.id, action.payload.data)
         .mergeMap((response: any) => concat(
-          resolver({data: response, meta: action.meta}, 'App', 'findSuccess'),
-          of(new UserActions.createManyAppsSuccess(action.payload.id, response, action.meta))
+          resolver({data: response, meta: action.meta}, 'Post', 'findSuccess'),
+          of(new UserActions.createManyPostsSuccess(action.payload.id, response, action.meta))
         ))
         .catch((error: any) => concat(
-          of(new UserActions.createManyAppsFail(error, action.meta)),
+          of(new UserActions.createManyPostsFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  public createManyShoppingCard$ = this.actions$
+    .ofType(UserActionTypes.CREATE_MANY_SHOPPINGCARD)
+    .mergeMap((action: LoopbackAction) =>
+      this.user.createManyShoppingCard(action.payload.id, action.payload.data)
+        .mergeMap((response: any) => concat(
+          resolver({data: response, meta: action.meta}, 'Product', 'findSuccess'),
+          of(new UserActions.createManyShoppingCardSuccess(action.payload.id, response, action.meta))
+        ))
+        .catch((error: any) => concat(
+          of(new UserActions.createManyShoppingCardFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  public createManyWhishList$ = this.actions$
+    .ofType(UserActionTypes.CREATE_MANY_WHISHLIST)
+    .mergeMap((action: LoopbackAction) =>
+      this.user.createManyWhishList(action.payload.id, action.payload.data)
+        .mergeMap((response: any) => concat(
+          resolver({data: response, meta: action.meta}, 'Product', 'findSuccess'),
+          of(new UserActions.createManyWhishListSuccess(action.payload.id, response, action.meta))
+        ))
+        .catch((error: any) => concat(
+          of(new UserActions.createManyWhishListFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );

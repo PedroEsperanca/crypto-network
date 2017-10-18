@@ -130,17 +130,17 @@ Object.assign(BaseLoopbackActionTypesFactory('Organization'), {
   UPDATE_BY_ID_CONTACTS_SUCCESS: type('[Organization] updateByIdContacts success'),
   UPDATE_BY_ID_CONTACTS_FAIL: type('[Organization] updateByIdContacts fail'),
 
-  FIND_BY_ID_APPS: type('[Organization] findByIdApps'),
-  FIND_BY_ID_APPS_SUCCESS: type('[Organization] findByIdApps success'),
-  FIND_BY_ID_APPS_FAIL: type('[Organization] findByIdApps fail'),
+  FIND_BY_ID_POSTS: type('[Organization] findByIdPosts'),
+  FIND_BY_ID_POSTS_SUCCESS: type('[Organization] findByIdPosts success'),
+  FIND_BY_ID_POSTS_FAIL: type('[Organization] findByIdPosts fail'),
 
-  DESTROY_BY_ID_APPS: type('[Organization] destroyByIdApps'),
-  DESTROY_BY_ID_APPS_SUCCESS: type('[Organization] destroyByIdApps success'),
-  DESTROY_BY_ID_APPS_FAIL: type('[Organization] destroyByIdApps fail'),
+  DESTROY_BY_ID_POSTS: type('[Organization] destroyByIdPosts'),
+  DESTROY_BY_ID_POSTS_SUCCESS: type('[Organization] destroyByIdPosts success'),
+  DESTROY_BY_ID_POSTS_FAIL: type('[Organization] destroyByIdPosts fail'),
 
-  UPDATE_BY_ID_APPS: type('[Organization] updateByIdApps'),
-  UPDATE_BY_ID_APPS_SUCCESS: type('[Organization] updateByIdApps success'),
-  UPDATE_BY_ID_APPS_FAIL: type('[Organization] updateByIdApps fail'),
+  UPDATE_BY_ID_POSTS: type('[Organization] updateByIdPosts'),
+  UPDATE_BY_ID_POSTS_SUCCESS: type('[Organization] updateByIdPosts success'),
+  UPDATE_BY_ID_POSTS_FAIL: type('[Organization] updateByIdPosts fail'),
 
   FIND_BY_ID_PRODUCTS: type('[Organization] findByIdProducts'),
   FIND_BY_ID_PRODUCTS_SUCCESS: type('[Organization] findByIdProducts success'),
@@ -238,17 +238,17 @@ Object.assign(BaseLoopbackActionTypesFactory('Organization'), {
   DELETE_CONTACTS_SUCCESS: type('[Organization] deleteContacts success'),
   DELETE_CONTACTS_FAIL: type('[Organization] deleteContacts fail'),
 
-  GET_APPS: type('[Organization] getApps'),
-  GET_APPS_SUCCESS: type('[Organization] getApps success'),
-  GET_APPS_FAIL: type('[Organization] getApps fail'),
+  GET_POSTS: type('[Organization] getPosts'),
+  GET_POSTS_SUCCESS: type('[Organization] getPosts success'),
+  GET_POSTS_FAIL: type('[Organization] getPosts fail'),
 
-  CREATE_APPS: type('[Organization] createApps'),
-  CREATE_APPS_SUCCESS: type('[Organization] createApps success'),
-  CREATE_APPS_FAIL: type('[Organization] createApps fail'),
+  CREATE_POSTS: type('[Organization] createPosts'),
+  CREATE_POSTS_SUCCESS: type('[Organization] createPosts success'),
+  CREATE_POSTS_FAIL: type('[Organization] createPosts fail'),
 
-  DELETE_APPS: type('[Organization] deleteApps'),
-  DELETE_APPS_SUCCESS: type('[Organization] deleteApps success'),
-  DELETE_APPS_FAIL: type('[Organization] deleteApps fail'),
+  DELETE_POSTS: type('[Organization] deletePosts'),
+  DELETE_POSTS_SUCCESS: type('[Organization] deletePosts success'),
+  DELETE_POSTS_FAIL: type('[Organization] deletePosts fail'),
 
   GET_PRODUCTS: type('[Organization] getProducts'),
   GET_PRODUCTS_SUCCESS: type('[Organization] getProducts success'),
@@ -326,9 +326,9 @@ Object.assign(BaseLoopbackActionTypesFactory('Organization'), {
   CREATE_MANY_CONTACTS_SUCCESS: type('[Organization] createManyContacts success'),
   CREATE_MANY_CONTACTS_FAIL: type('[Organization] createManyContacts fail'),
 
-  CREATE_MANY_APPS: type('[Organization] createManyApps'),
-  CREATE_MANY_APPS_SUCCESS: type('[Organization] createManyApps success'),
-  CREATE_MANY_APPS_FAIL: type('[Organization] createManyApps fail'),
+  CREATE_MANY_POSTS: type('[Organization] createManyPosts'),
+  CREATE_MANY_POSTS_SUCCESS: type('[Organization] createManyPosts success'),
+  CREATE_MANY_POSTS_FAIL: type('[Organization] createManyPosts fail'),
 
   CREATE_MANY_PRODUCTS: type('[Organization] createManyProducts'),
   CREATE_MANY_PRODUCTS_SUCCESS: type('[Organization] createManyProducts success'),
@@ -1787,16 +1787,16 @@ Object.assign(BaseLoopbackActionsFactory<Organization>(OrganizationActionTypes),
   },
 
   /**
-   * findByIdApps Action.
-   * Find a related item by id for apps.
+   * findByIdPosts Action.
+   * Find a related item by id for posts.
    *
    * @param {any} id Organization id
-   * @param {any} fk Foreign key for apps
+   * @param {any} fk Foreign key for posts
    * @param {any} meta (optional).
    * 
    */
-  findByIdApps: class implements Action {
-    public readonly type = OrganizationActionTypes.FIND_BY_ID_APPS;
+  findByIdPosts: class implements Action {
+    public readonly type = OrganizationActionTypes.FIND_BY_ID_POSTS;
       public payload: {id: any, fk: any};
 
     constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
@@ -1804,15 +1804,15 @@ Object.assign(BaseLoopbackActionsFactory<Organization>(OrganizationActionTypes),
     }
   },
   /**
-   * findByIdAppsSuccess Action.
+   * findByIdPostsSuccess Action.
    * 
    * @param {any} id 
    * @param {object} data 
    * @param {any} meta (optional).
    * 
    */
-  findByIdAppsSuccess: class implements Action {
-    public readonly type = OrganizationActionTypes.FIND_BY_ID_APPS_SUCCESS;
+  findByIdPostsSuccess: class implements Action {
+    public readonly type = OrganizationActionTypes.FIND_BY_ID_POSTS_SUCCESS;
       public payload: {id: any, data: any};
 
     constructor(id: any, data: any, public meta?: any) {
@@ -1820,29 +1820,29 @@ Object.assign(BaseLoopbackActionsFactory<Organization>(OrganizationActionTypes),
     }
   },
   /**
-   * findByIdAppsFail Action.
+   * findByIdPostsFail Action.
    *
    * @param {any} payload
    * @param {any} meta (optional).
    * 
    */
-  findByIdAppsFail: class implements Action {
-    public readonly type = OrganizationActionTypes.FIND_BY_ID_APPS_FAIL;
+  findByIdPostsFail: class implements Action {
+    public readonly type = OrganizationActionTypes.FIND_BY_ID_POSTS_FAIL;
 
     constructor(public payload: any, public meta?: any) { }
   },
 
   /**
-   * destroyByIdApps Action.
-   * Delete a related item by id for apps.
+   * destroyByIdPosts Action.
+   * Delete a related item by id for posts.
    *
    * @param {any} id Organization id
-   * @param {any} fk Foreign key for apps
+   * @param {any} fk Foreign key for posts
    * @param {any} meta (optional).
    * 
    */
-  destroyByIdApps: class implements Action {
-    public readonly type = OrganizationActionTypes.DESTROY_BY_ID_APPS;
+  destroyByIdPosts: class implements Action {
+    public readonly type = OrganizationActionTypes.DESTROY_BY_ID_POSTS;
       public payload: {id: any, fk: any};
 
     constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
@@ -1850,15 +1850,15 @@ Object.assign(BaseLoopbackActionsFactory<Organization>(OrganizationActionTypes),
     }
   },
   /**
-   * destroyByIdAppsSuccess Action.
+   * destroyByIdPostsSuccess Action.
    * 
    * @param {any} id 
    * This method returns no data.
    * @param {any} meta (optional).
    * 
    */
-  destroyByIdAppsSuccess: class implements Action {
-    public readonly type = OrganizationActionTypes.DESTROY_BY_ID_APPS_SUCCESS;
+  destroyByIdPostsSuccess: class implements Action {
+    public readonly type = OrganizationActionTypes.DESTROY_BY_ID_POSTS_SUCCESS;
       public payload: {id: any, fk: any};
 
     constructor(id: any, fk: any, public meta?: any) {
@@ -1866,32 +1866,32 @@ Object.assign(BaseLoopbackActionsFactory<Organization>(OrganizationActionTypes),
     }
   },
   /**
-   * destroyByIdAppsFail Action.
+   * destroyByIdPostsFail Action.
    *
    * @param {any} payload
    * @param {any} meta (optional).
    * 
    */
-  destroyByIdAppsFail: class implements Action {
-    public readonly type = OrganizationActionTypes.DESTROY_BY_ID_APPS_FAIL;
+  destroyByIdPostsFail: class implements Action {
+    public readonly type = OrganizationActionTypes.DESTROY_BY_ID_POSTS_FAIL;
 
     constructor(public payload: any, public meta?: any) { }
   },
 
   /**
-   * updateByIdApps Action.
-   * Update a related item by id for apps.
+   * updateByIdPosts Action.
+   * Update a related item by id for posts.
    *
    * @param {any} id Organization id
-   * @param {any} fk Foreign key for apps
+   * @param {any} fk Foreign key for posts
    * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    * @param {any} meta (optional).
    * 
    */
-  updateByIdApps: class implements Action {
-    public readonly type = OrganizationActionTypes.UPDATE_BY_ID_APPS;
+  updateByIdPosts: class implements Action {
+    public readonly type = OrganizationActionTypes.UPDATE_BY_ID_POSTS;
       public payload: {id: any, fk: any, data: any};
 
     constructor(id: any, fk: any, data: any = {}, customHeaders?: Function, public meta?: any) {
@@ -1899,15 +1899,15 @@ Object.assign(BaseLoopbackActionsFactory<Organization>(OrganizationActionTypes),
     }
   },
   /**
-   * updateByIdAppsSuccess Action.
+   * updateByIdPostsSuccess Action.
    * 
    * @param {any} id 
    * @param {object} data 
    * @param {any} meta (optional).
    * 
    */
-  updateByIdAppsSuccess: class implements Action {
-    public readonly type = OrganizationActionTypes.UPDATE_BY_ID_APPS_SUCCESS;
+  updateByIdPostsSuccess: class implements Action {
+    public readonly type = OrganizationActionTypes.UPDATE_BY_ID_POSTS_SUCCESS;
       public payload: {id: any, data: any};
 
     constructor(id: any, data: any, public meta?: any) {
@@ -1915,14 +1915,14 @@ Object.assign(BaseLoopbackActionsFactory<Organization>(OrganizationActionTypes),
     }
   },
   /**
-   * updateByIdAppsFail Action.
+   * updateByIdPostsFail Action.
    *
    * @param {any} payload
    * @param {any} meta (optional).
    * 
    */
-  updateByIdAppsFail: class implements Action {
-    public readonly type = OrganizationActionTypes.UPDATE_BY_ID_APPS_FAIL;
+  updateByIdPostsFail: class implements Action {
+    public readonly type = OrganizationActionTypes.UPDATE_BY_ID_POSTS_FAIL;
 
     constructor(public payload: any, public meta?: any) { }
   },
@@ -3016,16 +3016,16 @@ Object.assign(BaseLoopbackActionsFactory<Organization>(OrganizationActionTypes),
   },
 
   /**
-   * getApps Action.
-   * Queries apps of Organization.
+   * getPosts Action.
+   * Queries posts of Organization.
    *
    * @param {any} id Organization id
    * @param {object} filter 
    * @param {any} meta (optional).
    * 
    */
-  getApps: class implements Action {
-    public readonly type = OrganizationActionTypes.GET_APPS;
+  getPosts: class implements Action {
+    public readonly type = OrganizationActionTypes.GET_POSTS;
       public payload: {id: any, filter: LoopBackFilter};
 
     constructor(id: any, filter: LoopBackFilter = {}, customHeaders?: Function, public meta?: any) {
@@ -3033,15 +3033,15 @@ Object.assign(BaseLoopbackActionsFactory<Organization>(OrganizationActionTypes),
     }
   },
   /**
-   * getAppsSuccess Action.
+   * getPostsSuccess Action.
    * 
    * @param {any} id 
    * @param {object[]} data 
    * @param {any} meta (optional).
    * 
    */
-  getAppsSuccess: class implements Action {
-    public readonly type = OrganizationActionTypes.GET_APPS_SUCCESS;
+  getPostsSuccess: class implements Action {
+    public readonly type = OrganizationActionTypes.GET_POSTS_SUCCESS;
       public payload: {id: any, data: any};
 
     constructor(id: any, data: any, public meta?: any) {
@@ -3049,21 +3049,21 @@ Object.assign(BaseLoopbackActionsFactory<Organization>(OrganizationActionTypes),
     }
   },
   /**
-   * getAppsFail Action.
+   * getPostsFail Action.
    *
    * @param {any} payload
    * @param {any} meta (optional).
    * 
    */
-  getAppsFail: class implements Action {
-    public readonly type = OrganizationActionTypes.GET_APPS_FAIL;
+  getPostsFail: class implements Action {
+    public readonly type = OrganizationActionTypes.GET_POSTS_FAIL;
 
     constructor(public payload: any, public meta?: any) { }
   },
 
   /**
-   * createApps Action.
-   * Creates a new instance in apps of this model.
+   * createPosts Action.
+   * Creates a new instance in posts of this model.
    *
    * @param {any} id Organization id
    * @param {object} data Request data.
@@ -3072,8 +3072,8 @@ Object.assign(BaseLoopbackActionsFactory<Organization>(OrganizationActionTypes),
    * @param {any} meta (optional).
    * 
    */
-  createApps: class implements Action {
-    public readonly type = OrganizationActionTypes.CREATE_APPS;
+  createPosts: class implements Action {
+    public readonly type = OrganizationActionTypes.CREATE_POSTS;
       public payload: {id: any, data: any};
 
     constructor(id: any, data: any = {}, customHeaders?: Function, public meta?: any) {
@@ -3081,15 +3081,15 @@ Object.assign(BaseLoopbackActionsFactory<Organization>(OrganizationActionTypes),
     }
   },
   /**
-   * createAppsSuccess Action.
+   * createPostsSuccess Action.
    * 
    * @param {any} id 
    * @param {object} data 
    * @param {any} meta (optional).
    * 
    */
-  createAppsSuccess: class implements Action {
-    public readonly type = OrganizationActionTypes.CREATE_APPS_SUCCESS;
+  createPostsSuccess: class implements Action {
+    public readonly type = OrganizationActionTypes.CREATE_POSTS_SUCCESS;
       public payload: {id: any, data: any};
 
     constructor(id: any, data: any, public meta?: any) {
@@ -3097,53 +3097,53 @@ Object.assign(BaseLoopbackActionsFactory<Organization>(OrganizationActionTypes),
     }
   },
   /**
-   * createAppsFail Action.
+   * createPostsFail Action.
    *
    * @param {any} payload
    * @param {any} meta (optional).
    * 
    */
-  createAppsFail: class implements Action {
-    public readonly type = OrganizationActionTypes.CREATE_APPS_FAIL;
+  createPostsFail: class implements Action {
+    public readonly type = OrganizationActionTypes.CREATE_POSTS_FAIL;
 
     constructor(public payload: any, public meta?: any) { }
   },
 
   /**
-   * deleteApps Action.
-   * Deletes all apps of this model.
+   * deletePosts Action.
+   * Deletes all posts of this model.
    *
    * @param {any} id Organization id
    * @param {any} meta (optional).
    * 
    */
-  deleteApps: class implements Action {
-    public readonly type = OrganizationActionTypes.DELETE_APPS;
+  deletePosts: class implements Action {
+    public readonly type = OrganizationActionTypes.DELETE_POSTS;
       
     constructor(public payload: any, public meta?: any) {}
   },
   /**
-   * deleteAppsSuccess Action.
+   * deletePostsSuccess Action.
    * 
    * @param {any} id 
    * This method returns no data.
    * @param {any} meta (optional).
    * 
    */
-  deleteAppsSuccess: class implements Action {
-    public readonly type = OrganizationActionTypes.DELETE_APPS_SUCCESS;
+  deletePostsSuccess: class implements Action {
+    public readonly type = OrganizationActionTypes.DELETE_POSTS_SUCCESS;
   
     constructor(public payload: any, public meta?: any) {}
   },
   /**
-   * deleteAppsFail Action.
+   * deletePostsFail Action.
    *
    * @param {any} payload
    * @param {any} meta (optional).
    * 
    */
-  deleteAppsFail: class implements Action {
-    public readonly type = OrganizationActionTypes.DELETE_APPS_FAIL;
+  deletePostsFail: class implements Action {
+    public readonly type = OrganizationActionTypes.DELETE_POSTS_FAIL;
 
     constructor(public payload: any, public meta?: any) { }
   },
@@ -4025,8 +4025,8 @@ Object.assign(BaseLoopbackActionsFactory<Organization>(OrganizationActionTypes),
   },
 
   /**
-   * createManyApps Action.
-   * Creates a new instance in apps of this model.
+   * createManyPosts Action.
+   * Creates a new instance in posts of this model.
    *
    * @param {any} id Organization id
    * @param {object} data Request data.
@@ -4035,8 +4035,8 @@ Object.assign(BaseLoopbackActionsFactory<Organization>(OrganizationActionTypes),
    * @param {any} meta (optional).
    * 
    */
-  createManyApps: class implements Action {
-    public readonly type = OrganizationActionTypes.CREATE_MANY_APPS;
+  createManyPosts: class implements Action {
+    public readonly type = OrganizationActionTypes.CREATE_MANY_POSTS;
       public payload: {id: any, data: any[]};
 
     constructor(id: any, data: any[] = [], customHeaders?: Function, public meta?: any) {
@@ -4044,15 +4044,15 @@ Object.assign(BaseLoopbackActionsFactory<Organization>(OrganizationActionTypes),
     }
   },
   /**
-   * createManyAppsSuccess Action.
+   * createManyPostsSuccess Action.
    * 
    * @param {any} id 
    * @param {object[]} data 
    * @param {any} meta (optional).
    * 
    */
-  createManyAppsSuccess: class implements Action {
-    public readonly type = OrganizationActionTypes.CREATE_MANY_APPS_SUCCESS;
+  createManyPostsSuccess: class implements Action {
+    public readonly type = OrganizationActionTypes.CREATE_MANY_POSTS_SUCCESS;
       public payload: {id: any, data: any};
 
     constructor(id: any, data: any, public meta?: any) {
@@ -4060,14 +4060,14 @@ Object.assign(BaseLoopbackActionsFactory<Organization>(OrganizationActionTypes),
     }
   },
   /**
-   * createManyAppsFail Action.
+   * createManyPostsFail Action.
    *
    * @param {any} payload
    * @param {any} meta (optional).
    * 
    */
-  createManyAppsFail: class implements Action {
-    public readonly type = OrganizationActionTypes.CREATE_MANY_APPS_FAIL;
+  createManyPostsFail: class implements Action {
+    public readonly type = OrganizationActionTypes.CREATE_MANY_POSTS_FAIL;
 
     constructor(public payload: any, public meta?: any) { }
   },

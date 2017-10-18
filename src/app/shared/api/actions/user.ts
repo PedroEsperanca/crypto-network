@@ -34,22 +34,6 @@ Object.assign(BaseLoopbackActionTypesFactory('User'), {
   UPDATE_BY_ID_PHONES_SUCCESS: type('[User] updateByIdPhones success'),
   UPDATE_BY_ID_PHONES_FAIL: type('[User] updateByIdPhones fail'),
 
-  GET_S3PHOTO: type('[User] getS3Photo'),
-  GET_S3PHOTO_SUCCESS: type('[User] getS3Photo success'),
-  GET_S3PHOTO_FAIL: type('[User] getS3Photo fail'),
-
-  CREATE_S3PHOTO: type('[User] createS3Photo'),
-  CREATE_S3PHOTO_SUCCESS: type('[User] createS3Photo success'),
-  CREATE_S3PHOTO_FAIL: type('[User] createS3Photo fail'),
-
-  UPDATE_S3PHOTO: type('[User] updateS3Photo'),
-  UPDATE_S3PHOTO_SUCCESS: type('[User] updateS3Photo success'),
-  UPDATE_S3PHOTO_FAIL: type('[User] updateS3Photo fail'),
-
-  DESTROY_S3PHOTO: type('[User] destroyS3Photo'),
-  DESTROY_S3PHOTO_SUCCESS: type('[User] destroyS3Photo success'),
-  DESTROY_S3PHOTO_FAIL: type('[User] destroyS3Photo fail'),
-
   GET_STRIPECUSTOMER: type('[User] getStripeCustomer'),
   GET_STRIPECUSTOMER_SUCCESS: type('[User] getStripeCustomer success'),
   GET_STRIPECUSTOMER_FAIL: type('[User] getStripeCustomer fail'),
@@ -138,6 +122,22 @@ Object.assign(BaseLoopbackActionTypesFactory('User'), {
   UPDATE_BY_ID_ROLES_SUCCESS: type('[User] updateByIdRoles success'),
   UPDATE_BY_ID_ROLES_FAIL: type('[User] updateByIdRoles fail'),
 
+  GET_S3PHOTO: type('[User] getS3Photo'),
+  GET_S3PHOTO_SUCCESS: type('[User] getS3Photo success'),
+  GET_S3PHOTO_FAIL: type('[User] getS3Photo fail'),
+
+  CREATE_S3PHOTO: type('[User] createS3Photo'),
+  CREATE_S3PHOTO_SUCCESS: type('[User] createS3Photo success'),
+  CREATE_S3PHOTO_FAIL: type('[User] createS3Photo fail'),
+
+  UPDATE_S3PHOTO: type('[User] updateS3Photo'),
+  UPDATE_S3PHOTO_SUCCESS: type('[User] updateS3Photo success'),
+  UPDATE_S3PHOTO_FAIL: type('[User] updateS3Photo fail'),
+
+  DESTROY_S3PHOTO: type('[User] destroyS3Photo'),
+  DESTROY_S3PHOTO_SUCCESS: type('[User] destroyS3Photo success'),
+  DESTROY_S3PHOTO_FAIL: type('[User] destroyS3Photo fail'),
+
   FIND_BY_ID_ORGANIZATIONS: type('[User] findByIdOrganizations'),
   FIND_BY_ID_ORGANIZATIONS_SUCCESS: type('[User] findByIdOrganizations success'),
   FIND_BY_ID_ORGANIZATIONS_FAIL: type('[User] findByIdOrganizations fail'),
@@ -182,17 +182,93 @@ Object.assign(BaseLoopbackActionTypesFactory('User'), {
   UPDATE_BY_ID_INVITATIONS_SUCCESS: type('[User] updateByIdInvitations success'),
   UPDATE_BY_ID_INVITATIONS_FAIL: type('[User] updateByIdInvitations fail'),
 
-  FIND_BY_ID_APPS: type('[User] findByIdApps'),
-  FIND_BY_ID_APPS_SUCCESS: type('[User] findByIdApps success'),
-  FIND_BY_ID_APPS_FAIL: type('[User] findByIdApps fail'),
+  FIND_BY_ID_FOLLOWERS: type('[User] findByIdFollowers'),
+  FIND_BY_ID_FOLLOWERS_SUCCESS: type('[User] findByIdFollowers success'),
+  FIND_BY_ID_FOLLOWERS_FAIL: type('[User] findByIdFollowers fail'),
 
-  DESTROY_BY_ID_APPS: type('[User] destroyByIdApps'),
-  DESTROY_BY_ID_APPS_SUCCESS: type('[User] destroyByIdApps success'),
-  DESTROY_BY_ID_APPS_FAIL: type('[User] destroyByIdApps fail'),
+  LINK_FOLLOWERS: type('[User] linkFollowers'),
+  LINK_FOLLOWERS_SUCCESS: type('[User] linkFollowers success'),
+  LINK_FOLLOWERS_FAIL: type('[User] linkFollowers fail'),
 
-  UPDATE_BY_ID_APPS: type('[User] updateByIdApps'),
-  UPDATE_BY_ID_APPS_SUCCESS: type('[User] updateByIdApps success'),
-  UPDATE_BY_ID_APPS_FAIL: type('[User] updateByIdApps fail'),
+  UNLINK_FOLLOWERS: type('[User] unlinkFollowers'),
+  UNLINK_FOLLOWERS_SUCCESS: type('[User] unlinkFollowers success'),
+  UNLINK_FOLLOWERS_FAIL: type('[User] unlinkFollowers fail'),
+
+  FIND_BY_ID_FOLLOWING: type('[User] findByIdFollowing'),
+  FIND_BY_ID_FOLLOWING_SUCCESS: type('[User] findByIdFollowing success'),
+  FIND_BY_ID_FOLLOWING_FAIL: type('[User] findByIdFollowing fail'),
+
+  LINK_FOLLOWING: type('[User] linkFollowing'),
+  LINK_FOLLOWING_SUCCESS: type('[User] linkFollowing success'),
+  LINK_FOLLOWING_FAIL: type('[User] linkFollowing fail'),
+
+  UNLINK_FOLLOWING: type('[User] unlinkFollowing'),
+  UNLINK_FOLLOWING_SUCCESS: type('[User] unlinkFollowing success'),
+  UNLINK_FOLLOWING_FAIL: type('[User] unlinkFollowing fail'),
+
+  FIND_BY_ID_POSTS: type('[User] findByIdPosts'),
+  FIND_BY_ID_POSTS_SUCCESS: type('[User] findByIdPosts success'),
+  FIND_BY_ID_POSTS_FAIL: type('[User] findByIdPosts fail'),
+
+  DESTROY_BY_ID_POSTS: type('[User] destroyByIdPosts'),
+  DESTROY_BY_ID_POSTS_SUCCESS: type('[User] destroyByIdPosts success'),
+  DESTROY_BY_ID_POSTS_FAIL: type('[User] destroyByIdPosts fail'),
+
+  UPDATE_BY_ID_POSTS: type('[User] updateByIdPosts'),
+  UPDATE_BY_ID_POSTS_SUCCESS: type('[User] updateByIdPosts success'),
+  UPDATE_BY_ID_POSTS_FAIL: type('[User] updateByIdPosts fail'),
+
+  FIND_BY_ID_SHARES: type('[User] findByIdShares'),
+  FIND_BY_ID_SHARES_SUCCESS: type('[User] findByIdShares success'),
+  FIND_BY_ID_SHARES_FAIL: type('[User] findByIdShares fail'),
+
+  LINK_SHARES: type('[User] linkShares'),
+  LINK_SHARES_SUCCESS: type('[User] linkShares success'),
+  LINK_SHARES_FAIL: type('[User] linkShares fail'),
+
+  UNLINK_SHARES: type('[User] unlinkShares'),
+  UNLINK_SHARES_SUCCESS: type('[User] unlinkShares success'),
+  UNLINK_SHARES_FAIL: type('[User] unlinkShares fail'),
+
+  FIND_BY_ID_SHOPPINGCARD: type('[User] findByIdShoppingCard'),
+  FIND_BY_ID_SHOPPINGCARD_SUCCESS: type('[User] findByIdShoppingCard success'),
+  FIND_BY_ID_SHOPPINGCARD_FAIL: type('[User] findByIdShoppingCard fail'),
+
+  DESTROY_BY_ID_SHOPPINGCARD: type('[User] destroyByIdShoppingCard'),
+  DESTROY_BY_ID_SHOPPINGCARD_SUCCESS: type('[User] destroyByIdShoppingCard success'),
+  DESTROY_BY_ID_SHOPPINGCARD_FAIL: type('[User] destroyByIdShoppingCard fail'),
+
+  UPDATE_BY_ID_SHOPPINGCARD: type('[User] updateByIdShoppingCard'),
+  UPDATE_BY_ID_SHOPPINGCARD_SUCCESS: type('[User] updateByIdShoppingCard success'),
+  UPDATE_BY_ID_SHOPPINGCARD_FAIL: type('[User] updateByIdShoppingCard fail'),
+
+  LINK_SHOPPINGCARD: type('[User] linkShoppingCard'),
+  LINK_SHOPPINGCARD_SUCCESS: type('[User] linkShoppingCard success'),
+  LINK_SHOPPINGCARD_FAIL: type('[User] linkShoppingCard fail'),
+
+  UNLINK_SHOPPINGCARD: type('[User] unlinkShoppingCard'),
+  UNLINK_SHOPPINGCARD_SUCCESS: type('[User] unlinkShoppingCard success'),
+  UNLINK_SHOPPINGCARD_FAIL: type('[User] unlinkShoppingCard fail'),
+
+  FIND_BY_ID_WHISHLIST: type('[User] findByIdWhishList'),
+  FIND_BY_ID_WHISHLIST_SUCCESS: type('[User] findByIdWhishList success'),
+  FIND_BY_ID_WHISHLIST_FAIL: type('[User] findByIdWhishList fail'),
+
+  DESTROY_BY_ID_WHISHLIST: type('[User] destroyByIdWhishList'),
+  DESTROY_BY_ID_WHISHLIST_SUCCESS: type('[User] destroyByIdWhishList success'),
+  DESTROY_BY_ID_WHISHLIST_FAIL: type('[User] destroyByIdWhishList fail'),
+
+  UPDATE_BY_ID_WHISHLIST: type('[User] updateByIdWhishList'),
+  UPDATE_BY_ID_WHISHLIST_SUCCESS: type('[User] updateByIdWhishList success'),
+  UPDATE_BY_ID_WHISHLIST_FAIL: type('[User] updateByIdWhishList fail'),
+
+  LINK_WHISHLIST: type('[User] linkWhishList'),
+  LINK_WHISHLIST_SUCCESS: type('[User] linkWhishList success'),
+  LINK_WHISHLIST_FAIL: type('[User] linkWhishList fail'),
+
+  UNLINK_WHISHLIST: type('[User] unlinkWhishList'),
+  UNLINK_WHISHLIST_SUCCESS: type('[User] unlinkWhishList success'),
+  UNLINK_WHISHLIST_FAIL: type('[User] unlinkWhishList fail'),
 
   FIND_BY_ID_OAUTHCLIENTAPPLICATIONS: type('[User] findByIdOAuthClientApplications'),
   FIND_BY_ID_OAUTHCLIENTAPPLICATIONS_SUCCESS: type('[User] findByIdOAuthClientApplications success'),
@@ -338,17 +414,53 @@ Object.assign(BaseLoopbackActionTypesFactory('User'), {
   DELETE_INVITATIONS_SUCCESS: type('[User] deleteInvitations success'),
   DELETE_INVITATIONS_FAIL: type('[User] deleteInvitations fail'),
 
-  GET_APPS: type('[User] getApps'),
-  GET_APPS_SUCCESS: type('[User] getApps success'),
-  GET_APPS_FAIL: type('[User] getApps fail'),
+  GET_FOLLOWERS: type('[User] getFollowers'),
+  GET_FOLLOWERS_SUCCESS: type('[User] getFollowers success'),
+  GET_FOLLOWERS_FAIL: type('[User] getFollowers fail'),
 
-  CREATE_APPS: type('[User] createApps'),
-  CREATE_APPS_SUCCESS: type('[User] createApps success'),
-  CREATE_APPS_FAIL: type('[User] createApps fail'),
+  GET_FOLLOWING: type('[User] getFollowing'),
+  GET_FOLLOWING_SUCCESS: type('[User] getFollowing success'),
+  GET_FOLLOWING_FAIL: type('[User] getFollowing fail'),
 
-  DELETE_APPS: type('[User] deleteApps'),
-  DELETE_APPS_SUCCESS: type('[User] deleteApps success'),
-  DELETE_APPS_FAIL: type('[User] deleteApps fail'),
+  GET_POSTS: type('[User] getPosts'),
+  GET_POSTS_SUCCESS: type('[User] getPosts success'),
+  GET_POSTS_FAIL: type('[User] getPosts fail'),
+
+  CREATE_POSTS: type('[User] createPosts'),
+  CREATE_POSTS_SUCCESS: type('[User] createPosts success'),
+  CREATE_POSTS_FAIL: type('[User] createPosts fail'),
+
+  DELETE_POSTS: type('[User] deletePosts'),
+  DELETE_POSTS_SUCCESS: type('[User] deletePosts success'),
+  DELETE_POSTS_FAIL: type('[User] deletePosts fail'),
+
+  GET_SHARES: type('[User] getShares'),
+  GET_SHARES_SUCCESS: type('[User] getShares success'),
+  GET_SHARES_FAIL: type('[User] getShares fail'),
+
+  GET_SHOPPINGCARD: type('[User] getShoppingCard'),
+  GET_SHOPPINGCARD_SUCCESS: type('[User] getShoppingCard success'),
+  GET_SHOPPINGCARD_FAIL: type('[User] getShoppingCard fail'),
+
+  CREATE_SHOPPINGCARD: type('[User] createShoppingCard'),
+  CREATE_SHOPPINGCARD_SUCCESS: type('[User] createShoppingCard success'),
+  CREATE_SHOPPINGCARD_FAIL: type('[User] createShoppingCard fail'),
+
+  DELETE_SHOPPINGCARD: type('[User] deleteShoppingCard'),
+  DELETE_SHOPPINGCARD_SUCCESS: type('[User] deleteShoppingCard success'),
+  DELETE_SHOPPINGCARD_FAIL: type('[User] deleteShoppingCard fail'),
+
+  GET_WHISHLIST: type('[User] getWhishList'),
+  GET_WHISHLIST_SUCCESS: type('[User] getWhishList success'),
+  GET_WHISHLIST_FAIL: type('[User] getWhishList fail'),
+
+  CREATE_WHISHLIST: type('[User] createWhishList'),
+  CREATE_WHISHLIST_SUCCESS: type('[User] createWhishList success'),
+  CREATE_WHISHLIST_FAIL: type('[User] createWhishList fail'),
+
+  DELETE_WHISHLIST: type('[User] deleteWhishList'),
+  DELETE_WHISHLIST_SUCCESS: type('[User] deleteWhishList success'),
+  DELETE_WHISHLIST_FAIL: type('[User] deleteWhishList fail'),
 
   GET_OAUTHCLIENTAPPLICATIONS: type('[User] getOAuthClientApplications'),
   GET_OAUTHCLIENTAPPLICATIONS_SUCCESS: type('[User] getOAuthClientApplications success'),
@@ -398,6 +510,10 @@ Object.assign(BaseLoopbackActionTypesFactory('User'), {
   SET_PRIMARY_PHONE_SUCCESS: type('[User] setPrimaryPhone success'),
   SET_PRIMARY_PHONE_FAIL: type('[User] setPrimaryPhone fail'),
 
+  ACTIVATE: type('[User] activate'),
+  ACTIVATE_SUCCESS: type('[User] activate success'),
+  ACTIVATE_FAIL: type('[User] activate fail'),
+
   S3_P_U_T_SIGNED_URL: type('[User] s3PUTSignedUrl'),
   S3_P_U_T_SIGNED_URL_SUCCESS: type('[User] s3PUTSignedUrl success'),
   S3_P_U_T_SIGNED_URL_FAIL: type('[User] s3PUTSignedUrl fail'),
@@ -406,17 +522,13 @@ Object.assign(BaseLoopbackActionTypesFactory('User'), {
   S3_G_E_T_SIGNED_URL_SUCCESS: type('[User] s3GETSignedUrl success'),
   S3_G_E_T_SIGNED_URL_FAIL: type('[User] s3GETSignedUrl fail'),
 
-  ACTIVATE: type('[User] activate'),
-  ACTIVATE_SUCCESS: type('[User] activate success'),
-  ACTIVATE_FAIL: type('[User] activate fail'),
+  CREATE_MANY_STRIPECUSTOMER: type('[User] createManyStripeCustomer'),
+  CREATE_MANY_STRIPECUSTOMER_SUCCESS: type('[User] createManyStripeCustomer success'),
+  CREATE_MANY_STRIPECUSTOMER_FAIL: type('[User] createManyStripeCustomer fail'),
 
   CREATE_MANY_S3PHOTO: type('[User] createManyS3Photo'),
   CREATE_MANY_S3PHOTO_SUCCESS: type('[User] createManyS3Photo success'),
   CREATE_MANY_S3PHOTO_FAIL: type('[User] createManyS3Photo fail'),
-
-  CREATE_MANY_STRIPECUSTOMER: type('[User] createManyStripeCustomer'),
-  CREATE_MANY_STRIPECUSTOMER_SUCCESS: type('[User] createManyStripeCustomer success'),
-  CREATE_MANY_STRIPECUSTOMER_FAIL: type('[User] createManyStripeCustomer fail'),
 
   CREATE_MANY_EMAILS: type('[User] createManyEmails'),
   CREATE_MANY_EMAILS_SUCCESS: type('[User] createManyEmails success'),
@@ -462,9 +574,17 @@ Object.assign(BaseLoopbackActionTypesFactory('User'), {
   CREATE_MANY_INVITATIONS_SUCCESS: type('[User] createManyInvitations success'),
   CREATE_MANY_INVITATIONS_FAIL: type('[User] createManyInvitations fail'),
 
-  CREATE_MANY_APPS: type('[User] createManyApps'),
-  CREATE_MANY_APPS_SUCCESS: type('[User] createManyApps success'),
-  CREATE_MANY_APPS_FAIL: type('[User] createManyApps fail'),
+  CREATE_MANY_POSTS: type('[User] createManyPosts'),
+  CREATE_MANY_POSTS_SUCCESS: type('[User] createManyPosts success'),
+  CREATE_MANY_POSTS_FAIL: type('[User] createManyPosts fail'),
+
+  CREATE_MANY_SHOPPINGCARD: type('[User] createManyShoppingCard'),
+  CREATE_MANY_SHOPPINGCARD_SUCCESS: type('[User] createManyShoppingCard success'),
+  CREATE_MANY_SHOPPINGCARD_FAIL: type('[User] createManyShoppingCard fail'),
+
+  CREATE_MANY_WHISHLIST: type('[User] createManyWhishList'),
+  CREATE_MANY_WHISHLIST_SUCCESS: type('[User] createManyWhishList success'),
+  CREATE_MANY_WHISHLIST_FAIL: type('[User] createManyWhishList fail'),
 
   CREATE_MANY_OAUTHCLIENTAPPLICATIONS: type('[User] createManyOAuthClientApplications'),
   CREATE_MANY_OAUTHCLIENTAPPLICATIONS_SUCCESS: type('[User] createManyOAuthClientApplications success'),
@@ -809,190 +929,6 @@ Object.assign(BaseLoopbackActionsFactory<User>(UserActionTypes), {
    */
   updateByIdPhonesFail: class implements Action {
     public readonly type = UserActionTypes.UPDATE_BY_ID_PHONES_FAIL;
-
-    constructor(public payload: any, public meta?: any) { }
-  },
-
-  /**
-   * getS3Photo Action.
-   * Fetches hasOne relation s3Photo.
-   *
-   * @param {any} id user id
-   * @param {boolean} refresh 
-   * @param {any} meta (optional).
-   * 
-   */
-  getS3Photo: class implements Action {
-    public readonly type = UserActionTypes.GET_S3PHOTO;
-      public payload: {id: any, refresh: any};
-
-    constructor(id: any, refresh: any = {}, customHeaders?: Function, public meta?: any) {
-      this.payload = {id, refresh};
-    }
-  },
-  /**
-   * getS3PhotoSuccess Action.
-   * 
-   * @param {any} id 
-   * @param {object} data 
-   * @param {any} meta (optional).
-   * 
-   */
-  getS3PhotoSuccess: class implements Action {
-    public readonly type = UserActionTypes.GET_S3PHOTO_SUCCESS;
-      public payload: {id: any, data: any};
-
-    constructor(id: any, data: any, public meta?: any) {
-      this.payload = {id, data};
-    }
-  },
-  /**
-   * getS3PhotoFail Action.
-   *
-   * @param {any} payload
-   * @param {any} meta (optional).
-   * 
-   */
-  getS3PhotoFail: class implements Action {
-    public readonly type = UserActionTypes.GET_S3PHOTO_FAIL;
-
-    constructor(public payload: any, public meta?: any) { }
-  },
-
-  /**
-   * createS3Photo Action.
-   * Creates a new instance in s3Photo of this model.
-   *
-   * @param {any} id user id
-   * @param {object} data Request data.
-   *
-   * This method expects a subset of model properties as request parameters.
-   * @param {any} meta (optional).
-   * 
-   */
-  createS3Photo: class implements Action {
-    public readonly type = UserActionTypes.CREATE_S3PHOTO;
-      public payload: {id: any, data: any};
-
-    constructor(id: any, data: any = {}, customHeaders?: Function, public meta?: any) {
-      this.payload = {id, data};
-    }
-  },
-  /**
-   * createS3PhotoSuccess Action.
-   * 
-   * @param {any} id 
-   * @param {object} data 
-   * @param {any} meta (optional).
-   * 
-   */
-  createS3PhotoSuccess: class implements Action {
-    public readonly type = UserActionTypes.CREATE_S3PHOTO_SUCCESS;
-      public payload: {id: any, data: any};
-
-    constructor(id: any, data: any, public meta?: any) {
-      this.payload = {id, data};
-    }
-  },
-  /**
-   * createS3PhotoFail Action.
-   *
-   * @param {any} payload
-   * @param {any} meta (optional).
-   * 
-   */
-  createS3PhotoFail: class implements Action {
-    public readonly type = UserActionTypes.CREATE_S3PHOTO_FAIL;
-
-    constructor(public payload: any, public meta?: any) { }
-  },
-
-  /**
-   * updateS3Photo Action.
-   * Update s3Photo of this model.
-   *
-   * @param {any} id user id
-   * @param {object} data Request data.
-   *
-   * This method expects a subset of model properties as request parameters.
-   * @param {any} meta (optional).
-   * 
-   */
-  updateS3Photo: class implements Action {
-    public readonly type = UserActionTypes.UPDATE_S3PHOTO;
-      public payload: {id: any, data: any};
-
-    constructor(id: any, data: any = {}, customHeaders?: Function, public meta?: any) {
-      this.payload = {id, data};
-    }
-  },
-  /**
-   * updateS3PhotoSuccess Action.
-   * 
-   * @param {any} id 
-   * @param {object} data 
-   * @param {any} meta (optional).
-   * 
-   */
-  updateS3PhotoSuccess: class implements Action {
-    public readonly type = UserActionTypes.UPDATE_S3PHOTO_SUCCESS;
-      public payload: {id: any, data: any};
-
-    constructor(id: any, data: any, public meta?: any) {
-      this.payload = {id, data};
-    }
-  },
-  /**
-   * updateS3PhotoFail Action.
-   *
-   * @param {any} payload
-   * @param {any} meta (optional).
-   * 
-   */
-  updateS3PhotoFail: class implements Action {
-    public readonly type = UserActionTypes.UPDATE_S3PHOTO_FAIL;
-
-    constructor(public payload: any, public meta?: any) { }
-  },
-
-  /**
-   * destroyS3Photo Action.
-   * Deletes s3Photo of this model.
-   *
-   * @param {any} id user id
-   * @param {any} meta (optional).
-   * 
-   */
-  destroyS3Photo: class implements Action {
-    public readonly type = UserActionTypes.DESTROY_S3PHOTO;
-      
-    constructor(public payload: any, public meta?: any) {}
-  },
-  /**
-   * destroyS3PhotoSuccess Action.
-   * 
-   * @param {any} id 
-   * This method returns no data.
-   * @param {any} meta (optional).
-   * 
-   */
-  destroyS3PhotoSuccess: class implements Action {
-    public readonly type = UserActionTypes.DESTROY_S3PHOTO_SUCCESS;
-      public payload: {id: any, fk: any};
-
-    constructor(id: any, fk: any, public meta?: any) {
-      this.payload = {id, fk};
-    }
-  },
-  /**
-   * destroyS3PhotoFail Action.
-   *
-   * @param {any} payload
-   * @param {any} meta (optional).
-   * 
-   */
-  destroyS3PhotoFail: class implements Action {
-    public readonly type = UserActionTypes.DESTROY_S3PHOTO_FAIL;
 
     constructor(public payload: any, public meta?: any) { }
   },
@@ -2028,6 +1964,190 @@ Object.assign(BaseLoopbackActionsFactory<User>(UserActionTypes), {
   },
 
   /**
+   * getS3Photo Action.
+   * Fetches hasOne relation s3Photo.
+   *
+   * @param {any} id user id
+   * @param {boolean} refresh 
+   * @param {any} meta (optional).
+   * 
+   */
+  getS3Photo: class implements Action {
+    public readonly type = UserActionTypes.GET_S3PHOTO;
+      public payload: {id: any, refresh: any};
+
+    constructor(id: any, refresh: any = {}, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, refresh};
+    }
+  },
+  /**
+   * getS3PhotoSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  getS3PhotoSuccess: class implements Action {
+    public readonly type = UserActionTypes.GET_S3PHOTO_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * getS3PhotoFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  getS3PhotoFail: class implements Action {
+    public readonly type = UserActionTypes.GET_S3PHOTO_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * createS3Photo Action.
+   * Creates a new instance in s3Photo of this model.
+   *
+   * @param {any} id user id
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   * @param {any} meta (optional).
+   * 
+   */
+  createS3Photo: class implements Action {
+    public readonly type = UserActionTypes.CREATE_S3PHOTO;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any = {}, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * createS3PhotoSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  createS3PhotoSuccess: class implements Action {
+    public readonly type = UserActionTypes.CREATE_S3PHOTO_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * createS3PhotoFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  createS3PhotoFail: class implements Action {
+    public readonly type = UserActionTypes.CREATE_S3PHOTO_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * updateS3Photo Action.
+   * Update s3Photo of this model.
+   *
+   * @param {any} id user id
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   * @param {any} meta (optional).
+   * 
+   */
+  updateS3Photo: class implements Action {
+    public readonly type = UserActionTypes.UPDATE_S3PHOTO;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any = {}, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * updateS3PhotoSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  updateS3PhotoSuccess: class implements Action {
+    public readonly type = UserActionTypes.UPDATE_S3PHOTO_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * updateS3PhotoFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  updateS3PhotoFail: class implements Action {
+    public readonly type = UserActionTypes.UPDATE_S3PHOTO_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * destroyS3Photo Action.
+   * Deletes s3Photo of this model.
+   *
+   * @param {any} id user id
+   * @param {any} meta (optional).
+   * 
+   */
+  destroyS3Photo: class implements Action {
+    public readonly type = UserActionTypes.DESTROY_S3PHOTO;
+      
+    constructor(public payload: any, public meta?: any) {}
+  },
+  /**
+   * destroyS3PhotoSuccess Action.
+   * 
+   * @param {any} id 
+   * This method returns no data.
+   * @param {any} meta (optional).
+   * 
+   */
+  destroyS3PhotoSuccess: class implements Action {
+    public readonly type = UserActionTypes.DESTROY_S3PHOTO_SUCCESS;
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
+  },
+  /**
+   * destroyS3PhotoFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  destroyS3PhotoFail: class implements Action {
+    public readonly type = UserActionTypes.DESTROY_S3PHOTO_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
    * findByIdOrganizations Action.
    * Find a related item by id for organizations.
    *
@@ -2546,16 +2666,16 @@ Object.assign(BaseLoopbackActionsFactory<User>(UserActionTypes), {
   },
 
   /**
-   * findByIdApps Action.
-   * Find a related item by id for apps.
+   * findByIdFollowers Action.
+   * Find a related item by id for followers.
    *
    * @param {any} id user id
-   * @param {any} fk Foreign key for apps
+   * @param {any} fk Foreign key for followers
    * @param {any} meta (optional).
    * 
    */
-  findByIdApps: class implements Action {
-    public readonly type = UserActionTypes.FIND_BY_ID_APPS;
+  findByIdFollowers: class implements Action {
+    public readonly type = UserActionTypes.FIND_BY_ID_FOLLOWERS;
       public payload: {id: any, fk: any};
 
     constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
@@ -2563,15 +2683,15 @@ Object.assign(BaseLoopbackActionsFactory<User>(UserActionTypes), {
     }
   },
   /**
-   * findByIdAppsSuccess Action.
+   * findByIdFollowersSuccess Action.
    * 
    * @param {any} id 
    * @param {object} data 
    * @param {any} meta (optional).
    * 
    */
-  findByIdAppsSuccess: class implements Action {
-    public readonly type = UserActionTypes.FIND_BY_ID_APPS_SUCCESS;
+  findByIdFollowersSuccess: class implements Action {
+    public readonly type = UserActionTypes.FIND_BY_ID_FOLLOWERS_SUCCESS;
       public payload: {id: any, data: any};
 
     constructor(id: any, data: any, public meta?: any) {
@@ -2579,78 +2699,32 @@ Object.assign(BaseLoopbackActionsFactory<User>(UserActionTypes), {
     }
   },
   /**
-   * findByIdAppsFail Action.
+   * findByIdFollowersFail Action.
    *
    * @param {any} payload
    * @param {any} meta (optional).
    * 
    */
-  findByIdAppsFail: class implements Action {
-    public readonly type = UserActionTypes.FIND_BY_ID_APPS_FAIL;
+  findByIdFollowersFail: class implements Action {
+    public readonly type = UserActionTypes.FIND_BY_ID_FOLLOWERS_FAIL;
 
     constructor(public payload: any, public meta?: any) { }
   },
 
   /**
-   * destroyByIdApps Action.
-   * Delete a related item by id for apps.
+   * linkFollowers Action.
+   * Add a related item by id for followers.
    *
    * @param {any} id user id
-   * @param {any} fk Foreign key for apps
-   * @param {any} meta (optional).
-   * 
-   */
-  destroyByIdApps: class implements Action {
-    public readonly type = UserActionTypes.DESTROY_BY_ID_APPS;
-      public payload: {id: any, fk: any};
-
-    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
-      this.payload = {id, fk};
-    }
-  },
-  /**
-   * destroyByIdAppsSuccess Action.
-   * 
-   * @param {any} id 
-   * This method returns no data.
-   * @param {any} meta (optional).
-   * 
-   */
-  destroyByIdAppsSuccess: class implements Action {
-    public readonly type = UserActionTypes.DESTROY_BY_ID_APPS_SUCCESS;
-      public payload: {id: any, fk: any};
-
-    constructor(id: any, fk: any, public meta?: any) {
-      this.payload = {id, fk};
-    }
-  },
-  /**
-   * destroyByIdAppsFail Action.
-   *
-   * @param {any} payload
-   * @param {any} meta (optional).
-   * 
-   */
-  destroyByIdAppsFail: class implements Action {
-    public readonly type = UserActionTypes.DESTROY_BY_ID_APPS_FAIL;
-
-    constructor(public payload: any, public meta?: any) { }
-  },
-
-  /**
-   * updateByIdApps Action.
-   * Update a related item by id for apps.
-   *
-   * @param {any} id user id
-   * @param {any} fk Foreign key for apps
+   * @param {any} fk Foreign key for followers
    * @param {object} data Request data.
    *
    * This method expects a subset of model properties as request parameters.
    * @param {any} meta (optional).
    * 
    */
-  updateByIdApps: class implements Action {
-    public readonly type = UserActionTypes.UPDATE_BY_ID_APPS;
+  linkFollowers: class implements Action {
+    public readonly type = UserActionTypes.LINK_FOLLOWERS;
       public payload: {id: any, fk: any, data: any};
 
     constructor(id: any, fk: any, data: any = {}, customHeaders?: Function, public meta?: any) {
@@ -2658,15 +2732,15 @@ Object.assign(BaseLoopbackActionsFactory<User>(UserActionTypes), {
     }
   },
   /**
-   * updateByIdAppsSuccess Action.
+   * linkFollowersSuccess Action.
    * 
    * @param {any} id 
    * @param {object} data 
    * @param {any} meta (optional).
    * 
    */
-  updateByIdAppsSuccess: class implements Action {
-    public readonly type = UserActionTypes.UPDATE_BY_ID_APPS_SUCCESS;
+  linkFollowersSuccess: class implements Action {
+    public readonly type = UserActionTypes.LINK_FOLLOWERS_SUCCESS;
       public payload: {id: any, data: any};
 
     constructor(id: any, data: any, public meta?: any) {
@@ -2674,14 +2748,955 @@ Object.assign(BaseLoopbackActionsFactory<User>(UserActionTypes), {
     }
   },
   /**
-   * updateByIdAppsFail Action.
+   * linkFollowersFail Action.
    *
    * @param {any} payload
    * @param {any} meta (optional).
    * 
    */
-  updateByIdAppsFail: class implements Action {
-    public readonly type = UserActionTypes.UPDATE_BY_ID_APPS_FAIL;
+  linkFollowersFail: class implements Action {
+    public readonly type = UserActionTypes.LINK_FOLLOWERS_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * unlinkFollowers Action.
+   * Remove the followers relation to an item by id.
+   *
+   * @param {any} id user id
+   * @param {any} fk Foreign key for followers
+   * @param {any} meta (optional).
+   * 
+   */
+  unlinkFollowers: class implements Action {
+    public readonly type = UserActionTypes.UNLINK_FOLLOWERS;
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, fk};
+    }
+  },
+  /**
+   * unlinkFollowersSuccess Action.
+   * 
+   * @param {any} id 
+   * This method returns no data.
+   * @param {any} meta (optional).
+   * 
+   */
+  unlinkFollowersSuccess: class implements Action {
+    public readonly type = UserActionTypes.UNLINK_FOLLOWERS_SUCCESS;
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
+  },
+  /**
+   * unlinkFollowersFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  unlinkFollowersFail: class implements Action {
+    public readonly type = UserActionTypes.UNLINK_FOLLOWERS_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * findByIdFollowing Action.
+   * Find a related item by id for following.
+   *
+   * @param {any} id user id
+   * @param {any} fk Foreign key for following
+   * @param {any} meta (optional).
+   * 
+   */
+  findByIdFollowing: class implements Action {
+    public readonly type = UserActionTypes.FIND_BY_ID_FOLLOWING;
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, fk};
+    }
+  },
+  /**
+   * findByIdFollowingSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  findByIdFollowingSuccess: class implements Action {
+    public readonly type = UserActionTypes.FIND_BY_ID_FOLLOWING_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * findByIdFollowingFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  findByIdFollowingFail: class implements Action {
+    public readonly type = UserActionTypes.FIND_BY_ID_FOLLOWING_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * linkFollowing Action.
+   * Add a related item by id for following.
+   *
+   * @param {any} id user id
+   * @param {any} fk Foreign key for following
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   * @param {any} meta (optional).
+   * 
+   */
+  linkFollowing: class implements Action {
+    public readonly type = UserActionTypes.LINK_FOLLOWING;
+      public payload: {id: any, fk: any, data: any};
+
+    constructor(id: any, fk: any, data: any = {}, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, fk, data};
+    }
+  },
+  /**
+   * linkFollowingSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  linkFollowingSuccess: class implements Action {
+    public readonly type = UserActionTypes.LINK_FOLLOWING_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * linkFollowingFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  linkFollowingFail: class implements Action {
+    public readonly type = UserActionTypes.LINK_FOLLOWING_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * unlinkFollowing Action.
+   * Remove the following relation to an item by id.
+   *
+   * @param {any} id user id
+   * @param {any} fk Foreign key for following
+   * @param {any} meta (optional).
+   * 
+   */
+  unlinkFollowing: class implements Action {
+    public readonly type = UserActionTypes.UNLINK_FOLLOWING;
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, fk};
+    }
+  },
+  /**
+   * unlinkFollowingSuccess Action.
+   * 
+   * @param {any} id 
+   * This method returns no data.
+   * @param {any} meta (optional).
+   * 
+   */
+  unlinkFollowingSuccess: class implements Action {
+    public readonly type = UserActionTypes.UNLINK_FOLLOWING_SUCCESS;
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
+  },
+  /**
+   * unlinkFollowingFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  unlinkFollowingFail: class implements Action {
+    public readonly type = UserActionTypes.UNLINK_FOLLOWING_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * findByIdPosts Action.
+   * Find a related item by id for posts.
+   *
+   * @param {any} id user id
+   * @param {any} fk Foreign key for posts
+   * @param {any} meta (optional).
+   * 
+   */
+  findByIdPosts: class implements Action {
+    public readonly type = UserActionTypes.FIND_BY_ID_POSTS;
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, fk};
+    }
+  },
+  /**
+   * findByIdPostsSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  findByIdPostsSuccess: class implements Action {
+    public readonly type = UserActionTypes.FIND_BY_ID_POSTS_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * findByIdPostsFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  findByIdPostsFail: class implements Action {
+    public readonly type = UserActionTypes.FIND_BY_ID_POSTS_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * destroyByIdPosts Action.
+   * Delete a related item by id for posts.
+   *
+   * @param {any} id user id
+   * @param {any} fk Foreign key for posts
+   * @param {any} meta (optional).
+   * 
+   */
+  destroyByIdPosts: class implements Action {
+    public readonly type = UserActionTypes.DESTROY_BY_ID_POSTS;
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, fk};
+    }
+  },
+  /**
+   * destroyByIdPostsSuccess Action.
+   * 
+   * @param {any} id 
+   * This method returns no data.
+   * @param {any} meta (optional).
+   * 
+   */
+  destroyByIdPostsSuccess: class implements Action {
+    public readonly type = UserActionTypes.DESTROY_BY_ID_POSTS_SUCCESS;
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
+  },
+  /**
+   * destroyByIdPostsFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  destroyByIdPostsFail: class implements Action {
+    public readonly type = UserActionTypes.DESTROY_BY_ID_POSTS_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * updateByIdPosts Action.
+   * Update a related item by id for posts.
+   *
+   * @param {any} id user id
+   * @param {any} fk Foreign key for posts
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   * @param {any} meta (optional).
+   * 
+   */
+  updateByIdPosts: class implements Action {
+    public readonly type = UserActionTypes.UPDATE_BY_ID_POSTS;
+      public payload: {id: any, fk: any, data: any};
+
+    constructor(id: any, fk: any, data: any = {}, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, fk, data};
+    }
+  },
+  /**
+   * updateByIdPostsSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  updateByIdPostsSuccess: class implements Action {
+    public readonly type = UserActionTypes.UPDATE_BY_ID_POSTS_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * updateByIdPostsFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  updateByIdPostsFail: class implements Action {
+    public readonly type = UserActionTypes.UPDATE_BY_ID_POSTS_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * findByIdShares Action.
+   * Find a related item by id for shares.
+   *
+   * @param {any} id user id
+   * @param {any} fk Foreign key for shares
+   * @param {any} meta (optional).
+   * 
+   */
+  findByIdShares: class implements Action {
+    public readonly type = UserActionTypes.FIND_BY_ID_SHARES;
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, fk};
+    }
+  },
+  /**
+   * findByIdSharesSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  findByIdSharesSuccess: class implements Action {
+    public readonly type = UserActionTypes.FIND_BY_ID_SHARES_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * findByIdSharesFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  findByIdSharesFail: class implements Action {
+    public readonly type = UserActionTypes.FIND_BY_ID_SHARES_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * linkShares Action.
+   * Add a related item by id for shares.
+   *
+   * @param {any} id user id
+   * @param {any} fk Foreign key for shares
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   * @param {any} meta (optional).
+   * 
+   */
+  linkShares: class implements Action {
+    public readonly type = UserActionTypes.LINK_SHARES;
+      public payload: {id: any, fk: any, data: any};
+
+    constructor(id: any, fk: any, data: any = {}, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, fk, data};
+    }
+  },
+  /**
+   * linkSharesSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  linkSharesSuccess: class implements Action {
+    public readonly type = UserActionTypes.LINK_SHARES_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * linkSharesFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  linkSharesFail: class implements Action {
+    public readonly type = UserActionTypes.LINK_SHARES_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * unlinkShares Action.
+   * Remove the shares relation to an item by id.
+   *
+   * @param {any} id user id
+   * @param {any} fk Foreign key for shares
+   * @param {any} meta (optional).
+   * 
+   */
+  unlinkShares: class implements Action {
+    public readonly type = UserActionTypes.UNLINK_SHARES;
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, fk};
+    }
+  },
+  /**
+   * unlinkSharesSuccess Action.
+   * 
+   * @param {any} id 
+   * This method returns no data.
+   * @param {any} meta (optional).
+   * 
+   */
+  unlinkSharesSuccess: class implements Action {
+    public readonly type = UserActionTypes.UNLINK_SHARES_SUCCESS;
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
+  },
+  /**
+   * unlinkSharesFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  unlinkSharesFail: class implements Action {
+    public readonly type = UserActionTypes.UNLINK_SHARES_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * findByIdShoppingCard Action.
+   * Find a related item by id for shoppingCard.
+   *
+   * @param {any} id user id
+   * @param {any} fk Foreign key for shoppingCard
+   * @param {any} meta (optional).
+   * 
+   */
+  findByIdShoppingCard: class implements Action {
+    public readonly type = UserActionTypes.FIND_BY_ID_SHOPPINGCARD;
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, fk};
+    }
+  },
+  /**
+   * findByIdShoppingCardSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  findByIdShoppingCardSuccess: class implements Action {
+    public readonly type = UserActionTypes.FIND_BY_ID_SHOPPINGCARD_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * findByIdShoppingCardFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  findByIdShoppingCardFail: class implements Action {
+    public readonly type = UserActionTypes.FIND_BY_ID_SHOPPINGCARD_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * destroyByIdShoppingCard Action.
+   * Delete a related item by id for shoppingCard.
+   *
+   * @param {any} id user id
+   * @param {any} fk Foreign key for shoppingCard
+   * @param {any} meta (optional).
+   * 
+   */
+  destroyByIdShoppingCard: class implements Action {
+    public readonly type = UserActionTypes.DESTROY_BY_ID_SHOPPINGCARD;
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, fk};
+    }
+  },
+  /**
+   * destroyByIdShoppingCardSuccess Action.
+   * 
+   * @param {any} id 
+   * This method returns no data.
+   * @param {any} meta (optional).
+   * 
+   */
+  destroyByIdShoppingCardSuccess: class implements Action {
+    public readonly type = UserActionTypes.DESTROY_BY_ID_SHOPPINGCARD_SUCCESS;
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
+  },
+  /**
+   * destroyByIdShoppingCardFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  destroyByIdShoppingCardFail: class implements Action {
+    public readonly type = UserActionTypes.DESTROY_BY_ID_SHOPPINGCARD_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * updateByIdShoppingCard Action.
+   * Update a related item by id for shoppingCard.
+   *
+   * @param {any} id user id
+   * @param {any} fk Foreign key for shoppingCard
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   * @param {any} meta (optional).
+   * 
+   */
+  updateByIdShoppingCard: class implements Action {
+    public readonly type = UserActionTypes.UPDATE_BY_ID_SHOPPINGCARD;
+      public payload: {id: any, fk: any, data: any};
+
+    constructor(id: any, fk: any, data: any = {}, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, fk, data};
+    }
+  },
+  /**
+   * updateByIdShoppingCardSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  updateByIdShoppingCardSuccess: class implements Action {
+    public readonly type = UserActionTypes.UPDATE_BY_ID_SHOPPINGCARD_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * updateByIdShoppingCardFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  updateByIdShoppingCardFail: class implements Action {
+    public readonly type = UserActionTypes.UPDATE_BY_ID_SHOPPINGCARD_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * linkShoppingCard Action.
+   * Add a related item by id for shoppingCard.
+   *
+   * @param {any} id user id
+   * @param {any} fk Foreign key for shoppingCard
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   * @param {any} meta (optional).
+   * 
+   */
+  linkShoppingCard: class implements Action {
+    public readonly type = UserActionTypes.LINK_SHOPPINGCARD;
+      public payload: {id: any, fk: any, data: any};
+
+    constructor(id: any, fk: any, data: any = {}, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, fk, data};
+    }
+  },
+  /**
+   * linkShoppingCardSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  linkShoppingCardSuccess: class implements Action {
+    public readonly type = UserActionTypes.LINK_SHOPPINGCARD_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * linkShoppingCardFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  linkShoppingCardFail: class implements Action {
+    public readonly type = UserActionTypes.LINK_SHOPPINGCARD_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * unlinkShoppingCard Action.
+   * Remove the shoppingCard relation to an item by id.
+   *
+   * @param {any} id user id
+   * @param {any} fk Foreign key for shoppingCard
+   * @param {any} meta (optional).
+   * 
+   */
+  unlinkShoppingCard: class implements Action {
+    public readonly type = UserActionTypes.UNLINK_SHOPPINGCARD;
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, fk};
+    }
+  },
+  /**
+   * unlinkShoppingCardSuccess Action.
+   * 
+   * @param {any} id 
+   * This method returns no data.
+   * @param {any} meta (optional).
+   * 
+   */
+  unlinkShoppingCardSuccess: class implements Action {
+    public readonly type = UserActionTypes.UNLINK_SHOPPINGCARD_SUCCESS;
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
+  },
+  /**
+   * unlinkShoppingCardFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  unlinkShoppingCardFail: class implements Action {
+    public readonly type = UserActionTypes.UNLINK_SHOPPINGCARD_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * findByIdWhishList Action.
+   * Find a related item by id for whishList.
+   *
+   * @param {any} id user id
+   * @param {any} fk Foreign key for whishList
+   * @param {any} meta (optional).
+   * 
+   */
+  findByIdWhishList: class implements Action {
+    public readonly type = UserActionTypes.FIND_BY_ID_WHISHLIST;
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, fk};
+    }
+  },
+  /**
+   * findByIdWhishListSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  findByIdWhishListSuccess: class implements Action {
+    public readonly type = UserActionTypes.FIND_BY_ID_WHISHLIST_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * findByIdWhishListFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  findByIdWhishListFail: class implements Action {
+    public readonly type = UserActionTypes.FIND_BY_ID_WHISHLIST_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * destroyByIdWhishList Action.
+   * Delete a related item by id for whishList.
+   *
+   * @param {any} id user id
+   * @param {any} fk Foreign key for whishList
+   * @param {any} meta (optional).
+   * 
+   */
+  destroyByIdWhishList: class implements Action {
+    public readonly type = UserActionTypes.DESTROY_BY_ID_WHISHLIST;
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, fk};
+    }
+  },
+  /**
+   * destroyByIdWhishListSuccess Action.
+   * 
+   * @param {any} id 
+   * This method returns no data.
+   * @param {any} meta (optional).
+   * 
+   */
+  destroyByIdWhishListSuccess: class implements Action {
+    public readonly type = UserActionTypes.DESTROY_BY_ID_WHISHLIST_SUCCESS;
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
+  },
+  /**
+   * destroyByIdWhishListFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  destroyByIdWhishListFail: class implements Action {
+    public readonly type = UserActionTypes.DESTROY_BY_ID_WHISHLIST_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * updateByIdWhishList Action.
+   * Update a related item by id for whishList.
+   *
+   * @param {any} id user id
+   * @param {any} fk Foreign key for whishList
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   * @param {any} meta (optional).
+   * 
+   */
+  updateByIdWhishList: class implements Action {
+    public readonly type = UserActionTypes.UPDATE_BY_ID_WHISHLIST;
+      public payload: {id: any, fk: any, data: any};
+
+    constructor(id: any, fk: any, data: any = {}, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, fk, data};
+    }
+  },
+  /**
+   * updateByIdWhishListSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  updateByIdWhishListSuccess: class implements Action {
+    public readonly type = UserActionTypes.UPDATE_BY_ID_WHISHLIST_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * updateByIdWhishListFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  updateByIdWhishListFail: class implements Action {
+    public readonly type = UserActionTypes.UPDATE_BY_ID_WHISHLIST_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * linkWhishList Action.
+   * Add a related item by id for whishList.
+   *
+   * @param {any} id user id
+   * @param {any} fk Foreign key for whishList
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   * @param {any} meta (optional).
+   * 
+   */
+  linkWhishList: class implements Action {
+    public readonly type = UserActionTypes.LINK_WHISHLIST;
+      public payload: {id: any, fk: any, data: any};
+
+    constructor(id: any, fk: any, data: any = {}, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, fk, data};
+    }
+  },
+  /**
+   * linkWhishListSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  linkWhishListSuccess: class implements Action {
+    public readonly type = UserActionTypes.LINK_WHISHLIST_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * linkWhishListFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  linkWhishListFail: class implements Action {
+    public readonly type = UserActionTypes.LINK_WHISHLIST_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * unlinkWhishList Action.
+   * Remove the whishList relation to an item by id.
+   *
+   * @param {any} id user id
+   * @param {any} fk Foreign key for whishList
+   * @param {any} meta (optional).
+   * 
+   */
+  unlinkWhishList: class implements Action {
+    public readonly type = UserActionTypes.UNLINK_WHISHLIST;
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, fk};
+    }
+  },
+  /**
+   * unlinkWhishListSuccess Action.
+   * 
+   * @param {any} id 
+   * This method returns no data.
+   * @param {any} meta (optional).
+   * 
+   */
+  unlinkWhishListSuccess: class implements Action {
+    public readonly type = UserActionTypes.UNLINK_WHISHLIST_SUCCESS;
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
+  },
+  /**
+   * unlinkWhishListFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  unlinkWhishListFail: class implements Action {
+    public readonly type = UserActionTypes.UNLINK_WHISHLIST_FAIL;
 
     constructor(public payload: any, public meta?: any) { }
   },
@@ -4291,16 +5306,16 @@ Object.assign(BaseLoopbackActionsFactory<User>(UserActionTypes), {
   },
 
   /**
-   * getApps Action.
-   * Queries apps of user.
+   * getFollowers Action.
+   * Queries followers of user.
    *
    * @param {any} id user id
    * @param {object} filter 
    * @param {any} meta (optional).
    * 
    */
-  getApps: class implements Action {
-    public readonly type = UserActionTypes.GET_APPS;
+  getFollowers: class implements Action {
+    public readonly type = UserActionTypes.GET_FOLLOWERS;
       public payload: {id: any, filter: LoopBackFilter};
 
     constructor(id: any, filter: LoopBackFilter = {}, customHeaders?: Function, public meta?: any) {
@@ -4308,15 +5323,15 @@ Object.assign(BaseLoopbackActionsFactory<User>(UserActionTypes), {
     }
   },
   /**
-   * getAppsSuccess Action.
+   * getFollowersSuccess Action.
    * 
    * @param {any} id 
    * @param {object[]} data 
    * @param {any} meta (optional).
    * 
    */
-  getAppsSuccess: class implements Action {
-    public readonly type = UserActionTypes.GET_APPS_SUCCESS;
+  getFollowersSuccess: class implements Action {
+    public readonly type = UserActionTypes.GET_FOLLOWERS_SUCCESS;
       public payload: {id: any, data: any};
 
     constructor(id: any, data: any, public meta?: any) {
@@ -4324,21 +5339,113 @@ Object.assign(BaseLoopbackActionsFactory<User>(UserActionTypes), {
     }
   },
   /**
-   * getAppsFail Action.
+   * getFollowersFail Action.
    *
    * @param {any} payload
    * @param {any} meta (optional).
    * 
    */
-  getAppsFail: class implements Action {
-    public readonly type = UserActionTypes.GET_APPS_FAIL;
+  getFollowersFail: class implements Action {
+    public readonly type = UserActionTypes.GET_FOLLOWERS_FAIL;
 
     constructor(public payload: any, public meta?: any) { }
   },
 
   /**
-   * createApps Action.
-   * Creates a new instance in apps of this model.
+   * getFollowing Action.
+   * Queries following of user.
+   *
+   * @param {any} id user id
+   * @param {object} filter 
+   * @param {any} meta (optional).
+   * 
+   */
+  getFollowing: class implements Action {
+    public readonly type = UserActionTypes.GET_FOLLOWING;
+      public payload: {id: any, filter: LoopBackFilter};
+
+    constructor(id: any, filter: LoopBackFilter = {}, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, filter};
+    }
+  },
+  /**
+   * getFollowingSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object[]} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  getFollowingSuccess: class implements Action {
+    public readonly type = UserActionTypes.GET_FOLLOWING_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * getFollowingFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  getFollowingFail: class implements Action {
+    public readonly type = UserActionTypes.GET_FOLLOWING_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * getPosts Action.
+   * Queries posts of user.
+   *
+   * @param {any} id user id
+   * @param {object} filter 
+   * @param {any} meta (optional).
+   * 
+   */
+  getPosts: class implements Action {
+    public readonly type = UserActionTypes.GET_POSTS;
+      public payload: {id: any, filter: LoopBackFilter};
+
+    constructor(id: any, filter: LoopBackFilter = {}, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, filter};
+    }
+  },
+  /**
+   * getPostsSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object[]} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  getPostsSuccess: class implements Action {
+    public readonly type = UserActionTypes.GET_POSTS_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * getPostsFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  getPostsFail: class implements Action {
+    public readonly type = UserActionTypes.GET_POSTS_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * createPosts Action.
+   * Creates a new instance in posts of this model.
    *
    * @param {any} id user id
    * @param {object} data Request data.
@@ -4347,8 +5454,8 @@ Object.assign(BaseLoopbackActionsFactory<User>(UserActionTypes), {
    * @param {any} meta (optional).
    * 
    */
-  createApps: class implements Action {
-    public readonly type = UserActionTypes.CREATE_APPS;
+  createPosts: class implements Action {
+    public readonly type = UserActionTypes.CREATE_POSTS;
       public payload: {id: any, data: any};
 
     constructor(id: any, data: any = {}, customHeaders?: Function, public meta?: any) {
@@ -4356,15 +5463,15 @@ Object.assign(BaseLoopbackActionsFactory<User>(UserActionTypes), {
     }
   },
   /**
-   * createAppsSuccess Action.
+   * createPostsSuccess Action.
    * 
    * @param {any} id 
    * @param {object} data 
    * @param {any} meta (optional).
    * 
    */
-  createAppsSuccess: class implements Action {
-    public readonly type = UserActionTypes.CREATE_APPS_SUCCESS;
+  createPostsSuccess: class implements Action {
+    public readonly type = UserActionTypes.CREATE_POSTS_SUCCESS;
       public payload: {id: any, data: any};
 
     constructor(id: any, data: any, public meta?: any) {
@@ -4372,53 +5479,365 @@ Object.assign(BaseLoopbackActionsFactory<User>(UserActionTypes), {
     }
   },
   /**
-   * createAppsFail Action.
+   * createPostsFail Action.
    *
    * @param {any} payload
    * @param {any} meta (optional).
    * 
    */
-  createAppsFail: class implements Action {
-    public readonly type = UserActionTypes.CREATE_APPS_FAIL;
+  createPostsFail: class implements Action {
+    public readonly type = UserActionTypes.CREATE_POSTS_FAIL;
 
     constructor(public payload: any, public meta?: any) { }
   },
 
   /**
-   * deleteApps Action.
-   * Deletes all apps of this model.
+   * deletePosts Action.
+   * Deletes all posts of this model.
    *
    * @param {any} id user id
    * @param {any} meta (optional).
    * 
    */
-  deleteApps: class implements Action {
-    public readonly type = UserActionTypes.DELETE_APPS;
+  deletePosts: class implements Action {
+    public readonly type = UserActionTypes.DELETE_POSTS;
       
     constructor(public payload: any, public meta?: any) {}
   },
   /**
-   * deleteAppsSuccess Action.
+   * deletePostsSuccess Action.
    * 
    * @param {any} id 
    * This method returns no data.
    * @param {any} meta (optional).
    * 
    */
-  deleteAppsSuccess: class implements Action {
-    public readonly type = UserActionTypes.DELETE_APPS_SUCCESS;
+  deletePostsSuccess: class implements Action {
+    public readonly type = UserActionTypes.DELETE_POSTS_SUCCESS;
   
     constructor(public payload: any, public meta?: any) {}
   },
   /**
-   * deleteAppsFail Action.
+   * deletePostsFail Action.
    *
    * @param {any} payload
    * @param {any} meta (optional).
    * 
    */
-  deleteAppsFail: class implements Action {
-    public readonly type = UserActionTypes.DELETE_APPS_FAIL;
+  deletePostsFail: class implements Action {
+    public readonly type = UserActionTypes.DELETE_POSTS_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * getShares Action.
+   * Queries shares of user.
+   *
+   * @param {any} id user id
+   * @param {object} filter 
+   * @param {any} meta (optional).
+   * 
+   */
+  getShares: class implements Action {
+    public readonly type = UserActionTypes.GET_SHARES;
+      public payload: {id: any, filter: LoopBackFilter};
+
+    constructor(id: any, filter: LoopBackFilter = {}, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, filter};
+    }
+  },
+  /**
+   * getSharesSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object[]} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  getSharesSuccess: class implements Action {
+    public readonly type = UserActionTypes.GET_SHARES_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * getSharesFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  getSharesFail: class implements Action {
+    public readonly type = UserActionTypes.GET_SHARES_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * getShoppingCard Action.
+   * Queries shoppingCard of user.
+   *
+   * @param {any} id user id
+   * @param {object} filter 
+   * @param {any} meta (optional).
+   * 
+   */
+  getShoppingCard: class implements Action {
+    public readonly type = UserActionTypes.GET_SHOPPINGCARD;
+      public payload: {id: any, filter: LoopBackFilter};
+
+    constructor(id: any, filter: LoopBackFilter = {}, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, filter};
+    }
+  },
+  /**
+   * getShoppingCardSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object[]} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  getShoppingCardSuccess: class implements Action {
+    public readonly type = UserActionTypes.GET_SHOPPINGCARD_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * getShoppingCardFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  getShoppingCardFail: class implements Action {
+    public readonly type = UserActionTypes.GET_SHOPPINGCARD_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * createShoppingCard Action.
+   * Creates a new instance in shoppingCard of this model.
+   *
+   * @param {any} id user id
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   * @param {any} meta (optional).
+   * 
+   */
+  createShoppingCard: class implements Action {
+    public readonly type = UserActionTypes.CREATE_SHOPPINGCARD;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any = {}, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * createShoppingCardSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  createShoppingCardSuccess: class implements Action {
+    public readonly type = UserActionTypes.CREATE_SHOPPINGCARD_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * createShoppingCardFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  createShoppingCardFail: class implements Action {
+    public readonly type = UserActionTypes.CREATE_SHOPPINGCARD_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * deleteShoppingCard Action.
+   * Deletes all shoppingCard of this model.
+   *
+   * @param {any} id user id
+   * @param {any} meta (optional).
+   * 
+   */
+  deleteShoppingCard: class implements Action {
+    public readonly type = UserActionTypes.DELETE_SHOPPINGCARD;
+      
+    constructor(public payload: any, public meta?: any) {}
+  },
+  /**
+   * deleteShoppingCardSuccess Action.
+   * 
+   * @param {any} id 
+   * This method returns no data.
+   * @param {any} meta (optional).
+   * 
+   */
+  deleteShoppingCardSuccess: class implements Action {
+    public readonly type = UserActionTypes.DELETE_SHOPPINGCARD_SUCCESS;
+  
+    constructor(public payload: any, public meta?: any) {}
+  },
+  /**
+   * deleteShoppingCardFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  deleteShoppingCardFail: class implements Action {
+    public readonly type = UserActionTypes.DELETE_SHOPPINGCARD_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * getWhishList Action.
+   * Queries whishList of user.
+   *
+   * @param {any} id user id
+   * @param {object} filter 
+   * @param {any} meta (optional).
+   * 
+   */
+  getWhishList: class implements Action {
+    public readonly type = UserActionTypes.GET_WHISHLIST;
+      public payload: {id: any, filter: LoopBackFilter};
+
+    constructor(id: any, filter: LoopBackFilter = {}, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, filter};
+    }
+  },
+  /**
+   * getWhishListSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object[]} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  getWhishListSuccess: class implements Action {
+    public readonly type = UserActionTypes.GET_WHISHLIST_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * getWhishListFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  getWhishListFail: class implements Action {
+    public readonly type = UserActionTypes.GET_WHISHLIST_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * createWhishList Action.
+   * Creates a new instance in whishList of this model.
+   *
+   * @param {any} id user id
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   * @param {any} meta (optional).
+   * 
+   */
+  createWhishList: class implements Action {
+    public readonly type = UserActionTypes.CREATE_WHISHLIST;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any = {}, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * createWhishListSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  createWhishListSuccess: class implements Action {
+    public readonly type = UserActionTypes.CREATE_WHISHLIST_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * createWhishListFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  createWhishListFail: class implements Action {
+    public readonly type = UserActionTypes.CREATE_WHISHLIST_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * deleteWhishList Action.
+   * Deletes all whishList of this model.
+   *
+   * @param {any} id user id
+   * @param {any} meta (optional).
+   * 
+   */
+  deleteWhishList: class implements Action {
+    public readonly type = UserActionTypes.DELETE_WHISHLIST;
+      
+    constructor(public payload: any, public meta?: any) {}
+  },
+  /**
+   * deleteWhishListSuccess Action.
+   * 
+   * @param {any} id 
+   * This method returns no data.
+   * @param {any} meta (optional).
+   * 
+   */
+  deleteWhishListSuccess: class implements Action {
+    public readonly type = UserActionTypes.DELETE_WHISHLIST_SUCCESS;
+  
+    constructor(public payload: any, public meta?: any) {}
+  },
+  /**
+   * deleteWhishListFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  deleteWhishListFail: class implements Action {
+    public readonly type = UserActionTypes.DELETE_WHISHLIST_FAIL;
 
     constructor(public payload: any, public meta?: any) { }
   },
@@ -4979,6 +6398,53 @@ Object.assign(BaseLoopbackActionsFactory<User>(UserActionTypes), {
   },
 
   /**
+   * activate Action.
+   * Activate a user registration with invitation token.
+   *
+   * @param {string} uid 
+   * @param {string} token 
+   * @param {string} redirect 
+   * @param {any} meta (optional).
+   * 
+   */
+  activate: class implements Action {
+    public readonly type = UserActionTypes.ACTIVATE;
+      public payload: {uid: any, token: any, redirect: any};
+
+    constructor(uid: any, token: any, redirect: any = {}, customHeaders?: Function, public meta?: any) {
+      this.payload = {uid, token, redirect};
+    }
+  },
+  /**
+   * activateSuccess Action.
+   * 
+   * @param {any} id 
+   * This method returns no data.
+   * @param {any} meta (optional).
+   * 
+   */
+  activateSuccess: class implements Action {
+    public readonly type = UserActionTypes.ACTIVATE_SUCCESS;
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
+  },
+  /**
+   * activateFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  activateFail: class implements Action {
+    public readonly type = UserActionTypes.ACTIVATE_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
    * s3PUTSignedUrl Action.
    * Get a S3 Signed URL for direct file uploads.
    *
@@ -5072,48 +6538,49 @@ Object.assign(BaseLoopbackActionsFactory<User>(UserActionTypes), {
   },
 
   /**
-   * activate Action.
-   * Activate a user registration with invitation token.
+   * createManyStripeCustomer Action.
+   * Creates a new instance in stripeCustomer of this model.
    *
-   * @param {string} uid 
-   * @param {string} token 
-   * @param {string} redirect 
+   * @param {any} id user id
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
    * @param {any} meta (optional).
    * 
    */
-  activate: class implements Action {
-    public readonly type = UserActionTypes.ACTIVATE;
-      public payload: {uid: any, token: any, redirect: any};
+  createManyStripeCustomer: class implements Action {
+    public readonly type = UserActionTypes.CREATE_MANY_STRIPECUSTOMER;
+      public payload: {id: any, data: any[]};
 
-    constructor(uid: any, token: any, redirect: any = {}, customHeaders?: Function, public meta?: any) {
-      this.payload = {uid, token, redirect};
+    constructor(id: any, data: any[] = [], customHeaders?: Function, public meta?: any) {
+      this.payload = {id, data};
     }
   },
   /**
-   * activateSuccess Action.
+   * createManyStripeCustomerSuccess Action.
    * 
    * @param {any} id 
-   * This method returns no data.
+   * @param {object[]} data 
    * @param {any} meta (optional).
    * 
    */
-  activateSuccess: class implements Action {
-    public readonly type = UserActionTypes.ACTIVATE_SUCCESS;
-      public payload: {id: any, fk: any};
+  createManyStripeCustomerSuccess: class implements Action {
+    public readonly type = UserActionTypes.CREATE_MANY_STRIPECUSTOMER_SUCCESS;
+      public payload: {id: any, data: any};
 
-    constructor(id: any, fk: any, public meta?: any) {
-      this.payload = {id, fk};
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
     }
   },
   /**
-   * activateFail Action.
+   * createManyStripeCustomerFail Action.
    *
    * @param {any} payload
    * @param {any} meta (optional).
    * 
    */
-  activateFail: class implements Action {
-    public readonly type = UserActionTypes.ACTIVATE_FAIL;
+  createManyStripeCustomerFail: class implements Action {
+    public readonly type = UserActionTypes.CREATE_MANY_STRIPECUSTOMER_FAIL;
 
     constructor(public payload: any, public meta?: any) { }
   },
@@ -5162,54 +6629,6 @@ Object.assign(BaseLoopbackActionsFactory<User>(UserActionTypes), {
    */
   createManyS3PhotoFail: class implements Action {
     public readonly type = UserActionTypes.CREATE_MANY_S3PHOTO_FAIL;
-
-    constructor(public payload: any, public meta?: any) { }
-  },
-
-  /**
-   * createManyStripeCustomer Action.
-   * Creates a new instance in stripeCustomer of this model.
-   *
-   * @param {any} id user id
-   * @param {object} data Request data.
-   *
-   * This method expects a subset of model properties as request parameters.
-   * @param {any} meta (optional).
-   * 
-   */
-  createManyStripeCustomer: class implements Action {
-    public readonly type = UserActionTypes.CREATE_MANY_STRIPECUSTOMER;
-      public payload: {id: any, data: any[]};
-
-    constructor(id: any, data: any[] = [], customHeaders?: Function, public meta?: any) {
-      this.payload = {id, data};
-    }
-  },
-  /**
-   * createManyStripeCustomerSuccess Action.
-   * 
-   * @param {any} id 
-   * @param {object[]} data 
-   * @param {any} meta (optional).
-   * 
-   */
-  createManyStripeCustomerSuccess: class implements Action {
-    public readonly type = UserActionTypes.CREATE_MANY_STRIPECUSTOMER_SUCCESS;
-      public payload: {id: any, data: any};
-
-    constructor(id: any, data: any, public meta?: any) {
-      this.payload = {id, data};
-    }
-  },
-  /**
-   * createManyStripeCustomerFail Action.
-   *
-   * @param {any} payload
-   * @param {any} meta (optional).
-   * 
-   */
-  createManyStripeCustomerFail: class implements Action {
-    public readonly type = UserActionTypes.CREATE_MANY_STRIPECUSTOMER_FAIL;
 
     constructor(public payload: any, public meta?: any) { }
   },
@@ -5743,8 +7162,8 @@ Object.assign(BaseLoopbackActionsFactory<User>(UserActionTypes), {
   },
 
   /**
-   * createManyApps Action.
-   * Creates a new instance in apps of this model.
+   * createManyPosts Action.
+   * Creates a new instance in posts of this model.
    *
    * @param {any} id user id
    * @param {object} data Request data.
@@ -5753,8 +7172,8 @@ Object.assign(BaseLoopbackActionsFactory<User>(UserActionTypes), {
    * @param {any} meta (optional).
    * 
    */
-  createManyApps: class implements Action {
-    public readonly type = UserActionTypes.CREATE_MANY_APPS;
+  createManyPosts: class implements Action {
+    public readonly type = UserActionTypes.CREATE_MANY_POSTS;
       public payload: {id: any, data: any[]};
 
     constructor(id: any, data: any[] = [], customHeaders?: Function, public meta?: any) {
@@ -5762,15 +7181,15 @@ Object.assign(BaseLoopbackActionsFactory<User>(UserActionTypes), {
     }
   },
   /**
-   * createManyAppsSuccess Action.
+   * createManyPostsSuccess Action.
    * 
    * @param {any} id 
    * @param {object[]} data 
    * @param {any} meta (optional).
    * 
    */
-  createManyAppsSuccess: class implements Action {
-    public readonly type = UserActionTypes.CREATE_MANY_APPS_SUCCESS;
+  createManyPostsSuccess: class implements Action {
+    public readonly type = UserActionTypes.CREATE_MANY_POSTS_SUCCESS;
       public payload: {id: any, data: any};
 
     constructor(id: any, data: any, public meta?: any) {
@@ -5778,14 +7197,110 @@ Object.assign(BaseLoopbackActionsFactory<User>(UserActionTypes), {
     }
   },
   /**
-   * createManyAppsFail Action.
+   * createManyPostsFail Action.
    *
    * @param {any} payload
    * @param {any} meta (optional).
    * 
    */
-  createManyAppsFail: class implements Action {
-    public readonly type = UserActionTypes.CREATE_MANY_APPS_FAIL;
+  createManyPostsFail: class implements Action {
+    public readonly type = UserActionTypes.CREATE_MANY_POSTS_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * createManyShoppingCard Action.
+   * Creates a new instance in shoppingCard of this model.
+   *
+   * @param {any} id user id
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   * @param {any} meta (optional).
+   * 
+   */
+  createManyShoppingCard: class implements Action {
+    public readonly type = UserActionTypes.CREATE_MANY_SHOPPINGCARD;
+      public payload: {id: any, data: any[]};
+
+    constructor(id: any, data: any[] = [], customHeaders?: Function, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * createManyShoppingCardSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object[]} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  createManyShoppingCardSuccess: class implements Action {
+    public readonly type = UserActionTypes.CREATE_MANY_SHOPPINGCARD_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * createManyShoppingCardFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  createManyShoppingCardFail: class implements Action {
+    public readonly type = UserActionTypes.CREATE_MANY_SHOPPINGCARD_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * createManyWhishList Action.
+   * Creates a new instance in whishList of this model.
+   *
+   * @param {any} id user id
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   * @param {any} meta (optional).
+   * 
+   */
+  createManyWhishList: class implements Action {
+    public readonly type = UserActionTypes.CREATE_MANY_WHISHLIST;
+      public payload: {id: any, data: any[]};
+
+    constructor(id: any, data: any[] = [], customHeaders?: Function, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * createManyWhishListSuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object[]} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  createManyWhishListSuccess: class implements Action {
+    public readonly type = UserActionTypes.CREATE_MANY_WHISHLIST_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * createManyWhishListFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  createManyWhishListFail: class implements Action {
+    public readonly type = UserActionTypes.CREATE_MANY_WHISHLIST_FAIL;
 
     constructor(public payload: any, public meta?: any) { }
   },

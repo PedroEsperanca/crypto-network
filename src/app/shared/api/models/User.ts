@@ -5,7 +5,8 @@ import {
   StripeCharge,
   Organization,
   Contact,
-  App,
+  Post,
+  Product,
   OAuthApp
 } from '../index';
 
@@ -22,12 +23,11 @@ export interface UserInterface {
   "phoneNumbers"?: Array<any>;
   "createdAt"?: Date;
   "updatedAt"?: Date;
-  "photo"?: any;
   "slug"?: string;
+  "photo"?: any;
   "password"?: string;
   emails?: any[];
   phones?: any[];
-  s3Photo?: any[];
   stripeCustomer?: StripeCustomer;
   stripeSources?: StripeSource[];
   stripeCharges?: StripeCharge[];
@@ -35,10 +35,16 @@ export interface UserInterface {
   credentials?: any[];
   accessTokens?: any[];
   roles?: any[];
+  s3Photo?: any[];
   organizations?: Organization[];
   contacts?: Contact[];
   invitations?: any[];
-  apps?: App[];
+  followers?: User[];
+  following?: User[];
+  posts?: Post[];
+  shares?: Post[];
+  shoppingCard?: Product[];
+  whishList?: Product[];
   oAuthClientApplications?: OAuthApp[];
 }
 
@@ -54,12 +60,11 @@ export class User implements UserInterface {
   "phoneNumbers": Array<any>;
   "createdAt": Date;
   "updatedAt": Date;
-  "photo": any;
   "slug": string;
+  "photo": any;
   "password": string;
   emails: any[];
   phones: any[];
-  s3Photo: any[];
   stripeCustomer: StripeCustomer;
   stripeSources: StripeSource[];
   stripeCharges: StripeCharge[];
@@ -67,10 +72,16 @@ export class User implements UserInterface {
   credentials: any[];
   accessTokens: any[];
   roles: any[];
+  s3Photo: any[];
   organizations: Organization[];
   contacts: Contact[];
   invitations: any[];
-  apps: App[];
+  followers: User[];
+  following: User[];
+  posts: Post[];
+  shares: Post[];
+  shoppingCard: Product[];
+  whishList: Product[];
   oAuthClientApplications: OAuthApp[];
   constructor(data?: UserInterface) {
     Object.assign(this, data);
@@ -152,13 +163,13 @@ export class User implements UserInterface {
           name: 'updatedAt',
           type: 'Date'
         },
-        "photo": {
-          name: 'photo',
-          type: 'any'
-        },
         "slug": {
           name: 'slug',
           type: 'string'
+        },
+        "photo": {
+          name: 'photo',
+          type: 'any'
         },
         "password": {
           name: 'password',
@@ -180,14 +191,6 @@ export class User implements UserInterface {
           model: '',
           relationType: 'embedsMany',
                   keyFrom: 'phoneNumbers',
-          keyTo: 'id'
-        },
-        s3Photo: {
-          name: 's3Photo',
-          type: 'any[]',
-          model: '',
-          relationType: 'embedsOne',
-                  keyFrom: 'photo',
           keyTo: 'id'
         },
         stripeCustomer: {
@@ -246,6 +249,14 @@ export class User implements UserInterface {
                   keyFrom: 'id',
           keyTo: 'userId'
         },
+        s3Photo: {
+          name: 's3Photo',
+          type: 'any[]',
+          model: '',
+          relationType: 'embedsOne',
+                  keyFrom: 'photo',
+          keyTo: 'id'
+        },
         organizations: {
           name: 'organizations',
           type: 'Organization[]',
@@ -272,12 +283,62 @@ export class User implements UserInterface {
                   keyFrom: 'id',
           keyTo: 'userId'
         },
-        apps: {
-          name: 'apps',
-          type: 'App[]',
-          model: 'App',
+        followers: {
+          name: 'followers',
+          type: 'User[]',
+          model: 'User',
+          relationType: 'hasMany',
+          modelThrough: 'Follow',
+          keyThrough: 'userId',
+          keyFrom: 'id',
+          keyTo: 'followeeId'
+        },
+        following: {
+          name: 'following',
+          type: 'User[]',
+          model: 'User',
+          relationType: 'hasMany',
+          modelThrough: 'Follow',
+          keyThrough: 'followeeId',
+          keyFrom: 'id',
+          keyTo: 'userId'
+        },
+        posts: {
+          name: 'posts',
+          type: 'Post[]',
+          model: 'Post',
           relationType: 'hasMany',
                   keyFrom: 'id',
+          keyTo: 'userId'
+        },
+        shares: {
+          name: 'shares',
+          type: 'Post[]',
+          model: 'Post',
+          relationType: 'hasMany',
+          modelThrough: 'Share',
+          keyThrough: 'userId',
+          keyFrom: 'id',
+          keyTo: 'postId'
+        },
+        shoppingCard: {
+          name: 'shoppingCard',
+          type: 'Product[]',
+          model: 'Product',
+          relationType: 'hasMany',
+          modelThrough: 'userProduct',
+          keyThrough: 'productId',
+          keyFrom: 'id',
+          keyTo: 'userId'
+        },
+        whishList: {
+          name: 'whishList',
+          type: 'Product[]',
+          model: 'Product',
+          relationType: 'hasMany',
+          modelThrough: 'userProduct',
+          keyThrough: 'productId',
+          keyFrom: 'id',
           keyTo: 'userId'
         },
         oAuthClientApplications: {
