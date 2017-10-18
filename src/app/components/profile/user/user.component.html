@@ -5,7 +5,7 @@
         <img alt="" class="avatar" [src]="(profile$ | async)?.photo?.url || (profile$ | async)?.photo || config.logo">
       </a>
 
-      <a *ngIf="!(profile$ | async)?.id === currentUserId" class="vcard-avatar d-block">
+      <a *ngIf="(profile$ | async)?.id !== currentUserId" class="vcard-avatar d-block">
         <img *ngIf="(profile$ | async)?.photo" alt="" class="avatar" [src]="(profile$ | async)?.photo">
         <img *ngIf="!(profile$ | async)?.photo" alt="" class="avatar" [src]="config.logo">
       </a>

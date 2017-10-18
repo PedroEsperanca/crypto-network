@@ -129,5 +129,11 @@ export class ProductsHomeComponent implements OnInit, OnDestroy {
       this.selected$.next(this.selected);
     }
   }
+
+  public onSelect({ selected }) {
+    this.selected.splice(0, this.selected.length);
+    this.selected.push(...selected);
+    this.selected$.next(this.selected);
+  }
 }
 

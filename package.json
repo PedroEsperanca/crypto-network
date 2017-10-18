@@ -16,7 +16,7 @@
     "git:merge:preview": "git fetch upstream && git merge --no-commit upstream/master --allow-unrelated-histories",
     "git:prepare": "git add . && git add -f tools/install.js && git commit -m'setup'",
     "git:setup": "git init && git remote add upstream https://github.com/JonnyBGod/web-seed.git",
-    "github-deploy": "ng build --prod --build-optimizer --environment github --base-href \"/web-seed/\" && angular-cli-ghpages",
+    "github-deploy": "ng build --prod --environment github --base-href \"/web-seed/\" && angular-cli-ghpages",
     "serve:prod": "static dist -a '0.0.0.0' -c false --spa",
     "start:local": "ng serve --environment devLocal"
   },
