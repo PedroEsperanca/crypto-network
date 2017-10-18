@@ -14,7 +14,6 @@ import { MultilingualModule } from 'shared/i18n/multilingual.module';
 import { routing } from './people.routing';
 import { PeopleComponent } from './people.component';
 import { PeopleHomeComponent } from './home/home.component';
-import { PeopleUserComponent } from './user/user.component';
 
 @NgModule({
   imports: [
@@ -32,8 +31,7 @@ import { PeopleUserComponent } from './user/user.component';
   ],
   declarations: [
     PeopleComponent,
-    PeopleHomeComponent,
-    PeopleUserComponent
+    PeopleHomeComponent
   ]
 })
 export class PeopleModule { }

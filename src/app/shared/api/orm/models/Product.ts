@@ -34,7 +34,9 @@ export class OrmProduct extends OrmBase<Product> {
           destroyStream$.complete();
         });
     } else {
-      this.store.dispatch(new this.actions.getOrganization(id, refresh, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.getOrganization(id, refresh, meta));
+      }
 
       return this.store.select<any>(this.model.getModelDefinition().relations.organization.model + 's')
         .map((state: any) => state.entities[id]);
@@ -56,7 +58,9 @@ export class OrmProduct extends OrmBase<Product> {
           destroyStream$.complete();
         });
     } else {
-      this.store.dispatch(new this.actions.getS3Photo(id, refresh, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.getS3Photo(id, refresh, meta));
+      }
 
       return this.store.select<any>(this.model.getModelDefinition().relations.s3Photo.model + 's')
         .map((state: any) => state.entities[id]);

@@ -20,7 +20,7 @@
       <div *ngIf="config.settings?.organizations && (profile$ | async)?.organizations?.length" class="border-top clearfix">
         <h4>{{'Organizations' | translate}}</h4>
 
-        <a *ngFor="let org of (profile$ | async)?.organizations" routerLink="/organizations/{{org.id}}" class="avatar-group-item">
+        <a *ngFor="let org of (profile$ | async)?.organizations" routerLink="/organizations/{{org.slug || org.id}}" class="avatar-group-item">
           <img alt="@{{org.name}}" [src]="org.logo?.url || org.logo || config.logo" height="35" width="35">
         </a>
       </div>

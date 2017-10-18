@@ -3,12 +3,12 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { ConfigService } from '@ngx-config/core';
 
 @Component({
-  selector: 'app-organizations-settings-products-user',
-  styleUrls: [ './user.component.scss' ],
-  templateUrl: './user.component.html',
+  selector: 'app-organizations-settings-products-product',
+  styleUrls: [ './product.component.scss' ],
+  templateUrl: './product.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProductsUserComponent {
+export class ProductsProductComponent {
   public config: any;
 
   constructor(

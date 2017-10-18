@@ -18,6 +18,30 @@ import { OrganizationApi } from '../services/index';
 @Injectable()
 export class OrganizationEffects extends BaseLoopbackEffects {
   @Effect()
+  public stripeAuthenticateCallback$ = this.actions$
+    .ofType(OrganizationActionTypes.STRIPE_AUTHENTICATE_CALLBACK)
+    .mergeMap((action: LoopbackAction) =>
+      this.organization.stripeAuthenticateCallback(action.payload.req, action.payload.res)
+        .map((response: any) => new OrganizationActions.stripeAuthenticateCallbackSuccess(action.payload.id, action.payload.fk, action.meta))
+        .catch((error: any) => concat(
+          of(new OrganizationActions.stripeAuthenticateCallbackFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  public stripeAuthenticate$ = this.actions$
+    .ofType(OrganizationActionTypes.STRIPE_AUTHENTICATE)
+    .mergeMap((action: LoopbackAction) =>
+      this.organization.stripeAuthenticate(action.payload.id)
+        .map((response: any) => new OrganizationActions.stripeAuthenticateSuccess(action.payload.id, action.payload.fk, action.meta))
+        .catch((error: any) => concat(
+          of(new OrganizationActions.stripeAuthenticateFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
   public findByIdUsers$ = this.actions$
     .ofType(OrganizationActionTypes.FIND_BY_ID_USERS)
     .mergeMap((action: LoopbackAction) =>
@@ -310,6 +334,60 @@ export class OrganizationEffects extends BaseLoopbackEffects {
         ))
         .catch((error: any) => concat(
           of(new OrganizationActions.updateByIdStripeChargesFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  public getStripeStoreIdentity$ = this.actions$
+    .ofType(OrganizationActionTypes.GET_STRIPESTOREIDENTITY)
+    .mergeMap((action: LoopbackAction) =>
+      this.organization.getStripeStoreIdentity(action.payload.id, action.payload.refresh)
+        .mergeMap((response: any) => concat(
+          resolver({data: response, meta: action.meta}, 'StripeStoreIdentity', 'findSuccess'),
+          of(new OrganizationActions.getStripeStoreIdentitySuccess(action.payload.id, response, action.meta))
+        ))
+        .catch((error: any) => concat(
+          of(new OrganizationActions.getStripeStoreIdentityFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  public createStripeStoreIdentity$ = this.actions$
+    .ofType(OrganizationActionTypes.CREATE_STRIPESTOREIDENTITY)
+    .mergeMap((action: LoopbackAction) =>
+      this.organization.createStripeStoreIdentity(action.payload.id, action.payload.data)
+        .mergeMap((response: any) => concat(
+          resolver({data: response, meta: action.meta}, 'StripeStoreIdentity', 'findSuccess'),
+          of(new OrganizationActions.createStripeStoreIdentitySuccess(action.payload.id, response, action.meta))
+        ))
+        .catch((error: any) => concat(
+          of(new OrganizationActions.createStripeStoreIdentityFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  public updateStripeStoreIdentity$ = this.actions$
+    .ofType(OrganizationActionTypes.UPDATE_STRIPESTOREIDENTITY)
+    .mergeMap((action: LoopbackAction) =>
+      this.organization.updateStripeStoreIdentity(action.payload.id, action.payload.data)
+        .map((response: any) => new OrganizationActions.updateStripeStoreIdentitySuccess(action.payload.id, response, action.meta))
+        .catch((error: any) => concat(
+          of(new OrganizationActions.updateStripeStoreIdentityFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  public destroyStripeStoreIdentity$ = this.actions$
+    .ofType(OrganizationActionTypes.DESTROY_STRIPESTOREIDENTITY)
+    .mergeMap((action: LoopbackAction) =>
+      this.organization.destroyStripeStoreIdentity(action.payload.id)
+        .map((response: any) => new OrganizationActions.destroyStripeStoreIdentitySuccess(action.payload.id, action.payload.fk, action.meta))
+        .catch((error: any) => concat(
+          of(new OrganizationActions.destroyStripeStoreIdentityFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );
@@ -958,6 +1036,21 @@ export class OrganizationEffects extends BaseLoopbackEffects {
         ))
         .catch((error: any) => concat(
           of(new OrganizationActions.createManyStripeCustomerFail(error, action.meta)),
+          of(new LoopbackErrorActions.error(error, action.meta))
+        ))
+    );
+
+  @Effect()
+  public createManyStripeStoreIdentity$ = this.actions$
+    .ofType(OrganizationActionTypes.CREATE_MANY_STRIPESTOREIDENTITY)
+    .mergeMap((action: LoopbackAction) =>
+      this.organization.createManyStripeStoreIdentity(action.payload.id, action.payload.data)
+        .mergeMap((response: any) => concat(
+          resolver({data: response, meta: action.meta}, 'StripeStoreIdentity', 'findSuccess'),
+          of(new OrganizationActions.createManyStripeStoreIdentitySuccess(action.payload.id, response, action.meta))
+        ))
+        .catch((error: any) => concat(
+          of(new OrganizationActions.createManyStripeStoreIdentityFail(error, action.meta)),
           of(new LoopbackErrorActions.error(error, action.meta))
         ))
     );

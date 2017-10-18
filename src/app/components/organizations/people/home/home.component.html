@@ -85,7 +85,7 @@
 
       <ngx-datatable-column name=" " prop="photo" [flexGrow]="0.5" [sortable]="false">
         <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-          <a routerLink="/{{row.id}}">
+          <a routerLink="/{{row.slug || row.id}}">
             <img class="logo" [src]="value?.url || value || config.logo">
           </a>
         </ng-template>
@@ -93,7 +93,7 @@
 
       <ngx-datatable-column name="Name" prop="firstName" [flexGrow]="2">
         <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-          <a routerLink="/{{row.id}}">{{row.name || row.firstName + ' ' + row.lastName}}</a>
+          <a routerLink="/{{row.slug || row.id}}">{{row.name || row.firstName + ' ' + row.lastName}}</a>
         </ng-template>
       </ngx-datatable-column>
 

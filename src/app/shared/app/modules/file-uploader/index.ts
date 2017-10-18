@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 import { FileUploadModule } from 'ng2-file-upload';
+import { DndModule } from 'ng2-dnd';
 
 import { MultilingualModule } from 'shared/i18n/multilingual.module';
 
@@ -12,7 +13,8 @@ import { FileUploaderComponent } from './file-uploader.component';
   imports: [
     CommonModule,
     MultilingualModule,
-    FileUploadModule
+    FileUploadModule,
+    DndModule
   ],
   declarations: [ FileUploaderComponent ],
   exports: [ FileUploaderComponent ]

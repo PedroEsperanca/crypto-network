@@ -31,11 +31,8 @@ function include(state$: Observable<any>, filter: LoopBackFilter, store: any, mo
 
   const normalizedInclude = normalizeInclude(filter.include);
 
-  const stateWithEntities$ = state$.map((data) => {
-    const state: any = {
-      entities: {},
-      data: data
-    };
+  const stateEntities$ = state$.map((data) => {
+    const entities: any = {};
 
     for (const include of normalizedInclude) {
       let relationSchema: any;
@@ -53,16 +50,16 @@ function include(state$: Observable<any>, filter: LoopBackFilter, store: any, mo
     }
 
     for (const item of data) {
-      state.entities[item[model.getModelDefinition().idName]] = item;
+      entities[item[model.getModelDefinition().idName]] = item;
     }
 
-    return state;
+    return entities;
   })
   .publishReplay(1).refCount();
 
   const includesArray: any[] = [];
 
-  for (const include of normalizedInclude) {
+  for (let include of normalizedInclude) {
     let relationSchema: any;
     if (isPlainObject(include)) {
       relationSchema = model.getModelDefinition().relations[include.relation];
@@ -72,79 +69,100 @@ function include(state$: Observable<any>, filter: LoopBackFilter, store: any, mo
 
     if (!!relationSchema.model) {
       if (relationSchema.modelThrough) {
-        /*includesArray.push(
-          applyFilter(
-            store.select(relationSchema.model + 's')
-              .map((state: any) => state.entities)
-              .combineLatest(store.select(relationSchema.modelThrough + 's'),
-                (includeState: any, thoughState: any) => ({includeState, thoughState}))
-              .withLatestFrom(stateWithEntities$,
-                ({includeState, thoughState}, stateWithEntities: any) => ({includeState, thoughState, stateWithEntities}))
-              .map(({includeState, thoughState, stateWithEntities}) => {
-                let data: any | any[];
-                console.log(includeState, thoughState, stateWithEntities);
-                // TODO
-                return data;
-              })
-              .map((data: any | any[]) => {
-                if (!data || !Array.isArray(data) || !include.scope) {
-                  return data;
-                }
+        if (include.scope && include.scope.fields) {
+         include = Object.assign({}, include, {
+            scope: Object.assign({}, include.scope, {
+              fields: Array.isArray(include.scope.fields) ? [...include.scope.fields, '_through'] : [include.scope.fields, '_through']
+            })
+          })
+        }
 
-                return filterNodes(data, include.scope)
-              })
-              .publishReplay(1).refCount()
-          , include.scope || include, store, models[relationSchema.model])
-        );*/
-      } else {
         includesArray.push(
           applyFilter(
             store.select(relationSchema.model + 's')
               .map((state: any) => state.entities)
-              .withLatestFrom(stateWithEntities$,
-                (includeState: any, stateWithEntities: any) => ({includeState, stateWithEntities}))
-              .map(({includeState, stateWithEntities}) => {
-                let data: any | any[];
+              .combineLatest(store.select(relationSchema.modelThrough + 's').map((s) => removeDuplicates(s, relationSchema)),
+                (includeState: any, throughState: any) => ({includeState, throughState}))
+              .auditTime(0)
+              .withLatestFrom(stateEntities$,
+                ({includeState, throughState}, stateEntities: any) => ({includeState, throughState, stateEntities}))
+              .map(({includeState, throughState, stateEntities}) => {
+                const entities: any = {};
+                const data: any[] = [];
 
-                if (!stateWithEntities.data.length) {
+                for (const key in includeState) {
+                  if (includeState.hasOwnProperty(key)) {
+                    for (const keyThrough in throughState) {
+                      if (throughState.hasOwnProperty(keyThrough)) {
+                        if (stateEntities.hasOwnProperty(throughState[keyThrough][relationSchema.keyTo]) &&
+                          throughState[keyThrough][relationSchema.keyThrough] === includeState[key][relationSchema.keyFrom]) {
+                          if (!entities.hasOwnProperty(includeState[key][relationSchema.keyFrom])) {
+                            entities[includeState[key][relationSchema.keyFrom]] = Object.assign({}, includeState[key], {
+                              _through: [ throughState[keyThrough] ]
+                            });
+                          } else {
+                            entities[includeState[key][relationSchema.keyFrom]] = Object.assign({}, includeState[key], {
+                              _through: [ ...entities[includeState[key][relationSchema.keyFrom]]._through, throughState[keyThrough] ]
+                            });
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+
+                for (let key in entities) {
+                  if (entities.hasOwnProperty(key)) {
+                    data.push(entities[key]);
+                  }
+                }
+
+                return data;
+              })
+              .publishReplay(1).refCount()
+          , include.scope || include, store, models[relationSchema.model])
+        );
+      } else {
+        includesArray.push(
+          applyFilter(
+            store.select(relationSchema.model + 's')
+              .auditTime(0)
+              .map((state: any) => state.entities)
+              .withLatestFrom(stateEntities$,
+                (includeState: any, stateEntities: any) => ({includeState, stateEntities}))
+              .map(({includeState, stateEntities}) => {
+                let data: any[] = [];
+
+                if (!Object.keys(stateEntities).length) {
                   return data;
                 }
 
                 if (relationSchema.relationType === 'belongsTo') {
-                  for (const key in stateWithEntities.entities) {
-                    if (stateWithEntities.entities.hasOwnProperty(key) &&
-                      includeState.hasOwnProperty(stateWithEntities.entities[key][relationSchema.keyFrom])) {
-                      data = Object.assign({}, includeState[stateWithEntities.entities[key][relationSchema.keyFrom]], {
+                  for (const key in stateEntities) {
+                    if (stateEntities.hasOwnProperty(key) &&
+                      includeState.hasOwnProperty(stateEntities[key][relationSchema.keyFrom])) {
+                      data.push(Object.assign({}, includeState[stateEntities[key][relationSchema.keyFrom]], {
                         relationParentId: key
-                      });
+                      }));
                     }
                   }
                 } else if (relationSchema.relationType === 'hasOne') {
                   for (const key in includeState) {
                     if (includeState.hasOwnProperty(key) &&
-                      stateWithEntities.entities.hasOwnProperty(includeState[key][relationSchema.keyTo])) {
-                      data = includeState[key];
+                      stateEntities.hasOwnProperty(includeState[key][relationSchema.keyTo])) {
+                      data.push(includeState[key]);
                     }
                   }
                 } else {
-                  data = [];
-
                   for (const key in includeState) {
                     if (includeState.hasOwnProperty(key) &&
-                      stateWithEntities.entities.hasOwnProperty(includeState[key][relationSchema.keyTo])) {
+                      stateEntities.hasOwnProperty(includeState[key][relationSchema.keyTo])) {
                       data.push(includeState[key]);
                     }
                   }
                 }
 
                 return data;
-              })
-              .map((data: any | any[]) => {
-                if (!data || !Array.isArray(data) || !include.scope) {
-                  return data;
-                }
-
-                return filterNodes(data, include.scope)
               })
               .publishReplay(1).refCount()
           , include.scope || include, store, models[relationSchema.model])
@@ -153,35 +171,68 @@ function include(state$: Observable<any>, filter: LoopBackFilter, store: any, mo
     }
   }
 
-  return stateWithEntities$.combineLatest(...includesArray, (...args) => {
-    const stateWithEntities: any = args[0];
+  return stateEntities$
+    .combineLatest(...includesArray, (...args) => args)
+    .auditTime(0)
+    .map((args) => {
+      const stateEntities: any = JSON.parse(JSON.stringify(args[0]));
+      const data: any[] = [];
 
-    for (let i = 1; i < args.length; ++i) {
-      for (const item of args[i]) {
+      for (let i = 1; i < args.length; ++i) {
         const includeString: string = normalizedInclude[i - 1].relation || normalizedInclude[i - 1];
         const relationSchema = model.getModelDefinition().relations[includeString];
 
-        if (relationSchema.relationType === 'belongsTo') {
-          for (const key in stateWithEntities.entities) {
-            if (stateWithEntities.entities.hasOwnProperty(key) && item.relationParentId === key) {
-              stateWithEntities.entities[key][includeString] = item;
+        for (const item of args[i]) {
+          if (relationSchema.modelThrough) {
+            for (var z = 0; z < item._through.length; ++z) {
+              if (typeof stateEntities[item._through[z][relationSchema.keyTo]][includeString] === 'undefined') {
+                stateEntities[item._through[z][relationSchema.keyTo]][includeString] =
+                  relationSchema.type.indexOf('[]') !== -1 ? [] : null
+              }
+
+              stateEntities[item._through[z][relationSchema.keyTo]][includeString] = [
+                ...stateEntities[item._through[z][relationSchema.keyTo]][includeString],
+                item
+              ];
             }
-          }
-        } else {
-          if (stateWithEntities.entities.hasOwnProperty(item[relationSchema.keyTo])) {
-            if (relationSchema.relationType === 'hasOne') {
-              stateWithEntities.entities[item[relationSchema.keyTo]][includeString] = item;
+          } else {
+            if (relationSchema.relationType === 'belongsTo') {
+              for (const key in stateEntities) {
+                if (stateEntities.hasOwnProperty(key) && item.relationParentId === key) {
+                  stateEntities[key][includeString] = item;
+                }
+              }
             } else {
-              stateWithEntities.entities[item[relationSchema.keyTo]][includeString].push(item);
+              if (stateEntities.hasOwnProperty(item[relationSchema.keyTo])) {
+                if (relationSchema.relationType === 'hasOne') {
+                  stateEntities[item[relationSchema.keyTo]][includeString] = item;
+                } else {
+                  if (typeof stateEntities[item[relationSchema.keyTo]][includeString] === 'undefined') {
+                    stateEntities[item[relationSchema.keyTo]][includeString] =
+                      relationSchema.type.indexOf('[]') !== -1 ? [] : null
+                  }
+
+                  stateEntities[item[relationSchema.keyTo]][includeString] = [
+                    ...stateEntities[item[relationSchema.keyTo]][includeString],
+                    item
+                  ];
+                }
+              }
             }
           }
         }
       }
-    }
 
-    return stateWithEntities.data;
-  })
-  .publishReplay(1).refCount();
+      for (let key in stateEntities) {
+        if (stateEntities.hasOwnProperty(key)) {
+          data.push(stateEntities[key]);
+        }
+      }
+
+      return data;
+    })
+    .auditTime(0)
+    .publishReplay(1).refCount();
 }
 
 /*!
@@ -220,6 +271,33 @@ export function toArray(state: any): any[] {
   for (let key in state.entities) {
     if (state.entities.hasOwnProperty(key)) {
       entities.push(state.entities[key]);
+    }
+  }
+
+  return entities;
+}
+
+export function removeDuplicates(state: any, relationSchema: any): any[] {
+  const entities = Object.assign({}, state.entities);
+  
+  for (const keyThrough in entities) {
+    if (entities.hasOwnProperty(keyThrough)) {
+      if (keyThrough.indexOf('-') !== -1) {
+        const firstPart = keyThrough.substr(0, keyThrough.indexOf('-'));
+        const secondPart = keyThrough.substr(keyThrough.indexOf('-') + 1, keyThrough.length - 1);
+        if (entities.hasOwnProperty(secondPart + '-' + firstPart)) {
+          delete entities[secondPart + '-' + firstPart];
+        }
+      } else {
+        for (const key in entities) {
+          if (key.indexOf('-') !== -1 && entities.hasOwnProperty(key) &&
+            entities[key][relationSchema.keyTo] === entities[keyThrough][relationSchema.keyTo] &&
+            entities[key][relationSchema.keyThrough] === entities[keyThrough][relationSchema.keyThrough]) {
+            delete entities[key];
+            break;
+          }
+        }
+      }
     }
   }
 

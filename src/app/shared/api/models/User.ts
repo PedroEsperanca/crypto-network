@@ -23,6 +23,7 @@ export interface UserInterface {
   "createdAt"?: Date;
   "updatedAt"?: Date;
   "photo"?: any;
+  "slug"?: string;
   "password"?: string;
   emails?: any[];
   phones?: any[];
@@ -54,6 +55,7 @@ export class User implements UserInterface {
   "createdAt": Date;
   "updatedAt": Date;
   "photo": any;
+  "slug": string;
   "password": string;
   emails: any[];
   phones: any[];
@@ -153,6 +155,10 @@ export class User implements UserInterface {
         "photo": {
           name: 'photo',
           type: 'any'
+        },
+        "slug": {
+          name: 'slug',
+          type: 'string'
         },
         "password": {
           name: 'password',

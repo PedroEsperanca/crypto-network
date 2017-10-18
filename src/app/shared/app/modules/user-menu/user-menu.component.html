@@ -16,7 +16,7 @@
     <li class="divider dropdown-divider"></li>
 
     <li role="menuitem">
-      <a class="dropdown-item" routerLink="/{{(currentUser$ | async)?.id}}">{{'Your profile' | translate}}</a>
+      <a class="dropdown-item" routerLink="/{{(currentUser$ | async)?.slug || (currentUser$ | async)?.id}}">{{'Your Profile' | translate}}</a>
     </li>
 
     <!--<li><a ng-href="/apps"><i class="fa fa-th-large"></i> <span translate>Dashboard</span></a></li>

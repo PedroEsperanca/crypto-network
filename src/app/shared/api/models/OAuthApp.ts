@@ -46,6 +46,7 @@ export interface OAuthAppInterface {
   "createdAt"?: Date;
   "updatedAt"?: Date;
   "logo"?: any;
+  "slug"?: string;
   user?: User;
   organization?: Organization;
   s3Logo?: any[];
@@ -92,6 +93,7 @@ export class OAuthApp implements OAuthAppInterface {
   "createdAt": Date;
   "updatedAt": Date;
   "logo": any;
+  "slug": string;
   user: User;
   organization: Organization;
   s3Logo: any[];
@@ -288,6 +290,10 @@ export class OAuthApp implements OAuthAppInterface {
         "logo": {
           name: 'logo',
           type: 'any'
+        },
+        "slug": {
+          name: 'slug',
+          type: 'string'
         },
       },
       relations: {

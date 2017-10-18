@@ -6,6 +6,14 @@ import { LoopBackFilter, SDKToken, Organization } from '../models';
 
 export const OrganizationActionTypes =
 Object.assign(BaseLoopbackActionTypesFactory('Organization'), {
+  STRIPE_AUTHENTICATE_CALLBACK: type('[Organization] stripeAuthenticateCallback'),
+  STRIPE_AUTHENTICATE_CALLBACK_SUCCESS: type('[Organization] stripeAuthenticateCallback success'),
+  STRIPE_AUTHENTICATE_CALLBACK_FAIL: type('[Organization] stripeAuthenticateCallback fail'),
+
+  STRIPE_AUTHENTICATE: type('[Organization] stripeAuthenticate'),
+  STRIPE_AUTHENTICATE_SUCCESS: type('[Organization] stripeAuthenticate success'),
+  STRIPE_AUTHENTICATE_FAIL: type('[Organization] stripeAuthenticate fail'),
+
   FIND_BY_ID_USERS: type('[Organization] findByIdUsers'),
   FIND_BY_ID_USERS_SUCCESS: type('[Organization] findByIdUsers success'),
   FIND_BY_ID_USERS_FAIL: type('[Organization] findByIdUsers fail'),
@@ -93,6 +101,22 @@ Object.assign(BaseLoopbackActionTypesFactory('Organization'), {
   UPDATE_BY_ID_STRIPECHARGES: type('[Organization] updateByIdStripeCharges'),
   UPDATE_BY_ID_STRIPECHARGES_SUCCESS: type('[Organization] updateByIdStripeCharges success'),
   UPDATE_BY_ID_STRIPECHARGES_FAIL: type('[Organization] updateByIdStripeCharges fail'),
+
+  GET_STRIPESTOREIDENTITY: type('[Organization] getStripeStoreIdentity'),
+  GET_STRIPESTOREIDENTITY_SUCCESS: type('[Organization] getStripeStoreIdentity success'),
+  GET_STRIPESTOREIDENTITY_FAIL: type('[Organization] getStripeStoreIdentity fail'),
+
+  CREATE_STRIPESTOREIDENTITY: type('[Organization] createStripeStoreIdentity'),
+  CREATE_STRIPESTOREIDENTITY_SUCCESS: type('[Organization] createStripeStoreIdentity success'),
+  CREATE_STRIPESTOREIDENTITY_FAIL: type('[Organization] createStripeStoreIdentity fail'),
+
+  UPDATE_STRIPESTOREIDENTITY: type('[Organization] updateStripeStoreIdentity'),
+  UPDATE_STRIPESTOREIDENTITY_SUCCESS: type('[Organization] updateStripeStoreIdentity success'),
+  UPDATE_STRIPESTOREIDENTITY_FAIL: type('[Organization] updateStripeStoreIdentity fail'),
+
+  DESTROY_STRIPESTOREIDENTITY: type('[Organization] destroyStripeStoreIdentity'),
+  DESTROY_STRIPESTOREIDENTITY_SUCCESS: type('[Organization] destroyStripeStoreIdentity success'),
+  DESTROY_STRIPESTOREIDENTITY_FAIL: type('[Organization] destroyStripeStoreIdentity fail'),
 
   FIND_BY_ID_CONTACTS: type('[Organization] findByIdContacts'),
   FIND_BY_ID_CONTACTS_SUCCESS: type('[Organization] findByIdContacts success'),
@@ -278,6 +302,10 @@ Object.assign(BaseLoopbackActionTypesFactory('Organization'), {
   CREATE_MANY_STRIPECUSTOMER_SUCCESS: type('[Organization] createManyStripeCustomer success'),
   CREATE_MANY_STRIPECUSTOMER_FAIL: type('[Organization] createManyStripeCustomer fail'),
 
+  CREATE_MANY_STRIPESTOREIDENTITY: type('[Organization] createManyStripeStoreIdentity'),
+  CREATE_MANY_STRIPESTOREIDENTITY_SUCCESS: type('[Organization] createManyStripeStoreIdentity success'),
+  CREATE_MANY_STRIPESTOREIDENTITY_FAIL: type('[Organization] createManyStripeStoreIdentity fail'),
+
   CREATE_MANY_USERS: type('[Organization] createManyUsers'),
   CREATE_MANY_USERS_SUCCESS: type('[Organization] createManyUsers success'),
   CREATE_MANY_USERS_FAIL: type('[Organization] createManyUsers fail'),
@@ -317,6 +345,94 @@ Object.assign(BaseLoopbackActionTypesFactory('Organization'), {
 });
 export const OrganizationActions =
 Object.assign(BaseLoopbackActionsFactory<Organization>(OrganizationActionTypes), {
+
+  /**
+   * stripeAuthenticateCallback Action.
+   * Purchase a Batch
+   *
+   * @param {object} req 
+   * @param {object} res 
+   * @param {any} meta (optional).
+   * 
+   */
+  stripeAuthenticateCallback: class implements Action {
+    public readonly type = OrganizationActionTypes.STRIPE_AUTHENTICATE_CALLBACK;
+      public payload: {req: any, res: any};
+
+    constructor(req: any = {}, res: any = {}, customHeaders?: Function, public meta?: any) {
+      this.payload = {req, res};
+    }
+  },
+  /**
+   * stripeAuthenticateCallbackSuccess Action.
+   * 
+   * @param {any} id 
+   * This method returns no data.
+   * @param {any} meta (optional).
+   * 
+   */
+  stripeAuthenticateCallbackSuccess: class implements Action {
+    public readonly type = OrganizationActionTypes.STRIPE_AUTHENTICATE_CALLBACK_SUCCESS;
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
+  },
+  /**
+   * stripeAuthenticateCallbackFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  stripeAuthenticateCallbackFail: class implements Action {
+    public readonly type = OrganizationActionTypes.STRIPE_AUTHENTICATE_CALLBACK_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * stripeAuthenticate Action.
+   * Purchase a Batch
+   *
+   * @param {any} id Organization id
+   * @param {any} meta (optional).
+   * 
+   */
+  stripeAuthenticate: class implements Action {
+    public readonly type = OrganizationActionTypes.STRIPE_AUTHENTICATE;
+      
+    constructor(public payload: any, public meta?: any) {}
+  },
+  /**
+   * stripeAuthenticateSuccess Action.
+   * 
+   * @param {any} id 
+   * This method returns no data.
+   * @param {any} meta (optional).
+   * 
+   */
+  stripeAuthenticateSuccess: class implements Action {
+    public readonly type = OrganizationActionTypes.STRIPE_AUTHENTICATE_SUCCESS;
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
+  },
+  /**
+   * stripeAuthenticateFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  stripeAuthenticateFail: class implements Action {
+    public readonly type = OrganizationActionTypes.STRIPE_AUTHENTICATE_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
 
   /**
    * findByIdUsers Action.
@@ -1341,6 +1457,190 @@ Object.assign(BaseLoopbackActionsFactory<Organization>(OrganizationActionTypes),
    */
   updateByIdStripeChargesFail: class implements Action {
     public readonly type = OrganizationActionTypes.UPDATE_BY_ID_STRIPECHARGES_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * getStripeStoreIdentity Action.
+   * Fetches hasOne relation stripeStoreIdentity.
+   *
+   * @param {any} id Organization id
+   * @param {boolean} refresh 
+   * @param {any} meta (optional).
+   * 
+   */
+  getStripeStoreIdentity: class implements Action {
+    public readonly type = OrganizationActionTypes.GET_STRIPESTOREIDENTITY;
+      public payload: {id: any, refresh: any};
+
+    constructor(id: any, refresh: any = {}, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, refresh};
+    }
+  },
+  /**
+   * getStripeStoreIdentitySuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  getStripeStoreIdentitySuccess: class implements Action {
+    public readonly type = OrganizationActionTypes.GET_STRIPESTOREIDENTITY_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * getStripeStoreIdentityFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  getStripeStoreIdentityFail: class implements Action {
+    public readonly type = OrganizationActionTypes.GET_STRIPESTOREIDENTITY_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * createStripeStoreIdentity Action.
+   * Creates a new instance in stripeStoreIdentity of this model.
+   *
+   * @param {any} id Organization id
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   * @param {any} meta (optional).
+   * 
+   */
+  createStripeStoreIdentity: class implements Action {
+    public readonly type = OrganizationActionTypes.CREATE_STRIPESTOREIDENTITY;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any = {}, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * createStripeStoreIdentitySuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  createStripeStoreIdentitySuccess: class implements Action {
+    public readonly type = OrganizationActionTypes.CREATE_STRIPESTOREIDENTITY_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * createStripeStoreIdentityFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  createStripeStoreIdentityFail: class implements Action {
+    public readonly type = OrganizationActionTypes.CREATE_STRIPESTOREIDENTITY_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * updateStripeStoreIdentity Action.
+   * Update stripeStoreIdentity of this model.
+   *
+   * @param {any} id Organization id
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   * @param {any} meta (optional).
+   * 
+   */
+  updateStripeStoreIdentity: class implements Action {
+    public readonly type = OrganizationActionTypes.UPDATE_STRIPESTOREIDENTITY;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any = {}, customHeaders?: Function, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * updateStripeStoreIdentitySuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  updateStripeStoreIdentitySuccess: class implements Action {
+    public readonly type = OrganizationActionTypes.UPDATE_STRIPESTOREIDENTITY_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * updateStripeStoreIdentityFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  updateStripeStoreIdentityFail: class implements Action {
+    public readonly type = OrganizationActionTypes.UPDATE_STRIPESTOREIDENTITY_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * destroyStripeStoreIdentity Action.
+   * Deletes stripeStoreIdentity of this model.
+   *
+   * @param {any} id Organization id
+   * @param {any} meta (optional).
+   * 
+   */
+  destroyStripeStoreIdentity: class implements Action {
+    public readonly type = OrganizationActionTypes.DESTROY_STRIPESTOREIDENTITY;
+      
+    constructor(public payload: any, public meta?: any) {}
+  },
+  /**
+   * destroyStripeStoreIdentitySuccess Action.
+   * 
+   * @param {any} id 
+   * This method returns no data.
+   * @param {any} meta (optional).
+   * 
+   */
+  destroyStripeStoreIdentitySuccess: class implements Action {
+    public readonly type = OrganizationActionTypes.DESTROY_STRIPESTOREIDENTITY_SUCCESS;
+      public payload: {id: any, fk: any};
+
+    constructor(id: any, fk: any, public meta?: any) {
+      this.payload = {id, fk};
+    }
+  },
+  /**
+   * destroyStripeStoreIdentityFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  destroyStripeStoreIdentityFail: class implements Action {
+    public readonly type = OrganizationActionTypes.DESTROY_STRIPESTOREIDENTITY_FAIL;
 
     constructor(public payload: any, public meta?: any) { }
   },
@@ -3432,6 +3732,54 @@ Object.assign(BaseLoopbackActionsFactory<Organization>(OrganizationActionTypes),
    */
   createManyStripeCustomerFail: class implements Action {
     public readonly type = OrganizationActionTypes.CREATE_MANY_STRIPECUSTOMER_FAIL;
+
+    constructor(public payload: any, public meta?: any) { }
+  },
+
+  /**
+   * createManyStripeStoreIdentity Action.
+   * Creates a new instance in stripeStoreIdentity of this model.
+   *
+   * @param {any} id Organization id
+   * @param {object} data Request data.
+   *
+   * This method expects a subset of model properties as request parameters.
+   * @param {any} meta (optional).
+   * 
+   */
+  createManyStripeStoreIdentity: class implements Action {
+    public readonly type = OrganizationActionTypes.CREATE_MANY_STRIPESTOREIDENTITY;
+      public payload: {id: any, data: any[]};
+
+    constructor(id: any, data: any[] = [], customHeaders?: Function, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * createManyStripeStoreIdentitySuccess Action.
+   * 
+   * @param {any} id 
+   * @param {object[]} data 
+   * @param {any} meta (optional).
+   * 
+   */
+  createManyStripeStoreIdentitySuccess: class implements Action {
+    public readonly type = OrganizationActionTypes.CREATE_MANY_STRIPESTOREIDENTITY_SUCCESS;
+      public payload: {id: any, data: any};
+
+    constructor(id: any, data: any, public meta?: any) {
+      this.payload = {id, data};
+    }
+  },
+  /**
+   * createManyStripeStoreIdentityFail Action.
+   *
+   * @param {any} payload
+   * @param {any} meta (optional).
+   * 
+   */
+  createManyStripeStoreIdentityFail: class implements Action {
+    public readonly type = OrganizationActionTypes.CREATE_MANY_STRIPESTOREIDENTITY_FAIL;
 
     constructor(public payload: any, public meta?: any) { }
   },

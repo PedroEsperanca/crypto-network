@@ -1,3 +1,17 @@
 <div class="Subhead">
   <h2 class="Subhead-heading">{{'Store' | translate}}</h2>
 </div>
+
+<div *ngIf="!(currentOrganization$ | async)?.stripeStoreIdentity">
+	<a [href]="stripeAuthUrl" class="stripe-connect"><span>Connect with Stripe</span></a>
+</div>
+
+<div *ngIf="(currentOrganization$ | async)?.stripeStoreIdentity">
+	{{(currentOrganization$ | async)?.stripeStoreIdentity.externalId}}
+
+	{{(currentOrganization$ | async)?.stripeStoreIdentity.profile.display_name}}
+
+	<div style="text-align: right;">
+		<img src="/assets/img/stripe/Big/powered_by_stripe.svg">
+	</div>
+</div>

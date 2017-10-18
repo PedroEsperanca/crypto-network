@@ -21,11 +21,11 @@ const routes: Routes = [
   {
     path: ':id',
     component: OrganizationsComponent,
+    canActivate: [ OrganizationExistsGuard ],
     children: [
       {
         path: '',
-        component: OrganizationsHomeComponent,
-        canActivate: [ OrganizationExistsGuard ]
+        component: OrganizationsHomeComponent
       },
       {
         path: 'people',

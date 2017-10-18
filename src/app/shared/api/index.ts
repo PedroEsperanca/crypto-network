@@ -55,6 +55,7 @@ import { ContactApi } from './services/custom/Contact';
 import { StripeCustomerApi } from './services/custom/StripeCustomer';
 import { StripeSourceApi } from './services/custom/StripeSource';
 import { StripeChargeApi } from './services/custom/StripeCharge';
+import { StripeStoreIdentityApi } from './services/custom/StripeStoreIdentity';
 import { AppApi } from './services/custom/App';
 import { ProductApi } from './services/custom/Product';
 import { SubscriptionApi } from './services/custom/Subscription';
@@ -96,6 +97,7 @@ export class SDKBrowserModule {
         StripeCustomerApi,
         StripeSourceApi,
         StripeChargeApi,
+        StripeStoreIdentityApi,
         AppApi,
         ProductApi,
         SubscriptionApi,

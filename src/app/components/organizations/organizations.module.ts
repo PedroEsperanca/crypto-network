@@ -11,6 +11,8 @@ import { FileUploaderModule } from 'shared/app/modules/file-uploader';
 import { HeaderModule } from 'shared/app/modules/header';
 import { FooterModule } from 'shared/app/modules/footer';
 
+import { OrganizationsService } from './organizations.service';
+
 import { routing } from './organizations.routing';
 import { OrganizationsComponent } from './organizations.component';
 import { OrganizationsHomeComponent } from './home/home.component';
@@ -36,6 +38,9 @@ import { OrganizationsNotFoundComponent } from './not-found/not-found.component'
     OrganizationsHomeComponent,
     OrganizationsNewComponent,
     OrganizationsNotFoundComponent
+  ],
+  providers: [
+    OrganizationsService
   ]
 })
 export class OrganizationsModule { }

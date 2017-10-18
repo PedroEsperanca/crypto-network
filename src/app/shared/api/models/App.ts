@@ -13,6 +13,7 @@ export interface AppInterface {
   "organizationId"?: any;
   "createdAt"?: Date;
   "updatedAt"?: Date;
+  "slug"?: string;
   "options"?: any;
   user?: User;
   organization?: Organization;
@@ -28,6 +29,7 @@ export class App implements AppInterface {
   "organizationId": any;
   "createdAt": Date;
   "updatedAt": Date;
+  "slug": string;
   "options": any;
   user: User;
   organization: Organization;
@@ -93,6 +95,10 @@ export class App implements AppInterface {
         "updatedAt": {
           name: 'updatedAt',
           type: 'Date'
+        },
+        "slug": {
+          name: 'slug',
+          type: 'string'
         },
         "options": {
           name: 'options',

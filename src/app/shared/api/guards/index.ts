@@ -6,6 +6,7 @@ import { ContactExistsGuard } from './Contact';
 import { StripeCustomerExistsGuard } from './StripeCustomer';
 import { StripeSourceExistsGuard } from './StripeSource';
 import { StripeChargeExistsGuard } from './StripeCharge';
+import { StripeStoreIdentityExistsGuard } from './StripeStoreIdentity';
 import { AppExistsGuard } from './App';
 import { ProductExistsGuard } from './Product';
 import { SubscriptionExistsGuard } from './Subscription';
@@ -19,6 +20,7 @@ export const LOOPBACK_GUARDS_PROVIDERS = [
 	StripeCustomerExistsGuard,
 	StripeSourceExistsGuard,
 	StripeChargeExistsGuard,
+	StripeStoreIdentityExistsGuard,
 	AppExistsGuard,
 	ProductExistsGuard,
 	SubscriptionExistsGuard,
@@ -32,6 +34,7 @@ export * from './Contact';
 export * from './StripeCustomer';
 export * from './StripeSource';
 export * from './StripeCharge';
+export * from './StripeStoreIdentity';
 export * from './App';
 export * from './Product';
 export * from './Subscription';

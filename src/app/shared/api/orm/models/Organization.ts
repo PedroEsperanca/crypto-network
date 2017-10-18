@@ -20,6 +20,14 @@ export class OrmOrganization extends OrmBase<Organization> {
     super(store, Organization, OrganizationActions, realTime);
   }
 
+	public stripeAuthenticateCallback(req: any = {}, res: any = {}, customHeaders?: Function, meta?: any): void {
+    this.store.dispatch(new this.actions.stripeAuthenticateCallback(req, res, meta));
+  }
+  
+	public stripeAuthenticate(id: any, customHeaders?: Function, meta?: any): void {
+    this.store.dispatch(new this.actions.stripeAuthenticate(id, meta));
+  }
+  
 	public findByIdUsers(id: any, fk: any, customHeaders?: Function, meta?: any): Observable<any> {
     
     if (meta && meta.io) {
@@ -34,7 +42,9 @@ export class OrmOrganization extends OrmBase<Organization> {
           destroyStream$.complete();
         });
     } else {
-      this.store.dispatch(new this.actions.findByIdUsers(id, fk, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.findByIdUsers(id, fk, meta));
+      }
 
       return this.store.select<any>(this.model.getModelDefinition().relations.users.model + 's')
         .map((state: any) => state.entities[fk]);
@@ -72,7 +82,9 @@ export class OrmOrganization extends OrmBase<Organization> {
           destroyStream$.complete();
         });
     } else {
-      this.store.dispatch(new this.actions.findByIdRoles(id, fk, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.findByIdRoles(id, fk, meta));
+      }
 
       return this.store.select<any>(this.model.getModelDefinition().relations.roles.model + 's')
         .map((state: any) => state.entities[fk]);
@@ -102,7 +114,9 @@ export class OrmOrganization extends OrmBase<Organization> {
           destroyStream$.complete();
         });
     } else {
-      this.store.dispatch(new this.actions.getS3Photo(id, refresh, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.getS3Photo(id, refresh, meta));
+      }
 
       return this.store.select<any>(this.model.getModelDefinition().relations.s3Photo.model + 's')
         .map((state: any) => state.entities[id]);
@@ -136,7 +150,9 @@ export class OrmOrganization extends OrmBase<Organization> {
           destroyStream$.complete();
         });
     } else {
-      this.store.dispatch(new this.actions.getStripeCustomer(id, refresh, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.getStripeCustomer(id, refresh, meta));
+      }
 
       return this.store.select<any>(this.model.getModelDefinition().relations.stripeCustomer.model + 's')
         .map((state: any) => state.entities[id]);
@@ -170,7 +186,9 @@ export class OrmOrganization extends OrmBase<Organization> {
           destroyStream$.complete();
         });
     } else {
-      this.store.dispatch(new this.actions.findByIdStripeSources(id, fk, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.findByIdStripeSources(id, fk, meta));
+      }
 
       return this.store.select<any>(this.model.getModelDefinition().relations.stripeSources.model + 's')
         .map((state: any) => state.entities[fk]);
@@ -200,7 +218,9 @@ export class OrmOrganization extends OrmBase<Organization> {
           destroyStream$.complete();
         });
     } else {
-      this.store.dispatch(new this.actions.findByIdStripeCharges(id, fk, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.findByIdStripeCharges(id, fk, meta));
+      }
 
       return this.store.select<any>(this.model.getModelDefinition().relations.stripeCharges.model + 's')
         .map((state: any) => state.entities[fk]);
@@ -214,6 +234,42 @@ export class OrmOrganization extends OrmBase<Organization> {
   
 	public updateByIdStripeCharges(id: any, fk: any, data: any = {}, customHeaders?: Function, meta?: any): void {
     this.store.dispatch(new this.actions.updateByIdStripeCharges(id, fk, data, meta));
+  }
+  
+	public getStripeStoreIdentity(id: any, refresh: any = {}, customHeaders?: Function, meta?: any): Observable<any> {
+    
+    if (meta && meta.io) {
+      const destroyStream$: AsyncSubject<any> = new AsyncSubject();
+
+      createIO({}, this.store, destroyStream$, models[this.model.getModelDefinition().relations.rooms.model], this.realTime, meta);
+
+      return this.store.select<any>(this.model.getModelDefinition().relations.stripeStoreIdentity.model + 's')
+        .map((state: any) => state.entities[id])
+        .finally(() => {
+          destroyStream$.next(1);
+          destroyStream$.complete();
+        });
+    } else {
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.getStripeStoreIdentity(id, refresh, meta));
+      }
+
+      return this.store.select<any>(this.model.getModelDefinition().relations.stripeStoreIdentity.model + 's')
+        .map((state: any) => state.entities[id]);
+    }
+    
+  }
+  
+	public createStripeStoreIdentity(id: any, data: any = {}, customHeaders?: Function, meta?: any): void {
+    this.store.dispatch(new this.actions.createStripeStoreIdentity(id, data, meta));
+  }
+  
+	public updateStripeStoreIdentity(id: any, data: any = {}, customHeaders?: Function, meta?: any): void {
+    this.store.dispatch(new this.actions.updateStripeStoreIdentity(id, data, meta));
+  }
+  
+	public destroyStripeStoreIdentity(id: any, customHeaders?: Function, meta?: any): void {
+    this.store.dispatch(new this.actions.destroyStripeStoreIdentity(id, meta));
   }
   
 	public findByIdContacts(id: any, fk: any, customHeaders?: Function, meta?: any): Observable<any> {
@@ -230,7 +286,9 @@ export class OrmOrganization extends OrmBase<Organization> {
           destroyStream$.complete();
         });
     } else {
-      this.store.dispatch(new this.actions.findByIdContacts(id, fk, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.findByIdContacts(id, fk, meta));
+      }
 
       return this.store.select<any>(this.model.getModelDefinition().relations.contacts.model + 's')
         .map((state: any) => state.entities[fk]);
@@ -260,7 +318,9 @@ export class OrmOrganization extends OrmBase<Organization> {
           destroyStream$.complete();
         });
     } else {
-      this.store.dispatch(new this.actions.findByIdApps(id, fk, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.findByIdApps(id, fk, meta));
+      }
 
       return this.store.select<any>(this.model.getModelDefinition().relations.apps.model + 's')
         .map((state: any) => state.entities[fk]);
@@ -290,7 +350,9 @@ export class OrmOrganization extends OrmBase<Organization> {
           destroyStream$.complete();
         });
     } else {
-      this.store.dispatch(new this.actions.findByIdProducts(id, fk, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.findByIdProducts(id, fk, meta));
+      }
 
       return this.store.select<any>(this.model.getModelDefinition().relations.products.model + 's')
         .map((state: any) => state.entities[fk]);
@@ -320,7 +382,9 @@ export class OrmOrganization extends OrmBase<Organization> {
           destroyStream$.complete();
         });
     } else {
-      this.store.dispatch(new this.actions.findByIdSubscriptions(id, fk, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.findByIdSubscriptions(id, fk, meta));
+      }
 
       return this.store.select<any>(this.model.getModelDefinition().relations.subscriptions.model + 's')
         .map((state: any) => state.entities[fk]);
@@ -350,7 +414,9 @@ export class OrmOrganization extends OrmBase<Organization> {
           destroyStream$.complete();
         });
     } else {
-      this.store.dispatch(new this.actions.findByIdOAuthClientApplications(id, fk, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.findByIdOAuthClientApplications(id, fk, meta));
+      }
 
       return this.store.select<any>(this.model.getModelDefinition().relations.oAuthClientApplications.model + 's')
         .map((state: any) => state.entities[fk]);
@@ -383,7 +449,9 @@ export class OrmOrganization extends OrmBase<Organization> {
           })
         , filter, this.store, models[this.model.getModelDefinition().relations.users.model]);
     } else {
-      this.store.dispatch(new this.actions.getUsers(id, filter, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.getUsers(id, filter, meta));
+      }
 
       return applyFilter(
         this.store.select<any>(this.model.getModelDefinition().relations.users.model + 's')
@@ -419,7 +487,9 @@ export class OrmOrganization extends OrmBase<Organization> {
           })
         , filter, this.store, models[this.model.getModelDefinition().relations.roles.model]);
     } else {
-      this.store.dispatch(new this.actions.getRoles(id, filter, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.getRoles(id, filter, meta));
+      }
 
       return applyFilter(
         this.store.select<any>(this.model.getModelDefinition().relations.roles.model + 's')
@@ -455,7 +525,9 @@ export class OrmOrganization extends OrmBase<Organization> {
           })
         , filter, this.store, models[this.model.getModelDefinition().relations.stripeSources.model]);
     } else {
-      this.store.dispatch(new this.actions.getStripeSources(id, filter, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.getStripeSources(id, filter, meta));
+      }
 
       return applyFilter(
         this.store.select<any>(this.model.getModelDefinition().relations.stripeSources.model + 's')
@@ -491,7 +563,9 @@ export class OrmOrganization extends OrmBase<Organization> {
           })
         , filter, this.store, models[this.model.getModelDefinition().relations.stripeCharges.model]);
     } else {
-      this.store.dispatch(new this.actions.getStripeCharges(id, filter, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.getStripeCharges(id, filter, meta));
+      }
 
       return applyFilter(
         this.store.select<any>(this.model.getModelDefinition().relations.stripeCharges.model + 's')
@@ -527,7 +601,9 @@ export class OrmOrganization extends OrmBase<Organization> {
           })
         , filter, this.store, models[this.model.getModelDefinition().relations.contacts.model]);
     } else {
-      this.store.dispatch(new this.actions.getContacts(id, filter, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.getContacts(id, filter, meta));
+      }
 
       return applyFilter(
         this.store.select<any>(this.model.getModelDefinition().relations.contacts.model + 's')
@@ -563,7 +639,9 @@ export class OrmOrganization extends OrmBase<Organization> {
           })
         , filter, this.store, models[this.model.getModelDefinition().relations.apps.model]);
     } else {
-      this.store.dispatch(new this.actions.getApps(id, filter, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.getApps(id, filter, meta));
+      }
 
       return applyFilter(
         this.store.select<any>(this.model.getModelDefinition().relations.apps.model + 's')
@@ -599,7 +677,9 @@ export class OrmOrganization extends OrmBase<Organization> {
           })
         , filter, this.store, models[this.model.getModelDefinition().relations.products.model]);
     } else {
-      this.store.dispatch(new this.actions.getProducts(id, filter, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.getProducts(id, filter, meta));
+      }
 
       return applyFilter(
         this.store.select<any>(this.model.getModelDefinition().relations.products.model + 's')
@@ -635,7 +715,9 @@ export class OrmOrganization extends OrmBase<Organization> {
           })
         , filter, this.store, models[this.model.getModelDefinition().relations.subscriptions.model]);
     } else {
-      this.store.dispatch(new this.actions.getSubscriptions(id, filter, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.getSubscriptions(id, filter, meta));
+      }
 
       return applyFilter(
         this.store.select<any>(this.model.getModelDefinition().relations.subscriptions.model + 's')
@@ -671,7 +753,9 @@ export class OrmOrganization extends OrmBase<Organization> {
           })
         , filter, this.store, models[this.model.getModelDefinition().relations.oAuthClientApplications.model]);
     } else {
-      this.store.dispatch(new this.actions.getOAuthClientApplications(id, filter, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.getOAuthClientApplications(id, filter, meta));
+      }
 
       return applyFilter(
         this.store.select<any>(this.model.getModelDefinition().relations.oAuthClientApplications.model + 's')
@@ -704,6 +788,10 @@ export class OrmOrganization extends OrmBase<Organization> {
   
 	public createManyStripeCustomer(id: any, data: any[] = [], customHeaders?: Function, meta?: any): void {
     this.store.dispatch(new this.actions.createManyStripeCustomer(id, data, meta));
+  }
+  
+	public createManyStripeStoreIdentity(id: any, data: any[] = [], customHeaders?: Function, meta?: any): void {
+    this.store.dispatch(new this.actions.createManyStripeStoreIdentity(id, data, meta));
   }
   
 	public createManyUsers(id: any, data: any[] = [], customHeaders?: Function, meta?: any): void {

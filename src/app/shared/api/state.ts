@@ -10,6 +10,7 @@ import { ContactEffects } from './effects/Contact';
 import { StripeCustomerEffects } from './effects/StripeCustomer';
 import { StripeSourceEffects } from './effects/StripeSource';
 import { StripeChargeEffects } from './effects/StripeCharge';
+import { StripeStoreIdentityEffects } from './effects/StripeStoreIdentity';
 import { AppEffects } from './effects/App';
 import { ProductEffects } from './effects/Product';
 import { SubscriptionEffects } from './effects/Subscription';
@@ -23,6 +24,7 @@ export interface LoopbackStateInterface {
   StripeCustomers: reducers.StripeCustomersState;
   StripeSources: reducers.StripeSourcesState;
   StripeCharges: reducers.StripeChargesState;
+  StripeStoreIdentitys: reducers.StripeStoreIdentitysState;
   Apps: reducers.AppsState;
   Products: reducers.ProductsState;
   Subscriptions: reducers.SubscriptionsState;
@@ -37,10 +39,12 @@ export const LoopbackReducer = {
 	StripeCustomers: reducers.StripeCustomersReducer,
 	StripeSources: reducers.StripeSourcesReducer,
 	StripeCharges: reducers.StripeChargesReducer,
+	StripeStoreIdentitys: reducers.StripeStoreIdentitysReducer,
 	Apps: reducers.AppsReducer,
 	Products: reducers.ProductsReducer,
 	Subscriptions: reducers.SubscriptionsReducer,
 	OAuthApps: reducers.OAuthAppsReducer,
+	UserRoles: reducers.UserRolesReducer,
 };
 
 export const LoopbackEffects = [
@@ -51,6 +55,7 @@ export const LoopbackEffects = [
   StripeCustomerEffects,
   StripeSourceEffects,
   StripeChargeEffects,
+  StripeStoreIdentityEffects,
   AppEffects,
   ProductEffects,
   SubscriptionEffects,

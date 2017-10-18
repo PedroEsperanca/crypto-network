@@ -34,7 +34,9 @@ export class OrmStripeCharge extends OrmBase<StripeCharge> {
           destroyStream$.complete();
         });
     } else {
-      this.store.dispatch(new this.actions.getStripeSource(id, refresh, meta));
+      if (!meta || !meta.justCache) {
+        this.store.dispatch(new this.actions.getStripeSource(id, refresh, meta));
+      }
 
       return this.store.select<any>(this.model.getModelDefinition().relations.stripeSource.model + 's')
         .map((state: any) => state.entities[id]);

@@ -14,6 +14,7 @@ export interface ProductInterface {
   "createdAt"?: Date;
   "updatedAt"?: Date;
   "image"?: any;
+  "slug"?: string;
   organization?: Organization;
   s3Photo?: any[];
 }
@@ -28,6 +29,7 @@ export class Product implements ProductInterface {
   "createdAt": Date;
   "updatedAt": Date;
   "image": any;
+  "slug": string;
   organization: Organization;
   s3Photo: any[];
   constructor(data?: ProductInterface) {
@@ -98,6 +100,10 @@ export class Product implements ProductInterface {
         "image": {
           name: 'image',
           type: 'any'
+        },
+        "slug": {
+          name: 'slug',
+          type: 'string'
         },
       },
       relations: {

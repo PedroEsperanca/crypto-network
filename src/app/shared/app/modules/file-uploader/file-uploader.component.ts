@@ -5,6 +5,7 @@ import {
   Input,
   OnInit
 } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { UrlSerializer } from '@angular/router';
 
 import { FileUploader, FileItem } from 'ng2-file-upload';
@@ -24,7 +25,7 @@ export class FileUploaderComponent implements OnInit {
   @Input('maxFileSize') public maxFileSize: number;
   @Input('allowedMimeType') public allowedMimeType: string[];
 
-  @Input('currentFile') public currentFile: string;
+  @Input('currentFile') public currentFile: string | any[];
 
   @Input('autoUpload') public autoUpload = false;
 
@@ -33,6 +34,9 @@ export class FileUploaderComponent implements OnInit {
 
   @Input('onCompleteItem') public onCompleteItem: any;
   @Input('onCompleteAll') public onCompleteAll: any;
+  @Input('onOrderChange') public onOrderChange: any;
+
+  @Input('imageActions') public imageActions: any[];
 
   public uploader: FileUploader;
 
@@ -44,19 +48,20 @@ export class FileUploaderComponent implements OnInit {
 
   constructor(
     private cd: ChangeDetectorRef,
-    private urlSerializer: UrlSerializer
-  ) {}
-
-  public ngOnInit() {
+    private urlSerializer: UrlSerializer,
+    private sanitizer: DomSanitizer
+  ) {
     const params: any = {
       disableMultipart: true,
       method: 'PUT',
-      maxFileSize: this.maxFileSize || 1024 * 1024, // 1 MB
+      maxFileSize: this.maxFileSize || 3072 * 1024, // 3 MB
       allowedMimeType: this.allowedMimeType || ['image/png', 'image/jpg', 'image/jpeg']
     };
 
     this.uploader = new FileUploader(params);
+  }
 
+  public ngOnInit() {
     this.uploader.onAfterAddingAll = (fileItems: any): any => {
       return {fileItems};
     };
@@ -66,37 +71,20 @@ export class FileUploaderComponent implements OnInit {
     };
 
     this.uploader.onAfterAddingFile = (fileItem: FileItem): any => {
-      this.uploading = true;
-      this.cd.markForCheck();
+      (<any> fileItem).previewPath =
+        this.sanitizer.bypassSecurityTrustUrl((window.URL.createObjectURL(fileItem._file)));
 
-      const fileName = this.fileNameRewrite(fileItem.file.name);
-      if (fileName !== fileItem.file.name) {
-        fileItem.file.name = fileName;
-        // fileItem.some.name = fileName;
-        // fileItem._file.name = fileName;
+      if (this.autoUpload) {
+        this.prepareFile(fileItem, (err, item) => {
+          if (err) {
+            console.error(err);
+          }
+
+          return {item};
+        });
       }
 
-      fileItem.url = this.getUploadUrl(fileItem.file.name, fileItem.file.type).subscribe(
-        (response: string) => {
-          fileItem.url = response;
-
-          const parsedUrl = this.parseUrl(response);
-          if (parsedUrl.query['Cache-Control']) {
-            fileItem.headers.push({
-              name: 'Cache-Control',
-              value: parsedUrl.query['Cache-Control']
-            });
-          }
-
-          if (this.autoUpload) {
-            fileItem.upload();
-          }
-          return {fileItem};
-        },
-        (error) => {
-          return error;
-        }
-      );
+      this.cd.markForCheck();
     };
 
     this.uploader.onWhenAddingFileFailed = (item: any, filter: any, options: any): any => {
@@ -162,6 +150,47 @@ export class FileUploaderComponent implements OnInit {
 
   public fileOverBase(e: any): void {
     this.hasDropZoneOver = e;
+  }
+
+  public prepareAndUploadSingle(): void {
+    this.prepareFile(this.uploader.queue[0], (err, file) => {
+      this.uploader.queue[0] = file;
+
+      this.uploader.uploadAll();
+    });
+  }
+
+  private prepareFile(fileItem: FileItem, callback: any) {
+    this.uploading = true;
+    this.cd.markForCheck();
+
+    const fileName = this.fileNameRewrite(fileItem.file.name);
+    if (fileName !== fileItem.file.name) {
+      fileItem.file.name = fileName;
+      // fileItem.some.name = fileName;
+      // fileItem._file.name = fileName;
+    }
+
+    fileItem.url = this.getUploadUrl(fileItem.file.name, fileItem.file.type).subscribe(
+      (response: string) => {
+        fileItem.url = response;
+
+        const parsedUrl = this.parseUrl(response);
+        if (parsedUrl.query['Cache-Control']) {
+          fileItem.headers.push({
+            name: 'Cache-Control',
+            value: parsedUrl.query['Cache-Control']
+          });
+        }
+
+        if (this.autoUpload) {
+          fileItem.upload();
+        }
+
+        callback(null, fileItem);
+      },
+      (error) => callback(error)
+    );
   }
 
   private parseUrl(url) {

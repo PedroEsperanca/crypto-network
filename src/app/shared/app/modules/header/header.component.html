@@ -8,7 +8,7 @@
         </h2>
       </a>
 
-      <a *ngIf="auth.getCurrentUserId()" routerLink="/{{currentUser.id}}" class="navbar-brand logo">
+      <a *ngIf="auth.getCurrentUserId()" routerLink="/{{currentUser.slug || currentUser.id}}" class="navbar-brand logo">
         <h2 style="margin: 0 7px 8px;">
           <img src="{{config.logo}}">
           <!--<img [ctSrc]="config.settings?.logo" ctSize="32x32">-->

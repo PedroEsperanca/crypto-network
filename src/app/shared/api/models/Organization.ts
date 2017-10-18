@@ -4,6 +4,7 @@ import {
   StripeCustomer,
   StripeSource,
   StripeCharge,
+  StripeStoreIdentity,
   Contact,
   App,
   Product,
@@ -20,12 +21,14 @@ export interface OrganizationInterface {
   "createdAt"?: Date;
   "updatedAt"?: Date;
   "logo"?: any;
+  "slug"?: string;
   users?: User[];
   roles?: any[];
   s3Photo?: any[];
   stripeCustomer?: StripeCustomer;
   stripeSources?: StripeSource[];
   stripeCharges?: StripeCharge[];
+  stripeStoreIdentity?: StripeStoreIdentity;
   contacts?: Contact[];
   apps?: App[];
   products?: Product[];
@@ -41,12 +44,14 @@ export class Organization implements OrganizationInterface {
   "createdAt": Date;
   "updatedAt": Date;
   "logo": any;
+  "slug": string;
   users: User[];
   roles: any[];
   s3Photo: any[];
   stripeCustomer: StripeCustomer;
   stripeSources: StripeSource[];
   stripeCharges: StripeCharge[];
+  stripeStoreIdentity: StripeStoreIdentity;
   contacts: Contact[];
   apps: App[];
   products: Product[];
@@ -113,6 +118,10 @@ export class Organization implements OrganizationInterface {
           name: 'logo',
           type: 'any'
         },
+        "slug": {
+          name: 'slug',
+          type: 'string'
+        },
       },
       relations: {
         users: {
@@ -164,6 +173,14 @@ export class Organization implements OrganizationInterface {
           relationType: 'hasMany',
                   keyFrom: 'id',
           keyTo: 'customer'
+        },
+        stripeStoreIdentity: {
+          name: 'stripeStoreIdentity',
+          type: 'StripeStoreIdentity',
+          model: 'StripeStoreIdentity',
+          relationType: 'hasOne',
+                  keyFrom: 'id',
+          keyTo: 'organizationId'
         },
         contacts: {
           name: 'contacts',

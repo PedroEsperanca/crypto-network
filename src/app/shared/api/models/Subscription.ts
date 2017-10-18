@@ -13,6 +13,7 @@ export interface SubscriptionInterface {
   "organizationId"?: any;
   "createdAt"?: Date;
   "updatedAt"?: Date;
+  "slug"?: string;
   organization?: Organization;
 }
 
@@ -25,6 +26,7 @@ export class Subscription implements SubscriptionInterface {
   "organizationId": any;
   "createdAt": Date;
   "updatedAt": Date;
+  "slug": string;
   organization: Organization;
   constructor(data?: SubscriptionInterface) {
     Object.assign(this, data);
@@ -90,6 +92,10 @@ export class Subscription implements SubscriptionInterface {
         "updatedAt": {
           name: 'updatedAt',
           type: 'Date'
+        },
+        "slug": {
+          name: 'slug',
+          type: 'string'
         },
       },
       relations: {

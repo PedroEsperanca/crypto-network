@@ -3,7 +3,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ConfigService } from '@ngx-config/core';
 
-import { Orm } from 'shared/api/orm';
+import { OrganizationsService } from './organizations.service';
 
 import {
   Organization,
@@ -23,14 +23,12 @@ export class OrganizationsComponent {
   constructor(
     private configService: ConfigService,
     private route: ActivatedRoute,
-    private orm: Orm
+    private organizationService: OrganizationsService
   ) {
     this.config = this.configService.getSettings();
 
     route.params.take(1).subscribe((params) => {
-      this.organization$ = this.orm.Organization.findById(params.id, <any>{
-        counts: ['users', 'products', 'subscriptions']
-      });
+      this.organization$ = this.organizationService.getOrganization(params.id);
     });
   }
 }

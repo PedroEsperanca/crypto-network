@@ -1,6 +1,7 @@
 import { Observable } from 'rxjs/Observable';
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { ConfigService } from '@ngx-config/core';
 
@@ -20,6 +21,8 @@ export class ProfileUserComponent implements OnInit {
 
   constructor(
     public auth: LoopBackAuth,
+    private location: Location,
+    private router: Router,
     private route: ActivatedRoute,
     private orm: Orm,
     private configService: ConfigService
@@ -31,16 +34,32 @@ export class ProfileUserComponent implements OnInit {
     this.route.params
       .take(1)
       .subscribe((params) => {
-        this.profile$ = this.orm.User.findById(params['id'], {
+        this.profile$ = this.orm.User.findOne({
+          where: {
+            or: [
+             {
+               id: params['id']
+             }, {
+               slug: params['id']
+             }
+            ]
+          },
           include: {
             relation: 'organizations',
             scope: {
-              fields: ['name', 'photo']
+              fields: ['id', 'name', 'photo']
             }
+          }
+        })
+        .filter((user: User) => !!user)
+        .do((user: User) => {
+          if (user && user.slug && user.slug !== params['id']) {
+            this.router.navigate([this.location.path().replace(params['id'], user.slug)], {replaceUrl: true});
           }
         });
 
-        this.profile$.subscribe((data) => console.log(data))
+        // this.profile$
+        //   .subscribe((data) => console.log(data))
       });
 
     this.currentUserId = this.auth.getCurrentUserId();

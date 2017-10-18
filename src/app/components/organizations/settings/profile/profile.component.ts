@@ -1,7 +1,6 @@
 import { AsyncSubject } from 'rxjs/AsyncSubject';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { Component, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 
 import { ConfigService } from '@ngx-config/core';
 
@@ -12,6 +11,8 @@ import {
   OrganizationApi
 } from 'shared/api';
 
+import { OrganizationsService } from '../../organizations.service';
+
 @Component({
   selector: 'app-organizations-settings-profile',
   styleUrls: [ './profile.component.scss' ],
@@ -20,7 +21,7 @@ import {
 })
 export class SettingsProfileComponent implements OnDestroy {
   public config: any;
-  public formModel: Organization;
+  public formModel: any;
   public formModel$: ReplaySubject<Organization> = new ReplaySubject(1);
 
   private organizationId: string;
@@ -29,23 +30,26 @@ export class SettingsProfileComponent implements OnDestroy {
 
   constructor(
     private configService: ConfigService,
-    private route: ActivatedRoute,
     private orm: Orm,
-    private organization: OrganizationApi
+    private organization: OrganizationApi,
+    private organizationService: OrganizationsService
   ) {
     this.config = this.configService.getSettings();
 
-    route.parent.parent.parent.params.take(1).subscribe((params) => {
-      this.organizationId = params.id;
+    this.organizationService.getOrganization()
+      .takeUntil(this.destroyStream$)
+      .subscribe((org: Organization) => {
+        if (org) {
+          this.organizationId = org.id;
 
-      this.orm.Organization.findById(params.id)
-        .takeUntil(this.destroyStream$)
-        .subscribe((org: Organization) => {
-          if (org) {
-            this.formModel = org;
-            this.formModel$.next(this.formModel);
-          }
-        });
+          this.formModel = {
+            name: org.name,
+            logo: org.logo,
+            billingEmail: org.billingEmail,
+            description: org.description
+          };
+          this.formModel$.next(this.formModel);
+        }
     });
 
     this.fileNameRewrite = this.fileNameRewrite.bind(this);
@@ -59,7 +63,7 @@ export class SettingsProfileComponent implements OnDestroy {
   }
 
   public submitUpdate() {
-    this.orm.Organization.updateAttributes(this.organizationId, this.formModel, {
+    this.orm.Organization.patchAttributes(this.organizationId, this.formModel, {
       alert: {
         success: {
           message: 'Profile updated successfully.',

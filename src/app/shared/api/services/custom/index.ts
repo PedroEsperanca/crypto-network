@@ -5,6 +5,7 @@ export * from './Contact';
 export * from './StripeCustomer';
 export * from './StripeSource';
 export * from './StripeCharge';
+export * from './StripeStoreIdentity';
 export * from './App';
 export * from './Product';
 export * from './Subscription';

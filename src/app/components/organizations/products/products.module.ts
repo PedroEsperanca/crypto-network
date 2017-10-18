@@ -14,7 +14,7 @@ import { MultilingualModule } from 'shared/i18n/multilingual.module';
 import { routing } from './products.routing';
 import { ProductsComponent } from './products.component';
 import { ProductsHomeComponent } from './home/home.component';
-import { ProductsUserComponent } from './user/user.component';
+import { ProductsProductComponent } from './product/product.component';
 
 @NgModule({
   imports: [
@@ -33,7 +33,7 @@ import { ProductsUserComponent } from './user/user.component';
   declarations: [
     ProductsComponent,
     ProductsHomeComponent,
-    ProductsUserComponent
+    ProductsProductComponent
   ]
 })
 export class ProductsModule { }

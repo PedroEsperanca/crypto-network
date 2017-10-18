@@ -53,7 +53,7 @@ export class ResetPasswordComponent implements OnDestroy {
   }
 
   public resetPassword() {
-    this.store.dispatch(new UserActions.updateAttributes(this.userId, {
+    this.store.dispatch(new UserActions.patchAttributes(this.userId, {
       password: this.resetPasswordForm.controls['password'].value
     }));
 

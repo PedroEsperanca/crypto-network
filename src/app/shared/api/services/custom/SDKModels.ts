@@ -6,6 +6,7 @@ import { Contact } from '../../models/Contact';
 import { StripeCustomer } from '../../models/StripeCustomer';
 import { StripeSource } from '../../models/StripeSource';
 import { StripeCharge } from '../../models/StripeCharge';
+import { StripeStoreIdentity } from '../../models/StripeStoreIdentity';
 import { App } from '../../models/App';
 import { Product } from '../../models/Product';
 import { Subscription } from '../../models/Subscription';
@@ -23,6 +24,7 @@ export class SDKModels {
     StripeCustomer: StripeCustomer,
     StripeSource: StripeSource,
     StripeCharge: StripeCharge,
+    StripeStoreIdentity: StripeStoreIdentity,
     App: App,
     Product: Product,
     Subscription: Subscription,
