@@ -10,7 +10,6 @@ import * as multilingual from '../actions/index';
 import { MultilingualService, Languages, LanguageViewHelper } from '../services/index';
 
 @Component({
-  moduleId: module.id,
   selector: 'lang-switcher',
   templateUrl: 'lang-switcher.component.html',
   styleUrls: ['lang-switcher.component.scss'],
