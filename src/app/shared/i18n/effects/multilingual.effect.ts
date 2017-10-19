@@ -1,5 +1,5 @@
 // angular
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 
 // libs
 import { Store, Action } from '@ngrx/store';
@@ -9,22 +9,18 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 // module
-import { MultilingualService } from '../services/multilingual.service';
+import { MultilingualService, Languages } from '../services/multilingual.service';
 import * as multilingual from '../actions/multilingual.action';
 
 @Injectable()
 export class MultilingualEffects {
 
-  /**
-   * This effect makes use of the `startWith` operator to trigger
-   * the effect immediately on startup.
-   */
-  @Effect() public change$: Observable<Action> = this.actions$
-    .ofType(multilingual.actionTypes.CHANGE)
+  @Effect() change$: Observable<Action> = this.actions$
+    .ofType(multilingual.ActionTypes.CHANGE)
     .map((action: multilingual.ChangeAction) => {
-      const lang = action.payload;
-      if (includes(map(this.multilangService.availableLanguages, 'code'), lang)) {
-        const langChangedAction = new multilingual.LangChangedAction(lang);
+      let lang = action.payload;
+      if (includes(map(this.languages, 'code'), lang)) {
+        let langChangedAction = new multilingual.LangChangedAction(lang);
         // track analytics
         this.multilangService.track(langChangedAction.type, { label: langChangedAction.payload });
         // change state
@@ -38,6 +34,7 @@ export class MultilingualEffects {
   constructor(
     private store: Store<any>,
     private actions$: Actions,
-    private multilangService: MultilingualService
+    private multilangService: MultilingualService,
+    @Inject(Languages) private languages
   ) { }
 }

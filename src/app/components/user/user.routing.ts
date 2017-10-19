@@ -23,11 +23,21 @@ const routes: Routes = [
       },
       {
         path: 'login',
-        component: LoginComponent
+        component: LoginComponent,
+        data: {
+          meta: {
+            title: 'Login'
+          }
+        }
       },
       {
         path: 'signup',
-        component: SignupComponent
+        component: SignupComponent,
+        data: {
+          meta: {
+            title: 'Signup'
+          }
+        }
       },
       {
         path: 'verify/:token',

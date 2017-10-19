@@ -1,33 +1,35 @@
-// angular
-import { Component, ChangeDetectionStrategy, OnInit, OnDestroy } from '@angular/core';
-
 // libs
+import { Component, Inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs/Subscription';
 
 // app
-import { Config } from 'shared/core/index';
-import { LogService } from 'shared/core/services/index';
-import { ILang } from 'shared/core/interfaces/index';
-import { IAppState } from 'shared/ngrx/index';
-import { ElectronEventService } from 'shared/electron/index';
-import { MultilingualService } from '../services';
-import { IMultilingualState } from '../states';
+import { Config, ILang, LogService } from '../../core/index';
+import { IAppState } from '../../ngrx/index';
+import { ElectronEventService } from '../../electron/index';
+import * as multilingual from '../actions/index';
+import { MultilingualService, Languages, LanguageViewHelper } from '../services/index';
 
 @Component({
-  selector: 'app-i18n-lang-switcher',
+  moduleId: module.id,
+  selector: 'lang-switcher',
   templateUrl: 'lang-switcher.component.html',
-  styleUrls: ['lang-switcher.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['lang-switcher.component.scss'],
 })
-export class LangSwitcherComponent implements OnInit, OnDestroy {
-  public lang: string;
-  public supportedLanguages: ILang[];
-  private _sub: Subscription;
+export class LangSwitcherComponent {
 
-  constructor(public multilang: MultilingualService,
-              private log: LogService,
-              private store: Store<IAppState>) {
+  public lang: string;
+  public supportedLanguages: Array<ILang>;
+
+  constructor(
+    private store: Store<IAppState>,
+    private log: LogService,
+    @Inject(Languages) private languages,
+    @Inject(LanguageViewHelper) private viewHelper
+  ) {
+    store.take(1).subscribe((s: any) => {
+      // s && s.18n - ensures testing works in all cases (since some tests dont use i18n state)
+      this.lang = s && s.i18n ? s.i18n.lang : '';
+    });
 
     if (Config.IS_DESKTOP()) {
       // allow electron menu to talk to component
@@ -37,33 +39,26 @@ export class LangSwitcherComponent implements OnInit, OnDestroy {
     }
   }
 
-  public changeLang(e: any) {
-    let lang = this.multilang.defaultLanguage.code; // fallback to default
+  changeLang(e: any) {
+    let lang = this.supportedLanguages[0].code; // fallback to default 'en'
 
     if (Config.IS_MOBILE_NATIVE()) {
       if (e) {
-        lang = this.multilang.availableLanguages[e.newIndex].code;
+        lang = this.supportedLanguages[e.newIndex].code;
       }
     } else if (e && e.target) {
       lang = e.target.value;
     }
-
     this.log.debug(`Language change: ${lang}`);
-    this.multilang.changeLang(lang);
+    this.store.dispatch(new multilingual.ChangeAction(lang));
   }
 
-  public ngOnInit() {
-    this._sub = this.store.select('i18n').subscribe((s: IMultilingualState) => {
-      if (s.lang) {
-        this.lang = s.lang;
-        this.supportedLanguages = this.multilang.availableLanguages;
-      }
-    });
-  }
-
-  public ngOnDestroy() {
-    if (this._sub) {
-      this._sub.unsubscribe();
+  ngOnInit() {
+    this.supportedLanguages = this.languages;
+    if (Config.IS_MOBILE_NATIVE() && this.viewHelper) {
+      // {N} 3.0 requires SegmentedBarItem class for items
+      // when binding to SegmentedBar
+      this.supportedLanguages = this.viewHelper;
     }
   }
 }

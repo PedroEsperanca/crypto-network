@@ -47,6 +47,7 @@
     "@ngrx/router-store": "^4.0.4",
     "@ngrx/store": "^4.0.3",
     "@ngx-config/core": "^4.0.1",
+    "@ngx-meta/core": "^4.0.1",
     "@ngx-translate/core": "^8.0.0",
     "@ngx-translate/http-loader": "^2.0.0",
     "@swimlane/ngx-datatable": "^10.2.3",

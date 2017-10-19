@@ -1,5 +1,5 @@
 // angular
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 // libs
@@ -9,7 +9,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
 import { ConfigModule, ConfigLoader, ConfigStaticLoader } from '@ngx-config/core';
-import { TranslateLoader } from '@ngx-translate/core';
+import { MetaModule, MetaLoader, MetaStaticLoader, PageTitlePositioning } from '@ngx-meta/core';
+import { TranslateLoader, TranslateService } from '@ngx-translate/core';
 import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
 import { SimpleNotificationsModule, PushNotificationsModule } from 'angular2-notifications';
 import { NgxStripeModule } from 'ngx-stripe';
@@ -18,7 +19,7 @@ import { NgxStripeModule } from 'ngx-stripe';
 import { CoreModule } from 'shared/core/core.module';
 import { reducerToken, reducerProvider, metaReducers, effects, CustomRouterStateSerializer } from 'shared/ngrx/index';
 import { AnalyticsModule } from 'shared/analytics/analytics.module';
-import { MultilingualModule, translateLoaderFactory } from 'shared/i18n/multilingual.module';
+import { MultilingualModule, Languages, translateLoaderFactory } from 'shared/i18n';
 import { OrmModule } from 'shared/api/orm';
 
 
@@ -37,6 +38,21 @@ export function configFactory(): ConfigLoader {
 
 if (environment.target === 'desktop') {
   Config.PLATFORM_TARGET = Config.PLATFORMS.DESKTOP;
+}
+
+export function metaFactory(translate: TranslateService): MetaLoader {
+  return new MetaStaticLoader({
+    callback: (key: string) => translate.get(key),
+    pageTitlePositioning: PageTitlePositioning.AppendPageTitle,
+    pageTitleSeparator: ' - ',
+    applicationName: AppConfig.name,
+    defaults: {
+      title: AppConfig.title,
+      description: AppConfig.description,
+      'og:image': AppConfig.image,
+      'og:type': 'website'
+    }
+  });
 }
 
 declare var window;
@@ -66,9 +82,14 @@ export const ADVANCE_MODULES = [
   AnalyticsModule,
   MultilingualModule.forRoot([{
     provide: TranslateLoader,
-    deps: [Http],
+    deps: [HttpClient],
     useFactory: (translateLoaderFactory)
   }]),
+  MetaModule.forRoot({
+    provide: MetaLoader,
+    useFactory: (metaFactory),
+    deps: [TranslateService]
+  }),
   StoreModule.forRoot(reducerToken, { metaReducers }),
   !environment.production ? StoreDevtoolsModule.instrument({ maxAge: 50 }) : [],
   StoreRouterConnectingModule,
@@ -82,4 +103,8 @@ export const ADVANCE_MODULES = [
 export const ADVANCE_PROVIDERS = [
   reducerProvider,
   { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer },
+  {
+    provide: Languages,
+    useValue: AppConfig.i18n.availableLanguages
+  }
 ];

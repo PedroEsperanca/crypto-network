@@ -21,7 +21,7 @@ export interface IMultilingualActions {
   LANG_UNSUPPORTED: string;
 }
 
-export const actionTypes: IMultilingualActions = {
+export const ActionTypes: IMultilingualActions = {
   CHANGE:           type(`[${CATEGORY}] Change`),
   LANG_CHANGED:     type(`[${CATEGORY}] Lang Changed`),
   LANG_UNSUPPORTED: type(`[${CATEGORY}] Lang Unsupported`)
@@ -32,23 +32,22 @@ export const actionTypes: IMultilingualActions = {
  * payload. Expressing actions as classes enables powerful
  * type checking in reducer functions.
  *
- * See Discriminated Unions:
- * https://www.typescriptlang.org/docs/handbook/advanced-types.html#discriminated-unions
+ * See Discriminated Unions: https://www.typescriptlang.org/docs/handbook/advanced-types.html#discriminated-unions
  */
 export class ChangeAction implements Action {
-  public type = actionTypes.CHANGE;
+  type = ActionTypes.CHANGE;
 
   constructor(public payload: string) { }
 }
 
 export class LangChangedAction implements Action {
-  public type = actionTypes.LANG_CHANGED;
+  type = ActionTypes.LANG_CHANGED;
 
   constructor(public payload: string) { }
 }
 
 export class LangUnsupportedAction implements Action {
-  public type = actionTypes.LANG_UNSUPPORTED;
+  type = ActionTypes.LANG_UNSUPPORTED;
 
   constructor(public payload: string) { }
 }

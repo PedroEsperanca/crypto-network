@@ -1,5 +1,8 @@
 const AppConfig: any = {
   name: 'SEED',
+  title: 'Start Coding',
+  description: 'A seed project to enable fast bootstrap of Angular projects',
+  image: '/assets/img/angular-logo.png',
   logo: 'assets/img/angular-logo.png',
   links: {
     blog: '',

@@ -96,7 +96,6 @@ export class ModalInviteComponent implements OnInit, OnDestroy {
     this.store.select(getModalState)
       .takeUntil(this.destroyStream$)
       .subscribe((modalState) => {
-        console.log(modalState);
         if (modalState.open !== 'invite' && this.isModalOpened) {
           this.hideModal();
         } else if (modalState.open === 'invite' && !this.isModalOpened) {

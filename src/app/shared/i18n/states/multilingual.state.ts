@@ -1,4 +1,3 @@
-import { Observable } from 'rxjs/Observable';
 import { createSelector, createFeatureSelector } from '@ngrx/store';
 
 export interface IMultilingualState {
@@ -6,7 +5,7 @@ export interface IMultilingualState {
 }
 
 export const initialState: IMultilingualState = {
-  lang: ''
+  lang: 'en'
 };
 
 export const getMultilingualState = createFeatureSelector<IMultilingualState>('i18n');

@@ -1,9 +1,9 @@
 export class ConfigMockMultilang {
-  public init(): any {
+  init(): any {
     return null;
   }
 
-  public getSettings(group?: string, key?: string): any {
+  getSettings(group?: string, key?: string): any {
     return {
       i18n: {
         defaultLanguage: {

@@ -1,33 +1,22 @@
 // angular
-import {
-  NgModule,
-  ModuleWithProviders,
-  Optional,
-  SkipSelf,
-  CUSTOM_ELEMENTS_SCHEMA,
-  NO_ERRORS_SCHEMA
-} from '@angular/core';
+import { NgModule, ModuleWithProviders, Optional, SkipSelf, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 // libs
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
-// app
-import { Config } from '../core/index';
-
 // module
-import { LangSwitcherComponent } from './components/index';
-import { MultilingualService } from './services/index';
+import { Config } from '../core/index';
+import { MULTILANG_COMPONENTS } from './components/index';
+import { MULTILANG_PROVIDERS } from './services/index';
 
 // for AoT compilation
 export function translateLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, `${Config.IS_MOBILE_NATIVE() ?
-     '/' : ''}assets/i18n/`, '.json');
-};
+  return new TranslateHttpLoader(http, `${Config.IS_MOBILE_NATIVE() ? '/' : ''}assets/i18n/`, '.json');
+}
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -36,9 +25,8 @@ export function translateLoaderFactory(http: HttpClient) {
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule,
-    FormsModule,
     HttpClientModule,
+    FormsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -48,14 +36,14 @@ export function translateLoaderFactory(http: HttpClient) {
     }),
   ],
   declarations: [
-    LangSwitcherComponent
-  ],
-  exports: [
-    LangSwitcherComponent,
-    TranslateModule
+    ...MULTILANG_COMPONENTS
   ],
   providers: [
-    MultilingualService
+    ...MULTILANG_PROVIDERS,
+  ],
+  exports: [
+    ...MULTILANG_COMPONENTS,
+    TranslateModule
   ],
   schemas: [
     NO_ERRORS_SCHEMA,
@@ -63,15 +51,16 @@ export function translateLoaderFactory(http: HttpClient) {
   ]
 })
 export class MultilingualModule {
+
   // optional usage
-  // ideally we could use this to override TranslateModule,
-  // but it requires the static above at moment
-  public static forRoot(configuredProviders: any[]): ModuleWithProviders {
+  // ideally we could use this to override TranslateModule, but it requires the static above at moment
+  static forRoot(configuredProviders: Array<any>): ModuleWithProviders {
     return {
       ngModule: MultilingualModule,
       providers: configuredProviders
     };
   }
+
   constructor(@Optional() @SkipSelf() parentModule: MultilingualModule) {
     if (parentModule) {
       // throw new Error('MultilingualModule already loaded; Import in root module only.');
