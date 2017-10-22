@@ -6,6 +6,7 @@ import { PostCreatorComponent } from './post-creator.component';
   imports: [
     CommonModule
   ],
-  declarations: [PostCreatorComponent]
+  declarations: [PostCreatorComponent],
+  exports: [PostCreatorComponent]
 })
 export class PostCreatorModule { }
