@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
+import { SocialNetworkTopBarModule } from './top-bar/top-bar.module';
 
 @NgModule({
-  imports: [
-    CommonModule
-  ],
-  declarations: []
+  exports: [
+    SocialNetworkTopBarModule
+  ]
 })
-export class SharedModule { }
+export class SocialNetworkSharedModule { }
