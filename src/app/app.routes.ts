@@ -17,6 +17,10 @@ export const ROUTES: Routes = [
         loadChildren: './components/index/index.module#IndexModule'
       },
       {
+        path: 'social-network',
+        loadChildren: './components/social-network/social-network.module#SocialNetworkModule'
+      },
+      {
         path: 'not-found',
         component: NotFoundComponent
       },
