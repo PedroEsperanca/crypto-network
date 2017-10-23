@@ -1,0 +1,106 @@
+:host {
+
+  .global-nav {
+    background: white;
+    height: 46px;
+
+    .global-nav-container, .global-nav-row{
+      height: 100%;
+    }
+
+    ul.topbar-menu {
+      height: 100%;
+      display: flex;
+      flex-direction: row;
+      margin-bottom: 0;
+      padding-left: 0;
+
+      &.align-right {
+        justify-content: flex-end;
+      }
+
+      li {
+        display: inline-block;
+        color: #66757f;
+        height: 100%;
+        display: flex;
+        align-items: center;
+
+        a {
+          color: inherit;
+          display: block;
+          font-size: 13px;
+          font-weight: bold;
+          height: 46px;
+          line-height: 1;
+          padding: 0 14px;
+          border-bottom: 2px solid transparent;
+          transition: all .15s ease-in-out;
+          display: flex;
+          align-items: center;
+          text-decoration: none;
+
+          &:hover {
+            color: #19CF86;
+            border-bottom-color: #19CF86;
+          }
+
+          .text {
+            font-weight: bold;
+          }
+
+          .left-menu-icon {
+            font-size: 17px;
+            padding-right: 5px;
+          }
+        }
+
+        .avatar {
+          height: 32px;
+          width: 32px;
+          border-radius: 32px;
+          margin-right: 15px;
+        }
+
+        .CTA-button {
+          border-radius: 100px;
+          box-shadow: none;
+          cursor: pointer;
+          font-size: 14px;
+          font-weight: bold;
+          line-height: 20px;
+          padding: 6px 16px;
+          position: relative;
+          text-align: center;
+          white-space: nowrap;
+          border: 1px solid #46D89E;
+          background-color: #46D89E;
+          color: #fff;
+          outline: none;
+
+          &:hover, &:active {
+            background-color: #19CF86;
+            border-color: #19CF86;
+          }
+
+          &:active {
+            box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px #46D89E;
+          }
+        }
+
+      }
+    }
+
+    .icon-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+
+      i {
+        color: #19CF86;
+        font-size: 21px;
+      }
+    }
+  }
+}
