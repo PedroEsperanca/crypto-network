@@ -12,6 +12,10 @@ const routes: Routes = [
         path: 'style-guide',
         loadChildren: './style-guide/style-guide.module#SocialNetworkStyleGuideModule'
       },
+      {
+        path: 'profile',
+        loadChildren: './profile/profile.module#SocialNetworkProfileModule'
+      },
     ]
   }
 ];

@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProfileComponent } from './profile.component';
+import { SocialNetworkProfileComponent } from './profile.component';
 
 @NgModule({
   imports: [
     CommonModule
   ],
-  declarations: [ProfileComponent]
+  declarations: [SocialNetworkProfileComponent]
 })
-export class ProfileModule { }
+export class SocialNetworkProfileModule { }

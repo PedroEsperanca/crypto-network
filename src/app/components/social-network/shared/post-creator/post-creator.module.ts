@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PostCreatorComponent } from './post-creator.component';
+import { SocialNetworkPostCreatorComponent } from './post-creator.component';
 
 @NgModule({
   imports: [
     CommonModule
   ],
-  declarations: [PostCreatorComponent],
-  exports: [PostCreatorComponent]
+  declarations: [SocialNetworkPostCreatorComponent],
+  exports: [SocialNetworkPostCreatorComponent]
 })
-export class PostCreatorModule { }
+export class SocialNetworkPostCreatorModule { }
